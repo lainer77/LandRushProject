@@ -21,9 +21,9 @@ namespace LandRushLibrary.ConcreteUnit
             }
         }
 
-        public int GetAttackPower()
+        public int GetAttackPower(int attackType)
         {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(Status.AttackPower);
+            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(Status.AttackPower, attackType);
 
             OnAttackPowerCalulated(args);
 
@@ -41,9 +41,9 @@ namespace LandRushLibrary.ConcreteUnit
 
         }
 
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulated(int attackPower)
+        private AttackPowerCalulatedEventArgs OnAttackPowerCalulated(int attackPower, int attackType)
         {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(attackPower);
+            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(attackPower, attackType);
             OnAttackPowerCalulated(args);
 
             return args;

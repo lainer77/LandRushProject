@@ -11,9 +11,9 @@ namespace LandRushLibrary.Combat
 
         }
 
-        public static void Attack<T>(IAttackable attacker, Unit<T> beHitUnit, bool guard = false) where T : UnitInfo
+        public static void Attack<T>(IAttackable attacker, Unit<T> beHitUnit, int attackType, bool guard = false) where T : UnitInfo
         {
-            int damage = attacker.GetAttackPower();
+            int damage = attacker.GetAttackPower(attackType);
             int armor = beHitUnit.Status.Armor;
 
             if (guard && ( beHitUnit is Player) )

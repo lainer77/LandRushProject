@@ -10,7 +10,7 @@ namespace LandRushLibrary.Combat
 {
     public interface IAttackable
     {
-        int GetAttackPower();
+        int GetAttackPower(int attackType);
         event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
     }
 }

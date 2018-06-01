@@ -57,8 +57,6 @@ namespace LandRushLibrary.Unit
                 SlainExp = 20,
                 MaxHp = 30,
                 CurrentHp = 30
-                
-                
             };
 
             _MonsterInfoInfos.Add(orcInfo.UnitId, orcInfo);            

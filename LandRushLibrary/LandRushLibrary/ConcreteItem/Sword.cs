@@ -7,7 +7,7 @@ using LandRushLibrary.Unit;
 
 namespace LandRushLibrary.ConcreteItem
 {
-    public class Sword : EquipmentItem<SwordInfo>, IAttackable
+    public class Sword : EquipmentItem<SwordInfo>
     {
         private PlayerInfo _playerInfo;
 
@@ -16,43 +16,6 @@ namespace LandRushLibrary.ConcreteItem
             Info = (SwordInfo)ItemInfoRepository.Instance.GetItemInfo(itemId);
             _playerInfo = playerInfo;
         }
-        
-
-        #region Events
-
-        public int GetAttackPower()
-        {
-            return 1;
-        }
-
-        public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
-
-        protected virtual void OnAttackPowerCalulated(AttackPowerCalulatedEventArgs e)
-        {
-            if (AttackPowerCalulated != null)
-                AttackPowerCalulated(this, e);
-
-        }
-
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulated(int attackPower)
-        {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(attackPower);
-            OnAttackPowerCalulated(args);
-
-            return args;
-        }
-
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulatedForOut()
-        {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs();
-            OnAttackPowerCalulated(args);
-
-            return args;
-        }
-
-
-
-        #endregion
 
     }
 }
