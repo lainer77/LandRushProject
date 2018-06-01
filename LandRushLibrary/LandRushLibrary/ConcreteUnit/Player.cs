@@ -4,6 +4,10 @@ using LandRushLibrary.Unit;
 
 namespace LandRushLibrary.ConcreteUnit
 {
+    /// <summary>
+    /// 작업중 : 남민우
+    /// </summary>
+     
     public class Player : Unit<PlayerInfo>, IAttackable
     {
         private int _shieldArmor;
