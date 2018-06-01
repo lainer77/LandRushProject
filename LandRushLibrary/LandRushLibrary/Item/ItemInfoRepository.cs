@@ -31,10 +31,18 @@ namespace LandRushLibrary.Item
         {
             _itemInfos = new Dictionary<int, ItemInfo>();
 
-            SwordInfo ordSword = new SwordInfo
+            SwordInfo oldSwordInfo = new SwordInfo
             {
                 ItemId = ItemId.OLD_SWORD,
 
+            };
+            ShieldInfo oldShieldInfo = new ShieldInfo
+            {
+                ItemId = ItemId.OLD_SHIELD
+            };
+            BowInfo oldBowInfo = new BowInfo
+            {
+                ItemId = ItemId.OLD_BOW
             };
         }
 

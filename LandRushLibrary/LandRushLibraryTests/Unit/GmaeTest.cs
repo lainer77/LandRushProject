@@ -77,12 +77,7 @@ namespace LandRushLibrary.Unit.Tests
             Console.WriteLine(orc.Status.CurrentHp);
             Console.WriteLine(player.Status.CurrentExp);
         }
-
-        public void 플레이어가_몬스터를처치하고레벨업을한다()
-        {
-            Monster orc = new Monster(UnitId.ORC);
-            Player player = new Player();
-        }
+        
 
         public void monsterDead(Object sender, Unit<MonsterInfo>.UnitDeadEventArgs e)
         {

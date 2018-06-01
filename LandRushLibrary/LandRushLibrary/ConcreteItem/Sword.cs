@@ -16,13 +16,14 @@ namespace LandRushLibrary.ConcreteItem
             Info = (SwordInfo)ItemInfoRepository.Instance.GetItemInfo(itemId);
             _playerInfo = playerInfo;
         }
+        
+
+        #region Events
 
         public int GetAttackPower()
         {
             return 1;
         }
-
-        #region Events
 
         public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
 
