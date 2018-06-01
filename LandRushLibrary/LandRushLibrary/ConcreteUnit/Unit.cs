@@ -8,7 +8,6 @@ namespace LandRushLibrary.ConcreteUnit
     {
         public int UnitId { get; set; }
         public string Name { get; set; }
-        public string PrefabName { get; set; }
         public int AttackPower { get; set; }
         public int Armor { get; set; }
         public int MaxHp { get; set; }

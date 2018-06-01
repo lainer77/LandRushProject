@@ -1,9 +1,7 @@
-﻿
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using LandRushLibrary.ConcreteItem;
 
-namespace LandRushLibrary.Item
+namespace LandRushLibrary.ItemInfos
 {
     /// <summary>
     /// 작업자 : 남민우

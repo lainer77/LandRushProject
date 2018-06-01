@@ -2,7 +2,7 @@
 using System;
 using LandRushLibrary.Combat;
 using LandRushLibrary.ConcreteUnit;
-using LandRushLibrary.Item;
+using LandRushLibrary.ItemInfos;
 using LandRushLibrary.UnitInfo;
 using LandRushLibrary.UnitInfos;
 

@@ -5,6 +5,9 @@ namespace LandRushLibrary.ConcreteUnit
 {
     public class Monster : Unit, IAttackable
     {
+        public int SlainExp { get; set; }
+        public int MonsterType { get; set; }
+
         public override void GetDamage(int damage)
         {
             throw new NotImplementedException();

@@ -1,6 +1,6 @@
 ﻿
 
-namespace LandRushLibrary.Item
+namespace LandRushLibrary.ItemInfos
 {
     public abstract class EquipmentItemInfo : ItemInfo
     {

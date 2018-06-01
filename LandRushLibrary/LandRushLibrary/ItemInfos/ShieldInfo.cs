@@ -1,5 +1,5 @@
 ﻿
-namespace LandRushLibrary.Item
+namespace LandRushLibrary.ItemInfos
 {
     public class ShieldInfo : EquipmentItemInfo
     {

@@ -1,4 +1,4 @@
-﻿using LandRushLibrary.Item;
+﻿using LandRushLibrary.ItemInfos;
 
 namespace LandRushLibrary.ConcreteItem
 {

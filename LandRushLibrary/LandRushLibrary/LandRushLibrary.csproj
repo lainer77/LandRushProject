@@ -51,13 +51,15 @@
     <Compile Include="ConcreteUnit\Monster.cs" />
     <Compile Include="ConcreteUnit\Player.cs" />
     <Compile Include="ConcreteUnit\Unit.cs" />
-    <Compile Include="Item\BowInfo.cs" />
-    <Compile Include="Item\EquipmentItemInfo.cs" />
-    <Compile Include="Item\ItemInfo.cs" />
-    <Compile Include="Item\ItemInfoRepository.cs" />
-    <Compile Include="Item\PlayersItemController.cs" />
-    <Compile Include="Item\ShieldInfo.cs" />
-    <Compile Include="Item\SwordInfo.cs" />
+    <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Factory\MonsterFactory.cs" />
+    <Compile Include="BowInfo.cs" />
+    <Compile Include="ItemInfos\EquipmentItemInfo.cs" />
+    <Compile Include="ItemInfos\ItemInfo.cs" />
+    <Compile Include="ItemInfos\ItemInfoRepository.cs" />
+    <Compile Include="ItemInfos\PlayersItemController.cs" />
+    <Compile Include="ItemInfos\ShieldInfo.cs" />
+    <Compile Include="ItemInfos\SwordInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AttackType.cs" />
     <Compile Include="Repository\ItemId.cs" />
@@ -72,8 +74,6 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

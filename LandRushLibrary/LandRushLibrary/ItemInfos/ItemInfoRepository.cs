@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using LandRushLibrary.Repository;
 
-namespace LandRushLibrary.Item
+namespace LandRushLibrary.ItemInfos
 {
     public class ItemInfoRepository
     {
@@ -19,6 +19,7 @@ namespace LandRushLibrary.Item
                 return _instance;
             }
         }
+
 
         private ItemInfoRepository()
         {
