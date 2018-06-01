@@ -10,19 +10,53 @@ namespace LandRushLibrary.ConcreteUnit
         public int CurrentExp { get; set; }
         public int MaxExp { get; set; }
 
+        public int ShieldArmor { get; set; }
+
+        
+
         public override void GetDamage(int damage)
         {
+            CurrentHp -= damage;
+
+            if (CurrentHp <= 0)
+            {
+                OnDead(new DeadEventArgs(this));
+            }
+        }
+
+        public void Attack(Unit attakedUnit, bool guard = false)
+        {
+            int damage = AttackPower;
+
+            OnCalculatedRandomDamage(new CalculatedRandomDamageEventArgs(damage));
+
+            damage -= attakedUnit.Armor;
+
+            if (damage < 0)
+                damage = 0;
+
+            if (attakedUnit.CurrentHp <= 0)
+            {
+                OnMonsterKilled(new MonsterKilledEventArgs((Monster)attakedUnit));
+                AddExperience(((Monster)attakedUnit).SlainExp);
+
+                if (CurrentExp >= MaxExp)
+                {
+                    Level++;
+                    CurrentExp -= MaxExp;
+                    MaxExp = LevelManager.Instance.GetNextExp(Level, MaxExp);
+
+                    OnLevelUp(new LevelUpEventArgs(Level));
+                }
+            }
+
+
 
         }
 
-        public int GetAttackPower()
+        private void AddExperience(int exp)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Attack(Unit attakedUnit)
-        {
-            throw new NotImplementedException();
+            CurrentExp += exp;
         }
 
         public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
@@ -107,18 +141,18 @@ namespace LandRushLibrary.ConcreteUnit
         }
         #endregion
 
-        public event EventHandler<DoAttackEventArgs> DoAttack;
+        public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 
-        protected virtual void OnDoAttack(DoAttackEventArgs e)
+        protected virtual void OnCalculatedRandomDamage(CalculatedRandomDamageEventArgs e)
         {
-            if (DoAttack != null)
-                DoAttack(this, e);
+            if (CalculatedRandomDamage != null)
+                CalculatedRandomDamage(this, e);
         }
 
-        private DoAttackEventArgs OnDoAttack(int attackPower)
+        private CalculatedRandomDamageEventArgs OnCalculatedRandomDamage(int attackPower)
         {
-            DoAttackEventArgs args = new DoAttackEventArgs(attackPower);
-            OnDoAttack(args);
+            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(attackPower);
+            OnCalculatedRandomDamage(args);
 
             return args;
         }

@@ -10,34 +10,43 @@ namespace LandRushLibrary.ConcreteUnit
 
         public override void GetDamage(int damage)
         {
-            throw new NotImplementedException();
+            CurrentHp -= damage;
+            if(CurrentHp <= 0)
+                OnDead(new DeadEventArgs(this));
         }
 
-        public int GetAttackPower()
+        public void Attack(Unit attakedUnit, bool guard = false)
         {
-            throw new NotImplementedException();
-        }
+            int damage = AttackPower;
 
-        public void Attack(Unit attakedUnit)
-        {
-            throw new NotImplementedException();
+            OnDoAttack(new CalculatedRandomDamageEventArgs(damage));
+
+            damage -= attakedUnit.Armor;
+
+            if (guard == true && (attakedUnit is Player))
+                damage -= ((Player) attakedUnit).ShieldArmor;
+
+            if (damage < 0)
+                damage = 0;
+
+            attakedUnit.GetDamage(damage);
         }
 
 
         public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
 
-        public event EventHandler<DoAttackEventArgs> DoAttack;
+        public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 
-        protected virtual void OnDoAttack(DoAttackEventArgs e)
+        protected virtual void OnCalculatedRandomDamage(CalculatedRandomDamageEventArgs e)
         {
-            if (DoAttack != null)
-                DoAttack(this, e);
+            if (CalculatedRandomDamage != null)
+                CalculatedRandomDamage(this, e);
         }
 
-        private DoAttackEventArgs OnDoAttack(int attackPower)
+        private CalculatedRandomDamageEventArgs OnCalculatedRandomDamage(int attackPower)
         {
-            DoAttackEventArgs args = new DoAttackEventArgs(attackPower);
-            OnDoAttack(args);
+            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(attackPower);
+            OnCalculatedRandomDamage(args);
 
             return args;
         }

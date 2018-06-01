@@ -3,15 +3,15 @@ using System;
 
 namespace LandRushLibrary.Combat
 {
-    public class DoAttackEventArgs : EventArgs
+    public class CalculatedRandomDamageEventArgs : EventArgs
     {
         public int AttackPower { get; set; }
 
-        public DoAttackEventArgs()
+        public CalculatedRandomDamageEventArgs()
         {
         }
 
-        public DoAttackEventArgs(int attackPower)
+        public CalculatedRandomDamageEventArgs(int attackPower)
         {
             AttackPower = attackPower;
         }

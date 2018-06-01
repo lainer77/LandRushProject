@@ -5,9 +5,7 @@ namespace LandRushLibrary.Combat
 {
     public interface IAttackable
     {
-        int GetAttackPower();
-        void Attack(Unit attakedUnit);
-        
-        event EventHandler<DoAttackEventArgs> DoAttack;
+        void Attack(Unit attakedUnit, bool guard = false);
+        event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
     }
 }
