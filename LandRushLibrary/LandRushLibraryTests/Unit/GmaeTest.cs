@@ -51,7 +51,7 @@ namespace LandRushLibrary.Unit.Tests
             orc.AttackPowerCalulated += test;
             player.UnitDead += playerDead;
             player.BeAttacked += playerAttaked;
-            
+
 
 
         }
@@ -64,7 +64,6 @@ namespace LandRushLibrary.Unit.Tests
 
             orc.UnitDead += monsterDead;
             orcLord.AttackPowerCalulated += test;
-            
             Console.WriteLine(orc.Status.CurrentHp);
             Console.WriteLine(orc.Status.CurrentHp);
             Console.WriteLine(player.Status.CurrentExp);

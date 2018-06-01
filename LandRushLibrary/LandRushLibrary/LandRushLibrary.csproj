@@ -54,6 +54,7 @@
     <Compile Include="Item\EquipmentItemInfo.cs" />
     <Compile Include="Item\ItemInfo.cs" />
     <Compile Include="Item\ItemInfoRepository.cs" />
+    <Compile Include="Item\PlayersItemController.cs" />
     <Compile Include="Item\ShieldInfo.cs" />
     <Compile Include="Item\SwordInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewFolder1\" />
