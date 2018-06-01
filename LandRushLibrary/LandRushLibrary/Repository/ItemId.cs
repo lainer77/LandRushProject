@@ -1,11 +1,9 @@
-﻿
-namespace LandRushLibrary.Repository
+﻿namespace LandRushLibrary.Repository
 {
-    public class ItemId
+    public enum ItemId
     {
-        public const int OLD_SWORD = 1;
-        public const int OLD_SHIELD = 2;
-        public const int OLD_BOW = 3;
-
+        OLD_SWORD = 1,
+        OLD_SHIELD = 2,
+        OLD_BOW = 3
     }
 }

@@ -8,9 +8,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using LandRushLibrary.Combat;
-using LandRushLibrary.ConcreteUnit;
 using LandRushLibrary.Repository;
-using LandRushLibrary.UnitInfo;
 
 namespace LandRushLibrary.Unit.Tests
 {
@@ -34,7 +32,7 @@ namespace LandRushLibrary.Unit.Tests
         //public void 플레이어가_공격을_받아_7의_데미지를_입어야한다()
         //{
         //    Player player = new Player();
-        //    Monster orc = new Monster(UnitId.ORC);
+        //    Monster orc = new Monster(MonsterID.ORC);
 
         //    orc.AttackPowerCalulated += test;
 
@@ -46,7 +44,7 @@ namespace LandRushLibrary.Unit.Tests
         //public void 플레이어가_죽는지_테스트()
         //{
         //    Player player = new Player();
-        //    Monster orc = new Monster(UnitId.ORC);
+        //    Monster orc = new Monster(MonsterID.ORC);
 
         //    orc.AttackPowerCalulated += test;
         //    player.UnitDead += playerDead;
@@ -58,8 +56,8 @@ namespace LandRushLibrary.Unit.Tests
         //[TestMethod()]
         //public void 플레이어가_orc를죽이고경험치를획득한다()
         //{
-        //    Monster orc = new Monster(UnitId.ORC);
-        //    Monster orcLord = new Monster(UnitId.ORC_LORD);
+        //    Monster orc = new Monster(MonsterID.ORC);
+        //    Monster orcLord = new Monster(MonsterID.ORC_LORD);
         //    Player player = new Player();
 
         //    orc.UnitDead += monsterDead;

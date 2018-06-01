@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using LandRushLibrary.ConcreteItem;
+using LandRushLibrary.Items;
 
 namespace LandRushLibrary.ItemInfos
 {

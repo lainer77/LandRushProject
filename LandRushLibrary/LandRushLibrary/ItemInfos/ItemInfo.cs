@@ -1,8 +1,10 @@
-﻿namespace LandRushLibrary.ItemInfos
+﻿using LandRushLibrary.Repository;
+
+namespace LandRushLibrary.ItemInfos
 {
     public abstract class ItemInfo
     {
-        public int ItemId { get;  set; }
+        public ItemId ItemId { get;  set; }
         public string Name { get; set; }
         public string IconName { get; set; }
         public string PrefabName { get; set; }

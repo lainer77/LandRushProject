@@ -1,14 +1,15 @@
-﻿
-using LandRushLibrary.ConcreteUnit;
-using LandRushLibrary.UnitInfos;
+﻿using System.Collections.Generic;
+using LandRushLibrary.Repository;
+using LandRushLibrary.Units;
+using LandRushLibrary.Utilities;
 
 namespace LandRushLibrary.Factory
 {
-    public class MonsterFactory : Factory<Monster>
+    public class MonsterFactory
     {
-        private MonsterFactory _instace;
+        private static MonsterFactory _instace;
 
-        public MonsterFactory Instance
+        public static MonsterFactory Instance
         {
             get
             {
@@ -21,23 +22,14 @@ namespace LandRushLibrary.Factory
 
         private MonsterFactory()
         {
-
+            _monsters = UnitSerializer.Instance.Deseriailize();
         }
 
-        public override Monster Create(int monsterId)
-        {
-            MonsterInfo monsterInfo = UnitInfoRepository.Instance.GetMonsterInfo(monsterId);
-            Monster monster = new Monster();
+        private readonly Dictionary<MonsterID, Monster> _monsters;
 
-            monster.UnitId = monsterInfo.UnitId;
-            monster.Name = monsterInfo.Name;
-            monster.AttackPower = monsterInfo.AttackPower;
-            monster.Armor = monsterInfo.Armor;
-            monster.MaxHp = monsterInfo.MaxHp;
-            monster.CurrentHp = monsterInfo.CurrentHp;
-            monster.Speed= monsterInfo.Speed;
-            monster.SlainExp = monsterInfo.SlainExp;
-            monster.MonsterType = monsterInfo.MonsterType;
+        public Monster Create(MonsterID monsterId)
+        {
+            Monster monster = _monsters[monsterId].Clone();
 
             return monster;
         }

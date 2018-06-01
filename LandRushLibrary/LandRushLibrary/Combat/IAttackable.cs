@@ -1,5 +1,5 @@
 ﻿using System;
-using LandRushLibrary.ConcreteUnit;
+using LandRushLibrary.Units;
 
 namespace LandRushLibrary.Combat
 {
