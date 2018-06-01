@@ -10,12 +10,12 @@ namespace LandRushLibrary.Utilities
     [JsonObject(MemberSerialization.OptOut)]
     public class ParsedItem
     {
-        public Sword[] swords;
-        public Bow[] bows;
-        public Shield[] shields;
-        public Potion[] potions;
-        public Arrow[] arrows;
-        public IngredientItem[] ingredients;
+        public List<Sword> swords;
+        public List<Bow> bows;
+        public List<Shield> shields;
+        public List<Potion> potions;
+        public List<Arrow> arrows;
+        public List<IngredientItem> ingredients;
 
         public Dictionary<ItemID, GameItem> GetItemDictionary()
         {
