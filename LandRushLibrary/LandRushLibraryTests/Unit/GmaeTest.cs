@@ -38,7 +38,6 @@ namespace LandRushLibrary.Unit.Tests
 
             orc.AttackPowerCalulated += test;
 
-            DamageDiscriminator.Attack(orc, player);
 
             Assert.AreEqual(player.Status.MaxHp - 7, player.Status.CurrentHp);
         }
@@ -54,11 +53,6 @@ namespace LandRushLibrary.Unit.Tests
             player.BeAttacked += playerAttaked;
             
 
-            DamageDiscriminator.Attack(orc, player);
-            DamageDiscriminator.Attack(orc, player);
-            DamageDiscriminator.Attack(orc, player);
-            DamageDiscriminator.Attack(orc, player);
-            DamageDiscriminator.Attack(orc, player);
 
         }
         [TestMethod()]
@@ -71,9 +65,7 @@ namespace LandRushLibrary.Unit.Tests
             orc.UnitDead += monsterDead;
             orcLord.AttackPowerCalulated += test;
             
-            DamageDiscriminator.Attack(orcLord, orc);
             Console.WriteLine(orc.Status.CurrentHp);
-            DamageDiscriminator.Attack(orcLord, orc);
             Console.WriteLine(orc.Status.CurrentHp);
             Console.WriteLine(player.Status.CurrentExp);
         }
