@@ -1,4 +1,8 @@
 ﻿
+using System.Collections.Generic;
+using System.Diagnostics;
+using LandRushLibrary.ConcreteItem;
+
 namespace LandRushLibrary.Item
 {
     /// <summary>
@@ -8,6 +12,27 @@ namespace LandRushLibrary.Item
     /// </summary>
     public class PlayersItemController
     {
+        private PlayersItemController _instance;
+
+        public PlayersItemController Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new PlayersItemController();
+
+                return _instance;
+            }
+        }
+
+        private int _currentEquipmentPare;
+        public List<EquipmentPare> EquipmentPares;
+
+        public struct EquipmentPare
+        {
+            public EquipmentItem<EquipmentItemInfo> LeftEquipment { get; set; }
+            public EquipmentItem<EquipmentItemInfo> RightEquipment { get; set; }
+        }
         
     }
 }

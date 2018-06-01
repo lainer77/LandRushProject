@@ -3,7 +3,7 @@
   <Class Name="LandRushLibrary.ConcreteUnit.Monster">
     <Position X="3.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAACBAA=</HashCode>
       <FileName>ConcreteUnit\Monster.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,19 +11,15 @@
   <Class Name="LandRushLibrary.ConcreteUnit.Player">
     <Position X="8.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAIAAAAAAA=</HashCode>
+      <HashCode>AAQgAAAAAAAAAAAAAAAAAAABAAAAAAAABECIAAACRAA=</HashCode>
       <FileName>ConcreteUnit\Player.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="LandRushLibrary.ConcreteUnit.Unit&lt;T&gt;">
     <Position X="6.25" Y="5" Width="1.5" />
     <NestedTypes>
       <Class Name="LandRushLibrary.ConcreteUnit.Unit&lt;T&gt;.UnitDeadEventArgs" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>ConcreteUnit\Unit.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="LandRushLibrary.ConcreteUnit.Unit&lt;T&gt;.AttackPowerCalulatedEventArgs" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>ConcreteUnit\Unit.cs</NewMemberFileName>
         </TypeIdentifier>
@@ -35,7 +31,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAQAAAAEAAAAAAAAAAAAAQCAQAAYAAAAAAAIAAACBAI=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAQCAQAAYAAAAAAAIAAAAAAI=</HashCode>
       <FileName>ConcreteUnit\Unit.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -63,7 +59,7 @@
   <Class Name="LandRushLibrary.Unit.PlayerInfo">
     <Position X="8" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAABAAABAAAAAAAAAAA=</HashCode>
       <FileName>Unit\PlayerInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -81,10 +77,87 @@
       <FileName>Unit\UnitInfoRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="LandRushLibrary.Combat.AttackPowerCalulatedEventArgs" Collapsed="true">
+    <Position X="3.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Combat\AttackPowerCalulatedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.ConcreteItem.EquipmentItem&lt;T&gt;" Collapsed="true">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConcreteItem\EquipmentItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.ConcreteItem.GameItem&lt;T&gt;" Collapsed="true">
+    <Position X="2.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ConcreteItem\GameItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.ConcreteItem.Sword" Collapsed="true">
+    <Position X="1" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConcreteItem\Sword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.BowInfo" Collapsed="true">
+    <Position X="2" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item\BowInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.EquipmentItemInfo" Collapsed="true">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Item\EquipmentItemInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.ItemInfo" Collapsed="true">
+    <Position X="1.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAgAAAAAQAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item\ItemInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.ItemInfoRepository" Collapsed="true">
+    <Position X="1.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAQAAAAAAgAAQ=</HashCode>
+      <FileName>Item\ItemInfoRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.PlayersItemController" Collapsed="true">
+    <Position X="1.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAgAAAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Item\PlayersItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.ShieldInfo" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Item\ShieldInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LandRushLibrary.Item.SwordInfo" Collapsed="true">
+    <Position X="2" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item\SwordInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="LandRushLibrary.Combat.IAttackable">
     <Position X="9.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Combat\IAttackable.cs</FileName>
     </TypeIdentifier>
   </Interface>
