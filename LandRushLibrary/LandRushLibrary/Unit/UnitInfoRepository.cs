@@ -8,7 +8,7 @@ namespace LandRushLibrary.Unit
     {
         private static UnitInfoRepository _instance;
         private PlayerInfo _playerInfo;
-        private Dictionary<int, MonsterInfo> _MonsterInfoInfos;
+        private Dictionary<int, MonsterInfo> _monsterInfoDictionary;
 
         public static UnitInfoRepository Instance
         {
@@ -17,25 +17,19 @@ namespace LandRushLibrary.Unit
                 if (_instance == null)
                 {
                     _instance = new UnitInfoRepository();
-                    _instance.InitUnitInfoInfo();
                 }
 
                 return _instance;
             }
         }
 
-        //public UnitInfo GetUnitInfoInfo(int unitId)
-        //{
-        //    return _MonsterInfoInfos[unitId];
-        //}
-
-        public void InitUnitInfoInfo()
+        private UnitInfoRepository()
         {
-            _MonsterInfoInfos = new Dictionary<int, MonsterInfo>();
+            _monsterInfoDictionary = new Dictionary<int, MonsterInfo>();
 
-            PlayerInfo playerInfo = new PlayerInfo
+            _playerInfo = new PlayerInfo
             {
-                UnitId =  UnitId.PLAYER,
+                UnitId = UnitId.PLAYER,
                 Name = "Player",
                 Level = 1,
                 Armor = 5,
@@ -45,7 +39,6 @@ namespace LandRushLibrary.Unit
                 CurrentExp = 0
 
             };
-            _playerInfo = playerInfo;
 
             MonsterInfo orcInfo = new MonsterInfo
             {
@@ -59,7 +52,7 @@ namespace LandRushLibrary.Unit
                 CurrentHp = 30
             };
 
-            _MonsterInfoInfos.Add(orcInfo.UnitId, orcInfo);            
+            _monsterInfoDictionary.Add(orcInfo.UnitId, orcInfo);
 
             MonsterInfo orcLordInfo = new MonsterInfo
             {
@@ -70,13 +63,12 @@ namespace LandRushLibrary.Unit
                 PrefabName = "OrcLordPrefab"
             };
 
-            _MonsterInfoInfos.Add(orcLordInfo.UnitId, orcLordInfo);
-
+            _monsterInfoDictionary.Add(orcLordInfo.UnitId, orcLordInfo);
         }
 
         public MonsterInfo GetMonsterInfo(int unitId)
         {
-            return new MonsterInfo(_MonsterInfoInfos[unitId]);
+            return new MonsterInfo(_monsterInfoDictionary[unitId]);
         }
 
         public PlayerInfo GetPlayerInfo()

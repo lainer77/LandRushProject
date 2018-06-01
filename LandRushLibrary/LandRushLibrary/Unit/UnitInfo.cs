@@ -2,7 +2,12 @@
 
 namespace LandRushLibrary.Unit
 {
-    public abstract class UnitInfo
+    public interface ICloneable<T>
+    {
+        T Clone();
+    }
+
+    public abstract class UnitInfo : ICloneable<UnitInfo>
     {
         protected UnitInfo()
         {
@@ -29,6 +34,8 @@ namespace LandRushLibrary.Unit
         public int MaxHp { get; set; }
         public int CurrentHp { get; set; }
         public float Speed { get; set; }
+
+        public abstract UnitInfo Clone();
 
     }
 }

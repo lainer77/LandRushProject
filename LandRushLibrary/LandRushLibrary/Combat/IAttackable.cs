@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using LandRushLibrary.ConcreteUnit;
+using LandRushLibrary.Repository;
 
 namespace LandRushLibrary.Combat
 {
     public interface IAttackable
     {
-        int GetAttackPower(int attackType);
+        int GetAttackPower();
+        void Attack(Unit attakedUnit, int attackType = AttackType.NORMARL);
         event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
     }
 }

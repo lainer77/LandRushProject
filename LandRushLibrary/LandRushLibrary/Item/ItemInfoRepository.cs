@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LandRushLibrary.Repository;
 
 namespace LandRushLibrary.Item
@@ -18,18 +14,15 @@ namespace LandRushLibrary.Item
                 if (_instance == null)
                 {
                     _instance = new ItemInfoRepository();
-                    _instance.InitItemInfos();
                 }
 
                 return _instance;
             }
         }
 
-        private Dictionary<int, ItemInfo> _itemInfos;
-
-        private void InitItemInfos()
+        private ItemInfoRepository()
         {
-            _itemInfos = new Dictionary<int, ItemInfo>();
+            _itemInfoDictionary = new Dictionary<int, ItemInfo>();
 
             SwordInfo oldSwordInfo = new SwordInfo
             {
@@ -46,9 +39,11 @@ namespace LandRushLibrary.Item
             };
         }
 
+        private Dictionary<int, ItemInfo> _itemInfoDictionary;
+
         public ItemInfo GetItemInfo(int itemId)
         {
-            return _itemInfos[itemId];
+            return _itemInfoDictionary[itemId];
         }
     }
 }

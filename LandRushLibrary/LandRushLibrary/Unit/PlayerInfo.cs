@@ -27,5 +27,9 @@ namespace LandRushLibrary.Unit
         public int CurrentExp { get; set; }
         public int MaxExp { get; set; }
 
+        public override UnitInfo Clone()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
