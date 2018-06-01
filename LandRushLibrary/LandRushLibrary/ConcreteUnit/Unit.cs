@@ -7,9 +7,10 @@ namespace LandRushLibrary.ConcreteUnit
     {
         public T Status { get; set; }
 
-        public abstract void Damaged(int damage);
+        public abstract void GetDamaged(int damage);
 
         #region Events
+        #region UnitDead
         public event EventHandler<UnitDeadEventArgs> UnitDead;
 
         protected virtual void OnUnitDead(UnitDeadEventArgs e)
@@ -44,8 +45,10 @@ namespace LandRushLibrary.ConcreteUnit
             }
 
         }
+        #endregion
 
 
+        #region BeAttacked
         public event EventHandler<BeAttackedEventArgs> BeAttacked;
 
         protected virtual void OnBeAttacked(BeAttackedEventArgs e)
@@ -80,6 +83,7 @@ namespace LandRushLibrary.ConcreteUnit
                 Info = info;
             }
         }
+        #endregion
 
         #endregion
     }

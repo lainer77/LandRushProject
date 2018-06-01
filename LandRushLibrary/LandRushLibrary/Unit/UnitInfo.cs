@@ -2,7 +2,12 @@
 
 namespace LandRushLibrary.Unit
 {
-    public abstract class UnitInfo
+    public interface IClonable<T>
+    {
+        T Clone();
+    }
+
+    public abstract class UnitInfo : IClonable<UnitInfo>
     {
         protected UnitInfo()
         {
@@ -27,8 +32,10 @@ namespace LandRushLibrary.Unit
         public int AttackPower { get; set; }
         public int Armor { get; set; }
         public int MaxHp { get; set; }
+        //TODO : 정적타입
         public int CurrentHp { get; set; }
         public float Speed { get; set; }
 
+        public abstract UnitInfo Clone();
     }
 }

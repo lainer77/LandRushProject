@@ -26,7 +26,7 @@ namespace LandRushLibrary.Combat
             if (damage < 0)
                 damage = 0;
 
-            beHitUnit.Damaged( damage );
+            beHitUnit.GetDamaged( damage );
         }
     }
 }

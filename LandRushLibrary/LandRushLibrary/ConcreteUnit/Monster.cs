@@ -8,10 +8,11 @@ namespace LandRushLibrary.ConcreteUnit
     {
         public Monster(int unitId)
         {
-            Status = UnitInfoRepository.Instance.GetMonsterInfo(unitId);
+//            Status = UnitInfoRepository.Instance.GetMonsterInfo(unitId);
+            Status = UnitInfoRepository.Instance[unitId];
         }
 
-        public override void Damaged(int damage)
+        public override void GetDamaged(int damage)
         {
             Status.CurrentHp -= damage;
 

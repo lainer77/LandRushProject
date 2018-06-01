@@ -26,9 +26,9 @@ namespace LandRushLibrary.Item
         }
 
         private int _currentEquipmentPare;
-        public List<EquipmentPare> EquipmentPares;
+        public List<EquipmentPair> EquipmentPares;
 
-        public struct EquipmentPare
+        public struct EquipmentPair
         {
             public EquipmentItem<EquipmentItemInfo> LeftEquipment { get; set; }
             public EquipmentItem<EquipmentItemInfo> RightEquipment { get; set; }

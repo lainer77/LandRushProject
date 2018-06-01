@@ -57,9 +57,11 @@
     <Compile Include="Item\PlayersItemController.cs" />
     <Compile Include="Item\ShieldInfo.cs" />
     <Compile Include="Item\SwordInfo.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AttackType.cs" />
     <Compile Include="Repository\ItemId.cs" />
+    <Compile Include="Repository\MonsterFactory.cs" />
     <Compile Include="Repository\MonsterType.cs" />
     <Compile Include="Repository\UnitId.cs" />
     <Compile Include="Unit\MonsterInfo.cs" />

@@ -17,6 +17,36 @@ namespace LandRushLibrary.Unit.Tests
     public class GameTest
     {
         [TestMethod()]
+        public void Foo()
+        {
+            Monster m1 = MonsterFactory.Instance.Create(new MonsterInfo());
+            Monster m1 = MonsterFactory.Instance.Create(new PlayerInfo());
+
+
+
+
+            Player p = new Player();
+            Monster m = new Monster(UnitId.ORC);
+
+//            DamageDiscriminator.Attack(p, m, AttackType.ARROW);
+
+            p.MonsterKilled += POnMonsterKilled;
+            p.LevelUp += POnLevelUp;
+
+            p.Attack(m);
+        }
+
+        [TestMethod()]
+        public void POnLevelUp(object sender, Player.LevelUpEventArgs e)
+        {
+            Assert.AreEqual(3, e.NewLevel);
+        }
+
+        private void POnMonsterKilled(object sender, Player.MonsterKilledEventArgs e)
+        {
+        }
+
+        [TestMethod()]
         public void Orc가_생성되고_공격력이_10이여야한다()
         {
             Monster orc = new Monster(UnitId.ORC);

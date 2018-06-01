@@ -27,7 +27,23 @@ namespace LandRushLibrary.Unit
         }
 
         public int SlainExp { get; set; }
+        //TODO : 열거형
         public int MonsterType { get; set; }
 
+        public override UnitInfo Clone()
+        {
+            UnitInfo monsterInfo = new MonsterInfo();
+
+            monsterInfo.UnitId = UnitId;
+            monsterInfo.Name = Name;
+            monsterInfo.PrefabName = PrefabName;
+            monsterInfo.AttackPower = AttackPower;
+            monsterInfo.Armor = Armor;
+            monsterInfo.MaxHp = MaxHp;
+            monsterInfo.CurrentHp = CurrentHp;
+            monsterInfo.Speed = Speed;
+
+            return monsterInfo;
+        }
     }
 }

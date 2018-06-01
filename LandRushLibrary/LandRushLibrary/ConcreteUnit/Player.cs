@@ -14,10 +14,10 @@ namespace LandRushLibrary.ConcreteUnit
 
         public Player()
         {
-            Status = UnitInfoRepository.Instance.GetPlayerInfo();
+            Status = UnitInfoRepository.Instance.PlayerInfo;
         }
 
-        public override void Damaged(int damage)
+        public override void GetDamaged(int damage)
         {
             Status.CurrentHp -= damage;
 
@@ -39,12 +39,12 @@ namespace LandRushLibrary.ConcreteUnit
             _shieldArmor = armor;
         }
 
-        public int GetExperience(Monster monster)
+        private int AddExperience(Monster monster)
         {
             return Status.CurrentExp += monster.Status.SlainExp;
         }
-        
-        public void LevelUp()
+
+        private void LevelUp()
         {
             if (Status.CurrentExp > Status.MaxExp)
             {
@@ -93,5 +93,113 @@ namespace LandRushLibrary.ConcreteUnit
             return args;
         }
         #endregion
+
+        #region MonsterKilled event things for C# 3.0
+        public event EventHandler<MonsterKilledEventArgs> MonsterKilled;
+
+        protected virtual void OnMonsterKilled(MonsterKilledEventArgs e)
+        {
+            if (MonsterKilled != null)
+                MonsterKilled(this, e);
+        }
+
+        private MonsterKilledEventArgs OnMonsterKilled(MonsterInfo monster )
+        {
+            MonsterKilledEventArgs args = new MonsterKilledEventArgs(monster );
+            OnMonsterKilled(args);
+
+            return args;
+        }
+
+        private MonsterKilledEventArgs OnMonsterKilledForOut()
+        {
+            MonsterKilledEventArgs args = new MonsterKilledEventArgs();
+            OnMonsterKilled(args);
+
+            return args;
+        }
+
+        public class MonsterKilledEventArgs : EventArgs
+        {
+            public MonsterInfo Monster { get; set;} 
+
+            public MonsterKilledEventArgs()
+            {
+            }
+
+            public MonsterKilledEventArgs(MonsterInfo monster )
+            {
+                Monster = monster; 
+            }
+        }
+        #endregion
+
+        #region LevelUp event things for C# 3.0
+        public event EventHandler<LevelUpEventArgs> LevelUp;
+
+        protected virtual void OnLevelUp(LevelUpEventArgs e)
+        {
+            if (LevelUp != null)
+                LevelUp(this, e);
+        }
+
+        private LevelUpEventArgs OnLevelUp(int newLevel )
+        {
+            LevelUpEventArgs args = new LevelUpEventArgs(newLevel );
+            OnLevelUp(args);
+
+            return args;
+        }
+
+        private LevelUpEventArgs OnLevelUpForOut()
+        {
+            LevelUpEventArgs args = new LevelUpEventArgs();
+            OnLevelUp(args);
+
+            return args;
+        }
+
+        public class LevelUpEventArgs : EventArgs
+        {
+            public int NewLevel { get; set;} 
+
+            public LevelUpEventArgs()
+            {
+            }
+
+            public LevelUpEventArgs(int newLevel )
+            {
+                NewLevel = newLevel; 
+            }
+        }
+        #endregion
+
+        public void Attack(Unit<UnitInfo> monster)
+        {
+            int damage = GetAttackPower(1);
+            int armor = monster.Status.Armor;
+
+            if (monster is Player)
+            {
+//                Player player = monster as Player;
+//                armor += player.GetShieldArmor();
+            }
+
+            damage = damage - armor;
+            if (damage < 0)
+                damage = 0;
+
+            monster.GetDamaged( damage );
+
+            if (monster.Status.CurrentHp < 0)
+            {
+                OnMonsterKilled((MonsterInfo) monster.Status);
+            }
+
+            if (Status.CurrentExp > 1000)
+            {
+                OnLevelUp(Status.Level + 1);
+            }
+        }
     }
 }
