@@ -41,35 +41,20 @@ namespace LandRushLibrary.Units
                 OnDead(new DeadEventArgs(this));
             }
         }
-
+        public event Predicate<Unit> CorrectTargetUnit;
         public void Attack(Unit attakedUnit, bool guard = false)
         {
-            int damage = AttackPower;
+            if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
+                return;
+            int demage = AttackPower;
 
-            OnCalculatedRandomDamage(new CalculatedRandomDamageEventArgs(damage));
+            int armor = attakedUnit.Armor;
 
-            damage -= attakedUnit.Armor;
+            demage -= armor;
+            if (demage < 0)
+                demage = 0;
 
-            if (damage < 0)
-                damage = 0;
-
-            if (attakedUnit.CurrentHp <= 0)
-            {
-                OnMonsterKilled(new MonsterKilledEventArgs((Monster)attakedUnit));
-                AddExperience(((Monster)attakedUnit).SlainExp);
-
-                if (CurrentExp >= MaxExp)
-                {
-                    Level++;
-                    CurrentExp -= MaxExp;
-                    MaxExp = LevelManager.Instance.GetNextExp(Level, MaxExp);
-
-                    OnLevelUp(new LevelUpEventArgs(Level));
-                }
-            }
-
-
-
+            attakedUnit.GetDamage(demage);
         }
 
         private void AddExperience(int exp)
@@ -77,7 +62,6 @@ namespace LandRushLibrary.Units
             CurrentExp += exp;
         }
 
-        public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
 
         #region MonsterKilled event things for C# 3.0
         public event EventHandler<MonsterKilledEventArgs> MonsterKilled;

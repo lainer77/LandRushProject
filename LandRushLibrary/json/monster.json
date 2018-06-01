@@ -1,0 +1,1 @@
+{"ORC":{"SlainExp":20,"MonsterType":1,"PrefabName":"OrcPrefab","MonsterId":2,"Name":"Orc","AttackPower":10,"Armor":0,"MaxHp":30,"CurrentHp":30,"Speed":0.0},"ORC_LORD":{"SlainExp":0,"MonsterType":2,"PrefabName":"OrcLordPrefab","MonsterId":3,"Name":"OrcLord","AttackPower":15,"Armor":0,"MaxHp":0,"CurrentHp":0,"Speed":0.0}}

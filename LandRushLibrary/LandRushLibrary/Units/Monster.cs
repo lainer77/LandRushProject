@@ -17,17 +17,24 @@ namespace LandRushLibrary.Units
                 OnDead(new DeadEventArgs(this));
         }
 
-        public void Attack(Unit attakedUnit, bool guard = false)
+        public event Predicate<Unit> CorrectTargetUnit;
+        public void Attack(Unit attakedUnit, bool guard)
         {
+            if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
+                return;
+
             int damage = AttackPower;
 
-            OnCalculatedRandomDamage(new CalculatedRandomDamageEventArgs(damage));
+            OnCalculatedRandomDamage(AttackPower);
 
-            damage -= attakedUnit.Armor;
+            int armor = attakedUnit.Armor;
 
-            if (guard == true && (attakedUnit is Player))
-                damage -= ((Player) attakedUnit).ShieldArmor;
+            if (guard && (attakedUnit is Player player))
+            {
+                armor += player.ShieldArmor;
+            }
 
+            damage -= armor;
             if (damage < 0)
                 damage = 0;
 
@@ -35,7 +42,6 @@ namespace LandRushLibrary.Units
         }
 
 
-        public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
 
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 

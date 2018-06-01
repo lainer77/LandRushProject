@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Combat\AttackPowerCalulatedEventArgs.cs" />
-    <Compile Include="Combat\DamageDiscriminator.cs" />
     <Compile Include="Combat\CalculatedRandomDamageEventArgs.cs" />
     <Compile Include="Combat\IAttackable.cs" />
     <Compile Include="Items\EquipmentItem.cs" />

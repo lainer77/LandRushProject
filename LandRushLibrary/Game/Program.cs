@@ -12,14 +12,10 @@ namespace Game
     {
         static void Main(string[] args)
         {
-//            UnitSerializer.Instance.Serialize();
-            var slime = MonsterFactory.Instance.Create(MonsterID.Slime);
-            Console.WriteLine(slime.Name);
-            Console.WriteLine(slime.AttackPower);
+           UnitSerializer.Instance.Serialize();
+           
+
             return;
-            var json = File.ReadAllText("c:\\p.json");
-            Player p = JsonConvert.DeserializeObject<Player>(json);
-            Console.WriteLine(p.Level);
 
 //            Player p = new Player();
 //            p.Level = 3;
