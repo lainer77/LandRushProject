@@ -1,9 +1,11 @@
 ﻿using System;
 using LandRushLibrary.Combat;
 using LandRushLibrary.Repository;
+using Newtonsoft.Json;
 
 namespace LandRushLibrary.Units
 {
+    [JsonObject(MemberSerialization.OptOut)]
     public class Monster : Unit, IAttackable
     {
         public int SlainExp { get; set; }
@@ -40,9 +42,6 @@ namespace LandRushLibrary.Units
 
             attakedUnit.GetDamage(damage);
         }
-
-
-
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 
         protected virtual void OnCalculatedRandomDamage(CalculatedRandomDamageEventArgs e)
@@ -59,13 +58,21 @@ namespace LandRushLibrary.Units
             return args;
         }
 
-
         public Monster Clone()
         {
             Monster clone = new Monster();
+
+            clone.MonsterId = MonsterId;
             clone.Name = Name;
             clone.AttackPower = AttackPower;
-
+            clone.Armor = Armor;
+            clone.MaxHp = MaxHp;
+            clone.CurrentHp = CurrentHp;
+            clone.Speed = Speed;
+            clone.SlainExp = SlainExp;
+            clone.PrefabName = PrefabName;
+            clone.MonsterType = MonsterType;
+ 
             return clone;
         }
     }

@@ -1,9 +1,10 @@
-﻿using LandRushLibrary.ItemInfos;
+﻿using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
-    public class EquipmentItem<T> : GameItem<T> where T : ItemInfo
+    [JsonObject(MemberSerialization.OptOut)]
+    public class EquipmentItem : GameItem
     {
-
+        public int Grade { get; set; }
     }
 }

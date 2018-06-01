@@ -1,0 +1,51 @@
+{
+	"swords": [{
+		"AttackPower": 10,
+		"Grade": 0,
+		"ItemId": 1,
+		"Name": "OldSword",
+		"IconName": "OldSword",
+		"PrefabName": "OldSword",
+		"Type": 0
+	}],
+		"shields": [{
+		"Armor": 10,
+		"Grade": 0,
+		"ItemId": 2,
+		"Name": "OldShield",
+		"IconName": "OldShield",
+		"PrefabName": "OldShield",
+		"Type": 1
+	}],
+	"bows": [ {
+		"AttackPower": 10,
+		"Grade": 0,
+		"ItemId": 3,
+		"Name": "OldBow",
+		"IconName": "OldBow",
+		"PrefabName": "OldBow",
+		"Type": 2
+	}],
+	"potions": [ {
+		"RecorveyPoint": 0,
+		"ItemId": 4,
+		"Name": "Potion",
+		"IconName": "Potion",
+		"PrefabName": "Potion",
+		"Type": 3
+	}],
+	"arrows": [ {
+		"ItemId": 5,
+		"Name": "Arrow",
+		"IconName": "Arrow",
+		"PrefabName": "Arrow",
+		"Type": 5
+	}],
+	"ingredients": [ {
+		"ItemId": 6,
+		"Name": "Wood",
+		"IconName": "Wood",
+		"PrefabName": "Wood",
+		"Type": 4
+	}]
+}

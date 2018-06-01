@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using LandRushLibrary.Factory;
+using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
 using LandRushLibrary.Utilities;
@@ -12,16 +14,13 @@ namespace Game
     {
         static void Main(string[] args)
         {
-           UnitSerializer.Instance.Serialize();
-           
+            ItemSerializer.Instance.Serialize();
+            Dictionary<ItemID, GameItem> dictionary = ItemSerializer.Instance.Deseriailize();
 
-            return;
-
-//            Player p = new Player();
-//            p.Level = 3;
-//
-//            string json = JsonConvert.SerializeObject(p);
-//            File.WriteAllText("c:\\p.json", json);
+            foreach (var gameItem in dictionary)
+            {
+                Console.WriteLine(gameItem.Value.Name);
+            }
         }
     }
 }

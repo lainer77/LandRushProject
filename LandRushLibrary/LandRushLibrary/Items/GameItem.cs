@@ -1,11 +1,15 @@
-﻿
-using LandRushLibrary.ItemInfos;
+﻿using LandRushLibrary.Repository;
+using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
-    public abstract class GameItem<T> where T : ItemInfo
+    [JsonObject(MemberSerialization.OptOut)]
+    public abstract class GameItem
     {
-        public T Info { get; set; }
-
+        public ItemID ItemId { get; set; }
+        public string Name { get; set; }
+        public string IconName { get; set; }
+        public string PrefabName { get; set; }
+        public ItemType Type { get; set; }
     }
 }

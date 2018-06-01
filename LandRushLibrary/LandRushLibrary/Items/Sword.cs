@@ -1,14 +1,11 @@
-﻿using LandRushLibrary.ItemInfos;
-using LandRushLibrary.Units;
+﻿using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
-    public class Sword : EquipmentItem<SwordInfo>
+    [JsonObject(MemberSerialization.OptOut)]
+    public class Sword : EquipmentItem
     {
-        public Sword(int itemId)
-        {
-            Info = (SwordInfo)ItemInfoRepository.Instance.GetItemInfo(itemId);
-        }
+        public int AttackPower { get; set; }
 
     }
 }

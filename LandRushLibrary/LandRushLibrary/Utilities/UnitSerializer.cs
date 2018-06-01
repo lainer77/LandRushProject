@@ -8,7 +8,7 @@ namespace LandRushLibrary.Utilities
 {
     public class UnitSerializer
     {
-        public const string MonstersFilePath = "..//..//..//json//monster.json";
+        public const string MonstersFilePath = "..//..//..//json//monsters//monster.json";
 
         #region singleton
         private static UnitSerializer _instance;
@@ -28,35 +28,8 @@ namespace LandRushLibrary.Utilities
         }
         #endregion
 
-        public void Serialize()
+        public void Serialize(Dictionary<MonsterID, Monster> dictionary)
         {
-            var dictionary = new Dictionary<MonsterID, Monster>();
-
-            Monster orcInfo = new Monster
-                                  {
-                                      MonsterId = MonsterID.ORC,
-                                      Name = "Orc",
-                                      MonsterType = MonsterGrade.NORMAL,
-                                      AttackPower = 10,
-                                      PrefabName = "OrcPrefab",
-                                      SlainExp = 20,
-                                      MaxHp = 30,
-                                      CurrentHp = 30
-                                  };
-
-            dictionary.Add(orcInfo.MonsterId, orcInfo);
-
-            Monster orcLordInfo = new Monster
-                                      {
-                                          MonsterId = MonsterID.ORC_LORD,
-                                          Name = "OrcLord",
-                                          MonsterType = MonsterGrade.BOSS,
-                                          AttackPower = 15,
-                                          PrefabName = "OrcLordPrefab"
-                                      };
-
-            dictionary.Add(orcLordInfo.MonsterId, orcLordInfo);
-
             var json = JsonConvert.SerializeObject(dictionary);
             File.WriteAllText(MonstersFilePath, json);
         }
