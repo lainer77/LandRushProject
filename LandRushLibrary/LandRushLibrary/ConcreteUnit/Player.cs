@@ -1,93 +1,128 @@
 ﻿using System;
 using LandRushLibrary.Combat;
-using LandRushLibrary.Unit;
+using LandRushLibrary.Repository;
 
 namespace LandRushLibrary.ConcreteUnit
 {
-    public class Player : Unit<PlayerInfo>, IAttackable
+    public class Player : Unit, IAttackable
     {
-        private int _shieldArmor;
+        public int Level { get; set; }
+        public int CurrentExp { get; set; }
+        public int MaxExp { get; set; }
 
-        public Player()
+        public override void GetDamage(int damage)
         {
-            Status = UnitInfoRepository.Instance.GetPlayerInfo();
+
         }
 
-        public override void Damaged(int damage)
+        public int GetAttackPower()
         {
-            Status.CurrentHp -= damage;
-
-            if (Status.CurrentHp <= 0)
-            {
-                OnUnitDead(new UnitDeadEventArgs(Status));
-            }
-
-            OnBeAttacked(new BeAttackedEventArgs(Status));
+            throw new NotImplementedException();
         }
 
-        public int GetShieldArmor()
+        public void Attack(Unit attakedUnit)
         {
-            return _shieldArmor;
+            throw new NotImplementedException();
         }
 
-        public void SetShieldArmor(int armor)
-        {
-            _shieldArmor = armor;
-        }
-
-        public int GetExperience(Monster monster)
-        {
-            return Status.CurrentExp += monster.Status.SlainExp;
-        }
-        
-        public void LevelUp()
-        {
-            if (Status.CurrentExp > Status.MaxExp)
-            {
-                Status.Level++;
-                Status.AttackPower += Status.Level;
-                Status.Armor += Status.Armor;
-                Status.MaxHp += (Status.Level * 10);
-                Status.CurrentHp = Status.MaxHp;
-                Status.CurrentExp -= Status.MaxExp;
-                Status.MaxExp += (Status.Level * 100);
-            }
-        }
-
-        public int GetAttackPower(int attackType)
-        {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(Status.AttackPower, attackType);
-
-            OnAttackPowerCalulated(args);
-
-            return args.AttackPower;
-        }
-
-        #region Events
         public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
 
-        protected virtual void OnAttackPowerCalulated(AttackPowerCalulatedEventArgs e)
-        {
-            if (AttackPowerCalulated != null)
-                AttackPowerCalulated(this, e);
+        #region MonsterKilled event things for C# 3.0
+        public event EventHandler<MonsterKilledEventArgs> MonsterKilled;
 
+        protected virtual void OnMonsterKilled(MonsterKilledEventArgs e)
+        {
+            if (MonsterKilled != null)
+                MonsterKilled(this, e);
         }
 
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulated(int attackPower, int attackType)
+        private MonsterKilledEventArgs OnMonsterKilled(Monster monster)
         {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(attackPower, attackType);
-            OnAttackPowerCalulated(args);
+            MonsterKilledEventArgs args = new MonsterKilledEventArgs(monster);
+            OnMonsterKilled(args);
 
             return args;
         }
 
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulatedForOut()
+        private MonsterKilledEventArgs OnMonsterKilledForOut()
         {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs();
-            OnAttackPowerCalulated(args);
+            MonsterKilledEventArgs args = new MonsterKilledEventArgs();
+            OnMonsterKilled(args);
 
             return args;
+        }
+
+        public class MonsterKilledEventArgs : EventArgs
+        {
+            public Monster Monster { get; set; }
+
+            public MonsterKilledEventArgs()
+            {
+            }
+
+            public MonsterKilledEventArgs(Monster monster)
+            {
+                Monster = monster;
+            }
         }
         #endregion
+
+        #region LevelUp event things for C# 3.0
+        public event EventHandler<LevelUpEventArgs> LevelUp;
+
+        protected virtual void OnLevelUp(LevelUpEventArgs e)
+        {
+            if (LevelUp != null)
+                LevelUp(this, e);
+        }
+
+        private LevelUpEventArgs OnLevelUp(int newLevel)
+        {
+            LevelUpEventArgs args = new LevelUpEventArgs(newLevel);
+            OnLevelUp(args);
+
+            return args;
+        }
+
+        private LevelUpEventArgs OnLevelUpForOut()
+        {
+            LevelUpEventArgs args = new LevelUpEventArgs();
+            OnLevelUp(args);
+
+            return args;
+        }
+
+        public class LevelUpEventArgs : EventArgs
+        {
+            public int NewLevel { get; set; }
+
+            public LevelUpEventArgs()
+            {
+            }
+
+            public LevelUpEventArgs(int newLevel)
+            {
+                NewLevel = newLevel;
+            }
+        }
+        #endregion
+
+        public event EventHandler<DoAttackEventArgs> DoAttack;
+
+        protected virtual void OnDoAttack(DoAttackEventArgs e)
+        {
+            if (DoAttack != null)
+                DoAttack(this, e);
+        }
+
+        private DoAttackEventArgs OnDoAttack(int attackPower)
+        {
+            DoAttackEventArgs args = new DoAttackEventArgs(attackPower);
+            OnDoAttack(args);
+
+            return args;
+        }
+
+
     }
 }

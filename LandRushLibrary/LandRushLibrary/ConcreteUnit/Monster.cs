@@ -1,64 +1,46 @@
 ﻿using System;
 using LandRushLibrary.Combat;
-using LandRushLibrary.Unit;
 
 namespace LandRushLibrary.ConcreteUnit
 {
-    public class Monster : Unit<MonsterInfo>, IAttackable
+    public class Monster : Unit, IAttackable
     {
-        public Monster(int unitId)
+        public override void GetDamage(int damage)
         {
-            Status = UnitInfoRepository.Instance.GetMonsterInfo(unitId);
+            throw new NotImplementedException();
         }
 
-        public override void Damaged(int damage)
+        public int GetAttackPower()
         {
-            Status.CurrentHp -= damage;
-
-            if (Status.CurrentHp <= 0)
-            {
-                OnUnitDead(new UnitDeadEventArgs(Status));
-            }
+            throw new NotImplementedException();
         }
 
-        public int GetAttackPower(int attackType)
+        public void Attack(Unit attakedUnit)
         {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(Status.AttackPower, attackType);
-
-            OnAttackPowerCalulated(args);
-
-            return args.AttackPower;
+            throw new NotImplementedException();
         }
 
-        #region Events
 
         public event EventHandler<AttackPowerCalulatedEventArgs> AttackPowerCalulated;
 
-        protected virtual void OnAttackPowerCalulated(AttackPowerCalulatedEventArgs e)
-        {
-            if (AttackPowerCalulated != null)
-                AttackPowerCalulated(this, e);
+        public event EventHandler<DoAttackEventArgs> DoAttack;
 
+        protected virtual void OnDoAttack(DoAttackEventArgs e)
+        {
+            if (DoAttack != null)
+                DoAttack(this, e);
         }
 
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulated(int attackPower, int attackType)
+        private DoAttackEventArgs OnDoAttack(int attackPower)
         {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs(attackPower, attackType);
-            OnAttackPowerCalulated(args);
-
-            return args;
-        }
-
-        private AttackPowerCalulatedEventArgs OnAttackPowerCalulatedForOut()
-        {
-            AttackPowerCalulatedEventArgs args = new AttackPowerCalulatedEventArgs();
-            OnAttackPowerCalulated(args);
+            DoAttackEventArgs args = new DoAttackEventArgs(attackPower);
+            OnDoAttack(args);
 
             return args;
         }
 
 
-        #endregion
+
     }
 
 }

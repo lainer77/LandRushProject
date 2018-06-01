@@ -1,5 +1,5 @@
-﻿
-namespace LandRushLibrary.Unit
+﻿namespace LandRushLibrary.UnitInfos
+
 {
     public class PlayerInfo : UnitInfo
     {
@@ -27,7 +27,7 @@ namespace LandRushLibrary.Unit
         public int CurrentExp { get; set; }
         public int MaxExp { get; set; }
 
-        public override UnitInfo Clone()
+        public override UnitInfo.UnitInfo Clone()
         {
             throw new System.NotImplementedException();
         }

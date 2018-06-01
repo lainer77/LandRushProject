@@ -1,86 +1,100 @@
-﻿using System;
-using LandRushLibrary.Unit;
+﻿
+using System;
+using LandRushLibrary.UnitInfos;
 
 namespace LandRushLibrary.ConcreteUnit
 {
-    public abstract class Unit<T> where T : UnitInfo
+    public abstract class Unit
     {
-        public T Status { get; set; }
+        public int UnitId { get; set; }
+        public string Name { get; set; }
+        public string PrefabName { get; set; }
+        public int AttackPower { get; set; }
+        public int Armor { get; set; }
+        public int MaxHp { get; set; }
+        public int CurrentHp { get; set; }
+        public float Speed { get; set; }
 
-        public abstract void Damaged(int damage);
+        public abstract void GetDamage(int damage);
 
-        #region Events
-        public event EventHandler<UnitDeadEventArgs> UnitDead;
+        #region Dead event things for C# 3.0
+        public event EventHandler<DeadEventArgs> Dead;
 
-        protected virtual void OnUnitDead(UnitDeadEventArgs e)
+        protected virtual void OnDead(DeadEventArgs e)
         {
-            if (UnitDead != null)
-                UnitDead(this, e);
+            if (Dead != null)
+                Dead(this, e);
         }
 
-        private UnitDeadEventArgs OnUnitDead()
+        private DeadEventArgs OnDead(Unit unit)
         {
-            UnitDeadEventArgs args = new UnitDeadEventArgs(Status);
-            OnUnitDead(args);
+            DeadEventArgs args = new DeadEventArgs(unit);
+            OnDead(args);
 
             return args;
         }
 
-        private UnitDeadEventArgs OnUnitDeadForOut()
+        private DeadEventArgs OnDeadForOut()
         {
-            UnitDeadEventArgs args = new UnitDeadEventArgs(Status);
-            OnUnitDead(args);
+            DeadEventArgs args = new DeadEventArgs();
+            OnDead(args);
 
             return args;
         }
 
-        public class UnitDeadEventArgs : EventArgs
+        public class DeadEventArgs : EventArgs
         {
-            public T Info { get; set; }
+            public Unit Unit { get; set; }
 
-            public UnitDeadEventArgs(T info)
+            public DeadEventArgs()
             {
-                Info = info;
             }
 
-        }
-
-
-        public event EventHandler<BeAttackedEventArgs> BeAttacked;
-
-        protected virtual void OnBeAttacked(BeAttackedEventArgs e)
-        {
-            if (BeAttacked != null)
-                BeAttacked(this, e);
-        }
-
-        private BeAttackedEventArgs OnBeAttacked()
-        {
-            BeAttackedEventArgs args = new BeAttackedEventArgs(Status);
-            OnBeAttacked(args);
-
-            return args;
-        }
-
-        private BeAttackedEventArgs OnBeAttackedForOut()
-        {
-            BeAttackedEventArgs args = new BeAttackedEventArgs(Status);
-            OnBeAttacked(args);
-
-            return args;
-        }
-
-        public class BeAttackedEventArgs : EventArgs
-        {
-
-            public T Info { get; set; }
-
-            public BeAttackedEventArgs(T info)
+            public DeadEventArgs(Unit unit)
             {
-                Info = info;
+                Unit = unit;
             }
         }
+        #endregion
 
+        #region Attacked event things for C# 3.0
+        public event EventHandler<AttackedEventArgs> Attacked;
+
+        protected virtual void OnAttacked(AttackedEventArgs e)
+        {
+            if (Attacked != null)
+                Attacked(this, e);
+        }
+
+        private AttackedEventArgs OnAttacked(UnitInfo attackedUnit)
+        {
+            AttackedEventArgs args = new AttackedEventArgs(attackedUnit);
+            OnAttacked(args);
+
+            return args;
+        }
+
+        private AttackedEventArgs OnAttackedForOut()
+        {
+            AttackedEventArgs args = new AttackedEventArgs();
+            OnAttacked(args);
+
+            return args;
+        }
+
+        public class AttackedEventArgs : EventArgs
+        {
+            public UnitInfo AttackedUnit { get; set; }
+
+            public AttackedEventArgs()
+            {
+            }
+
+            public AttackedEventArgs(UnitInfo attackedUnit)
+            {
+                AttackedUnit = attackedUnit;
+            }
+        }
         #endregion
     }
 }

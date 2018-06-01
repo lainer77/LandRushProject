@@ -3,7 +3,8 @@ using System;
 using LandRushLibrary.Combat;
 using LandRushLibrary.ConcreteUnit;
 using LandRushLibrary.Item;
-using LandRushLibrary.Unit;
+using LandRushLibrary.UnitInfo;
+using LandRushLibrary.UnitInfos;
 
 namespace LandRushLibrary.ConcreteItem
 {

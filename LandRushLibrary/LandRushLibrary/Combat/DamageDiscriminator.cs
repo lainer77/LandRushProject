@@ -1,6 +1,5 @@
 ﻿using System;
 using LandRushLibrary.ConcreteUnit;
-using LandRushLibrary.Unit;
 
 namespace LandRushLibrary.Combat
 {
@@ -11,7 +10,7 @@ namespace LandRushLibrary.Combat
 
         }
 
-        public static void Attack<T>(IAttackable attacker, Unit<T> beHitUnit, int attackType, bool guard = false) where T : UnitInfo
+        public static void Attack<T>(IAttackable attacker, Unit<T> beHitUnit, int attackType, bool guard = false) where T : UnitInfo.UnitInfo
         {
             int damage = attacker.GetAttackPower(attackType);
             int armor = beHitUnit.Status.Armor;

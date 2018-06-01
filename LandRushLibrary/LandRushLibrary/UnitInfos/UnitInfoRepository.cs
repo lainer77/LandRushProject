@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LandRushLibrary.Repository;
+using LandRushLibrary.UnitInfos;
 
-namespace LandRushLibrary.Unit
+namespace LandRushLibrary.UnitInfos
 {
     public class UnitInfoRepository
     {

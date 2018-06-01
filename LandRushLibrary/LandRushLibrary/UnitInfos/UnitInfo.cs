@@ -1,6 +1,6 @@
 ﻿
 
-namespace LandRushLibrary.Unit
+namespace LandRushLibrary.UnitInfos
 {
     public interface ICloneable<T>
     {

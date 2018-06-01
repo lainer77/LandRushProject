@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Combat\AttackPowerCalulatedEventArgs.cs" />
     <Compile Include="Combat\DamageDiscriminator.cs" />
+    <Compile Include="Combat\DoAttackEventArgs.cs" />
     <Compile Include="Combat\IAttackable.cs" />
     <Compile Include="ConcreteItem\EquipmentItem.cs" />
     <Compile Include="ConcreteItem\GameItem.cs" />
@@ -62,10 +63,10 @@
     <Compile Include="Repository\ItemId.cs" />
     <Compile Include="Repository\MonsterType.cs" />
     <Compile Include="Repository\UnitId.cs" />
-    <Compile Include="Unit\MonsterInfo.cs" />
-    <Compile Include="Unit\PlayerInfo.cs" />
-    <Compile Include="Unit\UnitInfo.cs" />
-    <Compile Include="Unit\UnitInfoRepository.cs" />
+    <Compile Include="UnitInfos\MonsterInfo.cs" />
+    <Compile Include="UnitInfos\PlayerInfo.cs" />
+    <Compile Include="UnitInfos\UnitInfo.cs" />
+    <Compile Include="UnitInfos\UnitInfoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
