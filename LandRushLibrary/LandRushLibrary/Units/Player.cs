@@ -19,7 +19,7 @@ namespace LandRushLibrary.Units
         public EquipmentItem LeftItem { get; set; }
         public EquipmentItem RightItem { get; set; }
 
-        public void ChnageItem(EquipmentItem leftItem, EquipmentItem rightItem)
+        public void ChangeEquipment(EquipmentItem leftItem, EquipmentItem rightItem)
         {
             LeftItem = leftItem;
             RightItem = rightItem;
