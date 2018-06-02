@@ -8,7 +8,7 @@ namespace LandRushLibrary.Utilities
 {
     public class UnitSerializer
     {
-        public const string MonstersFilePath = "..//..//..//json//monsters//monster.json";
+        public const string MonstersFilePath = "../Assets//json//monsters//monster.json";
 
         #region singleton
         private static UnitSerializer _instance;

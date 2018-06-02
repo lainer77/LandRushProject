@@ -8,7 +8,7 @@ namespace LandRushLibrary.Utilities
 {
     public class ItemSerializer
     {
-       private const string ItemsFilePath = "..//..//..//json//items//items.json";
+       private const string ItemsFilePath = "..//Assets//json//items//items.json";
 
         private static ItemSerializer _instance;
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using LandRushLibrary.Units;
+using LandRushLibrary.Combat;
 
-namespace LandRushLibrary.Combat
+namespace LandRushLibrary
 {
     public interface IAttackable
     {

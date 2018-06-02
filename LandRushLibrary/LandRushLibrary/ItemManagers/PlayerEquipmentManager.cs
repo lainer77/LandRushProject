@@ -23,7 +23,7 @@ namespace LandRushLibrary.ItemManagers
             Equipments = new List<EquipmentItem>();
         }
 
-        public List<EquipmentItem> Equipments { get; set; }
+        public List<EquipmentItem> Equipments { get; private set; }
         private EquipmentPair _firstPair;
         private EquipmentPair _secondPair;
         private int _currentPiar;
@@ -39,7 +39,7 @@ namespace LandRushLibrary.ItemManagers
         {
             EquipmentItem temp = Equipments[target];
             Equipments[target] = Equipments[source];
-            Equipments[source] = Equipments[target];
+            Equipments[source] = temp;
 
             OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
 
