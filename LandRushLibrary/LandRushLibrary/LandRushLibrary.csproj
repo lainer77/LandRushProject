@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Combat\AttackPowerCalulatedEventArgs.cs" />
     <Compile Include="Combat\CalculatedRandomDamageEventArgs.cs" />
+    <Compile Include="Enums\CombatStatus.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="ItemManagers\InvenItem.cs" />
