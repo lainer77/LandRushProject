@@ -7,5 +7,15 @@ namespace LandRushLibrary.Items
     public class Potion : ConsumpiveItem
     {
         public int RecorveyPoint { get; set; }
+
+        public override GameItem Clone()
+        {
+            Potion clone = new Potion();
+            SetBasicCloneItem(clone);
+
+            clone.RecorveyPoint = RecorveyPoint;
+
+            return clone;
+        }
     }
 }

@@ -14,13 +14,10 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            ItemSerializer.Instance.Serialize();
-            Dictionary<ItemID, GameItem> dictionary = ItemSerializer.Instance.Deseriailize();
+            Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD);
 
-            foreach (var gameItem in dictionary)
-            {
-                Console.WriteLine(gameItem.Value.Name);
-            }
+            Console.WriteLine(sword.Name);
+            Console.WriteLine(sword.ItemId);
         }
     }
 }

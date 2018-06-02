@@ -26,7 +26,21 @@ namespace LandRushLibrary.Factory
 
         private ItemFactory()
         {
-            //_items = ItemSerializer.Instance.Deseriailize();
+            _items = ItemSerializer.Instance.Deseriailize();
+        }
+
+        public GameItem Create(ItemID itemId)
+        {
+            GameItem clone = _items[itemId].Clone();
+
+            return clone;
+        }
+
+        public T Create<T>(ItemID itemId) where T : GameItem
+        {
+            GameItem clone = _items[itemId].Clone();
+
+            return clone as T;
         }
     }
 }

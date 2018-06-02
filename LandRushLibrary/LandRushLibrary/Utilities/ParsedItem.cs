@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using Newtonsoft.Json;
@@ -8,7 +6,7 @@ using Newtonsoft.Json;
 namespace LandRushLibrary.Utilities
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class ParsedItem
+    internal class ParsedItem
     {
         public List<Sword> swords;
         public List<Bow> bows;

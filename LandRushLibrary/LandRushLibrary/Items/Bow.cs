@@ -6,5 +6,15 @@ namespace LandRushLibrary.Items
     public class Bow : EquipmentItem
     {
         public int AttackPower { get; set; }
+
+        public override GameItem Clone()
+        {
+            Bow clone = new Bow();
+            SetBasicCloneItem(clone);
+
+            clone.AttackPower = AttackPower;
+
+            return clone;
+        }
     }
 }
