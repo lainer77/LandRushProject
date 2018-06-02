@@ -1,16 +1,32 @@
 ﻿using System;
 using LandRushLibrary.Combat;
+using LandRushLibrary.Items;
 using Newtonsoft.Json;
 
 namespace LandRushLibrary.Units
 {
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Player : Unit, IAttackable
     {
+        [JsonProperty]
         public int Level { get; set; }
+        [JsonProperty]
         public int CurrentExp { get; set; }
+        [JsonProperty]
         public int MaxExp { get; set; }
+
         public int ShieldArmor { get; set; }
+        public EquipmentItem LeftItem { get; set; }
+        public EquipmentItem RightItem { get; set; }
+
+        public void ChnageItem(EquipmentItem leftItem, EquipmentItem rightItem)
+        {
+            LeftItem = leftItem;
+            RightItem = rightItem;
+
+            OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(leftItem, rightItem));
+        }
+
 
         #region singleton
         private static Player _instance;
@@ -42,11 +58,11 @@ namespace LandRushLibrary.Units
             }
         }
         public event Predicate<Unit> CorrectTargetUnit;
-        public void Attack(Unit attakedUnit, bool guard = false)
+        public void Attack(Unit attakedUnit, bool guard = false, int weaponDamage = 0)
         {
             if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
                 return;
-            int demage = AttackPower;
+            int demage = AttackPower + weaponDamage;
 
             int armor = attakedUnit.Armor;
 
@@ -139,6 +155,48 @@ namespace LandRushLibrary.Units
             public LevelUpEventArgs(int newLevel)
             {
                 NewLevel = newLevel;
+            }
+        }
+        #endregion
+
+        #region PlayerEquipmentChanged event things for C# 3.0
+        public event EventHandler<PlayerEquipmentChangedEventArgs> PlayerEquipmentChanged;
+
+        protected virtual void OnPlayerEquipmentChanged(PlayerEquipmentChangedEventArgs e)
+        {
+            if (PlayerEquipmentChanged != null)
+                PlayerEquipmentChanged(this, e);
+        }
+
+        private PlayerEquipmentChangedEventArgs OnPlayerEquipmentChanged(EquipmentItem leftItem, EquipmentItem rightItem)
+        {
+            PlayerEquipmentChangedEventArgs args = new PlayerEquipmentChangedEventArgs(leftItem, rightItem);
+            OnPlayerEquipmentChanged(args);
+
+            return args;
+        }
+
+        private PlayerEquipmentChangedEventArgs OnPlayerEquipmentChangedForOut()
+        {
+            PlayerEquipmentChangedEventArgs args = new PlayerEquipmentChangedEventArgs();
+            OnPlayerEquipmentChanged(args);
+
+            return args;
+        }
+
+        public class PlayerEquipmentChangedEventArgs : EventArgs
+        {
+            public EquipmentItem LeftItem { get; set; }
+            public EquipmentItem RightItem { get; set; }
+
+            public PlayerEquipmentChangedEventArgs()
+            {
+            }
+
+            public PlayerEquipmentChangedEventArgs(EquipmentItem leftItem, EquipmentItem rightItem)
+            {
+                LeftItem = leftItem;
+                RightItem = rightItem;
             }
         }
         #endregion

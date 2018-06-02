@@ -20,7 +20,7 @@ namespace LandRushLibrary.Units
         }
 
         public event Predicate<Unit> CorrectTargetUnit;
-        public void Attack(Unit attakedUnit, bool guard)
+        public void Attack(Unit attakedUnit, bool guard, int weaponDamage = 0)
         {
             if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
                 return;

@@ -49,6 +49,7 @@
     <Compile Include="Combat\IAttackable.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="ItemManagers\PlayerEquipmentManager.cs" />
+    <Compile Include="ItemManagers\PlayerInventoryItemManager.cs" />
     <Compile Include="Items\Arrow.cs" />
     <Compile Include="Items\Bow.cs" />
     <Compile Include="Items\ConsumpiveItem.cs" />
