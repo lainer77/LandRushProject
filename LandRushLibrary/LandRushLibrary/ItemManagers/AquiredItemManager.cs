@@ -1,6 +1,8 @@
 ﻿using LandRushLibrary.Items;
+using LandRushLibrary.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LandRushLibrary.ItemManagers
 {
@@ -23,30 +25,30 @@ namespace LandRushLibrary.ItemManagers
             _maxItemSlot = 12;
         }
 
-        public List<InvenItem> InvenItems { get; private set; }
+        public List<InvenItem> Items { get; protected set; }
         protected int _maxItemSlot;
         protected int _maxAmmount;
 
         public void AddInvenItem (GameItem item)
         {
-            foreach (var invenItem in InvenItems)
+            foreach (var invenItem in Items)
             {
                 if( invenItem.Item.ItemId == item.ItemId )
                 {
-                    if (invenItem.Ammount < _maxAmmount)
+                    if (invenItem.Amount < _maxAmmount)
                     {
-                        invenItem.Ammount++;
-                        OnInventoryItemChanged(new InventoryItemChangedEventArgs(InvenItems));
+                        invenItem.Amount++;
+                        OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
                         return;
                     }
                     
                 }
             }
 
-            if (InvenItems.Count < _maxItemSlot)
+            if (Items.Count < _maxItemSlot)
             {
-                InvenItems.Add(new InvenItem(item, 1));
-                OnInventoryItemChanged(new InventoryItemChangedEventArgs(InvenItems));
+                Items.Add(new InvenItem(item, 1));
+                OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
             }
             else
                 OnInventoryIsFull(new InventoryIsFullEventArgs());
@@ -55,11 +57,37 @@ namespace LandRushLibrary.ItemManagers
 
         public void ExchangeSlotItem(int source, int target)
         {
-            InvenItem temp = InvenItems[target];
-            InvenItems[target] = InvenItems[source];
-            InvenItems[source] = temp;
+            InvenItem temp = Items[target];
+            Items[target] = Items[source];
+            Items[source] = temp;
 
-            OnInventoryItemChanged(new InventoryItemChangedEventArgs(InvenItems));
+            OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
+        }
+
+        public void RemoveItem(ItemID itemId, int amount)
+        {
+            var invenItem = (from x in Items
+                             where x.Item.ItemId == itemId
+                             select x).ToList();
+
+            if ( invenItem == null)
+                return;
+
+            foreach (var item in invenItem)
+            {
+                int temp = item.Amount;
+                item.Amount -= amount;
+
+                if (item.Amount > 0)
+                    break;
+
+                Items.Remove(item);
+                amount -= temp;
+
+
+
+            }
+
         }
 
         #region InventoryItemChanged event things for C# 3.0

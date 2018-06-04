@@ -8,6 +8,8 @@
         POTION = 4,
         ARROW = 5,
         STONE = 6,
+        WOOD = 7,
+        IRON = 8
     }
 
     public enum ItemType

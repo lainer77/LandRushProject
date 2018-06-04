@@ -73,6 +73,8 @@
     <Compile Include="Enums\ItemID.cs" />
     <Compile Include="Enums\MonsterGrade.cs" />
     <Compile Include="Enums\MonsterID.cs" />
+    <Compile Include="Upgrade\UpgradeCost.cs" />
+    <Compile Include="Upgrade\UpgradeManager.cs" />
     <Compile Include="Utilities\ItemSerializer.cs" />
     <Compile Include="Utilities\ParsedItem.cs" />
     <Compile Include="Utilities\UnitSerializer.cs" />

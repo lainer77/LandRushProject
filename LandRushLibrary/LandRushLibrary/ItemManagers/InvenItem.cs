@@ -5,13 +5,13 @@ namespace LandRushLibrary.ItemManagers
 {
     public class InvenItem
     {
-        public InvenItem(GameItem item, int ammount)
+        public InvenItem(GameItem item, int amount)
         {
             Item = item;
-            Ammount = ammount;
+            Amount = amount;
         }
 
         public GameItem Item { get; set; }
-        public int Ammount { get; set; }
+        public int Amount { get; set; }
     }
 }
