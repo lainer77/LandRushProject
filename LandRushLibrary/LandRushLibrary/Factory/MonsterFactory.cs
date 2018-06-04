@@ -33,5 +33,6 @@ namespace LandRushLibrary.Factory
 
             return monster;
         }
+
     }
 }
