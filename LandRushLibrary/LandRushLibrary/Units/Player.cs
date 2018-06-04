@@ -1,5 +1,6 @@
 ﻿using System;
 using LandRushLibrary.Combat;
+using LandRushLibrary.Enums;
 using LandRushLibrary.Items;
 using Newtonsoft.Json;
 
@@ -18,15 +19,6 @@ namespace LandRushLibrary.Units
         public int ShieldArmor { get; set; }
         public EquipmentItem LeftItem { get; set; }
         public EquipmentItem RightItem { get; set; }
-
-        public void ChangeEquipment(EquipmentItem leftItem, EquipmentItem rightItem)
-        {
-            LeftItem = leftItem;
-            RightItem = rightItem;
-
-            OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(leftItem, rightItem));
-        }
-
 
         #region singleton
         private static Player _instance;
@@ -214,6 +206,84 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
+        #region CombatStatusChanged event things for C# 3.0
+
+        public event EventHandler<CombatStatusChangedEventArgs> CombatStatusChanged;
+
+
+
+        protected virtual void OnCombatStatusChanged(CombatStatusChangedEventArgs e)
+
+        {
+
+            if (CombatStatusChanged != null)
+
+                CombatStatusChanged(this, e);
+
+        }
+
+
+
+        private CombatStatusChangedEventArgs OnCombatStatusChanged(CombatStatus combatStatus)
+
+        {
+
+            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs(combatStatus);
+
+            OnCombatStatusChanged(args);
+
+
+
+            return args;
+
+        }
+
+
+
+        private CombatStatusChangedEventArgs OnCombatStatusChangedForOut()
+
+        {
+
+            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs();
+
+            OnCombatStatusChanged(args);
+
+
+
+            return args;
+
+        }
+
+
+
+        public class CombatStatusChangedEventArgs : EventArgs
+
+        {
+
+            public CombatStatus CombatStatus { get; set; }
+
+
+
+            public CombatStatusChangedEventArgs()
+
+            {
+
+            }
+
+
+
+            public CombatStatusChangedEventArgs(CombatStatus combatStatus)
+
+            {
+
+                CombatStatus = combatStatus;
+
+            }
+
+        }
+
+        #endregion
+
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 
         protected virtual void OnCalculatedRandomDamage(CalculatedRandomDamageEventArgs e)
@@ -234,46 +304,8 @@ namespace LandRushLibrary.Units
     }
 }
 
-using LandRushLibrary.Enums;
-using LandRushLibrary.Items;
-
-        #region CombatStatusChanged event things for C# 3.0
-        public event EventHandler<CombatStatusChangedEventArgs> CombatStatusChanged;
-
-        protected virtual void OnCombatStatusChanged(CombatStatusChangedEventArgs e)
-        {
-            if (CombatStatusChanged != null)
-                CombatStatusChanged(this, e);
-        }
-
-        private CombatStatusChangedEventArgs OnCombatStatusChanged(CombatStatus combatStatus)
-        {
-            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs(combatStatus);
-            OnCombatStatusChanged(args);
-
-            return args;
-        }
-
-        private CombatStatusChangedEventArgs OnCombatStatusChangedForOut()
-        {
-            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs();
-            OnCombatStatusChanged(args);
-
-            return args;
-        }
-
-        public class CombatStatusChangedEventArgs : EventArgs
-        {
-            public CombatStatus CombatStatus { get; set; }
-
-            public CombatStatusChangedEventArgs()
-            {
-            }
-
-            public CombatStatusChangedEventArgs(CombatStatus combatStatus)
-            {
-                CombatStatus = combatStatus;
-            }
-        }
-        #endregion
-
+
+
+
+
+

@@ -11,6 +11,9 @@ using LandRushLibrary.Combat;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Factory;
 using LandRushLibrary.Units;
+using LandRushLibrary.Items;
+using LandRushLibrary.ItemManagers;
+using static LandRushLibrary.Units.Player;
 
 namespace LandRushLibrary.Unit.Tests
 {
@@ -18,23 +21,42 @@ namespace LandRushLibrary.Unit.Tests
     public class GameTest
     {
         [TestMethod()]
-        public void Orc가_생성되고_공격력이_10이여야한다()
+        public void ORC가_생생되고_이름이Orc이고_공격력이10이여야_한다 ()
         {
             Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+            Assert.AreEqual("Orc", orc.Name);
             Assert.AreEqual(10, orc.AttackPower);
-        }
-        [TestMethod()]
-        public void 플레이어가_가져오는데_그_방어력이_5여야함()
-        {
-           Assert.AreEqual(5, Player.Instance.Armor);
         }
 
         [TestMethod()]
-        public void 플레이어가_Orc의_공격을_받아_5의_데미지를_입어야한다()
+        public void 장비들을_생성하고_EquipmentManager에_Set()
         {
-            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-            Assert.AreEqual(5,orc.AttackPower - Player.Instance.Armor);
+            Sword oldSword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
+            Shield oldShield = (Shield)ItemFactory.Instance.Create(ItemID.OLD_SHIELD);
+            Bow oldBow = (Bow)ItemFactory.Instance.Create(ItemID.OLD_BOW);
+
+            PlayerEquipmentManager.Instance.SetEquipmentToSlot(1, oldSword);
+            PlayerEquipmentManager.Instance.SetEquipmentToSlot(3, oldShield);
+            PlayerEquipmentManager.Instance.SetEquipmentToSlot(2, oldBow);
+
+            Player.Instance.PlayerEquipmentChanged += EquipmentPairTest;
+
+            PlayerEquipmentManager.Instance.EquipCurrentPair();
+
         }
+
+        public void EquipmentPairTest(Object sender, EventArgs e)
+        {
+            PlayerEquipmentChangedEventArgs args = e as PlayerEquipmentChangedEventArgs;
+
+            Console.WriteLine(args.RightItem.Name);
+            Console.WriteLine(args.LeftItem.Name);
+
+            Assert.AreEqual("OldSword", args.RightItem.Name);
+            Assert.AreEqual("OldShield", args.LeftItem.Name);
+            
+        }
+
 
         //[TestMethod()]
         //public void 플레이어가_죽는지_테스트()

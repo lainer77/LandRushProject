@@ -22,6 +22,15 @@ namespace LandRushLibrary.ItemManagers
         private PlayerEquipmentManager()
         {
             Equipments = new List<EquipmentItem>();
+            _firstPair = new EquipmentPair();
+            _secondPair = new EquipmentPair();
+            _currentPair = _firstPair;
+
+            Equipments = new List<EquipmentItem>();
+            for(int i = 0; i < 4; i++)
+            {
+                Equipments.Add(new DummyEquipment());
+            }
         }
 
         public List<EquipmentItem> Equipments { get; private set; }
@@ -29,9 +38,11 @@ namespace LandRushLibrary.ItemManagers
         private EquipmentPair _secondPair;
         private EquipmentPair _currentPair;
 
+        
+
         public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
         {
-            Equipments[slotNum] = equipment;
+            Equipments[slotNum - 1] = equipment;
 
             SetEquipmentPair();
 
@@ -70,17 +81,25 @@ namespace LandRushLibrary.ItemManagers
 
         private void SetEquipmentPair()
         {
-            _firstPair.LeftEquipment = Equipments[0];
-            _firstPair.RightEquipment = Equipments[2];
+            _firstPair.RightEquipment = Equipments[0];
+            _firstPair.LeftEquipment = Equipments[2];
 
-            _secondPair.LeftEquipment = Equipments[1];
-            _secondPair.RightEquipment = Equipments[3];
+            _secondPair.RightEquipment = Equipments[1];
+            _secondPair.LeftEquipment = Equipments[3];
         }
 
         private class EquipmentPair
         {
             public EquipmentItem LeftEquipment { get; set; } 
             public EquipmentItem RightEquipment { get; set; } 
+        }
+
+        private class DummyEquipment : EquipmentItem
+        {
+            public override GameItem Clone()
+            {
+                throw new NotImplementedException();
+            }
         }
 
         #region SlotItemChanged event things for C# 3.0
