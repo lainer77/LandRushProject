@@ -1,9 +1,11 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
-using LandRushLibrary.Units;
 using LandRushLibrary.Utilities;
+using System.Linq;
 
 namespace LandRushLibrary.Factory
 {
@@ -41,6 +43,17 @@ namespace LandRushLibrary.Factory
             GameItem clone = _items[itemId].Clone();
 
             return clone as T;
+        }
+
+        public ItemID FindItemId (Expression<Func<GameItem, bool>> predicate) 
+        {
+            var items = from x in _items
+                        select x.Value;
+
+            items.FirstOrDefault<GameItem>(predicate);
+
+            
+
         }
     }
 }

@@ -61,12 +61,44 @@ namespace LandRushLibrary.Upgrade
 
             InventoryManager inventory = InventoryManager.Instance;
 
-            foreach (var item in cost.IngredientAmount)
+            foreach (var item in cost.RequireIngredients)
             {
                 stock.AddIngredient(item.Key, inventory.GetAmountForId(item.Key));
             }
 
             return stock;
+        }
+
+        public bool UpgradePossibility(EquipmentItem equipment)
+        {
+            UpgradeCost cost = _upgradeCosts[equipment.Grade];
+            bool poss = true;
+
+            foreach (var item in cost.RequireIngredients)
+            {
+                if ( item.Value > InventoryManager.Instance.GetAmountForId(item.Key))
+                {
+                    poss = false;
+                    break;
+                }
+            }
+
+            return false;
+        }
+
+        public void Upgrade(EquipmentItem equipment)
+        {
+            if (!UpgradePossibility(equipment))
+                return;
+
+            InventoryManager inven = InventoryManager.Instance;
+            UpgradeCost cost = _upgradeCosts[equipment.Grade];
+
+            foreach (var item in cost.RequireIngredients)
+            {
+                inven.RemoveItem(item.Key, item.Value);
+            }
+
 
         }
     }

@@ -5,12 +5,12 @@ namespace LandRushLibrary.Upgrade
 {
     public class UpgradeCost
     {
-        public Dictionary<ItemID, int> IngredientAmount { get; private set; }
+        public Dictionary<ItemID, int> RequireIngredients { get; private set; }
         public float Probability { get; private set; }
 
         public void AddIngredient(ItemID id, int amount)
         {
-            IngredientAmount.Add(id, amount);
+            RequireIngredients.Add(id, amount);
         }
 
         public void SetProbability(float probability)
