@@ -57,6 +57,18 @@ namespace LandRushLibrary.Unit.Tests
             
         }
 
+        [TestMethod]
+        public void 플레이어_공격_테스트()
+        {
+            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+            Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
+
+            Player.Instance.Attack(orc, sword.AttackPower);
+
+            Console.WriteLine(orc.CurrentHp);
+            Assert.AreEqual(20, orc.CurrentHp);
+        }
+
 
         //[TestMethod()]
         //public void 플레이어가_죽는지_테스트()

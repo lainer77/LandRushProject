@@ -12,15 +12,22 @@ namespace LandRushLibrary.Units
         public MonsterGrade MonsterGrade { get; set; }
         public string PrefabName { get; set; }
 
-        public override void GetDamage(int damage)
+        public override void AddDamage(int damage)
         {
-            CurrentHp -= damage;
+            int addDamage = damage;
+            addDamage -= Armor;
+
+            if (addDamage < 0)
+                addDamage = 0;
+
+            CurrentHp -= addDamage;
+
             if(CurrentHp <= 0)
                 OnDead(new DeadEventArgs(this));
         }
 
         public event Predicate<Unit> CorrectTargetUnit;
-        public void Attack(Unit attakedUnit, bool guard, int weaponDamage = 0)
+        public void Attack(Unit attakedUnit, int weaponDamage = 0, bool guard = false)
         {
             if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
                 return;
@@ -40,7 +47,7 @@ namespace LandRushLibrary.Units
             if (damage < 0)
                 damage = 0;
 
-            attakedUnit.GetDamage(damage);
+            attakedUnit.AddDamage(damage);
         }
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 

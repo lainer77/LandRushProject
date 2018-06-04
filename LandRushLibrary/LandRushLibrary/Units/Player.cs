@@ -35,7 +35,11 @@ namespace LandRushLibrary.Units
 
         private Player()
         {
-            MaxHp = 1000;
+            Name = "Player";
+            AttackPower = 10;
+            Armor = 5;
+            MaxHp = 50;
+            CurrentHp = 50;
         }
         #endregion
 
@@ -53,7 +57,7 @@ namespace LandRushLibrary.Units
         }
 
 
-        public override void GetDamage(int damage)
+        public override void AddDamage(int damage)
         {
             CurrentHp -= damage;
 
@@ -63,19 +67,19 @@ namespace LandRushLibrary.Units
             }
         }
         public event Predicate<Unit> CorrectTargetUnit;
-        public void Attack(Unit attakedUnit, bool guard = false, int weaponDamage = 0)
+        public void Attack(Unit attakedUnit, int weaponDamage = 0, bool guard = false)
         {
             if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
                 return;
-            int demage = AttackPower + weaponDamage;
+            int damage = AttackPower + weaponDamage;
 
             int armor = attakedUnit.Armor;
 
-            demage -= armor;
-            if (demage < 0)
-                demage = 0;
+            damage -= armor;
+            if (damage < 0)
+                damage = 0;
 
-            attakedUnit.GetDamage(demage);
+            attakedUnit.AddDamage(damage);
         }
 
         private void AddExperience(int exp)

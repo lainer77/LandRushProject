@@ -15,7 +15,7 @@ namespace LandRushLibrary.Units
         public int CurrentHp { get; set; }
         public float Speed { get; set; }
 
-        public abstract void GetDamage(int damage);
+        public abstract void AddDamage(int damage);
 
         #region Dead event things for C# 3.0
         public event EventHandler<DeadEventArgs> Dead;
