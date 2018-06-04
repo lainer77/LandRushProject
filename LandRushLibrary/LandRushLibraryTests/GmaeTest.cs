@@ -57,18 +57,46 @@ namespace LandRushLibrary.Unit.Tests
             
         }
 
-        [TestMethod]
-        public void 플레이어_공격_테스트()
+        //[TestMethod]
+        //public void 플레이어_공격_테스트()
+        //{
+        //    Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+        //    Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
+
+        //    Player.Instance.Attack(orc, sword.AttackPower);
+
+        //    Console.WriteLine(orc.CurrentHp);
+        //    Assert.AreEqual(20, orc.CurrentHp);
+        //}
+
+            [TestMethod()]
+        public void 플레이어_레벨업_테스트()
         {
-            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-            Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
+            List<Monster> orcs = new List<Monster>();
+            Player player = Player.Instance;
 
-            Player.Instance.Attack(orc, sword.AttackPower);
+            for(int i = 0; i < 4; i++)
+            {
+                orcs.Add(MonsterFactory.Instance.Create(MonsterID.ORC));
+                orcs[i].Dead += OnDead;
+            }
 
-            Console.WriteLine(orc.CurrentHp);
-            Assert.AreEqual(20, orc.CurrentHp);
+            foreach (var orc in orcs)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    player.Attack(orcs[i], ((Sword)player.GetRightItem()).AttackPower);
+                    Console.WriteLine(orcs[i].CurrentHp);
+                }
+
+            }
+
         }
 
+        public void OnDead(Object sender, EventArgs e)
+        {
+            Console.WriteLine("Dead orc");
+        }
 
         //[TestMethod()]
         //public void 플레이어가_죽는지_테스트()

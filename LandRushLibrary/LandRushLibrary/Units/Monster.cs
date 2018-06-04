@@ -22,8 +22,11 @@ namespace LandRushLibrary.Units
 
             CurrentHp -= addDamage;
 
-            if(CurrentHp <= 0)
+            if(CurrentHp <= 0 && Alive == true)
+            {
+                Alive = false;
                 OnDead(new DeadEventArgs(this));
+            }
         }
 
         public event Predicate<Unit> CorrectTargetUnit;
@@ -79,6 +82,7 @@ namespace LandRushLibrary.Units
             clone.SlainExp = SlainExp;
             clone.PrefabName = PrefabName;
             clone.MonsterGrade = MonsterGrade;
+            clone.Alive = true;
  
             return clone;
         }

@@ -40,8 +40,12 @@ namespace LandRushLibrary.Units
             Armor = 5;
             MaxHp = 50;
             CurrentHp = 50;
+            MaxExp = 200;
+            CurrentExp = 0;
+            Alive = true;
         }
         #endregion
+
 
         public void ChangeEquipment(EquipmentItem leftItem, EquipmentItem rightItem)
         {
@@ -56,13 +60,23 @@ namespace LandRushLibrary.Units
             OnCombatStatusChanged(new CombatStatusChangedEventArgs(combatStatus));
         }
 
+        public EquipmentItem GetRightItem()
+        {
+            return RightItem;
+        }
+
+        public EquipmentItem GetLeftItem()
+        {
+            return LeftItem;
+        }
 
         public override void AddDamage(int damage)
         {
             CurrentHp -= damage;
 
-            if (CurrentHp <= 0)
+            if (CurrentHp <= 0 && Alive == true)
             {
+                Alive = false;
                 OnDead(new DeadEventArgs(this));
             }
         }

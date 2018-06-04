@@ -15,6 +15,9 @@ namespace LandRushLibrary.Units
         public int CurrentHp { get; set; }
         public float Speed { get; set; }
 
+        [JsonIgnore]
+        public bool Alive { get; protected set; }
+
         public abstract void AddDamage(int damage);
 
         #region Dead event things for C# 3.0
