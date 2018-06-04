@@ -8,7 +8,7 @@ namespace LandRushLibrary.Utilities
 {
     public class ItemSerializer
     {
-       private const string ItemsFilePath = "..//Assets//json//items//items.json";
+       private const string ItemsFilePath = "..//Assets//Json//items.json";
 
         private static ItemSerializer _instance;
 
@@ -75,6 +75,16 @@ namespace LandRushLibrary.Utilities
                 Type = ItemType.Arrow
             };
             dictionary.Add(arrow.ItemId, arrow);
+
+            IngredientItem stone = new IngredientItem
+            {
+                ItemId = ItemID.STONE,
+                Name = "Stone",
+                PrefabName = "StonePrefab",
+                IconName = "StoneIcon",
+                Type = ItemType.Ingredient
+            };
+            dictionary.Add(stone.ItemId, stone);
 
             string json = JsonConvert.SerializeObject(dictionary);
             File.WriteAllText(ItemsFilePath, json);
