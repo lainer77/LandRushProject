@@ -9,7 +9,7 @@ namespace LandRushLibrary.Units
     public class Monster : Unit, IAttackable
     {
         public int SlainExp { get; set; }
-        public MonsterGrade MonsterType { get; set; }
+        public MonsterGrade MonsterGrade { get; set; }
         public string PrefabName { get; set; }
 
         public override void GetDamage(int damage)
@@ -71,7 +71,7 @@ namespace LandRushLibrary.Units
             clone.Speed = Speed;
             clone.SlainExp = SlainExp;
             clone.PrefabName = PrefabName;
-            clone.MonsterType = MonsterType;
+            clone.MonsterGrade = MonsterGrade;
  
             return clone;
         }
