@@ -84,12 +84,16 @@ namespace LandRushLibrary.Unit.Tests
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    player.Attack(orcs[i], ((Sword)player.GetRightItem()).AttackPower);
-                    Console.WriteLine(orcs[i].CurrentHp);
+                    player.Attack(orc, ((Sword)player.GetRightItem()).AttackPower);
                 }
-
+                Console.WriteLine(player.CurrentExp);
             }
 
+        }
+
+        public void OnLevelUp(Object sender, EventArgs e)
+        {
+            Console.WriteLine(Player.Instance.CurrentExp);
         }
 
         public void OnDead(Object sender, EventArgs e)

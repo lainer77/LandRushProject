@@ -36,6 +36,7 @@ namespace LandRushLibrary.Units
         private Player()
         {
             Name = "Player";
+            Level = 1;
             AttackPower = 10;
             Armor = 5;
             MaxHp = 50;
@@ -83,6 +84,9 @@ namespace LandRushLibrary.Units
         public event Predicate<Unit> CorrectTargetUnit;
         public void Attack(Unit attakedUnit, int weaponDamage = 0, bool guard = false)
         {
+            if (attakedUnit.Alive == false)
+                return;
+
             if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
                 return;
             int damage = AttackPower + weaponDamage;
