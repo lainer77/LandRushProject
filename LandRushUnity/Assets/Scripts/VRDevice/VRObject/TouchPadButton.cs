@@ -60,6 +60,8 @@ public class TouchPadButton : DeviceButton
         base.OnPress(controller);
     }
 
+    #region DPadDrag
+
     protected event UnityAction DPadButtonIn;
 
     protected virtual void OnDPadButtonIn()
@@ -159,13 +161,35 @@ public class TouchPadButton : DeviceButton
         DPadButtonDragLeft?.Invoke();
     }
 
+    #endregion
+
+    #region DPadControll
 
     protected event UnityAction DPadUpButton;
+    protected event UnityAction DPadDownButton;
+    protected event UnityAction DPadRightButton;
+    protected event UnityAction DPadLeftButton;
 
     protected virtual void OnDPadUpButton()
     {
         DPadUpButton?.Invoke();
     }
+
+    protected virtual void OnDPadDownButton()
+    {
+        DPadDownButton?.Invoke();
+    }
+
+    protected virtual void OnDPadRightButton()
+    {
+        DPadRightButton?.Invoke();
+    }
+
+    protected virtual void OnDPadLeftButton()
+    {
+        DPadLeftButton?.Invoke();
+    }
+
     public virtual void SetDPadUpButtonEvent(UnityAction action, bool addOrRemove)
     {
         if (addOrRemove)
@@ -174,12 +198,6 @@ public class TouchPadButton : DeviceButton
             DPadUpButton -= action;
     }
 
-    protected event UnityAction DPadDownButton;
-
-    protected virtual void OnDPadDownButton()
-    {
-        DPadDownButton?.Invoke();
-    }
     public virtual void SetDPadDownButtonEvent(UnityAction action, bool addOrRemove)
     {
         if (addOrRemove)
@@ -188,12 +206,6 @@ public class TouchPadButton : DeviceButton
             DPadDownButton -= action;
     }
 
-    protected event UnityAction DPadRightButton;
-
-    protected virtual void OnDPadRightButton()
-    {
-        DPadRightButton?.Invoke();
-    }
     public virtual void SetDPadRightButtonEvent(UnityAction action, bool addOrRemove)
     {
         if (addOrRemove)
@@ -202,12 +214,6 @@ public class TouchPadButton : DeviceButton
             DPadRightButton -= action;
     }
 
-    protected event UnityAction DPadLeftButton;
-
-    protected virtual void OnDPadLeftButton()
-    {
-        DPadLeftButton?.Invoke();
-    }
     public virtual void SetDPadLeftButtonEvent(UnityAction action, bool addOrRemove)
     {
         if (addOrRemove)
@@ -216,7 +222,13 @@ public class TouchPadButton : DeviceButton
             DPadLeftButton -= action;
     }
 
+    #endregion
+
     protected UnityAction MoveAction;
+    protected override void OnDeviceButtonUp()
+    {
+        MoveAction?.Invoke();
+    }
 
     protected override void OnDeviceButtonDown()
     {
@@ -240,11 +252,6 @@ public class TouchPadButton : DeviceButton
         }
     }
 
-    protected override void OnDeviceButtonUp()
-    {
-        MoveAction?.Invoke();
-    }
-
     protected override void OnDeviceButtonPress()
     {
         Vector2 touchpadAxis = _controller.GetAxis(_deviceButtonId);
@@ -254,6 +261,7 @@ public class TouchPadButton : DeviceButton
             if (_dPadButtonId == EVRButtonId.k_EButton_DPad_Up)
             {
                 MoveAction = OnDPadUpButton;
+                MoveAction();
                 return;
             }
         }
@@ -262,6 +270,7 @@ public class TouchPadButton : DeviceButton
             if (_dPadButtonId == EVRButtonId.k_EButton_DPad_Down)
             {
                 MoveAction = OnDPadDownButton;
+                MoveAction();
                 return;
             }
         }
@@ -270,6 +279,7 @@ public class TouchPadButton : DeviceButton
             if (_dPadButtonId == EVRButtonId.k_EButton_DPad_Right)
             {
                 MoveAction = OnDPadRightButton;
+                MoveAction();
                 return;
             }
         }
@@ -278,10 +288,12 @@ public class TouchPadButton : DeviceButton
             if (_dPadButtonId == EVRButtonId.k_EButton_DPad_Left)
             {
                 MoveAction = OnDPadLeftButton;
+                MoveAction();
                 return;
             }
         }
 
         base.OnDeviceButtonPress();
     }
+
 }
