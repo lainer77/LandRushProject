@@ -1,4 +1,6 @@
 ﻿
+using LandRushLibrary.Units;
+
 namespace LandRushLibrary
 {
     public class LevelManager
@@ -25,6 +27,13 @@ namespace LandRushLibrary
         {
             currentMaxExp += newLevel * 100;
             return currentMaxExp;
+        }
+
+        public void AddStat(Player player)
+        {
+            player.MaxHp += (player.Level * 100);
+            player.AttackPower += player.Level;
+            player.Armor += player.Level;
         }
     }
 }

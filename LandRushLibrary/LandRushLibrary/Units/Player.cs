@@ -80,11 +80,26 @@ namespace LandRushLibrary.Units
                 damage = 0;
 
             attakedUnit.AddDamage(damage);
+
+            if (attakedUnit.CurrentHp <= 0)
+                AddExperience(((Monster)attakedUnit).SlainExp);
         }
 
         private void AddExperience(int exp)
         {
             CurrentExp += exp;
+
+            if ( CurrentExp >= MaxExp )
+            {
+                Level++;
+                CurrentExp -= MaxExp;
+                MaxExp = LevelManager.Instance.GetNextExp(Level, MaxExp);
+
+                LevelManager.Instance.AddStat(this);
+                CurrentHp = MaxHp;
+
+                OnLevelUp(new LevelUpEventArgs(Level));
+            }
         }
 
 
