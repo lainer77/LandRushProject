@@ -27,7 +27,7 @@ namespace LandRushLibrary.ItemManagers
         public List<EquipmentItem> Equipments { get; private set; }
         private EquipmentPair _firstPair;
         private EquipmentPair _secondPair;
-        private int _currentPiar;
+        private EquipmentPair _currentPair;
 
         public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
         {
@@ -52,19 +52,20 @@ namespace LandRushLibrary.ItemManagers
 
         public void ChangeEquipmentPair()
         {
-            if( _currentPiar == 1)
-            {
-                _currentPiar = 2;
-                Player.Instance.ChangeEquipment( _secondPair.LeftEquipment, _secondPair.RightEquipment );
-            }
+            if( _currentPair == _firstPair )
+                _currentPair = _secondPair;
             else
-            {
-                _currentPiar = 1;
-                Player.Instance.ChangeEquipment(_firstPair.LeftEquipment, _firstPair.RightEquipment);
+                _currentPair = _firstPair;
 
-            }
+            EquipCurrentPair();
 
             OnCurrentPairChanged(new CurrentPairChangedEventArgs());
+        }
+
+        public void EquipCurrentPair()
+        {
+            Player.Instance.ChangeEquipment(_currentPair.LeftEquipment, _currentPair.RightEquipment);
+
         }
 
         private void SetEquipmentPair()

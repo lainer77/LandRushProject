@@ -47,6 +47,19 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
+        public void ChangeEquipment(EquipmentItem leftItem, EquipmentItem rightItem)
+        {
+            LeftItem = leftItem;
+            RightItem = rightItem;
+
+            OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(leftItem, rightItem));
+        }
+
+        public void ChangeCombatStatus(CombatStatus combatStatus)
+        {
+            OnCombatStatusChanged(new CombatStatusChangedEventArgs(combatStatus));
+        }
+
 
         public override void GetDamage(int damage)
         {
@@ -220,3 +233,47 @@ namespace LandRushLibrary.Units
 
     }
 }
+
+using LandRushLibrary.Enums;
+using LandRushLibrary.Items;
+
+        #region CombatStatusChanged event things for C# 3.0
+        public event EventHandler<CombatStatusChangedEventArgs> CombatStatusChanged;
+
+        protected virtual void OnCombatStatusChanged(CombatStatusChangedEventArgs e)
+        {
+            if (CombatStatusChanged != null)
+                CombatStatusChanged(this, e);
+        }
+
+        private CombatStatusChangedEventArgs OnCombatStatusChanged(CombatStatus combatStatus)
+        {
+            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs(combatStatus);
+            OnCombatStatusChanged(args);
+
+            return args;
+        }
+
+        private CombatStatusChangedEventArgs OnCombatStatusChangedForOut()
+        {
+            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs();
+            OnCombatStatusChanged(args);
+
+            return args;
+        }
+
+        public class CombatStatusChangedEventArgs : EventArgs
+        {
+            public CombatStatus CombatStatus { get; set; }
+
+            public CombatStatusChangedEventArgs()
+            {
+            }
+
+            public CombatStatusChangedEventArgs(CombatStatus combatStatus)
+            {
+                CombatStatus = combatStatus;
+            }
+        }
+        #endregion
+

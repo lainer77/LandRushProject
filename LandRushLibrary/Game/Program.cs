@@ -14,10 +14,6 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD);
-
-            Console.WriteLine(sword.Name);
-            Console.WriteLine(sword.ItemId);
         }
     }
 }
