@@ -21,7 +21,7 @@ namespace LandRushLibrary.Unit.Tests
     public class GameTest
     {
         [TestMethod()]
-        public void ORC가_생생되고_이름이Orc이고_공격력이10이여야_한다 ()
+        public void ORC가_생생되고_이름이Orc이고_공격력이10이여야_한다()
         {
             Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
             Assert.AreEqual("Orc", orc.Name);
@@ -29,7 +29,7 @@ namespace LandRushLibrary.Unit.Tests
         }
 
         [TestMethod()]
-        public void 장비들을_생성하고_EquipmentManager에_Set()
+        public void 장비들을_생성하고_EquipmentManager에_Set한다()
         {
             Sword oldSword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
             Shield oldShield = (Shield)ItemFactory.Instance.Create(ItemID.OLD_SHIELD);
@@ -54,11 +54,11 @@ namespace LandRushLibrary.Unit.Tests
 
             Assert.AreEqual("OldSword", args.RightItem.Name);
             Assert.AreEqual("OldShield", args.LeftItem.Name);
-            
+
         }
 
         [TestMethod]
-        public void 플레이어_공격_테스트()
+        public void 플레이어_공격_테스트한다()
         {
             Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
             Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
@@ -70,18 +70,27 @@ namespace LandRushLibrary.Unit.Tests
         }
 
 
-        //[TestMethod()]
-        //public void 플레이어가_죽는지_테스트()
-        //{
-        //    Player player = new Player();
-        //    Monster orc = new Monster(MonsterID.ORC);
+        [TestMethod()]
+        public void 플레이어가_죽는지_테스트한다()
+        {
+            Player.Instance.Dead += OnPlayerDead;
+            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+            for (int i = 0; i < 11; i++)
+            {
+                orc.Attack(Player.Instance, orc.AttackPower, false);
+            }
+            Assert.AreEqual(0, Player.Instance.CurrentHp);
+        }
+        [TestMethod]
+        public void 플레이어가_생성된_orc를_죽이고_경험치를_획득한다()
+        {
 
-        //    orc.AttackPowerCalulated += test;
-        //    player.UnitDead += playerDead;
-        //    player.BeAttacked += playerAttaked;
+        }
 
-
-
+        public void OnPlayerDead(Object sender, EventArgs e)
+        {
+            Console.WriteLine("쥬금");
+        }
             //}
             //[TestMethod()]
             //public void 플레이어가_orc를죽이고경험치를획득한다()
