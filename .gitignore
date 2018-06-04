@@ -13,7 +13,6 @@ ExportedObj/
 #---------------------------------------------
 
 # Unity3D generated meta files
-LandRushUnity\Library
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
@@ -80,7 +79,6 @@ StyleCopReport.xml
 *_p.c
 *_i.h
 *.ilk
-*.meta
 *.obj
 *.iobj
 *.pch
@@ -422,4 +420,3 @@ ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
-*.meta
