@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A9F93066-11F2-C72F-2B83-BEEA9A6078D8}</ProjectGuid>
+    <ProjectGuid>{FA6E0B13-2594-810C-9327-070299EE1D93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
@@ -166,10 +166,16 @@
  <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
- <HintPath>D:/LandRush/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ </Reference>
+ <Reference Include="LandRushLibrary">
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/LandRushLibrary.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityScriptHelper">
- <HintPath>D:/LandRush/Assets/References/UnityScriptHelper.dll</HintPath>
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/UnityScriptHelper.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/woo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

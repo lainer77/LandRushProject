@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F3B546DA-F455-C373-F130-3F4DA18D3EEC}</ProjectGuid>
+    <ProjectGuid>{8F3A5FEE-4F10-22A5-ACFB-53D879FAB0AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -212,6 +212,7 @@
      <None Include="Assets\Export\VolumetricLines\Shaders\AlphaBlended.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\Highlight.shader" />
      <None Include="Assets\Export\VolumetricLines\Shaders\Strip-Additive.shader" />
+     <None Include="Assets\References\Newtonsoft.Json.xml" />
      <None Include="Assets\Export\VolumetricLines\Shaders\Fast-AlphaBlended.shader" />
      <None Include="Assets\Export\VolumetricLines\Shaders\Strip-AlphaBlended.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
@@ -290,10 +291,16 @@
  <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
- <HintPath>D:/LandRush/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ </Reference>
+ <Reference Include="LandRushLibrary">
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/LandRushLibrary.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityScriptHelper">
- <HintPath>D:/LandRush/Assets/References/UnityScriptHelper.dll</HintPath>
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/UnityScriptHelper.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/woo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
@@ -319,7 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{A9F93066-11F2-C72F-2B83-BEEA9A6078D8}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{FA6E0B13-2594-810C-9327-070299EE1D93}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

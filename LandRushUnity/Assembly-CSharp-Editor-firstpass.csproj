@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E7337C32-E8D2-68AC-3826-0F7757B82109}</ProjectGuid>
+    <ProjectGuid>{1E57C0DB-3C0A-0FBF-74F6-834231C15EB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
@@ -119,10 +119,16 @@
  <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
- <HintPath>D:/LandRush/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ </Reference>
+ <Reference Include="LandRushLibrary">
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/LandRushLibrary.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityScriptHelper">
- <HintPath>D:/LandRush/Assets/References/UnityScriptHelper.dll</HintPath>
+ <HintPath>C:/Users/woo/Desktop/LandRushProject/LandRushProject/LandRushUnity/Assets/References/UnityScriptHelper.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/woo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
@@ -148,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{A9F93066-11F2-C72F-2B83-BEEA9A6078D8}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{FA6E0B13-2594-810C-9327-070299EE1D93}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
