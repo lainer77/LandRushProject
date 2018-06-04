@@ -57,25 +57,19 @@ namespace LandRushLibrary.Unit.Tests
 
         }
 
-<<<<<<< HEAD:LandRushLibrary/LandRushLibraryTests/Unit/GmaeTest.cs
-        [TestMethod]
         public void 플레이어_공격_테스트한다()
-=======
-        //[TestMethod]
-        //public void 플레이어_공격_테스트()
-        //{
-        //    Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-        //    Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
+        {
+            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+            Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
 
-        //    Player.Instance.Attack(orc, sword.AttackPower);
+            Player.Instance.Attack(orc, sword.AttackPower);
 
-        //    Console.WriteLine(orc.CurrentHp);
-        //    Assert.AreEqual(20, orc.CurrentHp);
-        //}
+            Console.WriteLine(orc.CurrentHp);
+            Assert.AreEqual(20, orc.CurrentHp);
+        }
 
-            [TestMethod()]
+        [TestMethod()]
         public void 플레이어_레벨업_테스트()
->>>>>>> df5df57beb5a4b5776a5c3d5ded79e9b488d7e41:LandRushLibrary/LandRushLibraryTests/GmaeTest.cs
         {
             List<Monster> orcs = new List<Monster>();
             Player player = Player.Instance;
