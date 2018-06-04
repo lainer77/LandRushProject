@@ -14,8 +14,6 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            UnitSerializer.Instance.Deseriailize();
-            ItemSerializer.Instance.Serialize();
         }
     }
 }
