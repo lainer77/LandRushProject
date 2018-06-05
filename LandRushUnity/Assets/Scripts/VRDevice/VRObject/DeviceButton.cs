@@ -55,14 +55,13 @@ public class DeviceButton
         Up = controller.GetPressUp(_deviceButtonId);
         Press = controller.GetPress(_deviceButtonId);
     }
-    public delegate void ActionTest();
-    public event ActionTest DeviceButtonDown;
+    public event UnityAction DeviceButtonDown;
 
     protected virtual void OnDeviceButtonDown()
     {
         DeviceButtonDown?.Invoke();
     }
-    public virtual void SetDeviceButtonDownEvent(ActionTest action, bool addOrRemove)
+    public virtual void SetDeviceButtonDownEvent(UnityAction action, bool addOrRemove)
     {
         if (addOrRemove)
         {

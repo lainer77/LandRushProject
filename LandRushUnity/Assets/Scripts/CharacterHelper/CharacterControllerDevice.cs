@@ -6,6 +6,7 @@ using UnityScriptHelper;
 public class CharacterControllerDevice : MonoBehaviourEx
 {
     #region outlets
+
     #endregion
 
     #region fields
@@ -22,6 +23,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
     }
 
     private DeviceInteraction _leftController;
+
     protected override void Start()
     {
         _leftController = DeviceRepository.LeftDeviceInteraction;
@@ -40,6 +42,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
         _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
     }
+
     private void MoveUp()
     {
         MoveTo(Vector3.forward);
@@ -49,10 +52,12 @@ public class CharacterControllerDevice : MonoBehaviourEx
     {
         MoveTo(Vector3.back);
     }
+
     private void MoveLeft()
     {
         MoveTo(Vector3.left);
     }
+
     private void MoveRight()
     {
         MoveTo(Vector3.right);
@@ -60,7 +65,9 @@ public class CharacterControllerDevice : MonoBehaviourEx
 
     public void MoveTo(Vector3 vector)
     {
-        transform.Translate(vector);
+        Vector3 rotate = Camera.main.transform.rotation.ToEulerAngles();
+        transform.Rotate(eulerAngles: new Vector3(0, rotate.y, 0));
+        transform.Translate(vector * 0.1f);
     }
 
     #endregion
