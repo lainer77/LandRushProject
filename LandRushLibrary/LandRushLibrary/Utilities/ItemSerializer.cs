@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace LandRushLibrary.Utilities
 {
-    public class ItemSerializer
+    internal class ItemSerializer
     {
        private const string ItemsFilePath = "..//Assets//Json//items.json";
 

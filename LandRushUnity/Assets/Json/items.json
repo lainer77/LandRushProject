@@ -1,42 +1,78 @@
 {
-  "OLD_SWORD": {
-    "AttackPower": 10,
-    "Grade": 0,
-    "ItemId": 1,
-    "Name": "OldSword",
-    "IconName": "OldSword",
-    "PrefabName": "OldSword",
-    "Type": 0
-  },
-  "OLD_BOW": {
-    "AttackPower": 10,
-    "Grade": 0,
-    "ItemId": 3,
-    "Name": "OldBow",
-    "IconName": "OldBow",
-    "PrefabName": "OldBow",
-    "Type": 2
-  },
-  "POTION": {
-    "RecorveyPoint": 0,
-    "ItemId": 4,
-    "Name": "Potion",
-    "IconName": "Potion",
-    "PrefabName": "Potion",
-    "Type": 3
-  },
-  "ARROW": {
-    "ItemId": 5,
-    "Name": "Arrow",
-    "IconName": "Arrow",
-    "PrefabName": "Arrow",
-    "Type": 5
-  },
-  "STONE": {
-    "ItemId": 6,
-    "Name": "Stone",
-    "IconName": "StoneIcon",
-    "PrefabName": "StonePrefab",
-    "Type": 4
-  }
+  "Swords": [
+    {
+      "AttackPower": 10,
+      "Grade": 0,
+      "ItemId": 1,
+      "Name": "OldSword",
+      "IconName": "OldSword",
+      "PrefabName": "OldSword",
+      "Type": 0
+    }
+  ],
+  "Shields": [
+    {
+      "Armor": 10,
+      "Grade": 0,
+      "ItemId": 2,
+      "Name": "OldShield",
+      "IconName": "OldSword",
+      "PrefabName": "OldShield",
+      "Type": 1
+    }
+  ],
+  "Bows": [
+    {
+      "AttackPower": 10,
+      "Grade": 0,
+      "ItemId": 3,
+      "Name": "OldBow",
+      "IconName": "OldBow",
+      "PrefabName": "OldBow",
+      "Type": 2
+    }
+  ],
+  "Potions": [
+    {
+      "RecorveyPoint": 0,
+      "ItemId": 4,
+      "Name": "Potion",
+      "IconName": "Potion",
+      "PrefabName": "Potion",
+      "Type": 3
+    }
+  ],
+
+  "Arrows": [
+    {
+      "ItemId": 5,
+      "Name": "Arrow",
+      "IconName": "Arrow",
+      "PrefabName": "Arrow",
+      "Type": 5
+    }
+  ],
+  "Ingredients": [
+    {
+      "ItemId": 6,
+      "Name": "Stone",
+      "IconName": "StoneIcon",
+      "PrefabName": "StonePrefab",
+      "Type": 4
+    },
+    {
+      "ItemId": 7,
+      "Name": "Wood",
+      "IconName": "WoodIcon",
+      "PrefabName": "WoodPrefab",
+      "Type": 4
+    },
+    {
+      "ItemId": 8,
+      "Name": "Iron",
+      "IconName": "IronPrefab",
+      "PrefabName": "IronPrefab",
+      "Type": 4
+    }
+  ]
 }

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace LandRushLibrary.Utilities
 {
-    public class UnitSerializer
+    internal class UnitSerializer
     {
         public const string MonstersFilePath = "../Assets//Json//monster.json";
 

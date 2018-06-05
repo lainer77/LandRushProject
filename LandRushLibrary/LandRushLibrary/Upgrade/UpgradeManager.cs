@@ -93,7 +93,7 @@ namespace LandRushLibrary.Upgrade
                 }
             }
 
-            return false;
+            return poss;
         }
 
         public void Upgrade<T>(T equipment) where T : EquipmentItem

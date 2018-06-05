@@ -15,15 +15,8 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int>();
-
-            list.Add(1);
-            list.Add(10);
-            list.Add(9);
-
-
-            Console.WriteLine(list.Sum());
-
+            Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD);
+            Console.WriteLine( sword.ItemId );
         }
     }
 }
