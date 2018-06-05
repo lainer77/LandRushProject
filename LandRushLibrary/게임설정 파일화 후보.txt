@@ -1,4 +1,0 @@
-UpgradeManager _maxGrade = 장비 최대 단계
-UpgradeManager _upgradeCosts = 장비 강화비용들
-AquiredItemManager _maxItemSlot = 인벤토리/창고 슬롯 최대수
-AquiredItemManager _maxAmount = 한가지 아이템 겹칠 수 있는 개수
