@@ -99,7 +99,10 @@ namespace LandRushLibrary.Upgrade
         public void Upgrade<T>(T equipment) where T : EquipmentItem
         {
             if (!UpgradePossibility(equipment))
+            {
+                OnUpgradeTried(new UpgradeTriedEventArgs(false));
                 return;
+            }
 
             InventoryManager inven = InventoryManager.Instance;
             UpgradeCost cost = _upgradeCosts[equipment.Grade];
@@ -113,13 +116,18 @@ namespace LandRushLibrary.Upgrade
 
 
             int random = _random.Next(100);
-            int probability = (int)(_upgradeCosts[equipment.Grade].Probability * 100);
+            int rate = (int)(_upgradeCosts[equipment.Grade].Rate * 100);
 
-            if (random > probability)
+            if (random > rate)
+            {
+                OnUpgradeTried(new UpgradeTriedEventArgs(false));
                 return;
+            }
 
             Type type = equipment.GetType();
             equipment = ItemFactory.Instance.Create<T>(nextGradeItem);
+
+            OnUpgradeTried(new UpgradeTriedEventArgs(true));
 
         }
 
@@ -154,6 +162,7 @@ namespace LandRushLibrary.Upgrade
 
             public UpgradeTriedEventArgs()
             {
+
             }
 
             public UpgradeTriedEventArgs(bool success)

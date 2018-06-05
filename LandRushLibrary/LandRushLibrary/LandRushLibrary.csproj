@@ -46,6 +46,9 @@
   <ItemGroup>
     <Compile Include="Combat\AttackPowerCalulatedEventArgs.cs" />
     <Compile Include="Combat\CalculatedRandomDamageEventArgs.cs" />
+    <Compile Include="Drop\DropInfo.cs" />
+    <Compile Include="Drop\DropList.cs" />
+    <Compile Include="Drop\MonsterItemDropManager.cs" />
     <Compile Include="Enums\CombatStatus.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
