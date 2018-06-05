@@ -45,12 +45,12 @@ namespace LandRushLibrary.Factory
             return clone as T;
         }
 
-        public ItemID FindItemId (Func<GameItem, bool> predicate) 
+        public ItemID FindItemId<T> (Func<T, bool> predicate) where T : GameItem
         {
             var items = from x in _items
-                        select x.Value;
+                        select x.Value as T;
 
-            var item = items.FirstOrDefault<GameItem>(predicate);
+            var item = items.FirstOrDefault(predicate);
 
             return item.ItemId;
 

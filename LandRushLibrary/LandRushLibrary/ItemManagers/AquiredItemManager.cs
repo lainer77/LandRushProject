@@ -27,7 +27,7 @@ namespace LandRushLibrary.ItemManagers
 
         public List<InvenItem> Items { get; protected set; }
         protected int _maxItemSlot;
-        protected int _maxAmmount;
+        protected int _maxAmount;
 
         public void AddInvenItem (GameItem item)
         {
@@ -35,7 +35,7 @@ namespace LandRushLibrary.ItemManagers
             {
                 if( invenItem.Item.ItemId == item.ItemId )
                 {
-                    if (invenItem.Amount < _maxAmmount)
+                    if (invenItem.Amount < _maxAmount)
                     {
                         invenItem.Amount++;
                         OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
