@@ -10,8 +10,11 @@ public class CharacterControllerDevice : MonoBehaviourEx
 
     #region fields
 
+    private GameObject _inventory;
+    private InventoryManager _inventoryManager;
     private Rigidbody _rigidbody;
-
+    private DeviceInteraction _leftController;
+    private DeviceInteraction _rightController;
     #endregion
 
     #region messages
@@ -21,17 +24,32 @@ public class CharacterControllerDevice : MonoBehaviourEx
         ControllSetting(false);
     }
 
-    private DeviceInteraction _leftController;
+    
     protected override void Start()
     {
+        _inventory = GameObject.FindWithTag("Inventory");
+        _inventoryManager = _inventory.GetComponent<InventoryManager>();
         _leftController = DeviceRepository.LeftDeviceInteraction;
+        _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
         ControllSetting(true);
     }
 
+   
     #endregion
 
     #region methods
+
+    public void VisibleInventory()
+    {
+        if (_inventoryManager.IsVisable)
+        {
+            _inventory.SetActive(true);
+            _inventoryManager.IsVisable = true;
+        }
+        else 
+            _inventory.SetActive(false);
+    }
 
     public void ControllSetting(bool addOrRemove)
     {
@@ -39,6 +57,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _leftController.TouchpadButton.SetDPadDownButtonEvent(MoveDown, addOrRemove);
         _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
         _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
+        _rightController.ApplicationMenuButton.SetDeviceButtonDownEvent(VisibleInventory, addOrRemove);
     }
     private void MoveUp()
     {

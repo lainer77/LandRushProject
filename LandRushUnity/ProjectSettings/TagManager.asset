@@ -14,6 +14,7 @@ TagManager:
   - ArrowSlot
   - Bow
   - FxTemporaire
+  - Inventory
   layers:
   - Default
   - TransparentFX

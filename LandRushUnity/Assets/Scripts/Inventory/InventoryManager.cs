@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviourEx
     public List<GameObject> AllSlot; // 모든 슬롯 저장 리스트
     public RectTransform InventoryRectTransform; // 인벤토리 RectTransform
     public GameObject OriginalSlot; // 오리지날 슬롯 프리팹
-
+    public bool IsVisable = false;
     public float SlotSize; //슬롯의 size
     public float SlotGap; //슬롯 사이간격
 
@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviourEx
     private float _inventoryWidth; //인벤토리 가로 길이
     private float _inventoryHeight; // 인벤토리 세로길이
     private float _emptySlot; //빈슬롯의 수
-    private bool _isVisable = false;
+    
     #endregion
 
     #region messages
@@ -75,6 +75,38 @@ public class InventoryManager : MonoBehaviourEx
     #endregion	
 
     #region methods
-    
+    public bool AddItem(ItemManager itemManager)
+    {
+        int slotcount = AllSlot.Count;
+
+        for (int i = 0; i < slotcount; i++)
+        {
+            InventorySlot inventorySlot = AllSlot[i].GetComponent<InventorySlot>();
+
+            if (!inventorySlot.IsSlotEmptyFlag)
+                continue;
+
+            if (inventorySlot.ReturnItem().ItemType == itemManager.ItemType && inventorySlot.IsItemCountMax(itemManager))
+            {
+                inventorySlot.AddItem(itemManager);
+                return true;
+            }
+        }
+
+        for (int i = 0; i < slotcount; i++)
+        {
+            InventorySlot inventorySlot = AllSlot[i].GetComponent<InventorySlot>();
+
+            if (inventorySlot.IsSlotEmptyFlag)
+                continue;
+
+            inventorySlot.AddItem(itemManager);
+            return true;
+        }
+
+        return false;
+    }
     #endregion
+
+
 }

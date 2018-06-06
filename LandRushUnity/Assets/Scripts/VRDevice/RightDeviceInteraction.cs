@@ -9,4 +9,6 @@ public class RightDeviceInteraction : DeviceInteraction
         base.Awake();
         RaserCraft = transform.Find("RaserPoint").GetComponent<RaserCraft>();
     }
+
+   
 }
