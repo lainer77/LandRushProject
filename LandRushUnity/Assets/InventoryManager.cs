@@ -19,16 +19,18 @@ public class InventoryManager : MonoBehaviourEx
     #endregion
 
     #region fields
-
+    
     private float _inventoryWidth; //인벤토리 가로 길이
     private float _inventoryHeight; // 인벤토리 세로길이
     private float _emptySlot; //빈슬롯의 수
+    private bool _isVisable = false;
     #endregion
 
     #region messages
 
     protected override void Awake()
     {
+        
         //인벤토리 가로, 세로 사이즈 설정
         _inventoryWidth = (SlotCountHor * SlotSize) + (SlotCountHor * SlotGap) + SlotGap+2;
         _inventoryHeight = (SlotCountVer * SlotSize) + (SlotCountVer * SlotGap) + SlotGap +4;
@@ -64,6 +66,10 @@ public class InventoryManager : MonoBehaviourEx
 
         _emptySlot = AllSlot.Count;
 
+    }
+
+    protected override void Update()
+    {
     }
 
     #endregion	
