@@ -35,29 +35,33 @@ public class CharacterControllerDevice : MonoBehaviourEx
         ControllSetting(true);
     }
 
-   
-    #endregion
-
-    #region methods
-
-    public void VisibleInventory()
+    private void VisableInventory()
     {
-        if (_inventoryManager.IsVisable)
+        if (_inventoryManager.IsVisable == false)
         {
             _inventory.SetActive(true);
             _inventoryManager.IsVisable = true;
         }
-        else 
+        else
+        {
             _inventory.SetActive(false);
+            _inventoryManager.IsVisable = false;
+        }
+        
     }
 
+    #endregion
+
+    #region methods
+
+    
     public void ControllSetting(bool addOrRemove)
     {
         _leftController.TouchpadButton.SetDPadUpButtonEvent(MoveUp, addOrRemove);
         _leftController.TouchpadButton.SetDPadDownButtonEvent(MoveDown, addOrRemove);
         _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
         _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
-        _rightController.ApplicationMenuButton.SetDeviceButtonDownEvent(VisibleInventory, addOrRemove);
+        _rightController.SystemMenuButton.SetDeviceButtonDownEvent(VisableInventory, addOrRemove);
     }
     private void MoveUp()
     {
