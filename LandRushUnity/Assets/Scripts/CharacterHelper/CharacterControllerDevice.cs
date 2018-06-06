@@ -2,14 +2,20 @@
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityScriptHelper;
+using Valve.VR;
 
 public class CharacterControllerDevice : MonoBehaviourEx
 {
     #region outlets
+
+    public float MoveSpeed;
+
     #endregion
 
     #region fields
 
+    private Transform _cameraTransform;
+    private CharacterController _playerController;
     private GameObject _inventory;
     private InventoryManager _inventoryManager;
     private Rigidbody _rigidbody;
@@ -24,15 +30,22 @@ public class CharacterControllerDevice : MonoBehaviourEx
         ControllSetting(false);
     }
 
-    
+
     protected override void Start()
     {
+        _cameraTransform = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+        _playerController = GetComponent<CharacterController>();
         _inventory = GameObject.FindWithTag("Inventory");
         _inventoryManager = _inventory.GetComponent<InventoryManager>();
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
         ControllSetting(true);
+    }
+
+    private void Update()
+    {
+
     }
 
     private void VisableInventory()
@@ -47,14 +60,14 @@ public class CharacterControllerDevice : MonoBehaviourEx
             _inventory.SetActive(false);
             _inventoryManager.IsVisable = false;
         }
-        
+
     }
 
     #endregion
 
     #region methods
 
-    
+
     public void ControllSetting(bool addOrRemove)
     {
         _leftController.TouchpadButton.SetDPadUpButtonEvent(MoveUp, addOrRemove);
@@ -65,26 +78,28 @@ public class CharacterControllerDevice : MonoBehaviourEx
     }
     private void MoveUp()
     {
-        MoveTo(Vector3.forward);
+        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
+        _playerController.Move(lookDirection * MoveSpeed);
+        
     }
 
     private void MoveDown()
     {
-        MoveTo(Vector3.back);
+        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
+        _playerController.Move(lookDirection * MoveSpeed);
     }
     private void MoveLeft()
     {
-        MoveTo(Vector3.left);
+        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
+        _playerController.Move(lookDirection * MoveSpeed);
     }
     private void MoveRight()
     {
-        MoveTo(Vector3.right);
+        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
+        _playerController.Move(lookDirection * MoveSpeed);
     }
 
-    public void MoveTo(Vector3 vector)
-    {
-        transform.Translate(vector);
-    }
+
 
     #endregion
 }
