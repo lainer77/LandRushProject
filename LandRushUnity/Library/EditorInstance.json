@@ -1,13 +1,8 @@
 {
-<<<<<<< HEAD
-  "process_id": 7956,
-  "version": "2017.3.1f1",
-  "app_path": "C:/Program Files/Unity/Editor/Unity.exe",
-  "app_contents_path": "C:/Program Files/Unity/Editor/Data",
+  "process_id": 4892,
+  "version": "2018.1.3f1",
+  "app_path": "C:/Program Files/Unity/Hub/Editor/2018.1.3f1/Editor/Unity.exe",
+  "app_contents_path": "C:/Program Files/Unity/Hub/Editor/2018.1.3f1/Editor/Data",
   "attach_allowed": "True",
-  "is_loaded_from_assets": "True",
-=======
-	"process_id" : 5472,
-	"version" : "2017.3.1f1"
->>>>>>> d9eec384877baa1325468fe725280a18e2da3adc
+  "is_loaded_from_assets": "True"
 }

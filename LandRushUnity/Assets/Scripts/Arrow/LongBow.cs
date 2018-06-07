@@ -9,23 +9,26 @@ public class LongBow : MonoBehaviourEx
     private DeviceInteraction _rightDeviceInteraction;
     public ArrowShoundPackige ArrowShoundPackige;
     public GameObject CurrentArrow { get; set; }
-    public GameObject ArrowResetSocket;
     public GameObject DelegatePosition;
     public bool Nocked = false;
-    private float _nockStartPos = 0.18f;
+    private float _nockStartPos = 0.2f;
     private float _shoundPos = 0.25f;
-    private float _nockMaxPos = 0.66f;
+    private float _nockMaxPos = 0.7f;
 
     // 100 : x = 0.48 : y
     // 0.48x = 100y;
     protected override void OnTriggerEnter(Collider other)
     {
         Debug.Log("OnCollisionEnter Arrow");
+        
         GameObject ob = other.gameObject;
-        if (ob.tag == "Arrow")
+        
+        if (ob.CompareTag("Arrow"))
         {
             CurrentArrow = ob;
+            
             _rightDeviceInteraction = DeviceRepository.RightDeviceInteraction;
+            
             TriggerEventSet(true);
         }
     }
@@ -33,10 +36,13 @@ public class LongBow : MonoBehaviourEx
     protected override void OnTriggerExit(Collider other)
     {
         Debug.Log("OnCollisionExit Arrow");
+        
         GameObject ob = other.gameObject;
-        if (ob.tag == "Arrow")
+
+        if (ob.CompareTag("Arrow") && !Nocked)
         {
             CurrentArrow = null;
+            
             TriggerEventSet(false);
         }
     }
@@ -44,45 +50,60 @@ public class LongBow : MonoBehaviourEx
     private void TriggerEventSet(bool addOrRemove)
     {
         _rightDeviceInteraction.TriggerButton.SetDeviceButtonDownEvent(StartNockArrow, addOrRemove);
-        _rightDeviceInteraction.TriggerButton.SetDeviceButtonPressEvent(ArrowUpdate, addOrRemove);
+        _rightDeviceInteraction.TriggerButton.SetDeviceButtonPressEvent(NockedArrowUpdate, addOrRemove);
         _rightDeviceInteraction.TriggerButton.SetDeviceButtonUpEvent(EndNockArrow, addOrRemove);
     }
 
     private void StartNockArrow()
     {
         Debug.Log("StartNockArrow");
+        
         ArrowShoundPackige.NockShoundPlay();
+        
         Nocked = true;
     }
 
     private void EndNockArrow()
     {
         Debug.Log("EndNockArrow");
+        
         Nocked = false;
-        Rigidbody rigidbody = CurrentArrow.GetComponent<Rigidbody>();
+        
+        ArrowScript arrowScript = CurrentArrow.GetComponent<ArrowScript>();
+        arrowScript.Shoot(1000);
+        
         ArrowShoundPackige.ShotShoundPlay();
-        rigidbody.AddForce(Vector3.forward * 1000);
-        TriggerEventSet(false); 
+        
+        TriggerEventSet(false);
+        
         Destroy(CurrentArrow.gameObject, 10);
     }
 
-    private void ArrowUpdate()
+    private void NockedArrowUpdate()
     {
         if (!Nocked)
             return;
+        
         CurrentArrow.transform.rotation = DelegatePosition.transform.rotation;
-        //        DelegatePosition.transform.position = CurrentArrow.transform.position;
-        //        float currnetPos = DelegatePosition.transform.localPosition.z;
-        //        if (currnetPos == _shoundPos)
-        //        {
-        //            Debug.Log("PullShoundPlay");
-        //            ArrowShoundPackige.PullShoundPlay();
-        //        }
-        //            if (currnetPos > _nockMaxPos)
-        //            currnetPos = _nockMaxPos;
-        //        else if (currnetPos < _nockStartPos)
-        //            currnetPos = _nockStartPos;
-        //            DelegatePosition.transform.localPosition = new Vector3(0, 0, currnetPos);
-        CurrentArrow.transform.position = ArrowResetSocket.transform.position;
+        
+        DelegatePosition.transform.position = CurrentArrow.transform.position;
+        
+        float currnetPos = DelegatePosition.transform.localPosition.z;
+        
+        if (currnetPos == _shoundPos)
+        {
+            Debug.Log("PullShoundPlay");
+            
+            ArrowShoundPackige.PullShoundPlay();
+        }
+        
+        if (currnetPos > _nockMaxPos)
+            currnetPos = _nockMaxPos;
+        else if (currnetPos < _nockStartPos)
+            currnetPos = _nockStartPos;
+        
+        DelegatePosition.transform.localPosition = new Vector3(0, 0, currnetPos);
+        
+        CurrentArrow.transform.position = DelegatePosition.transform.position;
     }
 }
