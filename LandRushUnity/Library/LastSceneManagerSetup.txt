@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/KCCI/Desktop/UnityDemo/Assets/Scenes/SampleScene.unity
+- path: Assets/Seances/VR.unity
   isLoaded: 1
   isActive: 1
