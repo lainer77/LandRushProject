@@ -9,7 +9,8 @@
         ARROW = 5,
         STONE = 6,
         WOOD = 7,
-        IRON = 8
+        IRON = 8,
+            OLD_QUIVER = 9
     }
 
     public enum ItemType
@@ -17,6 +18,7 @@
         Sword,
         Shield,
         Bow,
+        Quiver,
         Potion,
         Ingredient,
         Arrow

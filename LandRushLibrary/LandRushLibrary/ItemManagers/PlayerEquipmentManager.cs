@@ -49,11 +49,15 @@ namespace LandRushLibrary.ItemManagers
             OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
         }
 
-        public void ExchangeEquipmentInSlot(int source, int target)
+        public void ExchangeEquipmentPairInSlot()
         {
-            EquipmentItem temp = Equipments[target];
-            Equipments[target] = Equipments[source];
-            Equipments[source] = temp;
+            EquipmentItem temp = Equipments[0];
+            Equipments[0] = Equipments[1];
+            Equipments[1] = temp;
+
+            temp = Equipments[2];
+            Equipments[2] = Equipments[3];
+            Equipments[3] = temp;
 
             SetEquipmentPair();
 

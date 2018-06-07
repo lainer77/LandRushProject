@@ -14,6 +14,7 @@ namespace LandRushLibrary.Utilities
         public List<Potion> potions;
         public List<Arrow> arrows;
         public List<IngredientItem> ingredients;
+        public List<Quiver> quivers;
 
         public Dictionary<ItemID, GameItem> GetItemDictionary()
         {
@@ -45,6 +46,10 @@ namespace LandRushLibrary.Utilities
             }
 
             foreach (var item in ingredients)
+            {
+                dictionary.Add(item.ItemId, item);
+            }
+            foreach(var item in quivers)
             {
                 dictionary.Add(item.ItemId, item);
             }
