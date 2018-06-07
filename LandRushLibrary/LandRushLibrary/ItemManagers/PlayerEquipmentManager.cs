@@ -38,8 +38,6 @@ namespace LandRushLibrary.ItemManagers
         private EquipmentPair _secondPair;
         private EquipmentPair _currentPair;
 
-        
-
         public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
         {
             Equipments[slotNum - 1] = equipment;

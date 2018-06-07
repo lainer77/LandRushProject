@@ -53,7 +53,7 @@ namespace LandRushLibrary.Units
             LeftItem = leftItem;
             RightItem = rightItem;
 
-            OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(leftItem, rightItem));
+            OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(rightItem, leftItem));
         }
 
         public void ChangeCombatStatus(CombatStatus combatStatus)
@@ -77,6 +77,8 @@ namespace LandRushLibrary.Units
                 return;
 
             CurrentHp -= damage;
+
+            OnAttacked(new AttackedEventArgs(this));
 
             if (CurrentHp <= 0 && Alive == true)
             {
@@ -214,6 +216,7 @@ namespace LandRushLibrary.Units
 
         protected virtual void OnPlayerEquipmentChanged(PlayerEquipmentChangedEventArgs e)
         {
+
             if (PlayerEquipmentChanged != null)
                 PlayerEquipmentChanged(this, e);
         }
@@ -243,7 +246,7 @@ namespace LandRushLibrary.Units
             {
             }
 
-            public PlayerEquipmentChangedEventArgs(EquipmentItem leftItem, EquipmentItem rightItem)
+            public PlayerEquipmentChangedEventArgs(EquipmentItem rightItem, EquipmentItem leftItem)
             {
                 LeftItem = leftItem;
                 RightItem = rightItem;

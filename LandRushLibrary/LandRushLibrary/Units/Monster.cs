@@ -18,12 +18,13 @@ namespace LandRushLibrary.Units
                 return;
 
             int addDamage = damage;
-            addDamage -= Armor;
 
             if (addDamage < 0)
                 addDamage = 0;
 
             CurrentHp -= addDamage;
+
+            OnAttacked(new AttackedEventArgs(this));
 
             if(CurrentHp <= 0 && Alive == true)
             {
@@ -57,6 +58,7 @@ namespace LandRushLibrary.Units
                 damage = 0;
 
             attakedUnit.AddDamage(damage);
+
         }
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
 

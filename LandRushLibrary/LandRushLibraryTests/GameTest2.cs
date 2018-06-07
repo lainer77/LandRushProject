@@ -1,40 +1,109 @@
 ﻿using LandRushLibrary.Combat;
 using LandRushLibrary.Factory;
+using LandRushLibrary.ItemManagers;
+using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using static LandRushLibrary.Units.Player;
 
 namespace LandRushLibraryTests
 {
     [TestClass()]
     public class GameTest2
     {
+        /// 전투 종합 테스트
+        /// 
         [TestMethod()]
-        public void 테스트()
+        public void Player_장비_세팅()
         {
-            Assert.AreEqual(0, 0);
+            Player player = Player.Instance;
+            PlayerEquipmentManager equipmentManager = PlayerEquipmentManager.Instance;
+
+            equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD));
+            equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OLD_BOW));
+            equipmentManager.SetEquipmentToSlot(3, ItemFactory.Instance.Create<Shield>(ItemID.OLD_SHIELD));
+            equipmentManager.SetEquipmentToSlot(4, ItemFactory.Instance.Create<Quiver>(ItemID.OLD_QUIVER));
+
+            player.PlayerEquipmentChanged += OnChangedPlayerEquipment;
+
+            equipmentManager.EquipCurrentPair();
+            
+        }
+
+        public void OnChangedPlayerEquipment(object sencer, PlayerEquipmentChangedEventArgs e )
+        {
+            Assert.AreEqual(ItemID.OLD_SWORD, e.RightItem.ItemId);
+            Assert.AreEqual(ItemID.OLD_SHIELD, e.LeftItem.ItemId);
         }
 
         [TestMethod()]
-        public void 공격테스트()
+        public void 오크_한대_쳐보기()
         {
             Player player = Player.Instance;
             Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
 
+            player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+
+            Assert.AreEqual(13, orc.CurrentHp);
 
             player.CalculatedRandomDamage += OnCalcDamage;
 
-            player.Attack(orc);
+            player.Attack(orc, ((Sword)player.RightItem).AttackPower);
 
-            Console.WriteLine(orc.CurrentHp);
+
+            Assert.AreEqual(1, orc.CurrentHp);
+
+            player.CalculatedRandomDamage -= OnCalcDamage;
         }
 
-        public void OnCalcDamage(object sender, EventArgs e)
+        public void OnCalcDamage(object sender, CalculatedRandomDamageEventArgs e)
         {
-            ((CalculatedRandomDamageEventArgs)e).AttackPower += 10;
+            ((CalculatedRandomDamageEventArgs)e).AttackPower -= 5;
+        }
+
+        [TestMethod()]
+        public void 오크를_한번_죽여보자()
+        {
+            Player player = Player.Instance;
+            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+
+            orc.Attacked += OnAttacked;
+            orc.Dead += OnDead;
+
+            player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+            player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+
+            player.MonsterKilled += OnMonsterKilled;
+
+            Assert.AreEqual(20, player.CurrentExp);
 
         }
+
+        public void OnDead(object sender, DeadEventArgs e)
+        {
+            Assert.AreEqual(false, e.Unit.Alive);
+        }
+
+        public void OnAttacked(object sender, AttackedEventArgs e)
+        {
+            Assert.AreEqual(true, e.AttackedUnit.Alive);
+        }
+
+        public void OnMonsterKilled(object sender, MonsterKilledEventArgs e)
+        {
+            Assert.AreEqual(false, e.Monster.Alive);
+        }
+
+        [TestMethod()]
+        public void 오크를_5번더_죽이면서_레벨업을_테스트_해보자()
+        {
+            Player player = Player.Instance;
+            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+        }
+        
+
     }
 
 

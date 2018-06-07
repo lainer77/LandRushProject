@@ -45,19 +45,7 @@ namespace LandRushLibrary.Units
             return args;
         }
 
-        public class DeadEventArgs : EventArgs
-        {
-            public Unit Unit { get; set; }
 
-            public DeadEventArgs()
-            {
-            }
-
-            public DeadEventArgs(Unit unit)
-            {
-                Unit = unit;
-            }
-        }
         #endregion
 
         #region Attacked event things for C# 3.0
@@ -85,19 +73,35 @@ namespace LandRushLibrary.Units
             return args;
         }
 
-        public class AttackedEventArgs : EventArgs
-        {
-            public Unit AttackedUnit { get; set; }
-
-            public AttackedEventArgs()
-            {
-            }
-
-            public AttackedEventArgs(Unit attackedUnit)
-            {
-                AttackedUnit = attackedUnit;
-            }
-        }
         #endregion
+    }
+
+
+    public class AttackedEventArgs : EventArgs
+    {
+        public Unit AttackedUnit { get; set; }
+
+        public AttackedEventArgs()
+        {
+        }
+
+        public AttackedEventArgs(Unit attackedUnit)
+        {
+            AttackedUnit = attackedUnit;
+        }
+    }
+
+    public class DeadEventArgs : EventArgs
+    {
+        public Unit Unit { get; set; }
+
+        public DeadEventArgs()
+        {
+        }
+
+        public DeadEventArgs(Unit unit)
+        {
+            Unit = unit;
+        }
     }
 }
