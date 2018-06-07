@@ -7,6 +7,6 @@ public class RightDeviceInteraction : DeviceInteraction
     protected override void Awake()
     {
         base.Awake();
-        RaserCraft = transform.Find("RaserPoint").GetComponent<RaserCraft>();
+        RaserCraft = transform.Find("Hand").Find("RaserPoint").GetComponent<RaserCraft>();
     }
 }

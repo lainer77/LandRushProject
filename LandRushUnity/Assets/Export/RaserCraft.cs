@@ -56,6 +56,8 @@ public class RaserCraft : MonoBehaviourEx
         _volumetricLineBehavior.EndPos = new Vector3(0, 0, Hit.distance * 1000);
 
         RayResult.transform.position = Hit.point;
+        if (Hit.normal == Vector3.zero)
+            return;
         RayResult.transform.rotation = Quaternion.LookRotation(Hit.normal);
     }
 
