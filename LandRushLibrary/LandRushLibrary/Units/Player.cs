@@ -94,8 +94,13 @@ namespace LandRushLibrary.Units
                 return;
             int damage = AttackPower + weaponDamage;
 
-            int armor = attakedUnit.Armor;
+            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(damage);
+            OnCalculatedRandomDamage(args);
 
+            damage = args.AttackPower;
+
+            int armor = attakedUnit.Armor;
+            
             damage -= armor;
             if (damage < 0)
                 damage = 0;

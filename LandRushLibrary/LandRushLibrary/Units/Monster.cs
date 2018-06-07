@@ -40,8 +40,11 @@ namespace LandRushLibrary.Units
 
             int damage = AttackPower;
 
-            OnCalculatedRandomDamage(AttackPower);
+            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(damage);
+            OnCalculatedRandomDamage(args);
 
+            damage = args.AttackPower;
+            
             int armor = attakedUnit.Armor;
 
             if (guard && (attakedUnit is Player player))

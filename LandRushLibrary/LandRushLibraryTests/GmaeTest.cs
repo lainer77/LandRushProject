@@ -17,7 +17,7 @@ using LandRushLibrary.ItemManagers;
 
 namespace LandRushLibrary.Unit.Tests
 {
-    [TestClass()]
+    //[TestClass()]
     public class GameTest
     {
         [TestMethod()]
@@ -197,6 +197,9 @@ namespace LandRushLibrary.Unit.Tests
 
             Assert.AreEqual("Wood",InventoryManager.Instance.Items[0].Item.Name);
         }
+
+ 
+
 
 
     }
