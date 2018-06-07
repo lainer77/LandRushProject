@@ -23,17 +23,29 @@ namespace LandRushLibrary.ItemManagers
         protected AquiredItemManager()
         {
             _maxItemSlot = 12;
+            _maxAmount = 10;
+            Items = new List<InvenItem>();
         }
 
         public List<InvenItem> Items { get; protected set; }
         protected int _maxItemSlot;
         protected int _maxAmount;
 
+        public void ClearInventory()
+        {
+            Items = new List<InvenItem>();
+        }
+
+        public GameItem GetSlotItemInfo(int slotNum)
+        {
+            return Items[slotNum].Item;
+        }
+
         public void AddInvenItem (GameItem item)
         {
             foreach (var invenItem in Items)
             {
-                if( invenItem.Item.ItemId == item.ItemId )
+                if ( invenItem.Item.ItemId == item.ItemId )
                 {
                     if (invenItem.Amount < _maxAmount)
                     {
@@ -115,19 +127,7 @@ namespace LandRushLibrary.ItemManagers
             return args;
         }
 
-        public class InventoryItemChangedEventArgs : EventArgs
-        {
-            public List<InvenItem> InvenItems { get; set; }
 
-            public InventoryItemChangedEventArgs()
-            {
-            }
-
-            public InventoryItemChangedEventArgs(List<InvenItem> invenItems)
-            {
-                InvenItems = invenItems;
-            }
-        }
         #endregion
 
         #region InventoryIsFull event things for C# 3.0
@@ -155,14 +155,30 @@ namespace LandRushLibrary.ItemManagers
             return args;
         }
 
-        public class InventoryIsFullEventArgs : EventArgs
-        {
 
-            public InventoryIsFullEventArgs()
-            {
-            }
-
-        }
         #endregion
+    }
+
+    public class InventoryItemChangedEventArgs : EventArgs
+    {
+        public List<InvenItem> InvenItems { get; set; }
+
+        public InventoryItemChangedEventArgs()
+        {
+        }
+
+        public InventoryItemChangedEventArgs(List<InvenItem> invenItems)
+        {
+            InvenItems = invenItems;
+        }
+    }
+
+    public class InventoryIsFullEventArgs : EventArgs
+    {
+
+        public InventoryIsFullEventArgs()
+        {
+        }
+
     }
 }

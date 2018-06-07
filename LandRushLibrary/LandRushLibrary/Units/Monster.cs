@@ -14,6 +14,9 @@ namespace LandRushLibrary.Units
 
         public override void AddDamage(int damage)
         {
+            if (Alive == false)
+                return;
+
             int addDamage = damage;
             addDamage -= Armor;
 

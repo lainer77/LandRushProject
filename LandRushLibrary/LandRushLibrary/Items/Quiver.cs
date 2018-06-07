@@ -4,16 +4,12 @@ using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptOut)]
     public class Quiver : EquipmentItem
     {
-        public Quiver(int limitChargingNum)
-        {
-            LimitChargingNum = limitChargingNum;
-        }
-
+        [JsonIgnore]
         private Stack<Arrow> Arrows { get; } = new Stack<Arrow>();
-        public int LimitChargingNum { get; } = 30;
+        public int LimitChargingNum { get; set; }
 
         public void ArrowCharging(int chargingArrowNum)
         {
@@ -41,9 +37,11 @@ namespace LandRushLibrary.Items
         }
         public override GameItem Clone()
         {
-            Quiver clone = new Quiver(LimitChargingNum);
-
+            Quiver clone = new Quiver();
             SetBasicCloneItem(clone);
+
+            clone.LimitChargingNum = LimitChargingNum;
+
             return clone;
         }
 

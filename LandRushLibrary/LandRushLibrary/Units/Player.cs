@@ -73,6 +73,9 @@ namespace LandRushLibrary.Units
 
         public override void AddDamage(int damage)
         {
+            if (Alive == false)
+                return;
+
             CurrentHp -= damage;
 
             if (CurrentHp <= 0 && Alive == true)

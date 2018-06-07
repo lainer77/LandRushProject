@@ -13,7 +13,7 @@ using LandRushLibrary.Factory;
 using LandRushLibrary.Units;
 using LandRushLibrary.Items;
 using LandRushLibrary.ItemManagers;
-using static LandRushLibrary.Units.Player;
+
 
 namespace LandRushLibrary.Unit.Tests
 {
@@ -47,7 +47,7 @@ namespace LandRushLibrary.Unit.Tests
 
         public void EquipmentPairTest(Object sender, EventArgs e)
         {
-            PlayerEquipmentChangedEventArgs args = e as PlayerEquipmentChangedEventArgs;
+            Player.PlayerEquipmentChangedEventArgs args = e as Player.PlayerEquipmentChangedEventArgs;
 
             Console.WriteLine(args.RightItem.Name);
             Console.WriteLine(args.LeftItem.Name);
@@ -74,7 +74,7 @@ namespace LandRushLibrary.Unit.Tests
             List<Monster> orcs = new List<Monster>();
             Player player = Player.Instance;
 
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 orcs.Add(MonsterFactory.Instance.Create(MonsterID.ORC));
                 orcs[i].Dead += OnDead;
@@ -109,55 +109,95 @@ namespace LandRushLibrary.Unit.Tests
             for (int i = 0; i < 11; i++)
             {
                 orc.Attack(Player.Instance, orc.AttackPower, false);
+                Console.WriteLine(Player.Instance.CurrentHp);
             }
             Assert.AreEqual(0, Player.Instance.CurrentHp);
-        }
-        [TestMethod]
-        public void 플레이어가_생성된_orc를_죽이고_경험치를_획득한다()
-        {
-
         }
 
         public void OnPlayerDead(Object sender, EventArgs e)
         {
             Console.WriteLine("쥬금");
         }
-            //}
-            //[TestMethod()]
-            //public void 플레이어가_orc를죽이고경험치를획득한다()
-            //{
-            //    Monster orc = new Monster(MonsterID.ORC);
-            //    Monster orcLord = new Monster(MonsterID.ORC_LORD);
-            //    Player player = new Player();
 
-            //    orc.UnitDead += monsterDead;
-            //    orcLord.AttackPowerCalulated += test;
-            //    Console.WriteLine(orc.Status.CurrentHp);
-            //    Console.WriteLine(orc.Status.CurrentHp);
-            //    Console.WriteLine(player.Status.CurrentExp);
-            //}
+        [TestMethod()]
+        public void 재료_아이템_정보_테스트()
+        {
+            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
 
+            Assert.AreEqual("Stone", stone.Name);
+            Assert.AreEqual(ItemID.STONE, stone.ItemId);
+            Assert.AreEqual(ItemType.Ingredient, stone.Type);
 
-            //public void monsterDead(Object sender, Unit<MonsterInfo>.UnitDeadEventArgs e)
-            //{
-            //    Player player = new Player();
-            //    player.GetExperience((Monster) sender);
+            IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.WOOD);
 
-            //}
-            //public void test(Object sender, AttackPowerCalulatedEventArgs e)
-            //{
-            //    e.AttackPower = e.AttackPower;
-            //}
+            Assert.AreEqual("Wood", wood.Name);
+            Assert.AreEqual(ItemID.WOOD, wood.ItemId);
+            Assert.AreEqual(ItemType.Ingredient, wood.Type);
 
-            //public void playerDead(Object sender, Unit<PlayerInfo>.UnitDeadEventArgs e)
-            //{
-            //    Console.WriteLine("죽음");
-            //}
+            IngredientItem iron = ItemFactory.Instance.Create<IngredientItem>(ItemID.IRON);
 
-            //public void playerAttaked(Object sender, Unit<PlayerInfo>.BeAttackedEventArgs e)
-            //{
-            //    Console.WriteLine(e.Info.CurrentHp);
-
-            //}
+            Assert.AreEqual("Iron", iron.Name);
+            Assert.AreEqual(ItemID.IRON, iron.ItemId);
+            Assert.AreEqual(ItemType.Ingredient, iron.Type);
         }
+
+        [TestMethod()]
+        public void 인벤토리_이이템_추가_테스트()
+        {
+            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
+            InventoryManager.Instance.AddInvenItem(stone);
+            InventoryManager.Instance.AddInvenItem(stone);
+            InventoryManager.Instance.AddInvenItem(stone);
+
+            Assert.AreEqual(1, InventoryManager.Instance.Items.Count);
+
+            for (int i = 0; i < 10; i++)
+            {
+                InventoryManager.Instance.AddInvenItem(stone);
+            }
+
+            Assert.AreEqual(2, InventoryManager.Instance.Items.Count);
+
+            Console.WriteLine(InventoryManager.Instance.Items[0].Amount);
+            Console.WriteLine(InventoryManager.Instance.Items[1].Amount);
+
+            InventoryManager.Instance.RemoveItem(ItemID.STONE, 13);
+
+            Assert.AreEqual(0, InventoryManager.Instance.Items.Count);
+
+            InventoryManager.Instance.InventoryIsFull += Full;
+
+            for (int i = 0; i < 121; i++)
+            {
+                InventoryManager.Instance.AddInvenItem(stone);
+            }
+
+
+        }
+
+        public void Full(Object sender, EventArgs e)
+        {
+            Console.WriteLine("꽉참");
+        }
+
+        [TestMethod()]
+        public void 인벤토리_아이템_변경_테스트()
+        {
+            InventoryManager.Instance.ClearInventory();
+
+            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
+            IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.WOOD);
+
+            InventoryManager.Instance.AddInvenItem(stone); 
+            InventoryManager.Instance.AddInvenItem(wood);
+
+            Assert.AreEqual("Stone", InventoryManager.Instance.Items[0].Item.Name);
+
+            InventoryManager.Instance.ExchangeSlotItem(0, 1);
+
+            Assert.AreEqual("Wood",InventoryManager.Instance.Items[0].Item.Name);
+        }
+
+
+    }
 }
