@@ -1,12 +1,13 @@
 ﻿
+using LandRushLibrary.Units;
 using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class Potion : ConsumpiveItem
+    public class Potion : ConsumableItem
     {
-        public int RecorveyPoint { get; set; }
+        public float RecorveyPoint { get; set; }
 
         public override GameItem Clone()
         {
@@ -16,6 +17,11 @@ namespace LandRushLibrary.Items
             clone.RecorveyPoint = RecorveyPoint;
 
             return clone;
+        }
+
+        public override void UseItem()
+        {
+            Player.Instance.CurrentHp += ( (int)(Player.Instance.MaxHp * RecorveyPoint) );
         }
     }
 }

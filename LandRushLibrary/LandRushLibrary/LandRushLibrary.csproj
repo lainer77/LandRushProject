@@ -46,11 +46,12 @@
   <ItemGroup>
     <Compile Include="Combat\AttackPowerCalulatedEventArgs.cs" />
     <Compile Include="Combat\CalculatedRandomDamageEventArgs.cs" />
+    <Compile Include="Consume\ItemConsumer.cs" />
     <Compile Include="Drop\DropInfo.cs" />
     <Compile Include="Drop\DropList.cs" />
     <Compile Include="Drop\MonsterItemDropManager.cs" />
-    <Compile Include="Interfaces\IAttackable.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
+    <Compile Include="Interfaces\IConsumable.cs" />
     <Compile Include="ItemManagers\InvenItem.cs" />
     <Compile Include="ItemManagers\InventoryManager.cs" />
     <Compile Include="ItemManagers\PlayerEquipmentManager.cs" />
@@ -58,7 +59,7 @@
     <Compile Include="ItemManagers\StorageManager.cs" />
     <Compile Include="Items\Arrow.cs" />
     <Compile Include="Items\Bow.cs" />
-    <Compile Include="Items\ConsumpiveItem.cs" />
+    <Compile Include="Items\ConsumableItem.cs" />
     <Compile Include="Items\EquipmentItem.cs" />
     <Compile Include="Items\GameItem.cs" />
     <Compile Include="Items\IngredientItem.cs" />

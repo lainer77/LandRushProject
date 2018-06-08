@@ -3,8 +3,8 @@
 namespace LandRushLibrary.Items
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public abstract class ConsumpiveItem : GameItem
+    public abstract class ConsumableItem : GameItem
     {
-
+        public abstract void UseItem();
     }
 }
