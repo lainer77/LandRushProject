@@ -7,6 +7,7 @@ using LandRushLibrary.ItemManagers;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
+using LandRushLibrary.Upgrade;
 using LandRushLibrary.Utilities;
 using Newtonsoft.Json;
 
@@ -15,9 +16,49 @@ namespace Game
     class Program
     {
         static private int[] _probability = { 0, 0, 0,0,0,0 };
-        static int _try = 100000;
+        static int _dropTry = 1000000;
+        static int _upTry = 100000;
+        static int _upSuceess = 0;
+
+        public static void OnUpTried(object sender, UpgradeTriedEventArgs e)
+        {
+            Console.WriteLine(e.Success);
+
+            if (e.Success)
+                _upSuceess++;
+        }
 
         static void Main(string[] args)
+        {
+            InventoryManager inven = InventoryManager.Instance;
+            UpgradeManager upgrader = UpgradeManager.Instance;
+
+            upgrader.UpgradeTried += OnUpTried;
+
+            for (int i = 0; i < _upTry; i++)
+            {
+                Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.STEEL_SWORD);
+
+                UpgradeCost cost = upgrader.GetUpgradeCost(sword);
+
+                foreach (var item in cost.RequireIngredients)
+                {
+                    for (int j = 0; j < item.Value; j++)
+                    {
+                        IngredientItem ingredient = ItemFactory.Instance.Create<IngredientItem>(item.Key);
+
+                        inven.AddInvenItem(ingredient);
+                    }
+                }
+
+                upgrader.Upgrade<Sword>(ref sword);
+            }
+
+            Console.WriteLine($"{ (double)_upSuceess / _upTry * 100:N2}%");
+
+        }
+
+        static void foo()
         {
             Player player = Player.Instance;
 
@@ -33,7 +74,7 @@ namespace Game
             Monster orc;
             Monster orcLord;
 
-            for (int i = 0; i < _try; i++)
+            for (int i = 0; i < _dropTry; i++)
             {
                 orc = MonsterFactory.Instance.Create(MonsterID.ORC);
                 orc.ItemDropped += OnItemDropped;
@@ -54,9 +95,8 @@ namespace Game
 
             foreach (var item in _probability)
             {
-                Console.WriteLine( $"{(double)item / _try * 100:N2}%");
+                Console.WriteLine($"{(double)item / _dropTry * 100:N2}%");
             }
-
         }
 
         static void OnItemDropped(object sender, ItemDroppedEventArgs e)
@@ -67,7 +107,7 @@ namespace Game
             {
                 Console.Write($"{item.ItemId}:{ item.Amount} / ");
 
-                if(item.ItemId == ItemID.POTION)
+                if(item.ItemId == ItemID.ARROW)
                 {
                     _probability[item.Amount]++;
                 }

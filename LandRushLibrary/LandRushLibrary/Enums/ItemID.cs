@@ -10,7 +10,10 @@
         STONE = 6,
         WOOD = 7,
         IRON = 8,
-            OLD_QUIVER = 9
+        OLD_QUIVER = 9,
+        SHORT_SWORD = 10,
+        KNIGHT_SWORD = 11,
+        STEEL_SWORD = 12
     }
 
     public enum ItemType
