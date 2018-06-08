@@ -49,7 +49,6 @@
     <Compile Include="Drop\DropInfo.cs" />
     <Compile Include="Drop\DropList.cs" />
     <Compile Include="Drop\MonsterItemDropManager.cs" />
-    <Compile Include="Enums\CombatStatus.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="ItemManagers\InvenItem.cs" />
@@ -81,7 +80,8 @@
     <Compile Include="Upgrade\UpgradeManager.cs" />
     <Compile Include="Utilities\ItemSerializer.cs" />
     <Compile Include="Utilities\ParsedItem.cs" />
-    <Compile Include="Utilities\UnitSerializer.cs" />
+    <Compile Include="Utilities\PlayerSerializer.cs" />
+    <Compile Include="Utilities\MonsterSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

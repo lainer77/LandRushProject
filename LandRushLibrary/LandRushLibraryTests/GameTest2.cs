@@ -79,6 +79,10 @@ namespace LandRushLibraryTests
 
             Assert.AreEqual(20, player.CurrentExp);
 
+            player.MonsterKilled -= OnMonsterKilled;
+            orc.Attacked -= OnAttacked;
+            orc.Dead -= OnDead;
+
         }
 
         public void OnDead(object sender, DeadEventArgs e)
@@ -97,12 +101,33 @@ namespace LandRushLibraryTests
         }
 
         [TestMethod()]
-        public void 오크를_5번더_죽이면서_레벨업을_테스트_해보자()
+        public void 오크를_10번더_죽이면서_레벨업을_테스트_해보자()
         {
             Player player = Player.Instance;
             Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+
+            player.LevelUp += OnLevelUp;
+
+            for (int i = 0; i < 10; i++)
+            {
+                player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+                player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+
+                orc = MonsterFactory.Instance.Create(MonsterID.ORC);
+            }
+
+            Assert.AreEqual(20, player.CurrentExp);
+            Assert.AreEqual(400, player.MaxExp);
+            Assert.AreEqual(12, player.AttackPower);
+            Assert.AreEqual(7, player.Armor);
+            Assert.AreEqual(250, player.MaxHp);
         }
-        
+
+        public void OnLevelUp(object sender, LevelUpEventArgs e)
+        {
+            Assert.AreEqual(2, e.NewLevel);
+        }
+
 
     }
 

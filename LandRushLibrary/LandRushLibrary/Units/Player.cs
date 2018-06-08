@@ -1,23 +1,25 @@
 ﻿using System;
 using LandRushLibrary.Combat;
-using LandRushLibrary.Enums;
 using LandRushLibrary.Items;
+using LandRushLibrary.Utilities;
 using Newtonsoft.Json;
 
 namespace LandRushLibrary.Units
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptOut)]
     public class Player : Unit, IAttackable
     {
-        [JsonProperty]
         public int Level { get; set; }
-        [JsonProperty]
         public int CurrentExp { get; set; }
-        [JsonProperty]
         public int MaxExp { get; set; }
 
+        [JsonIgnore]
+        public bool IsCombatMode { get; set; }
+        [JsonIgnore]
         public int ShieldArmor { get; set; }
+        [JsonIgnore]
         public EquipmentItem LeftItem { get; set; }
+        [JsonIgnore]
         public EquipmentItem RightItem { get; set; }
 
         #region singleton
@@ -28,25 +30,44 @@ namespace LandRushLibrary.Units
             get
             {
                 if (_instance == null)
-                    _instance = new Player();
+                {
+                    _instance = PlayerSerializer.Instance.DeSerialize();
+                    _instance.Revivor();
+                }
                 return _instance;
             }
         }
 
         private Player()
         {
-            Name = "Player";
-            Level = 1;
-            AttackPower = 10;
-            Armor = 5;
-            MaxHp = 50;
-            CurrentHp = 50;
-            MaxExp = 200;
-            CurrentExp = 0;
-            Alive = true;
+            //Player jsonPlayer = PlayerSerializer.Instance.DeSerialize();
+            //Name = jsonPlayer.Name;
+            //Level = jsonPlayer.Level;
+            //AttackPower = jsonPlayer.AttackPower;
+            //Armor = jsonPlayer.Armor;
+            //MaxHp = jsonPlayer.MaxHp;
+            //CurrentHp = MaxHp;
+            //Speed = jsonPlayer.Speed;
+            //Alive = true;
+
+            //Name = "Player";
+            //Level = 1;
+            //AttackPower = 10;
+            //Armor = 5;
+            //MaxHp = 50;
+            //CurrentHp = 50;
+            //MaxExp = 200;
+            //CurrentExp = 0;
+            //Alive = true;
         }
         #endregion
 
+        public void Revivor()
+        {
+            CurrentHp = MaxHp;
+            Alive = true;
+            IsCombatMode = false;
+        }
 
         public void ChangeEquipment(EquipmentItem leftItem, EquipmentItem rightItem)
         {
@@ -56,9 +77,17 @@ namespace LandRushLibrary.Units
             OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(rightItem, leftItem));
         }
 
-        public void ChangeCombatStatus(CombatStatus combatStatus)
+        public void ChangecombatMode(bool combatMode)
         {
-            OnCombatStatusChanged(new CombatStatusChangedEventArgs(combatStatus));
+            IsCombatMode = combatMode;
+
+            if(combatMode == false)
+            {
+                LeftItem = null;
+                RightItem = null;
+            }
+
+            OncombatModeChanged(new CombatModeChangedEventArgs(combatMode));
         }
 
         public EquipmentItem GetRightItem()
@@ -254,31 +283,31 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
-        #region CombatStatusChanged event things for C# 3.0
+        #region combatModeChanged event things for C# 3.0
 
-        public event EventHandler<CombatStatusChangedEventArgs> CombatStatusChanged;
+        public event EventHandler<CombatModeChangedEventArgs> combatModeChanged;
 
 
 
-        protected virtual void OnCombatStatusChanged(CombatStatusChangedEventArgs e)
+        protected virtual void OncombatModeChanged(CombatModeChangedEventArgs e)
 
         {
 
-            if (CombatStatusChanged != null)
+            if (combatModeChanged != null)
 
-                CombatStatusChanged(this, e);
+                combatModeChanged(this, e);
 
         }
 
 
 
-        private CombatStatusChangedEventArgs OnCombatStatusChanged(CombatStatus combatStatus)
+        private CombatModeChangedEventArgs OncombatModeChanged(bool combatMode)
 
         {
 
-            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs(combatStatus);
+            CombatModeChangedEventArgs args = new CombatModeChangedEventArgs(combatMode);
 
-            OnCombatStatusChanged(args);
+            OncombatModeChanged(args);
 
 
 
@@ -288,13 +317,13 @@ namespace LandRushLibrary.Units
 
 
 
-        private CombatStatusChangedEventArgs OnCombatStatusChangedForOut()
+        private CombatModeChangedEventArgs OncombatModeChangedForOut()
 
         {
 
-            CombatStatusChangedEventArgs args = new CombatStatusChangedEventArgs();
+            CombatModeChangedEventArgs args = new CombatModeChangedEventArgs();
 
-            OnCombatStatusChanged(args);
+            OncombatModeChanged(args);
 
 
 
@@ -304,15 +333,15 @@ namespace LandRushLibrary.Units
 
 
 
-        public class CombatStatusChangedEventArgs : EventArgs
+        public class CombatModeChangedEventArgs : EventArgs
 
         {
 
-            public CombatStatus CombatStatus { get; set; }
+            public bool combatMode { get; set; }
 
 
 
-            public CombatStatusChangedEventArgs()
+            public CombatModeChangedEventArgs()
 
             {
 
@@ -320,11 +349,11 @@ namespace LandRushLibrary.Units
 
 
 
-            public CombatStatusChangedEventArgs(CombatStatus combatStatus)
+            public CombatModeChangedEventArgs(bool combatMode)
 
             {
 
-                CombatStatus = combatStatus;
+                combatMode = combatMode;
 
             }
 

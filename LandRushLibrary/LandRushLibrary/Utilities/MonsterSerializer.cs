@@ -6,24 +6,24 @@ using Newtonsoft.Json;
 
 namespace LandRushLibrary.Utilities
 {
-    internal class UnitSerializer
+    internal class MonsterSerializer
     {
         public const string MonstersFilePath = "../Assets//Json//monster.json";
 
         #region singleton
-        private static UnitSerializer _instance;
+        private static MonsterSerializer _instance;
 
-        public static UnitSerializer Instance
+        public static MonsterSerializer Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new UnitSerializer();
+                    _instance = new MonsterSerializer();
                 return _instance;
             }
         }
 
-        private UnitSerializer()
+        private MonsterSerializer()
         {
 
         }

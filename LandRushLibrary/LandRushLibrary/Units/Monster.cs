@@ -8,6 +8,7 @@ namespace LandRushLibrary.Units
     [JsonObject(MemberSerialization.OptOut)]
     public class Monster : Unit, IAttackable
     {
+        public MonsterID MonsterId { get; set; }
         public int SlainExp { get; set; }
         public MonsterGrade MonsterGrade { get; set; }
         public string PrefabName { get; set; }

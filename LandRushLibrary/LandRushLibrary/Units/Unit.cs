@@ -7,7 +7,6 @@ namespace LandRushLibrary.Units
     [JsonObject(MemberSerialization.OptOut)]
     public abstract class Unit
     {
-        public MonsterID MonsterId { get; set; }
         public string Name { get; set; }
         public int AttackPower { get; set; }
         public int Armor { get; set; }

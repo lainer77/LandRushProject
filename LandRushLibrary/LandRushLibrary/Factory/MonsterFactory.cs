@@ -22,7 +22,7 @@ namespace LandRushLibrary.Factory
 
         private MonsterFactory()
         {
-            _monsters = UnitSerializer.Instance.Deseriailize();
+            _monsters = MonsterSerializer.Instance.Deseriailize();
         }
 
         private readonly Dictionary<MonsterID, Monster> _monsters;

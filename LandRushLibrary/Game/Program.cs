@@ -15,8 +15,9 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD);
-            Console.WriteLine( sword.ItemId );
+            Console.WriteLine(Player.Instance.AttackPower);
+            Console.WriteLine(Player.Instance.Name);
+            Console.WriteLine(Player.Instance.Level);
         }
     }
 }
