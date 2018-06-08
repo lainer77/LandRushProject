@@ -13,5 +13,10 @@ namespace LandRushLibrary.Items
 
             return clone;
         }
+
+        public override void UseItem()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

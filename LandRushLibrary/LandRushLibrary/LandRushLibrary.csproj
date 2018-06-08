@@ -51,7 +51,6 @@
     <Compile Include="Drop\DropList.cs" />
     <Compile Include="Drop\MonsterItemDropManager.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
-    <Compile Include="Interfaces\IConsumable.cs" />
     <Compile Include="ItemManagers\InvenItem.cs" />
     <Compile Include="ItemManagers\InventoryManager.cs" />
     <Compile Include="ItemManagers\PlayerEquipmentManager.cs" />
@@ -89,6 +88,8 @@
     <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
