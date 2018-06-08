@@ -21,13 +21,16 @@ public class CharacterControllerDevice : MonoBehaviourEx
     private Rigidbody _rigidbody;
     private DeviceInteraction _leftController;
     private DeviceInteraction _rightController;
+    private Vector3 _lookDirection;
+
+
     #endregion
 
     #region messages
 
     protected override void OnDestroy()
     {
-        ControllSetting(false);
+        //ControllSetting(false);
     }
 
 
@@ -40,12 +43,24 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
-        ControllSetting(true);
+       // ControllSetting(true);
     }
 
     private void Update()
     {
+        if (_rightController.Controller.GetPressDown(EVRButtonId.k_EButton_Grip))
+        {
+            VisableInventory();
+        }
 
+        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Up))
+            MoveUp();
+        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Down))
+            MoveDown();
+        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Left))
+            MoveLeft();
+        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Right))
+            MoveRight();
     }
 
     private void VisableInventory()
@@ -68,35 +83,35 @@ public class CharacterControllerDevice : MonoBehaviourEx
     #region methods
 
 
-    public void ControllSetting(bool addOrRemove)
-    {
-        _leftController.TouchpadButton.SetDPadUpButtonEvent(MoveUp, addOrRemove);
-        _leftController.TouchpadButton.SetDPadDownButtonEvent(MoveDown, addOrRemove);
-        _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
-        _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
-        _rightController.SystemMenuButton.SetDeviceButtonDownEvent(VisableInventory, addOrRemove);
-    }
+//    public void ControllSetting(bool addOrRemove)
+//    {
+//        _leftController.TouchpadButton.SetDPadUpButtonEvent(MoveUp, addOrRemove);
+//        _leftController.TouchpadButton.SetDPadDownButtonEvent(MoveDown, addOrRemove);
+//        _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
+//        _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
+//        _rightController.SystemMenuButton.SetDeviceButtonDownEvent(VisableInventory, addOrRemove);
+//    }
     private void MoveUp()
     {
-        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
-        _playerController.Move(lookDirection * MoveSpeed);
-        
+        Vector3 lookDirectionForwad = _cameraTransform.TransformDirection(Vector3.forward);
+        _playerController.Move(lookDirectionForwad * MoveSpeed);
+
     }
 
     private void MoveDown()
     {
-        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
-        _playerController.Move(lookDirection * MoveSpeed);
+        Vector3 lookDirectionBack = _cameraTransform.TransformDirection(Vector3.back);
+        _playerController.Move(lookDirectionBack * MoveSpeed);
     }
     private void MoveLeft()
     {
-        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
-        _playerController.Move(lookDirection * MoveSpeed);
+        Vector3 lookDirectionLeft = _cameraTransform.TransformDirection(Vector3.left);
+        _playerController.Move(lookDirectionLeft * MoveSpeed);
     }
     private void MoveRight()
     {
-        Vector3 lookDirection = _cameraTransform.TransformDirection(Vector3.forward);
-        _playerController.Move(lookDirection * MoveSpeed);
+        Vector3 lookDirectionRight = _cameraTransform.TransformDirection(Vector3.right);
+        _playerController.Move(lookDirectionRight * MoveSpeed);
     }
 
 
