@@ -38,6 +38,10 @@ public class DeviceInteraction : MonoBehaviourEx
     private TouchPadButton _touchpadButton;
     private DeviceButton _applicationMenuButton;
     private DeviceButton _systemMenuButton;
+    private TouchPadButton _touchPadButtonUp;
+    private TouchPadButton _touchPadButtonDown;
+    private TouchPadButton _touchPadButtonLeft;
+    private TouchPadButton _touchPadButtonRight;
 
     public DeviceButton TriggerButton
     {
@@ -64,6 +68,45 @@ public class DeviceInteraction : MonoBehaviourEx
             if (_touchpadButton == null)
                 _touchpadButton = new TouchPadButton(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
             return _touchpadButton; }
+    }
+
+    public TouchPadButton TouchpadButtonUp
+    {
+        get
+        {
+            if (_touchPadButtonUp == null)
+                _touchPadButtonUp = new TouchPadButton(Valve.VR.EVRButtonId.k_EButton_DPad_Up);
+            return _touchPadButtonUp;
+        }
+    }
+
+    public TouchPadButton TouchpadButtonDown
+    {
+        get
+        {
+            if (_touchPadButtonDown == null)
+                _touchPadButtonDown = new TouchPadButton(Valve.VR.EVRButtonId.k_EButton_DPad_Down);
+            return _touchPadButtonDown;
+        }
+    }
+    public TouchPadButton TouchpadButtonLeft
+    {
+        get
+        {
+            if (_touchPadButtonLeft == null)
+                _touchPadButtonLeft = new TouchPadButton(Valve.VR.EVRButtonId.k_EButton_DPad_Left);
+            return _touchPadButtonLeft;
+        }
+    }
+
+    public TouchPadButton TouchpadButtonRight
+    {
+        get
+        {
+            if (_touchPadButtonRight == null)
+                _touchPadButtonRight = new TouchPadButton(Valve.VR.EVRButtonId.k_EButton_DPad_Right);
+            return _touchPadButtonRight;
+        }
     }
 
     public DeviceButton ApplicationMenuButton
@@ -101,6 +144,10 @@ public class DeviceInteraction : MonoBehaviourEx
         TouchpadButton.OnPress(Controller);
         ApplicationMenuButton.OnPress(Controller);
         SystemMenuButton.OnPress(Controller);
+        TouchpadButtonUp.OnPress(Controller);
+        TouchpadButtonDown.OnPress(Controller);
+        TouchpadButtonLeft.OnPress(Controller);
+        TouchpadButtonRight.OnPress(Controller);
     }
 
     #endregion

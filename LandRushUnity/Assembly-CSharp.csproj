@@ -88,6 +88,8 @@
      <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
      <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineVertexData.cs" />
      <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricMultiLineBehavior.cs" />
+     <Compile Include="Assets\PlayerController.cs" />
+     <Compile Include="Assets\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\Arrow\ArrowShoundPackige.cs" />
      <Compile Include="Assets\Scripts\Arrow\ArrowSlot.cs" />
      <Compile Include="Assets\Scripts\Arrow\BowDesorption.cs" />

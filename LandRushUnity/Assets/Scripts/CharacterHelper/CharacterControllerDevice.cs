@@ -43,16 +43,13 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
-       // ControllSetting(true);
+        ControllSetting(true);
     }
 
     private void Update()
     {
         if (_rightController.Controller.GetPressDown(EVRButtonId.k_EButton_Grip))
-        {
             VisableInventory();
-        }
-
         if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Up))
             MoveUp();
         if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Down))
@@ -83,14 +80,14 @@ public class CharacterControllerDevice : MonoBehaviourEx
     #region methods
 
 
-//    public void ControllSetting(bool addOrRemove)
-//    {
-//        _leftController.TouchpadButton.SetDPadUpButtonEvent(MoveUp, addOrRemove);
-//        _leftController.TouchpadButton.SetDPadDownButtonEvent(MoveDown, addOrRemove);
-//        _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
-//        _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
-//        _rightController.SystemMenuButton.SetDeviceButtonDownEvent(VisableInventory, addOrRemove);
-//    }
+    public void ControllSetting(bool addOrRemove)
+    {
+        _leftController.TouchpadButton.SetDPadUpButtonEvent(MoveUp, addOrRemove);
+        _leftController.TouchpadButton.SetDPadDownButtonEvent(MoveDown, addOrRemove);
+        _leftController.TouchpadButton.SetDPadLeftButtonEvent(MoveLeft, addOrRemove);
+        _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
+        _rightController.SystemMenuButton.SetDeviceButtonDownEvent(VisableInventory, addOrRemove);
+    }
     private void MoveUp()
     {
         Vector3 lookDirectionForwad = _cameraTransform.TransformDirection(Vector3.forward);

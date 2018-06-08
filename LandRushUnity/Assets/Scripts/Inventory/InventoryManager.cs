@@ -51,7 +51,8 @@ public class InventoryManager : MonoBehaviourEx
                 slot.name = "slot_" + y + "_" + x;
                 slot.transform.parent = transform;
 
-                slotRectTransform.localPosition = new Vector3(-((SlotSize * x) + (SlotGap * (x - 4))), -((SlotSize * y) + (SlotGap * (y - 5f))), 0);
+                slotRectTransform.localPosition = new Vector3(-((SlotSize * x) + (SlotGap * (x + 8.1f ))),
+                                                            -((SlotSize * y) + (SlotGap * (y -5.2f))), 0);
 
                 slotRectTransform.localScale = Vector3.one;
                 slotRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SlotSize);
