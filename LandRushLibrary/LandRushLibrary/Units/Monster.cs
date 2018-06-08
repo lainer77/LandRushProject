@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using LandRushLibrary.Combat;
+using LandRushLibrary.Drop;
 using LandRushLibrary.Repository;
 using Newtonsoft.Json;
 
@@ -32,6 +34,18 @@ namespace LandRushLibrary.Units
                 Alive = false;
                 OnDead(new DeadEventArgs(this));
             }
+        }
+
+        protected override void OnDead(DeadEventArgs e)
+        {
+            List<DropInfo> dropInfos = MonsterItemDropManager.Instance.DropItem(MonsterGrade);
+
+            if( dropInfos.Count > 0)
+            {
+                OnItemDropped(new ItemDroppedEventArgs(dropInfos));
+            }
+
+            base.OnDead(e);
         }
 
         public event Predicate<Unit> CorrectTargetUnit;
@@ -94,6 +108,48 @@ namespace LandRushLibrary.Units
             clone.Alive = true;
  
             return clone;
+        }
+
+        #region ItemDropped event things for C# 3.0
+        public event EventHandler<ItemDroppedEventArgs> ItemDropped;
+
+        protected virtual void OnItemDropped(ItemDroppedEventArgs e)
+        {
+            if (ItemDropped != null)
+                ItemDropped(this, e);
+        }
+
+        private ItemDroppedEventArgs OnItemDropped(List<DropInfo> dropItems)
+        {
+            ItemDroppedEventArgs args = new ItemDroppedEventArgs(dropItems);
+            OnItemDropped(args);
+
+            return args;
+        }
+
+        private ItemDroppedEventArgs OnItemDroppedForOut()
+        {
+            ItemDroppedEventArgs args = new ItemDroppedEventArgs();
+            OnItemDropped(args);
+
+            return args;
+        }
+
+
+        #endregion
+    }
+
+    public class ItemDroppedEventArgs : EventArgs
+    {
+        public List<DropInfo> DropItems { get; set; }
+
+        public ItemDroppedEventArgs()
+        {
+        }
+
+        public ItemDroppedEventArgs(List<DropInfo> dropItems)
+        {
+            DropItems = dropItems;
         }
     }
 

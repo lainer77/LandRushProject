@@ -10,7 +10,7 @@ using static LandRushLibrary.Units.Player;
 
 namespace LandRushLibraryTests
 {
-    [TestClass()]
+    //[TestClass()]
     public class GameTest2
     {
         /// 전투 종합 테스트

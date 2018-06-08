@@ -6,7 +6,7 @@ using System;
 
 namespace LandRushLibrary.Drop
 {
-    public class MonsterItemDropManager
+    internal class MonsterItemDropManager
     {
         private static MonsterItemDropManager _instance;
         public static MonsterItemDropManager Instance
@@ -77,9 +77,9 @@ namespace LandRushLibrary.Drop
         private Dictionary<MonsterGrade, List<DropList>> _dropRates;
         private Random _random;
 
-        public void DropItem(Monster deadMonster)
+        public List<DropInfo> DropItem(MonsterGrade deadMonsterGrade)
         {
-            List<DropList> dropList = _dropRates[deadMonster.MonsterGrade];
+            List<DropList> dropList = _dropRates[deadMonsterGrade];
             List<DropInfo> finalDropList = new List<DropInfo>();
 
             var divList = dropList.GroupBy(x => x.ItemId);
@@ -103,48 +103,8 @@ namespace LandRushLibrary.Drop
 
             }
 
-            OnItemDropped(new ItemDroppedEventArgs(finalDropList));
+            return finalDropList;
         }
-
-        #region ItemDropped event things for C# 3.0
-        public event EventHandler<ItemDroppedEventArgs> ItemDropped;
-
-        protected virtual void OnItemDropped(ItemDroppedEventArgs e)
-        {
-            if (ItemDropped != null)
-                ItemDropped(this, e);
-        }
-
-        private ItemDroppedEventArgs OnItemDropped(List<DropInfo> dropInfos)
-        {
-            ItemDroppedEventArgs args = new ItemDroppedEventArgs(dropInfos);
-            OnItemDropped(args);
-
-            return args;
-        }
-
-        private ItemDroppedEventArgs OnItemDroppedForOut()
-        {
-            ItemDroppedEventArgs args = new ItemDroppedEventArgs();
-            OnItemDropped(args);
-
-            return args;
-        }
-
-        public class ItemDroppedEventArgs : EventArgs
-        {
-            public List<DropInfo> DropInfos { get; set; }
-
-            public ItemDroppedEventArgs()
-            {
-            }
-
-            public ItemDroppedEventArgs(List<DropInfo> dropInfos)
-            {
-                DropInfos = dropInfos;
-            }
-        }
-        #endregion
 
     }
 }
