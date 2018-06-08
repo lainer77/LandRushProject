@@ -11,7 +11,19 @@ public class LongBow : MonoBehaviourEx
     public ArrowShoundPackige ArrowShoundPackige;
     public GameObject CurrentArrow { get; set; }
     public GameObject DelegatePosition;
-    public bool Nocked = false;
+    private bool _nocked = false;
+    public bool Nocked
+    {
+        get
+        {
+            return _nocked;
+        }
+        set
+        {
+            _nocked = value;
+            _animator.SetBool("Pull", _nocked);
+        }
+    }
     private float _nockStartPos = 0.2f;
     private float _shoundPos = 0.25f;
     private float _nockMaxPos = 0.7f;
@@ -25,6 +37,7 @@ public class LongBow : MonoBehaviourEx
     {
         _animator = GetCachedComponent<Animator>();
         _bowPullClip = _animator.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == "BowPull");
+        _rightDeviceInteraction = DeviceRepository.RightDeviceInteraction;
     }
 
     // 100 : x = 0.48 : y
@@ -32,14 +45,11 @@ public class LongBow : MonoBehaviourEx
     protected override void OnTriggerEnter(Collider other)
     {
         Debug.Log("OnCollisionEnter Arrow");
+        
 
-        GameObject ob = other.gameObject;
-
-        if (ob.CompareTag("Arrow"))
+        if (other.CompareTag("Arrow"))
         {
-            CurrentArrow = ob;
-
-            _rightDeviceInteraction = DeviceRepository.RightDeviceInteraction;
+            CurrentArrow = other.gameObject;
 
             TriggerEventSet(true);
         }
@@ -48,11 +58,11 @@ public class LongBow : MonoBehaviourEx
     protected override void OnTriggerExit(Collider other)
     {
         Debug.Log("OnCollisionExit Arrow");
+        
 
-        GameObject ob = other.gameObject;
-
-        if (ob.CompareTag("Arrow") && !Nocked)
+        if (other.CompareTag("Arrow") && !Nocked)
         {
+            Debug.Log("Arrow is null");
             CurrentArrow = null;
 
             TriggerEventSet(false);
@@ -71,7 +81,6 @@ public class LongBow : MonoBehaviourEx
         Debug.Log("StartNockArrow");
 
         ArrowShoundPackige.NockShoundPlay();
-_animator.Play("BowPull");
         Nocked = true;
     }
 
@@ -79,7 +88,6 @@ _animator.Play("BowPull");
     {
         Debug.Log("EndNockArrow");
 
-        Nocked = false;
 
         ArrowScript arrowScript = CurrentArrow.GetComponent<ArrowScript>();
         arrowScript.Shoot(1000);
@@ -91,34 +99,42 @@ _animator.Play("BowPull");
         Destroy(CurrentArrow.gameObject, 10);
 
         CurrentArrow = null;
+        Nocked = false;
     }
 
     private void NockedArrowUpdate()
     {
         if (!Nocked)
             return;
-
+        if(CurrentArrow == null)
+            return;
+        
         CurrentArrow.transform.rotation = DelegatePosition.transform.rotation;
 
         DelegatePosition.transform.position = CurrentArrow.transform.position;
 
-        float currnetPos = DelegatePosition.transform.localPosition.z;
+        float arrowCurrnetPos = DelegatePosition.transform.localPosition.z;
 
-        if (currnetPos == _shoundPos)
+        if (arrowCurrnetPos.Equals(_shoundPos))
         {
             Debug.Log("PullShoundPlay");
 
             ArrowShoundPackige.PullShoundPlay();
         }
 
-        if (currnetPos > _nockMaxPos)
-            currnetPos = _nockMaxPos;
-        else if (currnetPos < _nockStartPos)
-            currnetPos = _nockStartPos;
+        if (arrowCurrnetPos > _nockMaxPos)
+        {
+            arrowCurrnetPos = _nockMaxPos;
+            _rightDeviceInteraction.StrongVibrationTime(0.3f);
+        }
+        else if (arrowCurrnetPos < _nockStartPos)
+        {
+            arrowCurrnetPos = _nockStartPos;
+        }
 
-        ArrowSyncBow(currnetPos - _nockStartPos);
+        ArrowSyncBow(arrowCurrnetPos - _nockStartPos);
 
-        DelegatePosition.transform.localPosition = new Vector3(0, 0, currnetPos);
+        DelegatePosition.transform.localPosition = new Vector3(0, 0, arrowCurrnetPos);
 
         CurrentArrow.transform.position = DelegatePosition.transform.position;
     }

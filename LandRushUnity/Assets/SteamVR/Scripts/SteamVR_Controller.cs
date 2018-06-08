@@ -10,6 +10,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -47,8 +48,9 @@ public class SteamVR_Controller
 		public SteamVR_Utils.RigidTransform transform { get { Update(); return new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking); } }
 		public Vector3 velocity { get { Update(); return new Vector3(pose.vVelocity.v0, pose.vVelocity.v1, -pose.vVelocity.v2); } }
 		public Vector3 angularVelocity { get { Update(); return new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2); } }
+        
 
-		public VRControllerState_t GetState() { Update(); return state; }
+        public VRControllerState_t GetState() { Update(); return state; }
 		public VRControllerState_t GetPrevState() { Update(); return prevState; }
 		public TrackedDevicePose_t GetPose() { Update(); return pose; }
 
