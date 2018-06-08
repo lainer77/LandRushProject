@@ -49,7 +49,7 @@ namespace LandRushLibraryTests
 
             InventoryManager inven = InventoryManager.Instance;
 
-            Assert.AreEqual(ItemID.IRON_SWORD, oldSword.ItemId);
+            Assert.AreEqual(ItemID.SHORT_SWORD, oldSword.ItemId);
             Assert.AreEqual(2, oldSword.Grade);
             Assert.AreEqual(38, inven.GetAmountForId(ItemID.STONE));
             Assert.AreEqual(38, inven.GetAmountForId(ItemID.WOOD));
