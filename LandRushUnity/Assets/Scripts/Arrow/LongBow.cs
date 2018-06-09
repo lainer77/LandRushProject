@@ -19,15 +19,15 @@ public class LongBow : MonoBehaviourEx
         set
         {
             _nocked = value;
-            _animator.SetBool("Pull", _nocked);
+            _animator.SetBool("Pull", value);
         }
     }
 
-    private float Power;
+    private float _power;
     private float _nockStartPos = 0.2f;
     private float _shoundPos = 0.25f;
     private float _nockMaxPos = 0.7f;
-    private float _acceleration = 5f;
+    private float _acceleration = 10;
     private Animator _animator;
 
     private AnimationClip _bowPullClip;
@@ -44,9 +44,6 @@ public class LongBow : MonoBehaviourEx
     // 0.48x = 100y;
     protected override void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter Arrow");
-
-
         if (other.CompareTag("Arrow"))
         {
             CurrentArrow = other.gameObject;
@@ -57,9 +54,6 @@ public class LongBow : MonoBehaviourEx
 
     protected override void OnTriggerExit(Collider other)
     {
-        Debug.Log("OnTriggerExit Arrow");
-
-
         if (other.CompareTag("Arrow") && !Nocked)
         {
             CurrentArrow = null;
@@ -77,22 +71,18 @@ public class LongBow : MonoBehaviourEx
 
     private void StartNockArrow()
     {
-        Debug.Log("StartNockArrow");
-
         ArrowShoundPackige.NockShoundPlay();
         Nocked = true;
     }
 
     private void EndNockArrow()
     {
-        Debug.Log("EndNockArrow");
-
         if (CurrentArrow == null)
             return;
 
         ArrowScript arrowScript = CurrentArrow.GetComponent<ArrowScript>();
-        
-        arrowScript.Shoot(Power);
+
+        arrowScript.Shoot(_power);
 
         ArrowShoundPackige.ShotShoundPlay();
 
@@ -103,7 +93,7 @@ public class LongBow : MonoBehaviourEx
         CurrentArrow = null;
         Nocked = false;
     }
-    
+
     private void NockedArrowUpdate()
     {
         if (!Nocked)
@@ -143,7 +133,15 @@ public class LongBow : MonoBehaviourEx
 
     private void ArrowSyncBow(float currnetPos)
     {
-        _animator.speed = (currnetPos - _bowPullClip.length) * _acceleration;
-        Power = currnetPos * 1000;
+        AnimatorStateInfo animationState = _animator.GetCurrentAnimatorStateInfo(0);
+        float myTime = animationState.normalizedTime % _bowPullClip.length;
+        Debug.Log("myTime" + myTime / _animator.GetFloat("Speed"));
+        float speed = (currnetPos - myTime / 10) * _acceleration;
+//        Debug.Log("speed" + speed);
+//        if (Mathf.Abs(myTime) < 1)
+//            speed = 0;
+        //        _animator.speed = (currnetPos - myTime / 10) * _acceleration;
+        _animator.SetFloat("Speed", speed);
+        _power = currnetPos * 1000;
     }
 }

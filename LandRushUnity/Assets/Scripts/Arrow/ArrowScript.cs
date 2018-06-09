@@ -40,10 +40,10 @@ public class ArrowScript : MonoBehaviourEx
         }
     }
 
-    protected override void Awake()
-	{
-		_rigidbody = GetCachedComponent<Rigidbody>(); 
-
+    protected override void Start()
+    {
+        _state = ArrowState.Hand;
+        _rigidbody = GetCachedComponent<Rigidbody>(); 
     }
 
     protected override void OnTransformParentChanged()
@@ -59,20 +59,26 @@ public class ArrowScript : MonoBehaviourEx
         transform.SetParent(null);
 
 	    State = ArrowState.Shoot;
-        Debug.Log("Shoot is Power = " + power);
+        
+
+	    _rigidbody.AddForce(Vector3.back * power);
 	    Head.AddForce(Vector3.back * power);
 
         Destroy(gameObject, 10);
 	}
 
-    private void UseGravity(Rigidbody rigidbody)
+    #region GravitySwitch
+
+    private void UseGravity(Rigidbody rigid)
     {
-        rigidbody.isKinematic = false;
-        rigidbody.useGravity = true;
+        rigid.isKinematic = false;
+        rigid.useGravity = true;
     }
-    private void UnUseGravity(Rigidbody rigidbody)
+    private void UnUseGravity(Rigidbody rigid)
     {
-        rigidbody.isKinematic = true;
-        rigidbody.useGravity = false;
+        rigid.isKinematic = true;
+        rigid.useGravity = false;
     }
+
+    #endregion
 }
