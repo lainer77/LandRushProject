@@ -22,13 +22,13 @@ namespace LandRushLibrary.ItemManagers
 
         protected AquiredItemManager()
         {
-            _maxItemSlot = 12;
+            _maxItemSlotCount = 12;
             _maxAmount = 10;
             Items = new List<InvenItem>();
         }
 
         public List<InvenItem> Items { get; protected set; }
-        protected int _maxItemSlot;
+        protected int _maxItemSlotCount;
         protected int _maxAmount;
 
         public void ClearInventory()
@@ -41,11 +41,11 @@ namespace LandRushLibrary.ItemManagers
             return Items[slotNum].Item;
         }
 
-        public void AddInvenItem (GameItem item)
+        public void AddInvenItem(GameItem item)
         {
             foreach (var invenItem in Items)
             {
-                if ( invenItem.Item.ItemId == item.ItemId )
+                if (invenItem.Item.ItemId == item.ItemId)
                 {
                     if (invenItem.Amount < _maxAmount)
                     {
@@ -53,11 +53,11 @@ namespace LandRushLibrary.ItemManagers
                         OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
                         return;
                     }
-                    
+
                 }
             }
 
-            if (Items.Count < _maxItemSlot)
+            if (Items.Count < _maxItemSlotCount)
             {
                 Items.Add(new InvenItem(item, 1));
                 OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
@@ -82,7 +82,7 @@ namespace LandRushLibrary.ItemManagers
                              where x.Item.ItemId == itemId
                              select x).ToList();
 
-            if ( invenItem == null)
+            if (invenItem == null)
                 return;
 
             foreach (var item in invenItem)
@@ -96,11 +96,21 @@ namespace LandRushLibrary.ItemManagers
                 Items.Remove(item);
                 amount -= temp;
 
-
-
             }
 
         }
+
+        public void SetMaxSlotCount(int maxSlotCout)
+        {
+            _maxItemSlotCount = maxSlotCout;
+        }
+
+        public void SetMaxAmount(int maxAmount)
+        {
+            _maxAmount = maxAmount;
+        }
+
+        #region Events
 
         #region InventoryItemChanged event things for C# 3.0
         public event EventHandler<InventoryItemChangedEventArgs> InventoryItemChanged;
@@ -155,7 +165,7 @@ namespace LandRushLibrary.ItemManagers
             return args;
         }
 
-
+        #endregion
         #endregion
     }
 
