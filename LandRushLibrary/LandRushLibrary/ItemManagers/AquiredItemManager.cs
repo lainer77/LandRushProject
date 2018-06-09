@@ -3,6 +3,7 @@ using LandRushLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LandRushLibrary.Factory;
 
 namespace LandRushLibrary.ItemManagers
 {
@@ -41,15 +42,15 @@ namespace LandRushLibrary.ItemManagers
             return Items[slotNum].Item;
         }
 
-        public void AddInvenItem(GameItem item)
+        public void AddInvenItem(ItemID itemId, int amount = 1)
         {
             foreach (var invenItem in Items)
             {
-                if (invenItem.Item.ItemId == item.ItemId)
+                if (invenItem.Item.ItemId == itemId)
                 {
-                    if (invenItem.Amount < _maxAmount)
+                    if (invenItem.Amount + amount <= _maxAmount)
                     {
-                        invenItem.Amount++;
+                        invenItem.Amount += amount;
                         OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
                         return;
                     }
@@ -59,7 +60,7 @@ namespace LandRushLibrary.ItemManagers
 
             if (Items.Count < _maxItemSlotCount)
             {
-                Items.Add(new InvenItem(item, 1));
+                Items.Add(new InvenItem(ItemFactory.Instance.Create(itemId), 1));
                 OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
             }
             else
@@ -109,6 +110,7 @@ namespace LandRushLibrary.ItemManagers
         {
             _maxAmount = maxAmount;
         }
+
 
         #region Events
 

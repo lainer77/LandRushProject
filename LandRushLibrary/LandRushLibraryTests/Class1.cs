@@ -22,9 +22,9 @@ namespace LandRushLibraryTests
 
             for (int i = 0; i < 40; i++)
             {
-                inven.AddInvenItem(stone);
-                inven.AddInvenItem(wood);
-                inven.AddInvenItem(iron);
+                inven.AddInvenItem(stone.ItemId);
+                inven.AddInvenItem(wood.ItemId);
+                inven.AddInvenItem(iron.ItemId);
             }
 
             System.Console.WriteLine(inven.GetAmountForId(ItemID.STONE));

@@ -145,15 +145,15 @@ namespace LandRushLibrary.Unit.Tests
         public void 인벤토리_이이템_추가_테스트()
         {
             IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
-            InventoryManager.Instance.AddInvenItem(stone);
-            InventoryManager.Instance.AddInvenItem(stone);
-            InventoryManager.Instance.AddInvenItem(stone);
+            InventoryManager.Instance.AddInvenItem(stone.ItemId);
+            InventoryManager.Instance.AddInvenItem(stone.ItemId);
+            InventoryManager.Instance.AddInvenItem(stone.ItemId);
 
             Assert.AreEqual(1, InventoryManager.Instance.Items.Count);
 
             for (int i = 0; i < 10; i++)
             {
-                InventoryManager.Instance.AddInvenItem(stone);
+                InventoryManager.Instance.AddInvenItem(stone.ItemId);
             }
 
             Assert.AreEqual(2, InventoryManager.Instance.Items.Count);
@@ -169,7 +169,7 @@ namespace LandRushLibrary.Unit.Tests
 
             for (int i = 0; i < 121; i++)
             {
-                InventoryManager.Instance.AddInvenItem(stone);
+                InventoryManager.Instance.AddInvenItem(stone.ItemId);
             }
 
 
@@ -188,8 +188,8 @@ namespace LandRushLibrary.Unit.Tests
             IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
             IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.WOOD);
 
-            InventoryManager.Instance.AddInvenItem(stone); 
-            InventoryManager.Instance.AddInvenItem(wood);
+            InventoryManager.Instance.AddInvenItem(stone.ItemId); 
+            InventoryManager.Instance.AddInvenItem(wood.ItemId);
 
             Assert.AreEqual("Stone", InventoryManager.Instance.Items[0].Item.Name);
 

@@ -47,7 +47,7 @@ namespace Game
                     {
                         IngredientItem ingredient = ItemFactory.Instance.Create<IngredientItem>(item.Key);
 
-                        inven.AddInvenItem(ingredient);
+                        inven.AddInvenItem(ingredient.ItemId);
                     }
                 }
 

@@ -38,7 +38,7 @@ namespace LandRushLibrary.Units
 
         protected override void OnDead(DeadEventArgs e)
         {
-            List<DropInfo> dropInfos = MonsterItemDropManager.Instance.DropItem(MonsterGrade);
+            List<DroppedItems> dropInfos = MonsterItemDropManager.Instance.DropItem(MonsterGrade);
 
             if( dropInfos.Count > 0)
             {
@@ -119,7 +119,7 @@ namespace LandRushLibrary.Units
                 ItemDropped(this, e);
         }
 
-        private ItemDroppedEventArgs OnItemDropped(List<DropInfo> dropItems)
+        private ItemDroppedEventArgs OnItemDropped(List<DroppedItems> dropItems)
         {
             ItemDroppedEventArgs args = new ItemDroppedEventArgs(dropItems);
             OnItemDropped(args);
@@ -141,13 +141,13 @@ namespace LandRushLibrary.Units
 
     public class ItemDroppedEventArgs : EventArgs
     {
-        public List<DropInfo> DropItems { get; set; }
+        public List<DroppedItems> DropItems { get; set; }
 
         public ItemDroppedEventArgs()
         {
         }
 
-        public ItemDroppedEventArgs(List<DropInfo> dropItems)
+        public ItemDroppedEventArgs(List<DroppedItems> dropItems)
         {
             DropItems = dropItems;
         }
