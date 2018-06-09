@@ -19,7 +19,7 @@ namespace LandRushLibrary.Utilities
             }
         }
 
-        private const string PlayerFilePath = "../Assets//Json//player.json";
+        private const string PlayerFilePath = "Assets//Json//player.json";
 
         public void Serialize()
         {
