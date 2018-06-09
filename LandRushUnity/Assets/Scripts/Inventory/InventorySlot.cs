@@ -1,73 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using LandRushLibrary.Items;
+using LandRushLibrary.Repository;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityScriptHelper;
 
 public class InventorySlot : MonoBehaviourEx
 {
-    public Stack<ItemManager> SlotStack;
+    #region outlet
+
+    public Stack<GameItem> Slot;
     public Text Text;
     public Sprite DefaultImage;
-
+    
+    
+    #endregion
+    
+    private GameItem _item;
     private Image _itemImage;
     private bool _isSlotEmpty;
-    protected override void Start()
+    #region feild
+
+
+
+    #endregion
+
+    #region message
+    protected override void Awake()
     {
-        SlotStack = new Stack<ItemManager>();
-
-        _isSlotEmpty = false;
-
-        float size = Text.gameObject.transform.parent.GetComponent<RectTransform>().sizeDelta.x;
-        Text.fontSize = (int) (size * 0.5f);
-
         _itemImage = transform.GetChild(0).GetComponent<Image>();
     }
 
-    public ItemManager ReturnItem()
+
+    #endregion
+
+    #region method
+
+
+    
+    public void SetItem(GameItem item)
     {
-        return SlotStack.Peek();
+        Slot.Push(item);
+        ChangeImage(true, item);
     }
 
-    public bool IsItemCountMax(ItemManager item)
+    public void ChangeImage(bool isSlotEmpty, GameItem item)
     {
-        return ReturnItem().MaxCount > SlotStack.Count;
+        _itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.IconName);
     }
 
-    public bool IsSlotEmptyFlag => _isSlotEmpty;
+    #endregion
 
-    public void SetSlots(bool b)
-    {
-        b = _isSlotEmpty;
-    }
-
-    public void AddItem(ItemManager item)
-    {
-        SlotStack.Push(item);
-        UpdateInfo(true, item.DefaultImage);
-    }
-
-    public void ItemUse()
-    {
-        if(!_isSlotEmpty)
-            return;
-
-        if (SlotStack.Count == 1)
-        {
-            SlotStack.Clear();
-            UpdateInfo(false, DefaultImage);
-            return;
-        }
-
-        SlotStack.Pop();
-        UpdateInfo(_isSlotEmpty, _itemImage.sprite);
-
-    }
-
-    public void UpdateInfo(bool b, Sprite image)
-    {
-        SetSlots(b);
-        _itemImage.sprite = image;
-        Text.text = SlotStack.Count > 1 ? SlotStack.Count.ToString() : "";
-    }
 }

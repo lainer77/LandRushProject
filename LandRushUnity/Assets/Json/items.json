@@ -1,1 +1,115 @@
-{"OLD_SWORD":{"AttackPower":10,"Grade":0,"ItemId":1,"Name":"OldSword","IconName":"OldSword","PrefabName":"OldSword","Type":0},"OLD_BOW":{"AttackPower":10,"Grade":0,"ItemId":3,"Name":"OldBow","IconName":"OldBow","PrefabName":"OldBow","Type":2},"POTION":{"RecorveyPoint":0,"ItemId":4,"Name":"Potion","IconName":"Potion","PrefabName":"Potion","Type":3},"ARROW":{"ItemId":5,"Name":"Arrow","IconName":"Arrow","PrefabName":"Arrow","Type":5},"STONE":{"ItemId":6,"Name":"Stone","IconName":"StoneIcon","PrefabName":"StonePrefab","Type":4}}
+{
+  "Swords": [
+    {
+      "AttackPower": 10,
+      "Grade": 1,
+      "ItemId": 1,
+      "Name": "OldSword",
+      "IconName": "OldSword",
+      "PrefabName": "OldSword",
+      "Type": 0
+    },
+    {
+      "AttackPower": 12,
+      "Grade": 2,
+      "ItemId": 10,
+      "Name": "ShortSword",
+      "IconName": "ShortSword",
+      "PrefabName": "ShortSword",
+      "Type": 0
+    },
+    {
+      "AttackPower": 15,
+      "Grade": 3,
+      "ItemId": 11,
+      "Name": "KnightSword",
+      "IconName": "KnightSword",
+      "PrefabName": "KnightSword",
+      "Type": 0
+    },
+    {
+      "AttackPower": 19,
+      "Grade": 4,
+      "ItemId": 12,
+      "Name": "SteelSword",
+      "IconName": "SteelSword",
+      "PrefabName": "SteelSword",
+      "Type": 0
+    }
+  ],
+  "Shields": [
+    {
+      "Armor": 10,
+      "Grade": 0,
+      "ItemId": 2,
+      "Name": "OldShield",
+      "IconName": "OldSword",
+      "PrefabName": "OldShield",
+      "Type": 1
+    }
+  ],
+  "Bows": [
+    {
+      "AttackPower": 10,
+      "Grade": 0,
+      "ItemId": 3,
+      "Name": "OldBow",
+      "IconName": "OldBow",
+      "PrefabName": "OldBow",
+      "Type": 2
+    }
+  ],
+  "Quivers": [
+    {
+      "LimitChargingNum": 30,
+      "Grade": 0,
+      "ItemId": 9,
+      "Name": "OldQuiver",
+      "IconName": "OldQuiver",
+      "PrefabName": "OldQuiver",
+      "Type": 3
+    }
+  ],
+  "Potions": [
+    {
+      "RecorveyPoint": 0.25,
+      "ItemId": 4,
+      "Name": "Potion",
+      "IconName": "Potion",
+      "PrefabName": "Potion",
+      "Type": 4
+    }
+  ],
+  "Ingredients": [
+    {
+      "ItemId": 6,
+      "Name": "Stone",
+      "IconName": "StoneIcon",
+      "PrefabName": "StonePrefab",
+      "Type": 5
+    },
+    {
+      "ItemId": 7,
+      "Name": "Wood",
+      "IconName": "WoodIcon",
+      "PrefabName": "WoodPrefab",
+      "Type": 5
+    },
+    {
+      "ItemId": 8,
+      "Name": "Iron",
+      "IconName": "IronPrefab",
+      "PrefabName": "IronPrefab",
+      "Type": 5
+    }
+  ],
+  "Arrows": [
+    {
+      "ItemId": 5,
+      "Name": "Arrow",
+      "IconName": "Arrow",
+      "PrefabName": "Arrow",
+      "Type": 6
+    }
+  ]
+}

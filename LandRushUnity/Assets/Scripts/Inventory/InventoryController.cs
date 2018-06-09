@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LandRushLibrary.Factory;
 using UnityEngine;
 using UnityScriptHelper;
+using LandRushLibrary.ItemManagers;
+using LandRushLibrary.Repository;
 
-public class InventoryManager : MonoBehaviourEx
+public class InventoryController : MonoBehaviourEx
 {
     #region outlets
 
     public List<GameObject> AllSlot; // 모든 슬롯 저장 리스트
     public RectTransform InventoryRectTransform; // 인벤토리 RectTransform
     public GameObject OriginalSlot; // 오리지날 슬롯 프리팹
-    
+
     public float SlotSize; //슬롯의 size
     public float SlotGap; //슬롯 사이간격
     public bool IsVisable;
@@ -23,15 +26,26 @@ public class InventoryManager : MonoBehaviourEx
     private float _inventoryWidth; //인벤토리 가로 길이
     private float _inventoryHeight; // 인벤토리 세로길이
     private float _emptySlot; //빈슬롯의 수
-    
+    private InventoryManager _inventoryManager;
+
     #endregion
 
     #region messages
 
     protected override void Awake()
     {
+        _inventoryManager = InventoryManager.Instance;
+        CreateInventory();
+        AddItem();  
+        SetSlotItem();
 
-        //인벤토리 가로, 세로 사이즈 설정
+    }
+
+    #endregion	
+
+    #region methods
+    void CreateInventory()
+    {
         _inventoryWidth = (SlotCountHor * SlotSize) + (SlotCountHor * SlotGap) + SlotGap + 2;
         _inventoryHeight = (SlotCountVer * SlotSize) + (SlotCountVer * SlotGap) + SlotGap + 4;
         // 인벤토리 가로, 세로 길이 설정
@@ -42,7 +56,7 @@ public class InventoryManager : MonoBehaviourEx
         {
             for (int x = 0; x < SlotCountHor; x++)
             {
-                GameObject slot = Instantiate(OriginalSlot) as GameObject;
+                GameObject slot = Instantiate(OriginalSlot);
 
                 RectTransform slotRectTransform = slot.GetComponent<RectTransform>();
 
@@ -51,8 +65,8 @@ public class InventoryManager : MonoBehaviourEx
                 slot.name = "slot_" + y + "_" + x;
                 slot.transform.parent = transform;
 
-                slotRectTransform.localPosition = new Vector3(-((SlotSize * x) + (SlotGap * (x + 8.1f ))),
-                                                            -((SlotSize * y) + (SlotGap * (y -5.2f))), 0);
+                slotRectTransform.localPosition = new Vector3(-((SlotSize * x) + (SlotGap * (x - 4f))),
+                    -((SlotSize * y) + (SlotGap * (y - 5.2f))), 0);
 
                 slotRectTransform.localScale = Vector3.one;
                 slotRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SlotSize);
@@ -65,45 +79,21 @@ public class InventoryManager : MonoBehaviourEx
             }
         }
 
-        IsVisable = false;
         _emptySlot = AllSlot.Count;
     }
 
-    #endregion	
-
-    #region methods
-    public bool AddItem(ItemManager itemManager)
+    void AddItem()
     {
-        int slotcount = AllSlot.Count;
-
-        for (int i = 0; i < slotcount; i++)
-        {
-            InventorySlot inventorySlot = AllSlot[i].GetComponent<InventorySlot>();
-
-            if (!inventorySlot.IsSlotEmptyFlag)
-                continue;
-
-            if (inventorySlot.ReturnItem().ItemType == itemManager.ItemType && inventorySlot.IsItemCountMax(itemManager))
-            {
-                inventorySlot.AddItem(itemManager);
-                return true;
-            }
-        }
-
-        for (int i = 0; i < slotcount; i++)
-        {
-            InventorySlot inventorySlot = AllSlot[i].GetComponent<InventorySlot>();
-
-            if (inventorySlot.IsSlotEmptyFlag)
-                continue;
-
-            inventorySlot.AddItem(itemManager);
-            return true;
-        }
-
-        return false;
+        _inventoryManager.AddInvenItem(ItemFactory.Instance.Create(ItemID.POTION));
     }
+
+    private void SetSlotItem()
+    {
+        for (int i = 0; i < _inventoryManager.Items.Count; i++)
+        {
+            AllSlot[i].GetComponent<InventorySlot>().SetItem(_inventoryManager.Items[i].Item);
+        }
+    }
+
     #endregion
-
-
 }

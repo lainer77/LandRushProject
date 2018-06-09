@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Security.Cryptography.X509Certificates;
+using LandRushLibrary.ItemManagers;
 using UnityEngine;
 using UnityScriptHelper;
 using Valve.VR;
@@ -17,7 +18,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
     private Transform _cameraTransform;
     private CharacterController _playerController;
     private GameObject _inventory;
-    private InventoryManager _inventoryManager;
+    private InventoryController _inventoryController;
     private Rigidbody _rigidbody;
     private DeviceInteraction _leftController;
     private DeviceInteraction _rightController;
@@ -39,41 +40,13 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _cameraTransform = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         _playerController = GetComponent<CharacterController>();
         _inventory = GameObject.FindWithTag("Inventory");
-        _inventoryManager = _inventory.GetComponent<InventoryManager>();
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
         ControllSetting(true);
     }
 
-    private void Update()
-    {
-        if (_rightController.Controller.GetPressDown(EVRButtonId.k_EButton_Grip))
-            VisableInventory();
-        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Up))
-            MoveUp();
-        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Down))
-            MoveDown();
-        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Left))
-            MoveLeft();
-        if (_leftController.Controller.GetPress(EVRButtonId.k_EButton_DPad_Right))
-            MoveRight();
-    }
-
-    private void VisableInventory()
-    {
-        if (_inventoryManager.IsVisable == false)
-        {
-            _inventory.SetActive(true);
-            _inventoryManager.IsVisable = true;
-        }
-        else
-        {
-            _inventory.SetActive(false);
-            _inventoryManager.IsVisable = false;
-        }
-
-    }
+   
 
     #endregion
 
@@ -111,7 +84,16 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _playerController.Move(lookDirectionRight * MoveSpeed);
     }
 
+    private void VisableInventory()
+    {
+        if (_inventory.activeSelf)
+        {
+            _inventory.SetActive(false);
+        }
+        else
+            _inventory.SetActive(true);
 
+    }
 
     #endregion
 }
