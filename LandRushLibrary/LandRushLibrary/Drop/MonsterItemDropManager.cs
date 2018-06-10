@@ -23,60 +23,64 @@ namespace LandRushLibrary.Drop
         private MonsterItemDropManager()
         {
             _dropRates = new Dictionary<MonsterGrade, List<DropList>>();
-
-            List<DropList> normalDropList = new List<DropList>();
             DropList dropList = new DropList();
 
 
-            dropList = new DropList(ItemID.ARROW, 0.2f, 2);
-            normalDropList.Add(dropList);
-            dropList = new DropList(ItemID.ARROW, 0.3f, 3);
-            normalDropList.Add(dropList);
-            dropList = new DropList(ItemID.ARROW, 0.2f, 4);
-            normalDropList.Add(dropList);
-            dropList = new DropList(ItemID.ARROW, 0.1f, 5);
-            normalDropList.Add(dropList);
+            List<DropList> normalDropList = new List<DropList>();
 
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 2);
+            normalDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.3f, amount: 3);
+            normalDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 4);
+            normalDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.1f, amount: 5);
+            normalDropList.Add(item: dropList);
 
-            dropList = new DropList(ItemID.POTION, 0.6f, 1);
-            normalDropList.Add(dropList);
+            dropList = new DropList(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
+            normalDropList.Add(item: dropList);
 
-            dropList = new DropList(ItemID.WOOD, 0.5f, 1);
-            normalDropList.Add(dropList);
-            dropList = new DropList(ItemID.WOOD, 0.3f, 2);
-            normalDropList.Add(dropList);
-            dropList = new DropList(ItemID.WOOD, 0.2f, 3);
-            normalDropList.Add(dropList);
+            dropList = new DropList(itemId: ItemID.WOOD, rate: 0.5f, amount: 1);
+            normalDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.WOOD, rate: 0.3f, amount: 2);
+            normalDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.WOOD, rate: 0.2f, amount: 3);
+            normalDropList.Add(item: dropList);
 
-            _dropRates.Add(MonsterGrade.NORMAL, normalDropList);
+            _dropRates.Add(key: MonsterGrade.NORMAL, value: normalDropList);
 
             ////////////////////////////////////////////////
 
             List<DropList> bossDropList = new List<DropList>();
 
-            dropList = new DropList(ItemID.ARROW, 0.1f, 2);
-            bossDropList.Add(dropList);
-            dropList = new DropList(ItemID.ARROW, 0.2f, 3);
-            bossDropList.Add(dropList);
-            dropList = new DropList(ItemID.ARROW, 0.3f, 4);
-            bossDropList.Add(dropList);
-            dropList = new DropList(ItemID.ARROW, 0.2f, 5);
-            bossDropList.Add(dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.1f, amount: 2);
+            bossDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 3);
+            bossDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.3f, amount: 4);
+            bossDropList.Add(item: dropList);
+            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 5);
+            bossDropList.Add(item: dropList);
 
-            dropList = new DropList(ItemID.POTION, 0.6f, 1);
-            bossDropList.Add(dropList);
+            dropList = new DropList(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
+            bossDropList.Add(item: dropList);
 
-            dropList = new DropList(ItemID.IRON, 1.0f, 1);
-            bossDropList.Add(dropList);
+            dropList = new DropList(itemId: ItemID.IRON, rate: 1.0f, amount: 1);
+            bossDropList.Add(item: dropList);
 
-            _dropRates.Add(MonsterGrade.BOSS, bossDropList);
+            _dropRates.Add(key: MonsterGrade.BOSS, value: bossDropList);
 
-            _random = new Random((int)DateTime.Now.Ticks);
+            _random = new Random(Seed: (int)DateTime.Now.Ticks);
         }
 
         private Dictionary<MonsterGrade, List<DropList>> _dropRates;
         private Random _random;
 
+        /// <summary>
+        /// TODO: rateSum 이라는 게 무엇? ramdom이 낮을 수록 얻는 아이템이 많다는 뜻???
+        /// </summary>
+        /// <param name="deadMonsterGrade"></param>
+        /// <returns></returns>
         public List<DroppedItems> DropItem(MonsterGrade deadMonsterGrade)
         {
             List<DropList> dropList = _dropRates[deadMonsterGrade];

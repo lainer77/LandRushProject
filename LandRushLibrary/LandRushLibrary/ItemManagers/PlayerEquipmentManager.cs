@@ -47,6 +47,9 @@ namespace LandRushLibrary.ItemManagers
             OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
         }
 
+        /// <summary>
+        ///  TODO: 장착된 상태가 아닌 대기 슬롯에 있는 아이템을 바꾼다는 뜻인가?
+        /// </summary>
         public void ExchangeEquipmentPairInSlot()
         {
             EquipmentItem temp = Equipments[0];
@@ -63,7 +66,7 @@ namespace LandRushLibrary.ItemManagers
 
         }
 
-        public void ChangeEquipmentPair()
+        public void EquipmentPairChange()
         {
             if( _currentPair == _firstPair )
                 _currentPair = _secondPair;
@@ -75,9 +78,12 @@ namespace LandRushLibrary.ItemManagers
             OnCurrentPairChanged(new CurrentPairChangedEventArgs());
         }
 
+        /// <summary>
+        ///  TODO: private? 이 아니야? 외부에서 호출해도 되는 부분?
+        /// </summary>
         public void EquipCurrentPair()
         {
-            Player.Instance.ChangeEquipment(_currentPair.LeftEquipment, _currentPair.RightEquipment);
+            Player.Instance.EquipmentChange(_currentPair.LeftEquipment, _currentPair.RightEquipment);
 
         }
 

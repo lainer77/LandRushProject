@@ -69,7 +69,7 @@ namespace LandRushLibrary.Units
             IsCombatMode = false;
         }
 
-        public void ChangeEquipment(EquipmentItem leftItem, EquipmentItem rightItem)
+        public void EquipmentChange(EquipmentItem leftItem, EquipmentItem rightItem)
         {
             LeftItem = leftItem;
             RightItem = rightItem;

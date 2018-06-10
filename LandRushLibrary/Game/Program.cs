@@ -9,13 +9,14 @@ using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
 using LandRushLibrary.Upgrade;
 using LandRushLibrary.Utilities;
+using    LandRushLibrary.Drop;
 using Newtonsoft.Json;
 
 namespace Game
 {
     class Program
     {
-        static private int[] _probability = { 0, 0, 0,0,0,0 };
+        static private int[] _probability = {0, 0, 0, 0, 0, 0};
         static int _dropTry = 1000000;
         static int _upTry = 100000;
         static int _upSuceess = 0;
@@ -54,8 +55,7 @@ namespace Game
                 upgrader.Upgrade<Sword>(ref sword);
             }
 
-            Console.WriteLine($"{ (double)_upSuceess / _upTry * 100:N2}%");
-
+            Console.WriteLine($"{(double) _upSuceess / _upTry * 100:N2}%");
         }
 
         static void foo()
@@ -79,8 +79,8 @@ namespace Game
                 orc = MonsterFactory.Instance.Create(MonsterID.ORC);
                 orc.ItemDropped += OnItemDropped;
 
-                player.Attack(orc, ((Sword)player.RightItem).AttackPower);
-                player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+                player.Attack(orc, ((Sword) player.RightItem).AttackPower);
+                player.Attack(orc, ((Sword) player.RightItem).AttackPower);
 
                 //orcLord = MonsterFactory.Instance.Create(MonsterID.ORC_LORD);
                 //orcLord.ItemDropped += OnItemDropped;
@@ -89,31 +89,38 @@ namespace Game
                 //{
                 //    player.Attack(orcLord, ((Sword)player.RightItem).AttackPower);
                 //}
+
+                MonsterItemDropManager dropManager = MonsterItemDropManager.Instance;
+                InventoryManager inventoryManager = InventoryManager.Instance;
+
+                List<DroppedItems> dropItemses = dropManager.DropItem(orc.MonsterGrade);
+
+                foreach (DroppedItems dropItem in dropItemses)
+                {
+                    inventoryManager.AddInvenItem(dropItem.ItemId, dropItem.Amount);
+                }
+
             }
 
             Console.WriteLine("==================================================================");
 
             foreach (var item in _probability)
             {
-                Console.WriteLine($"{(double)item / _dropTry * 100:N2}%");
+                Console.WriteLine($"{(double) item / _dropTry * 100:N2}%");
             }
         }
 
         static void OnItemDropped(object sender, ItemDroppedEventArgs e)
         {
+            InventoryManager inventoryManager = InventoryManager.Instance;
 
+            List<DroppedItems> dropItemses = e.DropItems;
 
-            foreach (var item in e.DropItems)
+            foreach (DroppedItems dropItem in dropItemses)
             {
-                Console.Write($"{item.ItemId}:{ item.Amount} / ");
-
-                if(item.ItemId == ItemID.ARROW)
-                {
-                    _probability[item.Amount]++;
-                }
+                inventoryManager.AddInvenItem(dropItem.ItemId, dropItem.Amount);
             }
-
-            Console.WriteLine();
+            
         }
     }
 }
