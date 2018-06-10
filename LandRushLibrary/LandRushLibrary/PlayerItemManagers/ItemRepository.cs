@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using LandRushLibrary.Factory;
 
-namespace LandRushLibrary.ItemManagers
+namespace LandRushLibrary.PlayerItemManagers
 {
-    public class AquiredItemManager<T> where T : class, new()
+    public class ItemRepository<T> where T : class, new()
     {
         protected static T _instance;
         public static T Instance
@@ -21,7 +21,7 @@ namespace LandRushLibrary.ItemManagers
             }
         }
 
-        protected AquiredItemManager()
+        protected ItemRepository()
         {
             _maxItemSlotCount = 12;
             _maxAmount = 10;
@@ -42,7 +42,7 @@ namespace LandRushLibrary.ItemManagers
             return Items[slotNum].Item;
         }
 
-        public void AddInvenItem(ItemID itemId, int amount = 1)
+        public bool AddInvenItem(ItemID itemId, int amount = 1)
         {
             foreach (var invenItem in Items)
             {
@@ -52,7 +52,7 @@ namespace LandRushLibrary.ItemManagers
                     {
                         invenItem.Amount += amount;
                         OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
-                        return;
+                        return true;
                     }
 
                 }
@@ -62,10 +62,13 @@ namespace LandRushLibrary.ItemManagers
             {
                 Items.Add(new InvenItem(ItemFactory.Instance.Create(itemId), 1));
                 OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
+                return true;
             }
             else
+            {
                 OnInventoryIsFull(new InventoryIsFullEventArgs());
-
+                return false;
+            }
         }
 
         public void ExchangeSlotItem(int source, int target)

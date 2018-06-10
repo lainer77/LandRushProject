@@ -12,7 +12,7 @@ using LandRushLibrary.Repository;
 using LandRushLibrary.Factory;
 using LandRushLibrary.Units;
 using LandRushLibrary.Items;
-using LandRushLibrary.ItemManagers;
+using LandRushLibrary.PlayerItemManagers;
 
 
 namespace LandRushLibrary.Unit.Tests
@@ -35,13 +35,9 @@ namespace LandRushLibrary.Unit.Tests
             Shield oldShield = (Shield)ItemFactory.Instance.Create(ItemID.OLD_SHIELD);
             Bow oldBow = (Bow)ItemFactory.Instance.Create(ItemID.OLD_BOW);
 
-            PlayerEquipmentManager.Instance.SetEquipmentToSlot(1, oldSword);
-            PlayerEquipmentManager.Instance.SetEquipmentToSlot(3, oldShield);
-            PlayerEquipmentManager.Instance.SetEquipmentToSlot(2, oldBow);
-
             Player.Instance.PlayerEquipmentChanged += EquipmentPairTest;
 
-            PlayerEquipmentManager.Instance.EquipCurrentPair();
+            PlayerEquipment.Instance.EquipCurrentPair();
 
         }
 
@@ -145,31 +141,31 @@ namespace LandRushLibrary.Unit.Tests
         public void 인벤토리_이이템_추가_테스트()
         {
             IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
-            InventoryManager.Instance.AddInvenItem(stone.ItemId);
-            InventoryManager.Instance.AddInvenItem(stone.ItemId);
-            InventoryManager.Instance.AddInvenItem(stone.ItemId);
+            Inventory.Instance.AddInvenItem(stone.ItemId);
+            Inventory.Instance.AddInvenItem(stone.ItemId);
+            Inventory.Instance.AddInvenItem(stone.ItemId);
 
-            Assert.AreEqual(1, InventoryManager.Instance.Items.Count);
+            Assert.AreEqual(1, Inventory.Instance.Items.Count);
 
             for (int i = 0; i < 10; i++)
             {
-                InventoryManager.Instance.AddInvenItem(stone.ItemId);
+                Inventory.Instance.AddInvenItem(stone.ItemId);
             }
 
-            Assert.AreEqual(2, InventoryManager.Instance.Items.Count);
+            Assert.AreEqual(2, Inventory.Instance.Items.Count);
 
-            Console.WriteLine(InventoryManager.Instance.Items[0].Amount);
-            Console.WriteLine(InventoryManager.Instance.Items[1].Amount);
+            Console.WriteLine(Inventory.Instance.Items[0].Amount);
+            Console.WriteLine(Inventory.Instance.Items[1].Amount);
 
-            InventoryManager.Instance.RemoveItem(ItemID.STONE, 13);
+            Inventory.Instance.RemoveItem(ItemID.STONE, 13);
 
-            Assert.AreEqual(0, InventoryManager.Instance.Items.Count);
+            Assert.AreEqual(0, Inventory.Instance.Items.Count);
 
-            InventoryManager.Instance.InventoryIsFull += Full;
+            Inventory.Instance.InventoryIsFull += Full;
 
             for (int i = 0; i < 121; i++)
             {
-                InventoryManager.Instance.AddInvenItem(stone.ItemId);
+                Inventory.Instance.AddInvenItem(stone.ItemId);
             }
 
 
@@ -183,19 +179,19 @@ namespace LandRushLibrary.Unit.Tests
         [TestMethod()]
         public void 인벤토리_아이템_변경_테스트()
         {
-            InventoryManager.Instance.ClearInventory();
+            Inventory.Instance.ClearInventory();
 
             IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
             IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.WOOD);
 
-            InventoryManager.Instance.AddInvenItem(stone.ItemId); 
-            InventoryManager.Instance.AddInvenItem(wood.ItemId);
+            Inventory.Instance.AddInvenItem(stone.ItemId); 
+            Inventory.Instance.AddInvenItem(wood.ItemId);
 
-            Assert.AreEqual("Stone", InventoryManager.Instance.Items[0].Item.Name);
+            Assert.AreEqual("Stone", Inventory.Instance.Items[0].Item.Name);
 
-            InventoryManager.Instance.ExchangeSlotItem(0, 1);
+            Inventory.Instance.ExchangeSlotItem(0, 1);
 
-            Assert.AreEqual("Wood",InventoryManager.Instance.Items[0].Item.Name);
+            Assert.AreEqual("Wood",Inventory.Instance.Items[0].Item.Name);
         }
 
  

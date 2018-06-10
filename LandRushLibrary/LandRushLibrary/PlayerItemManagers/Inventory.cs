@@ -2,9 +2,9 @@
 using LandRushLibrary.Repository;
 using System.Linq;
 
-namespace LandRushLibrary.ItemManagers
+namespace LandRushLibrary.PlayerItemManagers
 {
-    public class InventoryManager : AquiredItemManager<InventoryManager>
+    public class Inventory : ItemRepository<Inventory>
     {
         public int GetAmountForId(ItemID itemId)
         {

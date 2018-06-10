@@ -3,70 +3,70 @@ using LandRushLibrary.Units;
 using System;
 using System.Collections.Generic;
 
-namespace LandRushLibrary.ItemManagers
+namespace LandRushLibrary.PlayerItemManagers
 {
-    public class PlayerEquipmentManager
+    public class PlayerEquipment
     {
-        private static PlayerEquipmentManager _instance;
-        public static PlayerEquipmentManager Instance
+        private static PlayerEquipment _instance;
+        public static PlayerEquipment Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new PlayerEquipmentManager();
+                    _instance = new PlayerEquipment();
 
                 return _instance;
             }
         }
 
-        private PlayerEquipmentManager()
+        private PlayerEquipment()
         {
-            Equipments = new List<EquipmentItem>();
             _firstPair = new EquipmentPair();
             _secondPair = new EquipmentPair();
             _currentPair = _firstPair;
 
-            Equipments = new List<EquipmentItem>();
-            for(int i = 0; i < 4; i++)
-            {
-                Equipments.Add(new DummyEquipment());
-            }
         }
 
-        public List<EquipmentItem> Equipments { get; private set; }
+        #region Fields
+        private Sword Sword { get; set; }
+        private Bow Bow { get; set; }
+        private Shield Shield { get; set; }
+        private Quiver Quiver { get; set; }
+
         private EquipmentPair _firstPair;
         private EquipmentPair _secondPair;
         private EquipmentPair _currentPair;
+        #endregion
 
-        public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
-        {
-            Equipments[slotNum - 1] = equipment;
+        //public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
+        //{
+        //    Equipments[slotNum - 1] = equipment;
 
-            SetEquipmentPair();
+        //    SetEquipmentPair();
 
-            OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
-        }
+        //    OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
+        //}
 
         /// <summary>
         ///  TODO: 장착된 상태가 아닌 대기 슬롯에 있는 아이템을 바꾼다는 뜻인가?
         /// </summary>
-        public void ExchangeEquipmentPairInSlot()
-        {
-            EquipmentItem temp = Equipments[0];
-            Equipments[0] = Equipments[1];
-            Equipments[1] = temp;
+        //public void ExchangeEquipmentPairInSlot()
+        //{
+        //    EquipmentItem temp = Equipments[0];
+        //    Equipments[0] = Equipments[1];
+        //    Equipments[1] = temp;
 
-            temp = Equipments[2];
-            Equipments[2] = Equipments[3];
-            Equipments[3] = temp;
+        //    temp = Equipments[2];
+        //    Equipments[2] = Equipments[3];
+        //    Equipments[3] = temp;
 
-            SetEquipmentPair();
+        //    SetEquipmentPair();
 
-            OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
+        //    OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
 
-        }
+        //}
 
-        public void EquipmentPairChange()
+        public void ChangeCurrentPair()
         {
             if( _currentPair == _firstPair )
                 _currentPair = _secondPair;
@@ -89,11 +89,11 @@ namespace LandRushLibrary.ItemManagers
 
         private void SetEquipmentPair()
         {
-            _firstPair.RightEquipment = Equipments[0];
-            _firstPair.LeftEquipment = Equipments[2];
+            _firstPair.RightEquipment = Sword;
+            _firstPair.LeftEquipment = Shield;
 
-            _secondPair.RightEquipment = Equipments[1];
-            _secondPair.LeftEquipment = Equipments[3];
+            _secondPair.RightEquipment = Quiver;
+            _secondPair.LeftEquipment = Bow;
         }
 
         private class EquipmentPair

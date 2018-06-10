@@ -1,5 +1,5 @@
 ﻿
-using LandRushLibrary.ItemManagers;
+using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using System;
@@ -27,7 +27,7 @@ namespace LandRushLibrary.Consume
 
         public void ConsumeItem(ConsumableItem consumedItem)
         {
-            int amount = InventoryManager.Instance.GetAmountForId(consumedItem.ItemId);
+            int amount = Inventory.Instance.GetAmountForId(consumedItem.ItemId);
 
             if (amount <= 0)
             {
@@ -37,7 +37,7 @@ namespace LandRushLibrary.Consume
 
             consumedItem.UseItem();
 
-            InventoryManager.Instance.RemoveItem(consumedItem.ItemId, 1);
+            Inventory.Instance.RemoveItem(consumedItem.ItemId, 1);
 
             OnItemConsumed(new ItemConsumedEventArgs(consumedItem.ItemId));
 

@@ -52,11 +52,11 @@
     <Compile Include="Drop\MonsterItemDropManager.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
-    <Compile Include="ItemManagers\InvenItem.cs" />
-    <Compile Include="ItemManagers\InventoryManager.cs" />
-    <Compile Include="ItemManagers\PlayerEquipmentManager.cs" />
-    <Compile Include="ItemManagers\AquiredItemManager.cs" />
-    <Compile Include="ItemManagers\StorageManager.cs" />
+    <Compile Include="PlayerItemManagers\InvenItem.cs" />
+    <Compile Include="PlayerItemManagers\Inventory.cs" />
+    <Compile Include="PlayerItemManagers\PlayerEquipment.cs" />
+    <Compile Include="PlayerItemManagers\ItemRepository.cs" />
+    <Compile Include="PlayerItemManagers\ItemStorage.cs" />
     <Compile Include="Items\Arrow.cs" />
     <Compile Include="Items\Bow.cs" />
     <Compile Include="Items\ConsumableItem.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LandRushLibrary.Factory;
-using LandRushLibrary.ItemManagers;
+using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
@@ -31,7 +31,7 @@ namespace Game
 
         static void Main(string[] args)
         {
-            InventoryManager inven = InventoryManager.Instance;
+            Inventory inven = Inventory.Instance;
             UpgradeManager upgrader = UpgradeManager.Instance;
 
             upgrader.UpgradeTried += OnUpTried;
@@ -62,7 +62,7 @@ namespace Game
         {
             Player player = Player.Instance;
 
-            PlayerEquipmentManager equipmentManager = PlayerEquipmentManager.Instance;
+            PlayerEquipment equipmentManager = PlayerEquipment.Instance;
 
             equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD));
             equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OLD_BOW));
@@ -91,7 +91,7 @@ namespace Game
                 //}
 
                 MonsterItemDropManager dropManager = MonsterItemDropManager.Instance;
-                InventoryManager inventoryManager = InventoryManager.Instance;
+                Inventory inventoryManager = Inventory.Instance;
 
                 List<DroppedItems> dropItemses = dropManager.DropItem(orc.MonsterGrade);
 
@@ -112,7 +112,7 @@ namespace Game
 
         static void OnItemDropped(object sender, ItemDroppedEventArgs e)
         {
-            InventoryManager inventoryManager = InventoryManager.Instance;
+            Inventory inventoryManager = Inventory.Instance;
 
             List<DroppedItems> dropItemses = e.DropItems;
 

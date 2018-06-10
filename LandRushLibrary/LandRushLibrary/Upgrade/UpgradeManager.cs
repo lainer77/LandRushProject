@@ -1,6 +1,6 @@
 ﻿
 using LandRushLibrary.Factory;
-using LandRushLibrary.ItemManagers;
+using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using System;
@@ -75,7 +75,7 @@ namespace LandRushLibrary.Upgrade
 
             UpgradeCost stock = new UpgradeCost();
 
-            InventoryManager inventory = InventoryManager.Instance;
+            Inventory inventory = Inventory.Instance;
 
             foreach (var item in cost.RequireIngredients)
             {
@@ -95,7 +95,7 @@ namespace LandRushLibrary.Upgrade
 
             foreach (var item in cost.RequireIngredients)
             {
-                if ( item.Value > InventoryManager.Instance.GetAmountForId(item.Key))
+                if ( item.Value > Inventory.Instance.GetAmountForId(item.Key))
                 {
                     poss = false;
                     break;
@@ -113,7 +113,7 @@ namespace LandRushLibrary.Upgrade
                 return;
             }
 
-            InventoryManager inven = InventoryManager.Instance;
+            Inventory inven = Inventory.Instance;
             UpgradeCost cost = _upgradeCosts[equipment.Grade - 1];
 
             foreach (var item in cost.RequireIngredients)

@@ -1,6 +1,6 @@
 ﻿using LandRushLibrary.Combat;
 using LandRushLibrary.Factory;
-using LandRushLibrary.ItemManagers;
+using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
@@ -19,13 +19,7 @@ namespace LandRushLibraryTests
         public void Player_장비_세팅()
         {
             Player player = Player.Instance;
-            PlayerEquipmentManager equipmentManager = PlayerEquipmentManager.Instance;
-
-            equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD));
-            equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OLD_BOW));
-            equipmentManager.SetEquipmentToSlot(3, ItemFactory.Instance.Create<Shield>(ItemID.OLD_SHIELD));
-            equipmentManager.SetEquipmentToSlot(4, ItemFactory.Instance.Create<Quiver>(ItemID.OLD_QUIVER));
-
+            PlayerEquipment equipmentManager = PlayerEquipment.Instance;
             player.PlayerEquipmentChanged += OnChangedPlayerEquipment;
 
             equipmentManager.EquipCurrentPair();

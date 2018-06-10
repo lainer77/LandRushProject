@@ -1,7 +1,7 @@
 ﻿
 using LandRushLibrary.Items;
 
-namespace LandRushLibrary.ItemManagers
+namespace LandRushLibrary.PlayerItemManagers
 {
     public class InvenItem
     {
