@@ -28,6 +28,8 @@ public class LongBow : MonoBehaviourEx
     private float _shoundPos = 0.25f;
     private float _nockMaxPos = 0.7f;
     private float _acceleration = 10;
+    private float _nomalizedTime = 0;
+    private float _realTime = 0;
     private Animator _animator;
 
     private AnimationClip _bowPullClip;
@@ -134,9 +136,14 @@ public class LongBow : MonoBehaviourEx
     private void ArrowSyncBow(float currnetPos)
     {
         AnimatorStateInfo animationState = _animator.GetCurrentAnimatorStateInfo(0);
-        float myTime = animationState.normalizedTime % _bowPullClip.length;
-        Debug.Log("myTime" + myTime / _animator.GetFloat("Speed"));
-        float speed = (currnetPos - myTime / 10) * _acceleration;
+        float addTime = animationState.normalizedTime - _nomalizedTime;
+        _realTime += _animator.GetFloat("Speed") * addTime;
+        float clipRealTime = _realTime % _bowPullClip.length;
+        _nomalizedTime = animationState.normalizedTime;
+        Debug.Log("playbackTime" +  _animator.playbackTime);
+        Debug.Log("recorderStartTime" +  _animator.recorderStartTime);
+        Debug.Log("recorderStopTime" +  _animator.recorderStopTime);
+        float speed = (currnetPos - clipRealTime / 10) * _acceleration;
 //        Debug.Log("speed" + speed);
 //        if (Mathf.Abs(myTime) < 1)
 //            speed = 0;
