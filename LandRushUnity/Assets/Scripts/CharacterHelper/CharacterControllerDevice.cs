@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using LandRushLibrary.ItemManagers;
+using LandRushLibrary.Units;
 using UnityEngine;
 using UnityScriptHelper;
 using Valve.VR;
@@ -22,7 +23,6 @@ public class CharacterControllerDevice : MonoBehaviourEx
     private Rigidbody _rigidbody;
     private DeviceInteraction _leftController;
     private DeviceInteraction _rightController;
-    private Vector3 _lookDirection;
 
 
     #endregion
