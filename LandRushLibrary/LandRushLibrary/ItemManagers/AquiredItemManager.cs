@@ -27,7 +27,7 @@ namespace LandRushLibrary.ItemManagers
         protected int _maxItemSlot;
         protected int _maxAmmount;
 
-        public void AddInvenItem (GameItem item)
+        public void AddInvenItem(GameItem item)
         {
             foreach (var invenItem in InvenItems)
             {
