@@ -8,22 +8,22 @@ using System.Collections.Generic;
 
 namespace LandRushLibrary.Upgrade
 {
-    public class UpgradeManager
+    public class Upgrader
     {
-        private static UpgradeManager _instance;
-        public static UpgradeManager Instance
+        private static Upgrader _instance;
+        public static Upgrader Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new UpgradeManager();
+                    _instance = new Upgrader();
 
                 return _instance;
             }
         }
 
 
-        private UpgradeManager()
+        private Upgrader()
         {
             _upgradeCosts = new List<UpgradeCost>();
 

@@ -39,13 +39,13 @@ namespace LandRushLibraryTests
         {
             Sword oldSword = ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD);
 
-            System.Console.WriteLine(UpgradeManager.Instance.UpgradePossibility(oldSword));
+            System.Console.WriteLine(Upgrader.Instance.UpgradePossibility(oldSword));
 
-            UpgradeManager.Instance.UpgradeTried += OnUpgradeTried;
+            Upgrader.Instance.UpgradeTried += OnUpgradeTried;
 
             Assert.AreEqual(1, oldSword.Grade);
 
-            UpgradeManager.Instance.Upgrade<Sword>(ref oldSword);
+            Upgrader.Instance.Upgrade<Sword>(ref oldSword);
 
             Inventory inven = Inventory.Instance;
 

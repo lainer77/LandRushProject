@@ -32,7 +32,7 @@ namespace Game
         static void Main(string[] args)
         {
             Inventory inven = Inventory.Instance;
-            UpgradeManager upgrader = UpgradeManager.Instance;
+            Upgrader upgrader = Upgrader.Instance;
 
             upgrader.UpgradeTried += OnUpTried;
 
