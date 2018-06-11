@@ -84,7 +84,7 @@ namespace LandRushLibrary.Drop
         public List<DroppedItems> DropItem(MonsterGrade deadMonsterGrade)
         {
             List<DropList> dropList = _dropRates[deadMonsterGrade];
-            List<DroppedItems> finalDropList = new List<DroppedItems>();
+            List<DroppedItems> resultDropList = new List<DroppedItems>();
 
             var divList = dropList.GroupBy(x => x.ItemId);
 
@@ -100,14 +100,14 @@ namespace LandRushLibrary.Drop
 
                     if (rateSum >= random)
                     {
-                        finalDropList.Add(new DroppedItems(item.ItemId, item.Amount));
+                        resultDropList.Add(new DroppedItems(item.ItemId, item.Amount));
                         break;
                     }
                 }
 
             }
 
-            return finalDropList;
+            return resultDropList;
         }
 
     }
