@@ -90,15 +90,15 @@ namespace LandRushLibrary.Units
             OncombatModeChanged(new CombatModeChangedEventArgs(combatMode));
         }
 
-        public EquipmentItem GetRightItem()
-        {
-            return RightItem;
-        }
-
-        public EquipmentItem GetLeftItem()
-        {
-            return LeftItem;
-        }
+//        public EquipmentItem GetRightItem()
+//        {
+//            return RightItem;
+//        }
+//
+//        public EquipmentItem GetLeftItem()
+//        {
+//            return LeftItem;
+//        }
 
         public override void AddDamage(int damage)
         {

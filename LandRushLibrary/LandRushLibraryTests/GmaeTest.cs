@@ -80,7 +80,7 @@ namespace LandRushLibrary.Unit.Tests
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    player.Attack(orc, ((Sword)player.GetRightItem()).AttackPower);
+                    player.Attack(orc, ((Sword)player.RightItem).AttackPower);
                 }
                 Console.WriteLine(player.CurrentExp);
             }
