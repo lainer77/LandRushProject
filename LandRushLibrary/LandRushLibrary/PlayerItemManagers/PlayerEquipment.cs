@@ -38,6 +38,35 @@ namespace LandRushLibrary.PlayerItemManagers
         private EquipmentPair _currentPair;
         #endregion
 
+
+        public void ChangeCurrentPair()
+        {
+            if( _currentPair == _swordPair )
+                _currentPair = _bowPair;
+            else
+                _currentPair = _swordPair;
+
+            Player.Instance.EquipmentChange(_currentPair.LeftEquipment, _currentPair.RightEquipment);
+
+            OnCurrentPairChanged(new CurrentPairChangedEventArgs());
+        }
+
+
+        private void SetEquipmentPair()
+        {
+            _swordPair.RightEquipment = Sword;
+            _swordPair.LeftEquipment = Shield;
+
+            _bowPair.RightEquipment = Quiver;
+            _bowPair.LeftEquipment = Bow;
+        }
+
+        private class EquipmentPair
+        {
+            public EquipmentItem LeftEquipment { get; set; } 
+            public EquipmentItem RightEquipment { get; set; } 
+        }
+
         //public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
         //{
         //    Equipments[slotNum - 1] = equipment;
@@ -65,90 +94,6 @@ namespace LandRushLibrary.PlayerItemManagers
         //    OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
 
         //}
-
-        public void ChangeCurrentPair()
-        {
-            if( _currentPair == _swordPair )
-                _currentPair = _bowPair;
-            else
-                _currentPair = _swordPair;
-
-            EquipCurrentPair();
-
-            OnCurrentPairChanged(new CurrentPairChangedEventArgs());
-        }
-
-        /// <summary>
-        ///  TODO: private? 이 아니야? 외부에서 호출해도 되는 부분?
-        /// </summary>
-        public void EquipCurrentPair()
-        {
-            Player.Instance.EquipmentChange(_currentPair.LeftEquipment, _currentPair.RightEquipment);
-
-        }
-
-        private void SetEquipmentPair()
-        {
-            _swordPair.RightEquipment = Sword;
-            _swordPair.LeftEquipment = Shield;
-
-            _bowPair.RightEquipment = Quiver;
-            _bowPair.LeftEquipment = Bow;
-        }
-
-        private class EquipmentPair
-        {
-            public EquipmentItem LeftEquipment { get; set; } 
-            public EquipmentItem RightEquipment { get; set; } 
-        }
-
-        private class DummyEquipment : EquipmentItem
-        {
-            public override GameItem Clone()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        #region SlotItemChanged event things for C# 3.0
-        public event EventHandler<SlotItemChangedEventArgs> SlotItemChanged;
-
-        protected virtual void OnSlotItemChanged(SlotItemChangedEventArgs e)
-        {
-            if (SlotItemChanged != null)
-                SlotItemChanged(this, e);
-        }
-
-        private SlotItemChangedEventArgs OnSlotItemChanged(List<EquipmentItem> slotItems)
-        {
-            SlotItemChangedEventArgs args = new SlotItemChangedEventArgs(slotItems);
-            OnSlotItemChanged(args);
-
-            return args;
-        }
-
-        private SlotItemChangedEventArgs OnSlotItemChangedForOut()
-        {
-            SlotItemChangedEventArgs args = new SlotItemChangedEventArgs();
-            OnSlotItemChanged(args);
-
-            return args;
-        }
-
-        public class SlotItemChangedEventArgs : EventArgs
-        {
-            public List<EquipmentItem> SlotItems { get; set; }
-
-            public SlotItemChangedEventArgs()
-            {
-            }
-
-            public SlotItemChangedEventArgs(List<EquipmentItem> slotItems)
-            {
-                SlotItems = slotItems;
-            }
-        }
-        #endregion
 
         #region CurrentPairChanged event things for C# 3.0
         public event EventHandler<CurrentPairChangedEventArgs> CurrentPairChanged;
