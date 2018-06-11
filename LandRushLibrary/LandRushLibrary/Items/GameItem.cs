@@ -13,7 +13,7 @@ namespace LandRushLibrary.Items
         public ItemType Type { get; set; }
         public abstract GameItem Clone();
         
-        protected virtual void SetBasicCloneItem(GameItem clone)
+        protected virtual void CloneCore(GameItem clone)
         {
             clone.ItemId = ItemId;
             clone.Name = Name;

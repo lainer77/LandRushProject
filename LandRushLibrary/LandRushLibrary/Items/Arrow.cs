@@ -1,15 +1,20 @@
 ﻿
+using LandRushLibrary.Interfaces;
 using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items 
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class Arrow : GameItem
+    public class Arrow : EquipmentItem, ICountable
     {
+
+        public int Amount { get; set; }
+        public int MaxAmount { get; set; }
+
         public override GameItem Clone()
         {
             Arrow clone = new Arrow();
-            SetBasicCloneItem(clone);
+            CloneCore(clone);
 
             return clone;
         }

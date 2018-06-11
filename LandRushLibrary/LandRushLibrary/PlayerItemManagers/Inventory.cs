@@ -4,16 +4,19 @@ using System.Linq;
 
 namespace LandRushLibrary.PlayerItemManagers
 {
-    public class Inventory : ItemRepository<Inventory>
+    public class Inventory : ItemRepository
     {
-        public int GetAmountForId(ItemID itemId)
-        {
-            var amount = (from x in Items
-                          where x.Item.ItemId == itemId
-                          select x.Amount).ToList();
+        private static Inventory _instance;
 
-            return amount.Sum();
-            
+        public static Inventory Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new Inventory();
+
+                return _instance;
+            }
         }
     }
 }

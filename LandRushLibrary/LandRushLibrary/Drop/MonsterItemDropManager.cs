@@ -3,6 +3,9 @@ using LandRushLibrary.Units;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using LandRushLibrary.Factory;
+using LandRushLibrary.Interfaces;
+using LandRushLibrary.Items;
 
 namespace LandRushLibrary.Drop
 {
@@ -22,58 +25,58 @@ namespace LandRushLibrary.Drop
 
         private MonsterItemDropManager()
         {
-            _dropRates = new Dictionary<MonsterGrade, List<DropList>>();
-            DropList dropList = new DropList();
+            _dropRates = new Dictionary<MonsterGrade, List<DropRateInfo>>();
+            DropRateInfo dropRateInfo = new DropRateInfo();
 
 
-            List<DropList> normalDropList = new List<DropList>();
+            List<DropRateInfo> normalDropList = new List<DropRateInfo>();
 
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 2);
-            normalDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.3f, amount: 3);
-            normalDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 4);
-            normalDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.1f, amount: 5);
-            normalDropList.Add(item: dropList);
+            dropRateInfo = new DropRateInfo(ItemID.ARROW, rate: 0.2f, amount: 2);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.3f, amount: 3);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.2f, amount: 4);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.1f, amount: 5);
+            normalDropList.Add(item: dropRateInfo);
 
-            dropList = new DropList(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
-            normalDropList.Add(item: dropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
+            normalDropList.Add(item: dropRateInfo);
 
-            dropList = new DropList(itemId: ItemID.WOOD, rate: 0.5f, amount: 1);
-            normalDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.WOOD, rate: 0.3f, amount: 2);
-            normalDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.WOOD, rate: 0.2f, amount: 3);
-            normalDropList.Add(item: dropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.WOOD, rate: 0.5f, amount: 1);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.WOOD, rate: 0.3f, amount: 2);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.WOOD, rate: 0.2f, amount: 3);
+            normalDropList.Add(item: dropRateInfo);
 
             _dropRates.Add(key: MonsterGrade.NORMAL, value: normalDropList);
 
             ////////////////////////////////////////////////
 
-            List<DropList> bossDropList = new List<DropList>();
+            List<DropRateInfo> bossDropList = new List<DropRateInfo>();
 
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.1f, amount: 2);
-            bossDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 3);
-            bossDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.3f, amount: 4);
-            bossDropList.Add(item: dropList);
-            dropList = new DropList(itemId: ItemID.ARROW, rate: 0.2f, amount: 5);
-            bossDropList.Add(item: dropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.1f, amount: 2);
+            bossDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.2f, amount: 3);
+            bossDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.3f, amount: 4);
+            bossDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.2f, amount: 5);
+            bossDropList.Add(item: dropRateInfo);
 
-            dropList = new DropList(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
-            bossDropList.Add(item: dropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
+            bossDropList.Add(item: dropRateInfo);
 
-            dropList = new DropList(itemId: ItemID.IRON, rate: 1.0f, amount: 1);
-            bossDropList.Add(item: dropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.IRON, rate: 1.0f, amount: 1);
+            bossDropList.Add(item: dropRateInfo);
 
             _dropRates.Add(key: MonsterGrade.BOSS, value: bossDropList);
 
             _random = new Random(Seed: (int)DateTime.Now.Ticks);
         }
 
-        private Dictionary<MonsterGrade, List<DropList>> _dropRates;
+        private Dictionary<MonsterGrade, List<DropRateInfo>> _dropRates;
         private Random _random;
 
         /// <summary>
@@ -81,33 +84,60 @@ namespace LandRushLibrary.Drop
         /// </summary>
         /// <param name="deadMonsterGrade"></param>
         /// <returns></returns>
-        public List<DroppedItems> DropItem(MonsterGrade deadMonsterGrade)
+        public List<GameItem> DropItem(MonsterGrade deadMonsterGrade)
         {
-            List<DropList> dropList = _dropRates[deadMonsterGrade];
-            List<DroppedItems> resultDropList = new List<DroppedItems>();
+            List<DropRateInfo> dropRateInfos = _dropRates[deadMonsterGrade];
+            List<GameItem> dropItems = new List<GameItem>();
 
-            var divList = dropList.GroupBy(x => x.ItemId);
+            var gradeRates = dropRateInfos.GroupBy(x => x.DropItem.ItemId);
 
             int random = _random.Next(100);
 
-            foreach (var list in divList)
+            foreach (var rate in gradeRates)
             {
                 int rateSum = 0;
 
-                foreach (var item in list)
+                foreach (var x in rate)
                 {
-                    rateSum += (int)(item.Rate * 100);
+                    rateSum += (int)(x.Rate * 100);
 
                     if (rateSum >= random)
                     {
-                        resultDropList.Add(new DroppedItems(item.ItemId, item.Amount));
+                        GameItem dropItem = ItemFactory.Instance.Create(x.DropItem.ItemId);
+                        dropItems.Add(dropItem);
+
                         break;
                     }
                 }
 
             }
 
-            return resultDropList;
+            return dropItems;
+        }
+
+        private class DropRateInfo
+        {
+            public GameItem DropItem { get; private set; }
+            public float Rate { get; private set; }
+
+            public DropRateInfo(ItemID itemId, float rate, int amount = 1)
+            {
+                DropItem = ItemFactory.Instance.Create(itemId);
+
+                if (amount != 1)
+                {
+                    if (DropItem is ICountable countable)
+                        countable.Amount = amount;
+                }
+
+                Rate = rate;
+            }
+
+            public DropRateInfo()
+            {
+
+            }
+
         }
 
     }

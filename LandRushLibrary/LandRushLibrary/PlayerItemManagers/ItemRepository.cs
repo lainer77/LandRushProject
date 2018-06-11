@@ -4,63 +4,59 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LandRushLibrary.Factory;
+using LandRushLibrary.Interfaces;
 
 namespace LandRushLibrary.PlayerItemManagers
 {
-    public class ItemRepository<T> where T : class, new()
+    public abstract class ItemRepository
     {
-        protected static T _instance;
-        public static T Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new T();
-
-                return _instance;
-            }
-        }
-
-        protected ItemRepository()
-        {
-            _maxItemSlotCount = 12;
-            _maxAmount = 10;
-            Items = new List<InvenItem>();
-        }
-
-        public List<InvenItem> Items { get; protected set; }
+        public List<GameItem> Items { get; protected set; }
         protected int _maxItemSlotCount;
         protected int _maxAmount;
 
         public void ClearInventory()
         {
-            Items = new List<InvenItem>();
+            Items = new List<GameItem>();
         }
 
         public GameItem GetSlotItemInfo(int slotNum)
         {
-            return Items[slotNum].Item;
+            return Items[slotNum];
         }
 
-        public bool AddInvenItem(ItemID itemId, int amount = 1)
+        public bool AddGameItem(GameItem gameItem)
         {
-            foreach (var invenItem in Items)
-            {
-                if (invenItem.Item.ItemId == itemId)
-                {
-                    if (invenItem.Amount + amount <= _maxAmount)
-                    {
-                        invenItem.Amount += amount;
-                        OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
-                        return true;
-                    }
 
+            foreach (var item in Items)
+            {
+                if (item.ItemId == gameItem.ItemId)
+                {
+                    if (item is ICountable countable)
+                    {
+                        countable.Amount += ((ICountable) gameItem).Amount;
+
+                        if (countable.MaxAmount < countable.Amount)
+                        {
+                            int remainAmount = countable.Amount - countable.MaxAmount;
+                            countable.Amount = countable.MaxAmount;
+                            ((ICountable) gameItem).Amount = remainAmount;
+                        }
+                        else
+                        {
+                            OnInventoryItemChanged(Items);
+                            return true;
+                        }
+                    }
+                    
+                    break;
                 }
             }
+            
+
 
             if (Items.Count < _maxItemSlotCount)
             {
-                Items.Add(new InvenItem(ItemFactory.Instance.Create(itemId), 1));
+                Items.Add(gameItem);
                 OnInventoryItemChanged(new InventoryItemChangedEventArgs(Items));
                 return true;
             }
@@ -73,7 +69,7 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void ExchangeSlotItem(int source, int target)
         {
-            InvenItem temp = Items[target];
+            GameItem temp = Items[target];
             Items[target] = Items[source];
             Items[source] = temp;
 
@@ -82,38 +78,65 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void RemoveItem(ItemID itemId, int amount)
         {
-            var invenItem = (from x in Items
-                             where x.Item.ItemId == itemId
+            var GameItem = (from x in Items
+                             where x.ItemId == itemId
                              select x).ToList();
 
-            if (invenItem == null)
+            if (GameItem == null)
                 return;
 
-            foreach (var item in invenItem)
+
+            foreach (var item in GameItem)
             {
-                int temp = item.Amount;
-                item.Amount -= amount;
+                if (item is ICountable countable)
+                {
+                    int temp = countable.Amount;
+                    countable.Amount -= amount;
 
-                if (item.Amount > 0)
-                    break;
+                    if (countable.Amount > 0)
+                        break;
 
-                Items.Remove(item);
-                amount -= temp;
+                    Items.Remove(item);
+                    amount -= temp;
+                }
+                else
+                {
+                    if (amount == 0)
+                        break;
+
+                    Items.Remove(item);
+                    amount--;
+                }
 
             }
 
         }
 
-        public void SetMaxSlotCount(int maxSlotCout)
-        {
-            _maxItemSlotCount = maxSlotCout;
-        }
 
-        public void SetMaxAmount(int maxAmount)
-        {
-            _maxAmount = maxAmount;
-        }
 
+        public int GetAmountForId(ItemID itemId)
+        {
+            var items = (from x in Items
+                where x.ItemId == itemId
+                select x).ToList();
+
+            int amount = 0;
+
+            foreach (var gameItem in items)
+            {
+                if (gameItem is ICountable countable)
+                {
+                    amount += countable.Amount;
+                }
+                else
+                {
+                    amount++;
+                }
+            }
+
+            return amount;
+
+        }
 
         #region Events
 
@@ -126,9 +149,9 @@ namespace LandRushLibrary.PlayerItemManagers
                 InventoryItemChanged(this, e);
         }
 
-        private InventoryItemChangedEventArgs OnInventoryItemChanged(List<InvenItem> invenItems)
+        private InventoryItemChangedEventArgs OnInventoryItemChanged(List<GameItem> GameItems)
         {
-            InventoryItemChangedEventArgs args = new InventoryItemChangedEventArgs(invenItems);
+            InventoryItemChangedEventArgs args = new InventoryItemChangedEventArgs(GameItems);
             OnInventoryItemChanged(args);
 
             return args;
@@ -172,28 +195,28 @@ namespace LandRushLibrary.PlayerItemManagers
 
         #endregion
         #endregion
-    }
 
-    public class InventoryItemChangedEventArgs : EventArgs
-    {
-        public List<InvenItem> InvenItems { get; set; }
-
-        public InventoryItemChangedEventArgs()
+        public class InventoryItemChangedEventArgs : EventArgs
         {
+            public List<GameItem> GameItems { get; set; }
+
+            public InventoryItemChangedEventArgs()
+            {
+            }
+
+            public InventoryItemChangedEventArgs(List<GameItem> GameItems)
+            {
+                GameItems = GameItems;
+            }
         }
 
-        public InventoryItemChangedEventArgs(List<InvenItem> invenItems)
+        public class InventoryIsFullEventArgs : EventArgs
         {
-            InvenItems = invenItems;
+
+            public InventoryIsFullEventArgs()
+            {
+            }
+
         }
-    }
-
-    public class InventoryIsFullEventArgs : EventArgs
-    {
-
-        public InventoryIsFullEventArgs()
-        {
-        }
-
     }
 }

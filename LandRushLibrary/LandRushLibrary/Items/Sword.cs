@@ -1,20 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using LandRushLibrary.Interfaces;
+using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class Sword : EquipmentItem
+    public class Sword : EquipmentItem, IUpgradable
     {
         public int AttackPower { get; set; }
+        public int Grade { get; set; }
 
         public override GameItem Clone()
         {
             Sword clone = new Sword();
-            SetBasicCloneItem(clone);
+            CloneCore(clone);
 
             clone.AttackPower = AttackPower;
+            clone.Grade = Grade;
 
             return clone;
         }
+
     }
 }

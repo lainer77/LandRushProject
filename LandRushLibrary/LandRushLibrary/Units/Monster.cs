@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using LandRushLibrary.Combat;
 using LandRushLibrary.Drop;
+using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using Newtonsoft.Json;
 
@@ -38,7 +38,7 @@ namespace LandRushLibrary.Units
 
         protected override void OnDead(DeadEventArgs e)
         {
-            List<DroppedItems> dropInfos = MonsterItemDropManager.Instance.DropItem(MonsterGrade);
+            List<GameItem> dropInfos = MonsterItemDropManager.Instance.DropItem(MonsterGrade);
 
             if( dropInfos.Count > 0)
             {
@@ -119,7 +119,7 @@ namespace LandRushLibrary.Units
                 ItemDropped(this, e);
         }
 
-        private ItemDroppedEventArgs OnItemDropped(List<DroppedItems> dropItems)
+        private ItemDroppedEventArgs OnItemDropped(List<GameItem> dropItems)
         {
             ItemDroppedEventArgs args = new ItemDroppedEventArgs(dropItems);
             OnItemDropped(args);
@@ -135,22 +135,25 @@ namespace LandRushLibrary.Units
             return args;
         }
 
+        public class ItemDroppedEventArgs : EventArgs
+        {
+            public List<GameItem> DropItems { get; set; }
+
+            public ItemDroppedEventArgs()
+            {
+            }
+
+            public ItemDroppedEventArgs(List<GameItem> dropItems)
+            {
+                DropItems = dropItems;
+            }
+        }
 
         #endregion
+
+
     }
 
-    public class ItemDroppedEventArgs : EventArgs
-    {
-        public List<DroppedItems> DropItems { get; set; }
 
-        public ItemDroppedEventArgs()
-        {
-        }
-
-        public ItemDroppedEventArgs(List<DroppedItems> dropItems)
-        {
-            DropItems = dropItems;
-        }
-    }
 
 }

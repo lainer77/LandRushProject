@@ -5,6 +5,8 @@ using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using LandRushLibrary.Interfaces;
 
 namespace LandRushLibrary.Upgrade
 {
@@ -64,14 +66,14 @@ namespace LandRushLibrary.Upgrade
         private int _maxGrade;
         private Random _random;
 
-        public UpgradeCost GetUpgradeCost(EquipmentItem equipment)
+        public UpgradeCost GetUpgradeCost(IUpgradable upgradable)
         {
-            return _upgradeCosts[equipment.Grade - 1];
+            return _upgradeCosts[upgradable.Grade - 1];
         }
 
-        public UpgradeCost GetPlayerStock(EquipmentItem equipment)
+        public UpgradeCost GetPlayerStock(IUpgradable upgradable)
         {
-            UpgradeCost cost = _upgradeCosts[equipment.Grade - 1];
+            UpgradeCost cost = _upgradeCosts[upgradable.Grade - 1];
 
             UpgradeCost stock = new UpgradeCost();
 
@@ -85,12 +87,12 @@ namespace LandRushLibrary.Upgrade
             return stock;
         }
 
-        public bool UpgradePossibility(EquipmentItem equipment)
+        public bool UpgradePossibility(IUpgradable upgradable)
         {
-            if (equipment.Grade == _maxGrade)
+            if (upgradable.Grade == _maxGrade)
                 return false;
 
-            UpgradeCost cost = _upgradeCosts[equipment.Grade - 1];
+            UpgradeCost cost = _upgradeCosts[upgradable.Grade - 1];
             bool poss = true;
 
             foreach (var item in cost.RequireIngredients)
@@ -105,7 +107,7 @@ namespace LandRushLibrary.Upgrade
             return poss;
         }
 
-        public void Upgrade<T>(ref T equipment) where T : EquipmentItem
+        public void Upgrade<T>(ref T equipment) where T : EquipmentItem, IUpgradable
         {
             if (!UpgradePossibility(equipment))
             {
@@ -133,10 +135,9 @@ namespace LandRushLibrary.Upgrade
             ItemType type = equipment.Type;
             int grade = equipment.Grade;
 
-            ItemID nextGradeItem = ItemFactory.Instance.FindItemId<EquipmentItem>( x => ( x.Type == type )&&( x.Grade == (grade + 1) ));
+            List<T> nextGradeItems = ItemFactory.Instance.FindItemListId<T>( x => ( x.Type == type )&&( x.Grade == (grade + 1) ));
 
-
-            equipment = ItemFactory.Instance.Create<T>(nextGradeItem);
+            equipment = nextGradeItems.FirstOrDefault();
 
             OnUpgradeTried(new UpgradeTriedEventArgs(true, false));
 

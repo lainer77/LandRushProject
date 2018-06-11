@@ -45,31 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Combat\CalculatedRandomDamageEventArgs.cs" />
-    <Compile Include="Combat\CombatModeManager.cs" />
-    <Compile Include="Consume\ItemConsumer.cs" />
-    <Compile Include="Drop\DroppedItems.cs" />
-    <Compile Include="Drop\DropList.cs" />
     <Compile Include="Drop\MonsterItemDropManager.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
-    <Compile Include="PlayerItemManagers\InvenItem.cs" />
+    <Compile Include="Interfaces\ICountable.cs" />
+    <Compile Include="Interfaces\IUpgradable.cs" />
+    <Compile Include="Items\EquipmentItem.cs" />
+    <Compile Include="Items\UseableItem.cs" />
     <Compile Include="PlayerItemManagers\Inventory.cs" />
     <Compile Include="PlayerItemManagers\PlayerEquipment.cs" />
     <Compile Include="PlayerItemManagers\ItemRepository.cs" />
     <Compile Include="PlayerItemManagers\ItemStorage.cs" />
     <Compile Include="Items\Arrow.cs" />
     <Compile Include="Items\Bow.cs" />
-    <Compile Include="Items\ConsumableItem.cs" />
-    <Compile Include="Items\EquipmentItem.cs" />
     <Compile Include="Items\GameItem.cs" />
     <Compile Include="Items\IngredientItem.cs" />
     <Compile Include="Items\Potion.cs" />
-    <Compile Include="Items\Quiver.cs" />
     <Compile Include="Items\Shield.cs" />
     <Compile Include="Items\Sword.cs" />
-    <Compile Include="Map\Room.cs" />
-    <Compile Include="Map\StageMap.cs" />
     <Compile Include="Singleton\SingletonBase.cs" />
     <Compile Include="Units\Monster.cs" />
     <Compile Include="Units\Player.cs" />
