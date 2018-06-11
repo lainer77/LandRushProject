@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace LandRushLibrary.Items 
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class Arrow : ConsumableItem
+    public class Arrow : GameItem
     {
         public override GameItem Clone()
         {
@@ -14,9 +14,5 @@ namespace LandRushLibrary.Items
             return clone;
         }
 
-        public override void UseItem()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

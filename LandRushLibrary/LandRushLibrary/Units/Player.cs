@@ -14,8 +14,6 @@ namespace LandRushLibrary.Units
         public int MaxExp { get; set; }
 
         [JsonIgnore]
-        public bool IsCombatMode { get; set; }
-        [JsonIgnore]
         public int ShieldArmor { get; set; }
         [JsonIgnore]
         public EquipmentItem LeftItem { get; set; }
@@ -66,7 +64,6 @@ namespace LandRushLibrary.Units
         {
             CurrentHp = MaxHp;
             Alive = true;
-            IsCombatMode = false;
         }
 
         public void EquipmentChange(EquipmentItem leftItem, EquipmentItem rightItem)
@@ -75,29 +72,6 @@ namespace LandRushLibrary.Units
             RightItem = rightItem;
 
             OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(rightItem, leftItem));
-        }
-
-        public void ChangecombatMode(bool combatMode)
-        {
-            IsCombatMode = combatMode;
-
-            if(combatMode == false)
-            {
-                LeftItem = null;
-                RightItem = null;
-            }
-
-            OncombatModeChanged(new CombatModeChangedEventArgs(combatMode));
-        }
-
-        public EquipmentItem GetRightItem()
-        {
-            return RightItem;
-        }
-
-        public EquipmentItem GetLeftItem()
-        {
-            return LeftItem;
         }
 
         public override void AddDamage(int damage)
@@ -281,84 +255,6 @@ namespace LandRushLibrary.Units
                 RightItem = rightItem;
             }
         }
-        #endregion
-
-        #region combatModeChanged event things for C# 3.0
-
-        public event EventHandler<CombatModeChangedEventArgs> combatModeChanged;
-
-
-
-        protected virtual void OncombatModeChanged(CombatModeChangedEventArgs e)
-
-        {
-
-            if (combatModeChanged != null)
-
-                combatModeChanged(this, e);
-
-        }
-
-
-
-        private CombatModeChangedEventArgs OncombatModeChanged(bool combatMode)
-
-        {
-
-            CombatModeChangedEventArgs args = new CombatModeChangedEventArgs(combatMode);
-
-            OncombatModeChanged(args);
-
-
-
-            return args;
-
-        }
-
-
-
-        private CombatModeChangedEventArgs OncombatModeChangedForOut()
-
-        {
-
-            CombatModeChangedEventArgs args = new CombatModeChangedEventArgs();
-
-            OncombatModeChanged(args);
-
-
-
-            return args;
-
-        }
-
-
-
-        public class CombatModeChangedEventArgs : EventArgs
-
-        {
-
-            public bool combatMode { get; set; }
-
-
-
-            public CombatModeChangedEventArgs()
-
-            {
-
-            }
-
-
-
-            public CombatModeChangedEventArgs(bool combatMode)
-
-            {
-
-                combatMode = combatMode;
-
-            }
-
-        }
-
         #endregion
 
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;

@@ -64,10 +64,10 @@ namespace Game
 
             PlayerEquipment equipmentManager = PlayerEquipment.Instance;
 
-            equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD));
-            equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OLD_BOW));
-            equipmentManager.SetEquipmentToSlot(3, ItemFactory.Instance.Create<Shield>(ItemID.OLD_SHIELD));
-            equipmentManager.SetEquipmentToSlot(4, ItemFactory.Instance.Create<Quiver>(ItemID.OLD_QUIVER));
+            //equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD));
+            //equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OLD_BOW));
+            //equipmentManager.SetEquipmentToSlot(3, ItemFactory.Instance.Create<Shield>(ItemID.OLD_SHIELD));
+            //equipmentManager.SetEquipmentToSlot(4, ItemFactory.Instance.Create<Quiver>(ItemID.OLD_QUIVER));
 
             equipmentManager.EquipCurrentPair();
 
@@ -90,15 +90,15 @@ namespace Game
                 //    player.Attack(orcLord, ((Sword)player.RightItem).AttackPower);
                 //}
 
-                MonsterItemDropManager dropManager = MonsterItemDropManager.Instance;
-                Inventory inventoryManager = Inventory.Instance;
+                //MonsterItemDropManager dropManager = MonsterItemDropManager.Instance;
+                //Inventory inventoryManager = Inventory.Instance;
 
-                List<DroppedItems> dropItemses = dropManager.DropItem(orc.MonsterGrade);
+                //List<DroppedItems> dropItemses = dropManager.DropItem(orc.MonsterGrade);
 
-                foreach (DroppedItems dropItem in dropItemses)
-                {
-                    inventoryManager.AddInvenItem(dropItem.ItemId, dropItem.Amount);
-                }
+                //foreach (DroppedItems dropItem in dropItemses)
+                //{
+                //    inventoryManager.AddInvenItem(dropItem.ItemId, dropItem.Amount);
+                //}
 
             }
 

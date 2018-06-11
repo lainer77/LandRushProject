@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Combat\CalculatedRandomDamageEventArgs.cs" />
+    <Compile Include="Combat\CombatModeManager.cs" />
     <Compile Include="Consume\ItemConsumer.cs" />
     <Compile Include="Drop\DroppedItems.cs" />
     <Compile Include="Drop\DropList.cs" />

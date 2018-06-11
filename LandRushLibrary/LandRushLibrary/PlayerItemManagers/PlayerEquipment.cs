@@ -21,9 +21,9 @@ namespace LandRushLibrary.PlayerItemManagers
 
         private PlayerEquipment()
         {
-            _firstPair = new EquipmentPair();
-            _secondPair = new EquipmentPair();
-            _currentPair = _firstPair;
+            _swordPair = new EquipmentPair();
+            _bowPair = new EquipmentPair();
+            _currentPair = _swordPair;
 
         }
 
@@ -33,8 +33,8 @@ namespace LandRushLibrary.PlayerItemManagers
         private Shield Shield { get; set; }
         private Quiver Quiver { get; set; }
 
-        private EquipmentPair _firstPair;
-        private EquipmentPair _secondPair;
+        private EquipmentPair _swordPair;
+        private EquipmentPair _bowPair;
         private EquipmentPair _currentPair;
         #endregion
 
@@ -68,10 +68,10 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void ChangeCurrentPair()
         {
-            if( _currentPair == _firstPair )
-                _currentPair = _secondPair;
+            if( _currentPair == _swordPair )
+                _currentPair = _bowPair;
             else
-                _currentPair = _firstPair;
+                _currentPair = _swordPair;
 
             EquipCurrentPair();
 
@@ -89,11 +89,11 @@ namespace LandRushLibrary.PlayerItemManagers
 
         private void SetEquipmentPair()
         {
-            _firstPair.RightEquipment = Sword;
-            _firstPair.LeftEquipment = Shield;
+            _swordPair.RightEquipment = Sword;
+            _swordPair.LeftEquipment = Shield;
 
-            _secondPair.RightEquipment = Quiver;
-            _secondPair.LeftEquipment = Bow;
+            _bowPair.RightEquipment = Quiver;
+            _bowPair.LeftEquipment = Bow;
         }
 
         private class EquipmentPair
