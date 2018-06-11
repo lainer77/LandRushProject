@@ -136,19 +136,23 @@ public class LongBow : MonoBehaviourEx
     private void ArrowSyncBow(float currnetPos)
     {
         AnimatorStateInfo animationState = _animator.GetCurrentAnimatorStateInfo(0);
+
         float addTime = animationState.normalizedTime - _nomalizedTime;
         _realTime += _animator.GetFloat("Speed") * addTime;
+
         float clipRealTime = _realTime % _bowPullClip.length;
         _nomalizedTime = animationState.normalizedTime;
-        Debug.Log("playbackTime" +  _animator.playbackTime);
-        Debug.Log("recorderStartTime" +  _animator.recorderStartTime);
-        Debug.Log("recorderStopTime" +  _animator.recorderStopTime);
+
         float speed = (currnetPos - clipRealTime / 10) * _acceleration;
-//        Debug.Log("speed" + speed);
-//        if (Mathf.Abs(myTime) < 1)
-//            speed = 0;
-        //        _animator.speed = (currnetPos - myTime / 10) * _acceleration;
+
+//        Debug.Log("realTime :" + _realTime);
+//        Debug.Log("speed :" + speed);
+        Debug.Log("clipRealTime :" + clipRealTime);
+        Debug.Log("currnetPos :" + currnetPos * 10);
+        if (Mathf.Abs(speed) < 0)
+            speed = 0;
         _animator.SetFloat("Speed", speed);
+
         _power = currnetPos * 1000;
     }
 }
