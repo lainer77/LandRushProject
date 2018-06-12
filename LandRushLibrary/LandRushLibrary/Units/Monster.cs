@@ -15,7 +15,7 @@ namespace LandRushLibrary.Units
         public MonsterGrade MonsterGrade { get; set; }
         public string PrefabName { get; set; }
 
-        public override void AddDamage(int damage)
+        public override void InflictDamage(int damage)
         {
             if (Alive == false)
                 return;
@@ -29,9 +29,8 @@ namespace LandRushLibrary.Units
 
             OnAttacked(new AttackedEventArgs(this));
 
-            if(CurrentHp <= 0 && Alive == true)
+            if (Alive == false) 
             {
-                Alive = false;
                 OnDead(new DeadEventArgs(this));
             }
         }
@@ -48,10 +47,9 @@ namespace LandRushLibrary.Units
             base.OnDead(e);
         }
 
-        public event Predicate<Unit> CorrectTargetUnit;
-        public void Attack(Unit attakedUnit, int weaponDamage = 0, bool guard = false)
+        public void Attack(Unit attakedUnit, int weaponDamage = 0)
         {
-            if (CorrectTargetUnit != null && CorrectTargetUnit(attakedUnit))
+            if (InspectCorrectTarget != null && InspectCorrectTarget(attakedUnit))
                 return;
 
             int damage = AttackPower;
@@ -63,16 +61,12 @@ namespace LandRushLibrary.Units
             
             int armor = attakedUnit.Armor;
 
-            if (guard && (attakedUnit is Player player))
-            {
-                armor += player.ShieldArmor;
-            }
 
             damage -= armor;
             if (damage < 0)
                 damage = 0;
 
-            attakedUnit.AddDamage(damage);
+            attakedUnit.InflictDamage(damage);
 
         }
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
@@ -105,7 +99,6 @@ namespace LandRushLibrary.Units
             clone.SlainExp = SlainExp;
             clone.PrefabName = PrefabName;
             clone.MonsterGrade = MonsterGrade;
-            clone.Alive = true;
  
             return clone;
         }

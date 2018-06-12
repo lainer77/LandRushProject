@@ -1,5 +1,6 @@
 ﻿using System;
 using LandRushLibrary.Items;
+using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Utilities;
 using Newtonsoft.Json;
 
@@ -13,11 +14,11 @@ namespace LandRushLibrary.Units
         public int MaxExp { get; set; }
 
         [JsonIgnore]
-        public int ShieldArmor { get; set; }
+        public PlayerEquipment Equipment { get; private set; }
         [JsonIgnore]
-        public EquipmentItem LeftItem { get; set; }
+        private readonly int _maxPairCount = 2;
         [JsonIgnore]
-        public EquipmentItem RightItem { get; set; }
+        public bool IsCombatMode { get; set; }
 
         #region singleton
         private static Player _instance;
@@ -29,51 +30,22 @@ namespace LandRushLibrary.Units
                 if (_instance == null)
                 {
                     _instance = PlayerSerializer.Instance.DeSerialize();
-                    _instance.Revivor();
+                    _instance.Equipment = new PlayerEquipment(_instance._maxPairCount);
+                    _instance.CurrentHp = _instance.MaxHp;
+
                 }
+
                 return _instance;
             }
         }
 
         private Player()
         {
-            //Player jsonPlayer = PlayerSerializer.Instance.DeSerialize();
-            //Name = jsonPlayer.Name;
-            //Level = jsonPlayer.Level;
-            //AttackPower = jsonPlayer.AttackPower;
-            //Armor = jsonPlayer.Armor;
-            //MaxHp = jsonPlayer.MaxHp;
-            //CurrentHp = MaxHp;
-            //Speed = jsonPlayer.Speed;
-            //Alive = true;
-
-            //Name = "Player";
-            //Level = 1;
-            //AttackPower = 10;
-            //Armor = 5;
-            //MaxHp = 50;
-            //CurrentHp = 50;
-            //MaxExp = 200;
-            //CurrentExp = 0;
-            //Alive = true;
         }
         #endregion
 
-        public void Revivor()
-        {
-            CurrentHp = MaxHp;
-            Alive = true;
-        }
 
-        public void EquipmentChange(EquipmentItem leftItem, EquipmentItem rightItem)
-        {
-            LeftItem = leftItem;
-            RightItem = rightItem;
-
-            OnPlayerEquipmentChanged(new PlayerEquipmentChangedEventArgs(rightItem, leftItem));
-        }
-
-        public override void AddDamage(int damage)
+        public override void InflictDamage(int damage)
         {
             if (Alive == false)
                 return;
@@ -82,14 +54,13 @@ namespace LandRushLibrary.Units
 
             OnAttacked(new AttackedEventArgs(this));
 
-            if (CurrentHp <= 0 && Alive == true)
+            if (Alive == false)
             {
-                Alive = false;
                 OnDead(new DeadEventArgs(this));
             }
         }
         public event Predicate<Unit> CorrectTargetUnit;
-        public void Attack(Unit attakedUnit, int weaponDamage = 0, bool guard = false)
+        public void Attack(Unit attakedUnit, int weaponDamage = 0)
         {
             if (attakedUnit.Alive == false)
                 return;
@@ -109,7 +80,7 @@ namespace LandRushLibrary.Units
             if (damage < 0)
                 damage = 0;
 
-            attakedUnit.AddDamage(damage);
+            attakedUnit.InflictDamage(damage);
 
             if (attakedUnit.CurrentHp <= 0)
                 AddExperience(((Monster)attakedUnit).SlainExp);
@@ -209,49 +180,6 @@ namespace LandRushLibrary.Units
             public LevelUpEventArgs(int newLevel)
             {
                 NewLevel = newLevel;
-            }
-        }
-        #endregion
-
-        #region PlayerEquipmentChanged event things for C# 3.0
-        public event EventHandler<PlayerEquipmentChangedEventArgs> PlayerEquipmentChanged;
-
-        protected virtual void OnPlayerEquipmentChanged(PlayerEquipmentChangedEventArgs e)
-        {
-
-            if (PlayerEquipmentChanged != null)
-                PlayerEquipmentChanged(this, e);
-        }
-
-        private PlayerEquipmentChangedEventArgs OnPlayerEquipmentChanged(EquipmentItem leftItem, EquipmentItem rightItem)
-        {
-            PlayerEquipmentChangedEventArgs args = new PlayerEquipmentChangedEventArgs(leftItem, rightItem);
-            OnPlayerEquipmentChanged(args);
-
-            return args;
-        }
-
-        private PlayerEquipmentChangedEventArgs OnPlayerEquipmentChangedForOut()
-        {
-            PlayerEquipmentChangedEventArgs args = new PlayerEquipmentChangedEventArgs();
-            OnPlayerEquipmentChanged(args);
-
-            return args;
-        }
-
-        public class PlayerEquipmentChangedEventArgs : EventArgs
-        {
-            public EquipmentItem LeftItem { get; set; }
-            public EquipmentItem RightItem { get; set; }
-
-            public PlayerEquipmentChangedEventArgs()
-            {
-            }
-
-            public PlayerEquipmentChangedEventArgs(EquipmentItem rightItem, EquipmentItem leftItem)
-            {
-                LeftItem = leftItem;
-                RightItem = rightItem;
             }
         }
         #endregion

@@ -2,7 +2,7 @@
 {
     public enum MonsterGrade
     {
-        NORMAL = 1,
-        BOSS = 2
+        Normal = 1,
+        Boss = 2
     }
 }

@@ -14,6 +14,9 @@ namespace LandRushLibrary.Items
             IngredientItem clone = new IngredientItem();
             CloneCore(clone);
 
+            clone.Amount = 1;
+
+
             return clone;
         }
 

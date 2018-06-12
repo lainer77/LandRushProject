@@ -14,10 +14,11 @@ namespace LandRushLibrary.Units
         public int CurrentHp { get; set; }
         public float Speed { get; set; }
 
-        [JsonIgnore]
-        public bool Alive { get; protected set; }
+        [JsonIgnore] public bool Alive => CurrentHp > 0;
 
-        public abstract void AddDamage(int damage);
+        public Predicate<Unit> InspectCorrectTarget;
+
+        public abstract void InflictDamage(int damage);
 
         #region Dead event things for C# 3.0
         public event EventHandler<DeadEventArgs> Dead;

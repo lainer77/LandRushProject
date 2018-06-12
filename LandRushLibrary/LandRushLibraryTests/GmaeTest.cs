@@ -7,7 +7,6 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
-using LandRushLibrary.Combat;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Factory;
 using LandRushLibrary.Units;
@@ -18,185 +17,185 @@ using LandRushLibrary.PlayerItemManagers;
 namespace LandRushLibrary.Unit.Tests
 {
     //[TestClass()]
-    public class GameTest
-    {
-        [TestMethod()]
-        public void ORC가_생생되고_이름이Orc이고_공격력이10이여야_한다()
-        {
-            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-            Assert.AreEqual("Orc", orc.Name);
-            Assert.AreEqual(10, orc.AttackPower);
-        }
+    //public class GameTest
+    //{
+    //    [TestMethod()]
+    //    public void ORC가_생생되고_이름이Orc이고_공격력이10이여야_한다()
+    //    {
+    //        Monster orc = MonsterFactory.Instance.Create(MonsterID.Orc);
+    //        Assert.AreEqual("Orc", orc.Name);
+    //        Assert.AreEqual(10, orc.AttackPower);
+    //    }
 
-        [TestMethod()]
-        public void 장비들을_생성하고_EquipmentManager에_Set한다()
-        {
-            Sword oldSword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
-            Shield oldShield = (Shield)ItemFactory.Instance.Create(ItemID.OLD_SHIELD);
-            Bow oldBow = (Bow)ItemFactory.Instance.Create(ItemID.OLD_BOW);
+    //    [TestMethod()]
+    //    public void 장비들을_생성하고_EquipmentManager에_Set한다()
+    //    {
+    //        Sword oldSword = (Sword)ItemFactory.Instance.Create(ItemID.OldSword);
+    //        Shield oldShield = (Shield)ItemFactory.Instance.Create(ItemID.OldShield);
+    //        Bow oldBow = (Bow)ItemFactory.Instance.Create(ItemID.OldBow);
 
-            Player.Instance.PlayerEquipmentChanged += EquipmentPairTest;
+    //        Player.Instance.PlayerEquipmentChanged += EquipmentPairTest;
 
-            PlayerEquipment.Instance.EquipCurrentPair();
+    //        PlayerEquipment.Instance.EquipCurrentPair();
 
-        }
+    //    }
 
-        public void EquipmentPairTest(Object sender, EventArgs e)
-        {
-            Player.PlayerEquipmentChangedEventArgs args = e as Player.PlayerEquipmentChangedEventArgs;
+    //    public void EquipmentPairTest(Object sender, EventArgs e)
+    //    {
+    //        Player.PlayerEquipmentChangedEventArgs args = e as Player.PlayerEquipmentChangedEventArgs;
 
-            Console.WriteLine(args.RightItem.Name);
-            Console.WriteLine(args.LeftItem.Name);
+    //        Console.WriteLine(args.RightItem.Name);
+    //        Console.WriteLine(args.LeftItem.Name);
 
-            Assert.AreEqual("OldSword", args.RightItem.Name);
-            Assert.AreEqual("OldShield", args.LeftItem.Name);
+    //        Assert.AreEqual("OldSword", args.RightItem.Name);
+    //        Assert.AreEqual("OldShield", args.LeftItem.Name);
 
-        }
+    //    }
 
-        public void 플레이어_공격_테스트한다()
-        {
-            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-            Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OLD_SWORD);
+    //    public void 플레이어_공격_테스트한다()
+    //    {
+    //        Monster orc = MonsterFactory.Instance.Create(MonsterID.Orc);
+    //        Sword sword = (Sword)ItemFactory.Instance.Create(ItemID.OldSword);
 
-            Player.Instance.Attack(orc, sword.AttackPower);
+    //        Player.Instance.Attack(orc, sword.AttackPower);
 
-            Console.WriteLine(orc.CurrentHp);
-            Assert.AreEqual(20, orc.CurrentHp);
-        }
+    //        Console.WriteLine(orc.CurrentHp);
+    //        Assert.AreEqual(20, orc.CurrentHp);
+    //    }
 
-        [TestMethod()]
-        public void 플레이어_레벨업_테스트()
-        {
-            List<Monster> orcs = new List<Monster>();
-            Player player = Player.Instance;
+    //    [TestMethod()]
+    //    public void 플레이어_레벨업_테스트()
+    //    {
+    //        List<Monster> orcs = new List<Monster>();
+    //        Player player = Player.Instance;
 
-            for (int i = 0; i < 4; i++)
-            {
-                orcs.Add(MonsterFactory.Instance.Create(MonsterID.ORC));
-                orcs[i].Dead += OnDead;
-            }
+    //        for (int i = 0; i < 4; i++)
+    //        {
+    //            orcs.Add(MonsterFactory.Instance.Create(MonsterID.Orc));
+    //            orcs[i].Dead += OnDead;
+    //        }
 
-            foreach (var orc in orcs)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    player.Attack(orc, ((Sword)player.RightItem).AttackPower);
-                }
-                Console.WriteLine(player.CurrentExp);
-            }
+    //        foreach (var orc in orcs)
+    //        {
+    //            for (int i = 0; i < 4; i++)
+    //            {
+    //                player.Attack(orc, ((Sword)player.RightItem).AttackPower);
+    //            }
+    //            Console.WriteLine(player.CurrentExp);
+    //        }
 
-        }
+    //    }
 
-        public void OnLevelUp(Object sender, EventArgs e)
-        {
-            Console.WriteLine(Player.Instance.CurrentExp);
-        }
+    //    public void OnLevelUp(Object sender, EventArgs e)
+    //    {
+    //        Console.WriteLine(Player.Instance.CurrentExp);
+    //    }
 
-        public void OnDead(Object sender, EventArgs e)
-        {
-            Console.WriteLine("Dead orc");
-        }
+    //    public void OnDead(Object sender, EventArgs e)
+    //    {
+    //        Console.WriteLine("Dead orc");
+    //    }
 
-        [TestMethod()]
-        public void 플레이어가_죽는지_테스트한다()
-        {
-            Player.Instance.Dead += OnPlayerDead;
-            Monster orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-            for (int i = 0; i < 11; i++)
-            {
-                orc.Attack(Player.Instance, orc.AttackPower, false);
-                Console.WriteLine(Player.Instance.CurrentHp);
-            }
-            Assert.AreEqual(0, Player.Instance.CurrentHp);
-        }
+    //    [TestMethod()]
+    //    public void 플레이어가_죽는지_테스트한다()
+    //    {
+    //        Player.Instance.Dead += OnPlayerDead;
+    //        Monster orc = MonsterFactory.Instance.Create(MonsterID.Orc);
+    //        for (int i = 0; i < 11; i++)
+    //        {
+    //            orc.Attack(Player.Instance, orc.AttackPower, false);
+    //            Console.WriteLine(Player.Instance.CurrentHp);
+    //        }
+    //        Assert.AreEqual(0, Player.Instance.CurrentHp);
+    //    }
 
-        public void OnPlayerDead(Object sender, EventArgs e)
-        {
-            Console.WriteLine("쥬금");
-        }
+    //    public void OnPlayerDead(Object sender, EventArgs e)
+    //    {
+    //        Console.WriteLine("쥬금");
+    //    }
 
-        [TestMethod()]
-        public void 재료_아이템_정보_테스트()
-        {
-            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
+    //    [TestMethod()]
+    //    public void 재료_아이템_정보_테스트()
+    //    {
+    //        IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone);
 
-            Assert.AreEqual("Stone", stone.Name);
-            Assert.AreEqual(ItemID.STONE, stone.ItemId);
-            Assert.AreEqual(ItemType.Ingredient, stone.Type);
+    //        Assert.AreEqual("Stone", stone.Name);
+    //        Assert.AreEqual(ItemID.Stone, stone.ItemId);
+    //        Assert.AreEqual(ItemType.Ingredient, stone.Type);
 
-            IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.WOOD);
+    //        IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.Wood);
 
-            Assert.AreEqual("Wood", wood.Name);
-            Assert.AreEqual(ItemID.WOOD, wood.ItemId);
-            Assert.AreEqual(ItemType.Ingredient, wood.Type);
+    //        Assert.AreEqual("Wood", wood.Name);
+    //        Assert.AreEqual(ItemID.Wood, wood.ItemId);
+    //        Assert.AreEqual(ItemType.Ingredient, wood.Type);
 
-            IngredientItem iron = ItemFactory.Instance.Create<IngredientItem>(ItemID.IRON);
+    //        IngredientItem iron = ItemFactory.Instance.Create<IngredientItem>(ItemID.Iron);
 
-            Assert.AreEqual("Iron", iron.Name);
-            Assert.AreEqual(ItemID.IRON, iron.ItemId);
-            Assert.AreEqual(ItemType.Ingredient, iron.Type);
-        }
+    //        Assert.AreEqual("Iron", iron.Name);
+    //        Assert.AreEqual(ItemID.Iron, iron.ItemId);
+    //        Assert.AreEqual(ItemType.Ingredient, iron.Type);
+    //    }
 
-        [TestMethod()]
-        public void 인벤토리_이이템_추가_테스트()
-        {
-            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
-            Inventory.Instance.AddInvenItem(stone.ItemId);
-            Inventory.Instance.AddInvenItem(stone.ItemId);
-            Inventory.Instance.AddInvenItem(stone.ItemId);
+    //    [TestMethod()]
+    //    public void 인벤토리_이이템_추가_테스트()
+    //    {
+    //        IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone);
+    //        Inventory.Instance.AddInvenItem(stone.ItemId);
+    //        Inventory.Instance.AddInvenItem(stone.ItemId);
+    //        Inventory.Instance.AddInvenItem(stone.ItemId);
 
-            Assert.AreEqual(1, Inventory.Instance.Items.Count);
+    //        Assert.AreEqual(1, Inventory.Instance.Items.Count);
 
-            for (int i = 0; i < 10; i++)
-            {
-                Inventory.Instance.AddInvenItem(stone.ItemId);
-            }
+    //        for (int i = 0; i < 10; i++)
+    //        {
+    //            Inventory.Instance.AddInvenItem(stone.ItemId);
+    //        }
 
-            Assert.AreEqual(2, Inventory.Instance.Items.Count);
+    //        Assert.AreEqual(2, Inventory.Instance.Items.Count);
 
-            Console.WriteLine(Inventory.Instance.Items[0].Amount);
-            Console.WriteLine(Inventory.Instance.Items[1].Amount);
+    //        Console.WriteLine(Inventory.Instance.Items[0].Amount);
+    //        Console.WriteLine(Inventory.Instance.Items[1].Amount);
 
-            Inventory.Instance.RemoveItem(ItemID.STONE, 13);
+    //        Inventory.Instance.RemoveItem(ItemID.Stone, 13);
 
-            Assert.AreEqual(0, Inventory.Instance.Items.Count);
+    //        Assert.AreEqual(0, Inventory.Instance.Items.Count);
 
-            Inventory.Instance.InventoryIsFull += Full;
+    //        Inventory.Instance.InventoryIsFull += Full;
 
-            for (int i = 0; i < 121; i++)
-            {
-                Inventory.Instance.AddInvenItem(stone.ItemId);
-            }
+    //        for (int i = 0; i < 121; i++)
+    //        {
+    //            Inventory.Instance.AddInvenItem(stone.ItemId);
+    //        }
 
 
-        }
+    //    }
 
-        public void Full(Object sender, EventArgs e)
-        {
-            Console.WriteLine("꽉참");
-        }
+    //    public void Full(Object sender, EventArgs e)
+    //    {
+    //        Console.WriteLine("꽉참");
+    //    }
 
-        [TestMethod()]
-        public void 인벤토리_아이템_변경_테스트()
-        {
-            Inventory.Instance.ClearInventory();
+    //    [TestMethod()]
+    //    public void 인벤토리_아이템_변경_테스트()
+    //    {
+    //        Inventory.Instance.ClearInventory();
 
-            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.STONE);
-            IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.WOOD);
+    //        IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone);
+    //        IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.Wood);
 
-            Inventory.Instance.AddInvenItem(stone.ItemId); 
-            Inventory.Instance.AddInvenItem(wood.ItemId);
+    //        Inventory.Instance.AddInvenItem(stone.ItemId); 
+    //        Inventory.Instance.AddInvenItem(wood.ItemId);
 
-            Assert.AreEqual("Stone", Inventory.Instance.Items[0].Item.Name);
+    //        Assert.AreEqual("Stone", Inventory.Instance.Items[0].Item.Name);
 
-            Inventory.Instance.ExchangeSlotItem(0, 1);
+    //        Inventory.Instance.ExchangeSlotItem(0, 1);
 
-            Assert.AreEqual("Wood",Inventory.Instance.Items[0].Item.Name);
-        }
+    //        Assert.AreEqual("Wood",Inventory.Instance.Items[0].Item.Name);
+    //    }
 
  
 
 
 
-    }
+    //}
 }

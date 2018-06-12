@@ -31,85 +31,94 @@ namespace Game
 
         static void Main(string[] args)
         {
-            Inventory inven = Inventory.Instance;
-            Upgrader upgrader = Upgrader.Instance;
+            Arrow arrow = ItemFactory.Instance.Create<Arrow>(ItemID.Arrow);
+            Console.WriteLine(arrow.Amount);
 
-            upgrader.UpgradeTried += OnUpTried;
+            Potion potion = ItemFactory.Instance.Create<Potion>(ItemID.Potion);
+            Console.WriteLine(potion.RecorveyPoint);
 
-            for (int i = 0; i < _upTry; i++)
-            {
-                Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.STEEL_SWORD);
+            IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone);
+            Console.WriteLine(stone.Name);
 
-                UpgradeCost cost = upgrader.GetUpgradeCost(sword);
+            //Inventory inven = Inventory.Instance;
+            //Upgrader upgrader = Upgrader.Instance;
 
-                foreach (var item in cost.RequireIngredients)
-                {
-                    for (int j = 0; j < item.Value; j++)
-                    {
-                        IngredientItem ingredient = ItemFactory.Instance.Create<IngredientItem>(item.Key);
+            //upgrader.UpgradeTried += OnUpTried;
 
-                        inven.AddInvenItem(ingredient.ItemId);
-                    }
-                }
+            //for (int i = 0; i < _upTry; i++)
+            //{
+            //    Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.SteelSword);
 
-                upgrader.Upgrade<Sword>(ref sword);
-            }
+            //    UpgradeCost cost = upgrader.GetUpgradeCost(sword);
 
-            Console.WriteLine($"{(double) _upSuceess / _upTry * 100:N2}%");
+            //    foreach (var item in cost.RequireIngredients)
+            //    {
+            //        for (int j = 0; j < item.Value; j++)
+            //        {
+            //            IngredientItem ingredient = ItemFactory.Instance.Create<IngredientItem>(item.Key);
+
+            //            inven.AddInvenItem(ingredient.ItemId);
+            //        }
+            //    }
+
+            //    upgrader.Upgrade<Sword>(ref sword);
+            //}
+
+            //Console.WriteLine($"{(double) _upSuceess / _upTry * 100:N2}%");
         }
 
-        static void foo()
-        {
-            Player player = Player.Instance;
-            PlayerEquipment equipmentManager = PlayerEquipment.Instance;
+//        static void foo()
+//        {
+//            Player player = Player.Instance;
+//            PlayerEquipment equipmentManager = PlayerEquipment.Instance;
 
-//            equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OLD_SWORD));
-//            equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OLD_BOW));
-//            equipmentManager.SetEquipmentToSlot(3, ItemFactory.Instance.Create<Shield>(ItemID.OLD_SHIELD));
-//            equipmentManager.SetEquipmentToSlot(4, ItemFactory.Instance.Create<Quiver>(ItemID.OLD_QUIVER));
+////            equipmentManager.SetEquipmentToSlot(1, ItemFactory.Instance.Create<Sword>(ItemID.OldSword));
+////            equipmentManager.SetEquipmentToSlot(2, ItemFactory.Instance.Create<Bow>(ItemID.OldBow));
+////            equipmentManager.SetEquipmentToSlot(3, ItemFactory.Instance.Create<Shield>(ItemID.OldShield));
+////            equipmentManager.SetEquipmentToSlot(4, ItemFactory.Instance.Create<Quiver>(ItemID.OLD_QUIVER));
 
-            equipmentManager.EquipCurrentPair();
+//            equipmentManager.EquipCurrentPair();
 
-            Monster orc;
-            Monster orcLord;
+//            Monster orc;
+//            Monster orcLord;
 
-            for (int i = 0; i < _dropTry; i++)
-            {
-                orc = MonsterFactory.Instance.Create(MonsterID.ORC);
-                orc.ItemDropped += OnItemDropped;
+//            for (int i = 0; i < _dropTry; i++)
+//            {
+//                orc = MonsterFactory.Instance.Create(MonsterID.Orc);
+//                orc.ItemDropped += OnItemDropped;
 
-                player.Attack(orc, ((Sword) player.RightItem).AttackPower);
-                player.Attack(orc, ((Sword) player.RightItem).AttackPower);
+//                player.Attack(orc, ((Sword) player.RightItem).AttackPower);
+//                player.Attack(orc, ((Sword) player.RightItem).AttackPower);
 
-                //orcLord = MonsterFactory.Instance.Create(MonsterID.ORC_LORD);
-                //orcLord.ItemDropped += OnItemDropped;
+//                //orcLord = MonsterFactory.Instance.Create(MonsterID.OrcLord);
+//                //orcLord.ItemDropped += OnItemDropped;
 
-                //for (int j = 0; j < 12; j++)
-                //{
-                //    player.Attack(orcLord, ((Sword)player.RightItem).AttackPower);
-                //}
+//                //for (int j = 0; j < 12; j++)
+//                //{
+//                //    player.Attack(orcLord, ((Sword)player.RightItem).AttackPower);
+//                //}
                 
 
-            }
+//            }
 
-            Console.WriteLine("==================================================================");
+//            Console.WriteLine("==================================================================");
 
-            foreach (var item in _probability)
-            {
-                Console.WriteLine($"{(double) item / _dropTry * 100:N2}%");
-            }
-        }
+//            foreach (var item in _probability)
+//            {
+//                Console.WriteLine($"{(double) item / _dropTry * 100:N2}%");
+//            }
+//        }
 
-        static void OnItemDropped(object sender, ItemDroppedEventArgs e)
-        {
-            Inventory inventoryManager = Inventory.Instance;
+//        static void OnItemDropped(object sender, ItemDroppedEventArgs e)
+//        {
+//            Inventory inventoryManager = Inventory.Instance;
 
-            List<DroppedItems> dropItemses = e.DropItems;
+//            List<DroppedItems> dropItemses = e.DropItems;
 
-            foreach (DroppedItems dropItem in dropItemses)
-            {
-                inventoryManager.AddInvenItem(dropItem.ItemId, dropItem.Amount);
-            }
-        }
+//            foreach (DroppedItems dropItem in dropItemses)
+//            {
+//                inventoryManager.AddInvenItem(dropItem.ItemId, dropItem.Amount);
+//            }
+//        }
     }
 }

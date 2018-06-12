@@ -31,47 +31,47 @@ namespace LandRushLibrary.Drop
 
             List<DropRateInfo> normalDropList = new List<DropRateInfo>();
 
-            dropRateInfo = new DropRateInfo(ItemID.ARROW, rate: 0.2f, amount: 2);
+            dropRateInfo = new DropRateInfo(ItemID.Arrow, rate: 0.2f, amount: 2);
             normalDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.3f, amount: 3);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.3f, amount: 3);
             normalDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.2f, amount: 4);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.2f, amount: 4);
             normalDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.1f, amount: 5);
-            normalDropList.Add(item: dropRateInfo);
-
-            dropRateInfo = new DropRateInfo(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.1f, amount: 5);
             normalDropList.Add(item: dropRateInfo);
 
-            dropRateInfo = new DropRateInfo(itemId: ItemID.WOOD, rate: 0.5f, amount: 1);
-            normalDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.WOOD, rate: 0.3f, amount: 2);
-            normalDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.WOOD, rate: 0.2f, amount: 3);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Potion, rate: 0.6f, amount: 1);
             normalDropList.Add(item: dropRateInfo);
 
-            _dropRates.Add(key: MonsterGrade.NORMAL, value: normalDropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Wood, rate: 0.5f, amount: 1);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Wood, rate: 0.3f, amount: 2);
+            normalDropList.Add(item: dropRateInfo);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Wood, rate: 0.2f, amount: 3);
+            normalDropList.Add(item: dropRateInfo);
+
+            _dropRates.Add(key: MonsterGrade.Normal, value: normalDropList);
 
             ////////////////////////////////////////////////
 
             List<DropRateInfo> bossDropList = new List<DropRateInfo>();
 
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.1f, amount: 2);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.1f, amount: 2);
             bossDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.2f, amount: 3);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.2f, amount: 3);
             bossDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.3f, amount: 4);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.3f, amount: 4);
             bossDropList.Add(item: dropRateInfo);
-            dropRateInfo = new DropRateInfo(itemId: ItemID.ARROW, rate: 0.2f, amount: 5);
-            bossDropList.Add(item: dropRateInfo);
-
-            dropRateInfo = new DropRateInfo(itemId: ItemID.POTION, rate: 0.6f, amount: 1);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.2f, amount: 5);
             bossDropList.Add(item: dropRateInfo);
 
-            dropRateInfo = new DropRateInfo(itemId: ItemID.IRON, rate: 1.0f, amount: 1);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Potion, rate: 0.6f, amount: 1);
             bossDropList.Add(item: dropRateInfo);
 
-            _dropRates.Add(key: MonsterGrade.BOSS, value: bossDropList);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.Iron, rate: 1.0f, amount: 1);
+            bossDropList.Add(item: dropRateInfo);
+
+            _dropRates.Add(key: MonsterGrade.Boss, value: bossDropList);
 
             _random = new Random(Seed: (int)DateTime.Now.Ticks);
         }

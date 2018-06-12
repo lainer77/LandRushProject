@@ -32,7 +32,6 @@ namespace LandRushLibrary.Utilities
             var json = File.ReadAllText(PlayerFilePath);
             return JsonConvert.DeserializeObject<Player>(json);
 
-
         }
 
 

@@ -2,18 +2,17 @@
 {
     public enum ItemID
     {
-        OLD_SWORD = 1,
-        OLD_SHIELD = 2,
-        OLD_BOW = 3,
-        POTION = 4,
-        ARROW = 5,
-        STONE = 6,
-        WOOD = 7,
-        IRON = 8,
-        OLD_QUIVER = 9,
-        SHORT_SWORD = 10,
-        KNIGHT_SWORD = 11,
-        STEEL_SWORD = 12
+        OldSword = 1,
+        OldShield = 2,
+        OldBow = 3,
+        Potion = 4,
+        Arrow = 5,
+        Stone = 6,
+        Wood = 7,
+        Iron = 8,
+        ShortSword= 10,
+        KnightSword = 11,
+        SteelSword = 12
     }
 
     public enum ItemType

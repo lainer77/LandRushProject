@@ -204,9 +204,9 @@ namespace LandRushLibrary.PlayerItemManagers
             {
             }
 
-            public InventoryItemChangedEventArgs(List<GameItem> GameItems)
+            public InventoryItemChangedEventArgs(List<GameItem> gameItems)
             {
-                GameItems = GameItems;
+                GameItems = gameItems;
             }
         }
 

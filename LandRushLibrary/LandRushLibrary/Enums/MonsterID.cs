@@ -2,8 +2,8 @@
 {
     public enum MonsterID
     {
-        ORC = 2,
-        ORC_LORD = 3,
+        Orc = 2,
+        OrcLord = 3,
         Slime = 4
     }
 }

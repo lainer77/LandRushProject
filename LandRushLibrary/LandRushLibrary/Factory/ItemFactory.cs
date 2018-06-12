@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using LandRushLibrary.Items;
 using LandRushLibrary.Repository;
 using LandRushLibrary.Utilities;
@@ -50,7 +48,6 @@ namespace LandRushLibrary.Factory
             var items = (from x in _items
                         select x.Value as T).ToList();
 
-            //var item = items.FirstOrDefault(predicate).ItemId;
 
             return items;
 

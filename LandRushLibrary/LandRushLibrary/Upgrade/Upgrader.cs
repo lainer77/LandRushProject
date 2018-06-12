@@ -31,30 +31,30 @@ namespace LandRushLibrary.Upgrade
 
             UpgradeCost cost = new UpgradeCost();
             cost.SetProbability(0.8f);
-            cost.AddIngredient(ItemID.STONE, 2);
-            cost.AddIngredient(ItemID.WOOD, 2);
-            cost.AddIngredient(ItemID.IRON, 0);
+            cost.AddIngredient(ItemID.Stone, 2);
+            cost.AddIngredient(ItemID.Wood, 2);
+            cost.AddIngredient(ItemID.Iron, 0);
             _upgradeCosts.Add(cost);
 
             cost = new UpgradeCost();
             cost.SetProbability(0.5f);
-            cost.AddIngredient(ItemID.STONE, 5);
-            cost.AddIngredient(ItemID.WOOD, 5);
-            cost.AddIngredient(ItemID.IRON, 0);
+            cost.AddIngredient(ItemID.Stone, 5);
+            cost.AddIngredient(ItemID.Wood, 5);
+            cost.AddIngredient(ItemID.Iron, 0);
             _upgradeCosts.Add(cost);
 
             cost = new UpgradeCost();
             cost.SetProbability(0.3f);
-            cost.AddIngredient(ItemID.STONE, 10);
-            cost.AddIngredient(ItemID.WOOD, 10);
-            cost.AddIngredient(ItemID.IRON, 10);
+            cost.AddIngredient(ItemID.Stone, 10);
+            cost.AddIngredient(ItemID.Wood, 10);
+            cost.AddIngredient(ItemID.Iron, 10);
             _upgradeCosts.Add(cost);
 
             cost = new UpgradeCost();
             cost.SetProbability(0.0f);
-            cost.AddIngredient(ItemID.STONE, 0);
-            cost.AddIngredient(ItemID.WOOD, 0);
-            cost.AddIngredient(ItemID.IRON, 0);
+            cost.AddIngredient(ItemID.Stone, 0);
+            cost.AddIngredient(ItemID.Wood, 0);
+            cost.AddIngredient(ItemID.Iron, 0);
             _upgradeCosts.Add(cost);
 
             _maxGrade = 4;

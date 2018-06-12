@@ -5,7 +5,7 @@ namespace LandRushLibrary
 {
     public interface IAttackable
     {
-        void Attack(Unit attakedUnit, int weaponDamage = 0, bool guard = false);
+        void Attack(Unit attakedUnit, int weaponDamage = 0);
         event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
     }
 

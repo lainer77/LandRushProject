@@ -1,99 +1,55 @@
-﻿using LandRushLibrary.Items;
-using LandRushLibrary.Units;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using LandRushLibrary.Items;
 
 namespace LandRushLibrary.PlayerItemManagers
 {
     public class PlayerEquipment
     {
-        private static PlayerEquipment _instance;
-        public static PlayerEquipment Instance
+        public PlayerEquipment(int maxPairCount)
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new PlayerEquipment();
-
-                return _instance;
-            }
-        }
-
-        private PlayerEquipment()
-        {
-            _swordPair = new EquipmentPair();
-            _bowPair = new EquipmentPair();
-            _currentPair = _swordPair;
+            _maxPairCount = maxPairCount;
+            _equipmentPairs = new EquipmentPair[_maxPairCount];
 
         }
 
-        #region Fields
-        private Sword Sword { get; set; }
-        private Bow Bow { get; set; }
-        private Shield Shield { get; set; }
-        private Quiver Quiver { get; set; }
+        private readonly int _maxPairCount;
+        public int CurrentPair { get; private set; }
+        private EquipmentPair[] _equipmentPairs;
 
-        private EquipmentPair _swordPair;
-        private EquipmentPair _bowPair;
-        private EquipmentPair _currentPair;
-        #endregion
+        public EquipmentItem LeftEquipment { get; private set; }
+        public EquipmentItem RightEquipment { get; private set; }
 
-
-        public void ChangeCurrentPair()
+        public void EquipItem(EquipmentSlot equipmentSlot, EquipmentItem equipment)
         {
-            if( _currentPair == _swordPair )
-                _currentPair = _bowPair;
+            if (equipmentSlot == EquipmentSlot.Left)
+                _equipmentPairs[CurrentPair - 1].LeftEquipment = equipment;
+            else if (equipmentSlot == EquipmentSlot.Right)
+                _equipmentPairs[CurrentPair - 1].RightEquipment = equipment;
+
+            OnEquipmentChanged(this);
+        }
+
+        public void ChangeNextPair()
+        {
+            if (CurrentPair >= _maxPairCount)
+                CurrentPair = 1;
             else
-                _currentPair = _swordPair;
+                CurrentPair++;
 
-            Player.Instance.EquipmentChange(_currentPair.LeftEquipment, _currentPair.RightEquipment);
+            RightEquipment = _equipmentPairs[CurrentPair - 1].RightEquipment;
+            LeftEquipment = _equipmentPairs[CurrentPair - 1].LeftEquipment;
 
-            OnCurrentPairChanged(new CurrentPairChangedEventArgs());
-        }
+            OnCurrentPairChanged(this);
 
-
-        private void SetEquipmentPair()
-        {
-            _swordPair.RightEquipment = Sword;
-            _swordPair.LeftEquipment = Shield;
-
-            _bowPair.RightEquipment = Quiver;
-            _bowPair.LeftEquipment = Bow;
         }
 
         private class EquipmentPair
         {
-            public EquipmentItem LeftEquipment { get; set; } 
-            public EquipmentItem RightEquipment { get; set; } 
+            public EquipmentItem LeftEquipment { get; set; }
+            public EquipmentItem RightEquipment { get; set; }
+
         }
 
-        //public void SetEquipmentToSlot(int slotNum, EquipmentItem equipment)
-        //{
-        //    Equipments[slotNum - 1] = equipment;
-
-        //    SetEquipmentPair();
-
-        //    OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
-        //}
-
-        /// <summary>
-        ///  TODO: 장착된 상태가 아닌 대기 슬롯에 있는 아이템을 바꾼다는 뜻인가?
-        /// </summary>
-        //public void ExchangeEquipmentPairInSlot()
-        //{
-        //    EquipmentItem temp = Equipments[0];
-        //    Equipments[0] = Equipments[1];
-        //    Equipments[1] = temp;
-
-        //    temp = Equipments[2];
-        //    Equipments[2] = Equipments[3];
-        //    Equipments[3] = temp;
-
-        //    SetEquipmentPair();
-
-        //    OnSlotItemChanged(new SlotItemChangedEventArgs(Equipments));
-
-        //}
 
         #region CurrentPairChanged event things for C# 3.0
         public event EventHandler<CurrentPairChangedEventArgs> CurrentPairChanged;
@@ -104,9 +60,9 @@ namespace LandRushLibrary.PlayerItemManagers
                 CurrentPairChanged(this, e);
         }
 
-        private CurrentPairChangedEventArgs OnCurrentPairChanged()
+        private CurrentPairChangedEventArgs OnCurrentPairChanged(PlayerEquipment playerEquipment)
         {
-            CurrentPairChangedEventArgs args = new CurrentPairChangedEventArgs();
+            CurrentPairChangedEventArgs args = new CurrentPairChangedEventArgs(playerEquipment);
             OnCurrentPairChanged(args);
 
             return args;
@@ -122,15 +78,65 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public class CurrentPairChangedEventArgs : EventArgs
         {
-
+            public PlayerEquipment PlayerEquipment { get; set; }
 
             public CurrentPairChangedEventArgs()
             {
             }
 
+            public CurrentPairChangedEventArgs(PlayerEquipment playerEquipment)
+            {
+                PlayerEquipment = playerEquipment;
+            }
         }
         #endregion
+
+        #region EquipmentChanged event things for C# 3.0
+        public event EventHandler<EquipmentChangedEventArgs> EquipmentChanged;
+
+        protected virtual void OnEquipmentChanged(EquipmentChangedEventArgs e)
+        {
+            if (EquipmentChanged != null)
+                EquipmentChanged(this, e);
+        }
+
+        private EquipmentChangedEventArgs OnEquipmentChanged(PlayerEquipment playerEquipment)
+        {
+            EquipmentChangedEventArgs args = new EquipmentChangedEventArgs(playerEquipment);
+            OnEquipmentChanged(args);
+
+            return args;
+        }
+
+        private EquipmentChangedEventArgs OnEquipmentChangedForOut()
+        {
+            EquipmentChangedEventArgs args = new EquipmentChangedEventArgs();
+            OnEquipmentChanged(args);
+
+            return args;
+        }
+
+        public class EquipmentChangedEventArgs : EventArgs
+        {
+            public PlayerEquipment PlayerEquipment { get; set; }
+
+            public EquipmentChangedEventArgs()
+            {
+            }
+
+            public EquipmentChangedEventArgs(PlayerEquipment playerEquipment)
+            {
+                PlayerEquipment = playerEquipment;
+            }
+        }
+        #endregion
+
     }
 
+    public enum EquipmentSlot
+    {
+        Left,
+        Right
+    }
 
 }

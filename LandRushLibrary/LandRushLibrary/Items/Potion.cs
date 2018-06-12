@@ -10,6 +10,7 @@ namespace LandRushLibrary.Items
     public class Potion : UseableItem, ICountable
     {
         public float RecorveyPoint { get; set; }
+        [JsonIgnore]
         public int Amount { get; set; }
         public int MaxAmount { get; set; }
 
@@ -19,6 +20,7 @@ namespace LandRushLibrary.Items
             CloneCore(clone);
 
             clone.RecorveyPoint = RecorveyPoint;
+            clone.Amount = 1;
 
             return clone;
         }
