@@ -48,22 +48,25 @@ namespace LandRushLibrary.PlayerItemManagers
                 {
                     if (item is ICountable countable)
                     {
-                        countable.Amount += ((ICountable)gameItem).Amount;
 
-                        if (countable.MaxAmount < countable.Amount)
+                        if (countable.MaxAmount + ((ICountable)gameItem).Amount  < countable.Amount)
                         {
-                            int remainAmount = countable.Amount - countable.MaxAmount;
+                            int remainAmoun = ((ICountable) gameItem).Amount + countable.Amount - countable.MaxAmount;
+
                             countable.Amount = countable.MaxAmount;
-                            ((ICountable)gameItem).Amount = remainAmount;
+
+                            ((ICountable) gameItem).Amount = remainAmoun;
+                            continue;
                         }
                         else
                         {
+                            countable.Amount += ((ICountable)gameItem).Amount;
                             OnInventoryItemChanged(Items);
-                            return true;
+                            break;
                         }
+
                     }
 
-                    break;
                 }
             }
 
