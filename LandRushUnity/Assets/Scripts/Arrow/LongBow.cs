@@ -11,34 +11,18 @@ public class LongBow : MonoBehaviourEx
     public ArrowShoundPackige ArrowShoundPackige;
     public GameObject CurrentArrow { get; set; }
     public GameObject DelegatePosition;
-    private bool _nocked = false;
+    public GameObject Git;
+    private GameObject _boll;
 
-    public bool Nocked
-    {
-        get { return _nocked; }
-        set
-        {
-            _nocked = value;
-            _animator.SetBool("Pull", value);
-        }
-    }
+    public bool Nocked { get; set; }
 
     private float _power;
     private float _nockStartPos = 0.2f;
-    private float _shoundPos = 0.25f;
     private float _nockMaxPos = 0.7f;
-    private float _acceleration = 10;
-    private float _nomalizedTime = 0;
-    private float _realTime = 0;
-    private Animator _animator;
-
-    private AnimationClip _bowPullClip;
 
 
     protected override void Start()
     {
-        _animator = GetCachedComponent<Animator>();
-        _bowPullClip = _animator.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == "BowPull");
         _rightDeviceInteraction = DeviceRepository.RightDeviceInteraction;
     }
 
@@ -75,6 +59,7 @@ public class LongBow : MonoBehaviourEx
     {
         ArrowShoundPackige.NockShoundPlay();
         Nocked = true;
+        _boll = 
     }
 
     private void EndNockArrow()
@@ -109,12 +94,9 @@ public class LongBow : MonoBehaviourEx
 
         float arrowCurrentPos = DelegatePosition.transform.localPosition.z;
 
-        if (arrowCurrentPos.Equals(_shoundPos))
-        {
-            Debug.Log("PullShoundPlay");
 
-            ArrowShoundPackige.PullShoundPlay();
-        }
+        ArrowShoundPackige.PullShoundPlay();
+
 
         if (arrowCurrentPos > _nockMaxPos)
         {
@@ -135,24 +117,6 @@ public class LongBow : MonoBehaviourEx
 
     private void ArrowSyncBow(float currnetPos)
     {
-        AnimatorStateInfo animationState = _animator.GetCurrentAnimatorStateInfo(0);
-
-        float addTime = animationState.normalizedTime - _nomalizedTime;
-        _realTime += _animator.GetFloat("Speed") * addTime;
-
-        float clipRealTime = _realTime % _bowPullClip.length;
-        _nomalizedTime = animationState.normalizedTime;
-
-        float speed = (currnetPos - clipRealTime / 10) * _acceleration;
-
-//        Debug.Log("realTime :" + _realTime);
-//        Debug.Log("speed :" + speed);
-        Debug.Log("clipRealTime :" + clipRealTime);
-        Debug.Log("currnetPos :" + currnetPos * 10);
-        if (Mathf.Abs(speed) < 0)
-            speed = 0;
-        _animator.SetFloat("Speed", speed);
-
         _power = currnetPos * 1000;
     }
 }
