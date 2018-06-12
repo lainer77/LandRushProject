@@ -73,6 +73,7 @@ namespace LandRushLibrary.Upgrade
 
         public UpgradeCost GetPlayerStock(IUpgradable upgradable)
         {
+
             UpgradeCost cost = _upgradeCosts[upgradable.Grade - 1];
 
             UpgradeCost stock = new UpgradeCost();

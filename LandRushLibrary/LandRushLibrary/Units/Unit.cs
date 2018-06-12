@@ -18,7 +18,7 @@ namespace LandRushLibrary.Units
 
         public Predicate<Unit> InspectCorrectTarget;
 
-        public abstract void InflictDamage(int damage);
+        public abstract void GotDamage(int damage);
 
         #region Dead event things for C# 3.0
         public event EventHandler<DeadEventArgs> Dead;

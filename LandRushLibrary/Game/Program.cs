@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using LandRushLibrary.Factory;
 using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Items;
@@ -34,11 +35,21 @@ namespace Game
             Arrow arrow = ItemFactory.Instance.Create<Arrow>(ItemID.Arrow);
             Console.WriteLine(arrow.Amount);
 
-            Potion potion = ItemFactory.Instance.Create<Potion>(ItemID.Potion);
+            Potion potion = ItemFactory.Instance.Create<Potion>(ItemID.HpPotion);
             Console.WriteLine(potion.RecorveyPoint);
 
             IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone);
             Console.WriteLine(stone.Name);
+
+            EquipmentItem[,] equipment = new EquipmentItem[4, 3];
+            Console.WriteLine(equipment.Length);
+
+            int i = 0;
+            foreach (var equipmentItem in equipment)
+            {
+                i++;
+                Console.WriteLine(i);
+            }
 
             //Inventory inven = Inventory.Instance;
             //Upgrader upgrader = Upgrader.Instance;

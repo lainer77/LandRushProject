@@ -188,7 +188,7 @@ namespace LandRushLibrary.Unit.Tests
 
     //        Assert.AreEqual("Stone", Inventory.Instance.Items[0].Item.Name);
 
-    //        Inventory.Instance.ExchangeSlotItem(0, 1);
+    //        Inventory.Instance.SwapItem(0, 1);
 
     //        Assert.AreEqual("Wood",Inventory.Instance.Items[0].Item.Name);
     //    }

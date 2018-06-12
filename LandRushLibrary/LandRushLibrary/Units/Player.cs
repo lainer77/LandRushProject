@@ -45,7 +45,7 @@ namespace LandRushLibrary.Units
         #endregion
 
 
-        public override void InflictDamage(int damage)
+        public override void GotDamage(int damage)
         {
             if (Alive == false)
                 return;
@@ -80,7 +80,7 @@ namespace LandRushLibrary.Units
             if (damage < 0)
                 damage = 0;
 
-            attakedUnit.InflictDamage(damage);
+            attakedUnit.GotDamage(damage);
 
             if (attakedUnit.CurrentHp <= 0)
                 AddExperience(((Monster)attakedUnit).SlainExp);

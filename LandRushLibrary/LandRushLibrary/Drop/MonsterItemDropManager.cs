@@ -40,7 +40,7 @@ namespace LandRushLibrary.Drop
             dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.1f, amount: 5);
             normalDropList.Add(item: dropRateInfo);
 
-            dropRateInfo = new DropRateInfo(itemId: ItemID.Potion, rate: 0.6f, amount: 1);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.HpPotion, rate: 0.6f, amount: 1);
             normalDropList.Add(item: dropRateInfo);
 
             dropRateInfo = new DropRateInfo(itemId: ItemID.Wood, rate: 0.5f, amount: 1);
@@ -65,7 +65,7 @@ namespace LandRushLibrary.Drop
             dropRateInfo = new DropRateInfo(itemId: ItemID.Arrow, rate: 0.2f, amount: 5);
             bossDropList.Add(item: dropRateInfo);
 
-            dropRateInfo = new DropRateInfo(itemId: ItemID.Potion, rate: 0.6f, amount: 1);
+            dropRateInfo = new DropRateInfo(itemId: ItemID.HpPotion, rate: 0.6f, amount: 1);
             bossDropList.Add(item: dropRateInfo);
 
             dropRateInfo = new DropRateInfo(itemId: ItemID.Iron, rate: 1.0f, amount: 1);

@@ -15,7 +15,7 @@ namespace LandRushLibrary.Units
         public MonsterGrade MonsterGrade { get; set; }
         public string PrefabName { get; set; }
 
-        public override void InflictDamage(int damage)
+        public override void GotDamage(int damage)
         {
             if (Alive == false)
                 return;
@@ -66,7 +66,7 @@ namespace LandRushLibrary.Units
             if (damage < 0)
                 damage = 0;
 
-            attakedUnit.InflictDamage(damage);
+            attakedUnit.GotDamage(damage);
 
         }
         public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;

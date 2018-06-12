@@ -5,7 +5,7 @@
         OldSword = 1,
         OldShield = 2,
         OldBow = 3,
-        Potion = 4,
+        HpPotion = 4,
         Arrow = 5,
         Stone = 6,
         Wood = 7,
