@@ -95,6 +95,7 @@
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineVertexData.cs" />
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricMultiLineBehavior.cs" />
+    <Compile Include="Assets\HeadTargetted.cs" />
     <Compile Include="Assets\Scripts\Arrow\ArrowScript.cs" />
     <Compile Include="Assets\Scripts\Arrow\ArrowShoundPackige.cs" />
     <Compile Include="Assets\Scripts\Arrow\LongBow.cs" />

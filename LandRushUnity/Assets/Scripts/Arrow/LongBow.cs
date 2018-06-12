@@ -11,12 +11,14 @@ public class LongBow : MonoBehaviourEx
     public ArrowShoundPackige ArrowShoundPackige;
     public GameObject CurrentArrow { get; set; }
     public GameObject DelegatePosition;
-    public GameObject Git;
-    private GameObject _boll;
+    public GameObject Boll;
+    private GameObject _git;
 
     public bool Nocked { get; set; }
 
-    private float _power;
+    public GameObject StartPosition;
+
+    private Vector3 _power;
     private float _nockStartPos = 0.2f;
     private float _nockMaxPos = 0.7f;
 
@@ -59,7 +61,7 @@ public class LongBow : MonoBehaviourEx
     {
         ArrowShoundPackige.NockShoundPlay();
         Nocked = true;
-        _boll = 
+        _git = CurrentArrow.GetComponent<ArrowScript>().Git;
     }
 
     private void EndNockArrow()
@@ -76,7 +78,7 @@ public class LongBow : MonoBehaviourEx
         TriggerEventSet(false);
 
 //        Destroy(CurrentArrow.gameObject, 10);
-
+        _git = null;
         CurrentArrow = null;
         Nocked = false;
     }
@@ -88,15 +90,25 @@ public class LongBow : MonoBehaviourEx
         if (CurrentArrow == null)
             return;
 
+        //현재 Nocked 된 화살의 위치를 시위대에 고정시킨다.(위치, 방향)
         CurrentArrow.transform.rotation = DelegatePosition.transform.rotation;
 
         DelegatePosition.transform.position = CurrentArrow.transform.position;
 
+        //화살의 현재 위치
         float arrowCurrentPos = DelegatePosition.transform.localPosition.z;
 
 
-        ArrowShoundPackige.PullShoundPlay();
-
+        if (arrowCurrentPos >= 0.3f && arrowCurrentPos <= 0.35f)
+        {
+            ArrowShoundPackige.PullShoundPlay();
+            _rightDeviceInteraction.StrongVibrationTime(0.1f);
+        }
+        if (arrowCurrentPos >= 0.6f && arrowCurrentPos <= 0.65f)
+        {
+            ArrowShoundPackige.PullShoundPlay();
+            _rightDeviceInteraction.StrongVibrationTime(0.1f);
+        }
 
         if (arrowCurrentPos > _nockMaxPos)
         {
@@ -108,15 +120,16 @@ public class LongBow : MonoBehaviourEx
             arrowCurrentPos = _nockStartPos;
         }
 
-        ArrowSyncBow(arrowCurrentPos - _nockStartPos);
+        BowStringSync();
 
         DelegatePosition.transform.localPosition = new Vector3(0, 0, arrowCurrentPos);
 
         CurrentArrow.transform.position = DelegatePosition.transform.position;
     }
 
-    private void ArrowSyncBow(float currnetPos)
+    private void BowStringSync()
     {
-        _power = currnetPos * 1000;
+        Boll.transform.position = _git.transform.position;
+        _power = StartPosition.transform.position - Boll.transform.position;
     }
 }

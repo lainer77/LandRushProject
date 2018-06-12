@@ -7,9 +7,7 @@ using UnityScriptHelper;
 public class ArrowShoundPackige : MonoBehaviourEx
 {
     public List<AudioClip> AudioClipList;
-    private AudioSource _nockShound;
-    private AudioSource _pullShound;
-    private AudioSource _shotShound;
+    private AudioSource _shound;
     public float VolMin;
     public float VolMax;
 
@@ -17,27 +15,33 @@ public class ArrowShoundPackige : MonoBehaviourEx
 
     public float PitchMax;
     // Use this for initialization
+    protected override void Start()
+    {
+        _shound = GetCachedComponent<AudioSource>();
+    }
 
-    //-------------------------------------------------
+//-------------------------------------------------
     public void NockShoundPlay()
     {
-        ShoundPlay(_nockShound, 0);
+        ShoundPlay(_shound, 0);
     }
 
     public void PullShoundPlay()
     {
-        ShoundPlay(_pullShound, 3);
+        ShoundPlay(_shound, 3);
     }
 
     public void ShotShoundPlay()
     {
-        ShoundPlay(_shotShound, 6);
+        ShoundPlay(_shound, 6);
     }
-
+    
     private void ShoundPlay(AudioSource shound, int start)
     {
         if (shound != null && shound.isActiveAndEnabled)
         {
+            if (_shound.isPlaying)
+                return;
             //randomly apply a volume between the volume min max
             shound.volume = Random.Range(VolMin, VolMax);
 

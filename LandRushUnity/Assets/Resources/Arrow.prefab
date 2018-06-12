@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 54493796788063502}
   - component: {fileID: 138054179603398524}
   - component: {fileID: 65462895102497102}
+  - component: {fileID: 114870240906883408}
   m_Layer: 0
   m_Name: Arrowhead collider
   m_TagString: Untagged
@@ -77,6 +78,21 @@ GameObject:
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Arrow
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1592969685826616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4728667042665250}
+  m_Layer: 0
+  m_Name: Git
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,11 +177,24 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1130040262553710}
-  m_LocalRotation: {x: -0.000000041445332, y: 0.000000041445347, z: -0.7071067, w: 0.7071069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.8088817}
   m_LocalScale: {x: 0.005100377, y: 0.005100374, z: 0.016655745}
   m_Children: []
   m_Father: {fileID: 4188222886224778}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4728667042665250
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592969685826616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4946639203761726}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4931723786342844
@@ -193,6 +222,7 @@ Transform:
   m_Children:
   - {fileID: 4931723786342844}
   - {fileID: 4188222886224778}
+  - {fileID: 4728667042665250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,8 +318,8 @@ Rigidbody:
   m_GameObject: {fileID: 1434814926236860}
   serializedVersion: 2
   m_Mass: 0.1
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 2
@@ -303,11 +333,11 @@ Rigidbody:
   m_GameObject: {fileID: 1130040262553710}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.02
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!65 &65373439932354906
@@ -346,6 +376,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Head: {fileID: 54493796788063502}
+--- !u!114 &114870240906883408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130040262553710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f434215ac37b36f4e878ca8172553f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!138 &138054179603398524
 FixedJoint:
   m_ObjectHideFlags: 1

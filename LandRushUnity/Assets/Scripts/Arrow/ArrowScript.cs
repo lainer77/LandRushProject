@@ -4,7 +4,7 @@ using LandRushLibrary.Items;
 using UnityEngine;
 using UnityScriptHelper;
 
-public class ArrowScript : MonoBehaviourEx 
+public class ArrowScript : MonoBehaviourEx
 {
     public enum ArrowState
     {
@@ -12,9 +12,22 @@ public class ArrowScript : MonoBehaviourEx
         Hand,
         Nocked
     }
-	public Arrow Arrow { get; set; }
+
+    public Arrow Arrow { get; set; }
     public Rigidbody Head;
-	private Rigidbody _rigidbody;
+    private GameObject _git;
+
+    public GameObject Git
+    {
+        get
+        {
+            if (_git == null)
+                _git = transform.Find("Git").gameObject;
+            return _git;
+        }
+    }
+
+    private Rigidbody _rigidbody;
     private ArrowState _state;
 
     public ArrowState State
@@ -30,7 +43,6 @@ public class ArrowScript : MonoBehaviourEx
             }
             else if (_state == ArrowState.Nocked)
             {
-                
             }
             else
             {
@@ -40,10 +52,12 @@ public class ArrowScript : MonoBehaviourEx
         }
     }
 
+    private float _speed = 100;
+
     protected override void Start()
     {
         _state = ArrowState.Hand;
-        _rigidbody = GetCachedComponent<Rigidbody>(); 
+        _rigidbody = GetCachedComponent<Rigidbody>();
     }
 
     protected override void OnTransformParentChanged()
@@ -54,18 +68,18 @@ public class ArrowScript : MonoBehaviourEx
         }
     }
 
-    public void Shoot(float power)
-	{
+    public void Shoot(Vector3 power)
+    {
         transform.SetParent(null);
 
-	    State = ArrowState.Shoot;
-        
+        State = ArrowState.Shoot;
 
-	    _rigidbody.AddForce(Vector3.back * power);
-	    Head.AddForce(Vector3.back * power);
+
+        _rigidbody.velocity = power * _speed / 3;
+        Head.velocity = power * _speed;
 
         Destroy(gameObject, 10);
-	}
+    }
 
     #region GravitySwitch
 
@@ -74,6 +88,7 @@ public class ArrowScript : MonoBehaviourEx
         rigid.isKinematic = false;
         rigid.useGravity = true;
     }
+
     private void UnUseGravity(Rigidbody rigid)
     {
         rigid.isKinematic = true;
