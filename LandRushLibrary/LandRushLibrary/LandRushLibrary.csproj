@@ -48,7 +48,6 @@
     <Compile Include="Drop\MonsterItemDropManager.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
-    <Compile Include="Interfaces\ICountable.cs" />
     <Compile Include="Interfaces\IUpgradable.cs" />
     <Compile Include="Items\EquipmentItem.cs" />
     <Compile Include="Items\UseableItem.cs" />

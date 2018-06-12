@@ -132,8 +132,7 @@ namespace LandRushLibrary.Drop
 
                 if (amount != 1)
                 {
-                    if (DropItem is ICountable countable)
-                        countable.Amount = amount;
+                    DropItem.Amount = amount;
                 }
 
                 Rate = rate;

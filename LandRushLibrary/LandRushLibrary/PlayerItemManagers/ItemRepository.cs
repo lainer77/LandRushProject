@@ -37,55 +37,29 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public bool AddGameItem(GameItem gameItem)
         {
-
             foreach (var item in Items)
             {
                 if (item == null)
-                    continue;
-
-
-                if (item.ItemId == gameItem.ItemId)
                 {
-                    if (item is ICountable countable)
+                    if (gameItem.Amount == 0)
                     {
-
-                        if (countable.MaxAmount + ((ICountable)gameItem).Amount  < countable.Amount)
-                        {
-                            int remainAmoun = ((ICountable) gameItem).Amount + countable.Amount - countable.MaxAmount;
-
-                            countable.Amount = countable.MaxAmount;
-
-                            ((ICountable) gameItem).Amount = remainAmoun;
-                            continue;
-                        }
-                        else
-                        {
-                            countable.Amount += ((ICountable)gameItem).Amount;
-                            OnInventoryItemChanged(Items);
-                            break;
-                        }
-
-                    }
-
-                }
-            }
-
-
-            for (int i = 0; i < _rows; i++)
-            {
-                for (int j = 0; j < _columns; j++)
-                {
-                    if (Items[i, j] == null)
-                    {
-                        Items[i, j] = gameItem;
                         OnInventoryItemChanged(Items);
                         return true;
-
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
+                if (item.ItemId == gameItem.ItemId)
+                {
+                    gameItem.Amount = item.AddAmount(gameItem.Amount);
+
+                }
+
             }
 
-            OnInventoryIsFull(new InventoryIsFullEventArgs());
+            OnInventoryIsFullForOut(gameItem);
             return false;
 
         }
@@ -101,41 +75,11 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void RemoveItem(ItemID itemId, int amount)
         {
-            for (int i = 0; i < _rows; i++)
+            foreach (var item in Items)
             {
-                for (int j = 0; j < _columns; j++)
-                {
-                    if (Items[i, j].ItemId == itemId)
-                    {
-                        if (Items[i, j] is ICountable countable)
-                        {
-                            int temp = countable.Amount;
-                            countable.Amount -= amount;
-
-                            if (countable.Amount > 0)
-                                break;
-
-                            Items[i, j] = null;
-                            amount -= temp;
-                        }
-                        else
-                        {
-                            if (amount == 0)
-                                break;
-
-                            Items[i, j] = null;
-
-                            amount--;
-                        }
-                    }
-                }
+                if (item.ItemId == ItemID) 
             }
-
-            OnInventoryItemChanged(Items);
-
         }
-
-
 
         public int GetAmountForId(ItemID itemId)
         {
@@ -218,17 +162,17 @@ namespace LandRushLibrary.PlayerItemManagers
                 InventoryIsFull(this, e);
         }
 
-        private InventoryIsFullEventArgs OnInventoryIsFull()
+        private InventoryIsFullEventArgs OnInventoryIsFull(GameItem remainItem)
         {
-            InventoryIsFullEventArgs args = new InventoryIsFullEventArgs();
+            InventoryIsFullEventArgs args = new InventoryIsFullEventArgs(remainItem);
             OnInventoryIsFull(args);
 
             return args;
         }
 
-        private InventoryIsFullEventArgs OnInventoryIsFullForOut()
+        private InventoryIsFullEventArgs OnInventoryIsFullForOut(GameItem remainItem)
         {
-            InventoryIsFullEventArgs args = new InventoryIsFullEventArgs();
+            InventoryIsFullEventArgs args = new InventoryIsFullEventArgs(remainItem);
             OnInventoryIsFull(args);
 
             return args;
@@ -237,8 +181,11 @@ namespace LandRushLibrary.PlayerItemManagers
         public class InventoryIsFullEventArgs : EventArgs
         {
 
-            public InventoryIsFullEventArgs()
+            GameItem RemainItem { get; set; }
+
+            public InventoryIsFullEventArgs(GameItem remainItem)
             {
+                RemainItem = remainItem;
             }
 
         }
