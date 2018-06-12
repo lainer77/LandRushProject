@@ -77,7 +77,19 @@ namespace LandRushLibrary.PlayerItemManagers
         {
             foreach (var item in Items)
             {
-                if (item.ItemId == ItemID) 
+                if (item == null)
+                    continue;
+
+                if (item.ItemId == itemId)
+                {
+                    item.Amount -= amount;
+
+                    if (item.Amount < 0)
+                        amount = item.Amount * (-1);
+                    else
+                        break;
+
+                }
             }
         }
 
@@ -85,25 +97,14 @@ namespace LandRushLibrary.PlayerItemManagers
         {
             int amount = 0;
 
-            for (int i = 0; i < _rows; i++)
+            foreach(var item in Items)
             {
-                for (int j = 0; j < _columns; j++)
-                {
-                    if (Items[i, j].ItemId == itemId)
-                    {
-                        if (Items[i, j] is ICountable countable)
-                        {
-                            amount += countable.Amount;
-                        }
-                        else
-                        {
-                            amount++;
-                        }
-                    }
-                }
+                if (item == null)
+                    continue;
+
+                if (item.ItemId == itemId)
+                    amount += item.Amount;
             }
-
-
 
             return amount;
 

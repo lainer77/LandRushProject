@@ -82,17 +82,7 @@ namespace LandRushLibraryTests
             Assert.AreEqual(stone, inven.Items[0,0]);
             Assert.AreEqual(30, stone.MaxAmount);
 
-            for (int i = 0; i < 30; i++)
-            {
-                Console.WriteLine( ((ICountable)inven.Items[0, 0]).Amount);
-                inven.AddGameItem(ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone));
-            }
 
-            Assert.AreEqual(30, ((ICountable)inven.Items[0,0]).Amount);
-
-            inven.AddGameItem(ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone));
-
-            Assert.AreEqual(1, ((ICountable)inven.Items[0, 1]).Amount);
                 
 
         }

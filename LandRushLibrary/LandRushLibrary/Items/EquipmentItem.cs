@@ -6,11 +6,8 @@ using Newtonsoft.Json;
 namespace LandRushLibrary.Items
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public abstract class EquipmentItem : GameItem, ICountable
+    public abstract class EquipmentItem : GameItem
     {
-        [JsonIgnore]
-        public int Amount { get; set; }
-        public int MaxAmount { get; set; }
     }
 
 
