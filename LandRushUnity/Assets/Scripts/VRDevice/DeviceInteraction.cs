@@ -117,7 +117,7 @@ public class DeviceInteraction : MonoBehaviourEx
 
     public void StrongVibrationTime(float time)
     {
-        StartCoroutine(Vibration(time, 3999));
+        StartCoroutine(Vibration(time, 5000));
     }
 
     IEnumerator Vibration(float length, ushort strength)

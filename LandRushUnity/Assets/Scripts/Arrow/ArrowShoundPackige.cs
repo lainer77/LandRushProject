@@ -14,6 +14,9 @@ public class ArrowShoundPackige : MonoBehaviourEx
     public float PitchMin;
 
     public float PitchMax;
+
+    private int _start;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -23,33 +26,34 @@ public class ArrowShoundPackige : MonoBehaviourEx
 //-------------------------------------------------
     public void NockShoundPlay()
     {
-        ShoundPlay(_shound, 0);
+        _start = 0;
+        Invoke("ShoundPlay", _shound.clip.length);
     }
 
     public void PullShoundPlay()
     {
-        ShoundPlay(_shound, 3);
+        _start = 3;
+        Invoke("ShoundPlay", _shound.clip.length);
     }
 
     public void ShotShoundPlay()
     {
-        ShoundPlay(_shound, 6);
+        _start = 6;
+        Invoke("ShoundPlay", _shound.clip.length);
     }
-    
-    private void ShoundPlay(AudioSource shound, int start)
+
+    private void ShoundPlay()
     {
-        if (shound != null && shound.isActiveAndEnabled)
+        if (_shound != null && _shound.isActiveAndEnabled)
         {
-            if (_shound.isPlaying)
-                return;
             //randomly apply a volume between the volume min max
-            shound.volume = Random.Range(VolMin, VolMax);
+            _shound.volume = Random.Range(VolMin, VolMax);
 
             //randomly apply a pitch between the pitch min max
-            shound.pitch = Random.Range(PitchMin, PitchMax);
+            _shound.pitch = Random.Range(PitchMin, PitchMax);
 
             // play the sound
-            shound.PlayOneShot(AudioClipList[Random.Range(start, start + 3)]);
+            _shound.PlayOneShot(AudioClipList[Random.Range(_start, _start + 3)]);
         }
     }
 }

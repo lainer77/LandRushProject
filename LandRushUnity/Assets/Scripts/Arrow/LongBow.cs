@@ -12,13 +12,15 @@ public class LongBow : MonoBehaviourEx
     public GameObject CurrentArrow { get; set; }
     public GameObject DelegatePosition;
     public GameObject Boll;
-    private GameObject _git;
+
 
     public bool Nocked { get; set; }
 
     public GameObject StartPosition;
 
     private Vector3 _power;
+    private GameObject _git;
+    private Rigidbody _arrowRigidbody;
     private float _nockStartPos = 0.2f;
     private float _nockMaxPos = 0.7f;
 
@@ -26,6 +28,8 @@ public class LongBow : MonoBehaviourEx
     protected override void Start()
     {
         _rightDeviceInteraction = DeviceRepository.RightDeviceInteraction;
+
+        _rightDeviceInteraction.StrongVibrationTime(10f);
     }
 
     // 100 : x = 0.48 : y
@@ -97,27 +101,15 @@ public class LongBow : MonoBehaviourEx
 
         //화살의 현재 위치
         float arrowCurrentPos = DelegatePosition.transform.localPosition.z;
-
-
-        if (arrowCurrentPos >= 0.3f && arrowCurrentPos <= 0.35f)
-        {
-            ArrowShoundPackige.PullShoundPlay();
-            _rightDeviceInteraction.StrongVibrationTime(0.1f);
-        }
-        if (arrowCurrentPos >= 0.6f && arrowCurrentPos <= 0.65f)
-        {
-            ArrowShoundPackige.PullShoundPlay();
-            _rightDeviceInteraction.StrongVibrationTime(0.1f);
-        }
-
         if (arrowCurrentPos > _nockMaxPos)
         {
             arrowCurrentPos = _nockMaxPos;
-            _rightDeviceInteraction.StrongVibrationTime(0.3f);
+            _rightDeviceInteraction.StrongVibrationTime(1f);
         }
         else if (arrowCurrentPos < _nockStartPos)
         {
             arrowCurrentPos = _nockStartPos;
+            _rightDeviceInteraction.StrongVibrationTime(1f);
         }
 
         BowStringSync();
@@ -125,6 +117,20 @@ public class LongBow : MonoBehaviourEx
         DelegatePosition.transform.localPosition = new Vector3(0, 0, arrowCurrentPos);
 
         CurrentArrow.transform.position = DelegatePosition.transform.position;
+
+
+        //////////////////////////////////////////////////////////////////////////////
+
+
+        //화살에 가해진 힘에 따라 소리가 난다.
+        float rbSpeed = _arrowRigidbody.velocity.sqrMagnitude;
+        Debug.Log("화살에 가해진 힘에 따라 소리가 난다. reSpeed" + rbSpeed);
+        if (rbSpeed > 0.1)
+        {
+            ArrowShoundPackige.PullShoundPlay();
+            _rightDeviceInteraction.StrongVibrationTime(0.5f);
+        }
+
     }
 
     private void BowStringSync()

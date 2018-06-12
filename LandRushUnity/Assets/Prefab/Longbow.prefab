@@ -1364,10 +1364,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5dea26c1298d78149af149b8bd73ff63, type: 3}
   - {fileID: 8300000, guid: f9d368eac27f70740bed52d36e0070d8, type: 3}
   - {fileID: 8300000, guid: c4212c0047b94924e8982fea80fb6547, type: 3}
-  VolMin: 0
-  VolMax: 0
-  PitchMin: 0
-  PitchMax: 0
+  VolMin: 3
+  VolMax: 10
+  PitchMin: 3
+  PitchMax: 10
 --- !u!114 &114934958097179162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1573,7 +1573,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1815127665495408}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

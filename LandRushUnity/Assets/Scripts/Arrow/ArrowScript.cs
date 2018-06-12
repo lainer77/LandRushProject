@@ -53,6 +53,8 @@ public class ArrowScript : MonoBehaviourEx
     }
 
     private float _speed = 100;
+    private float _nockStartPos = 0.2f;
+    private float _nockMaxPos = 0.7f;
 
     protected override void Start()
     {
@@ -80,6 +82,8 @@ public class ArrowScript : MonoBehaviourEx
 
         Destroy(gameObject, 10);
     }
+
+    
 
     #region GravitySwitch
 
