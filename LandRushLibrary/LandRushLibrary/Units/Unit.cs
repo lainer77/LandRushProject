@@ -7,20 +7,23 @@ namespace LandRushLibrary.Units
     [JsonObject(MemberSerialization.OptOut)]
     public abstract class Unit
     {
+        #region Fields
         public string Name { get; set; }
         public int AttackPower { get; set; }
         public int Armor { get; set; }
         public int MaxHp { get; set; }
         public int CurrentHp { get; set; }
         public float Speed { get; set; }
-
-        [JsonIgnore] public bool Alive => CurrentHp > 0;
-
+        [JsonIgnore]
+        public bool Alive => CurrentHp > 0;
         public Predicate<Unit> InspectCorrectTarget;
+        #endregion
 
         public abstract void GotDamage(int damage);
 
-        #region Dead event things for C# 3.0
+        #region Events
+
+        #region Dead
         public event EventHandler<DeadEventArgs> Dead;
 
         protected virtual void OnDead(DeadEventArgs e)
@@ -61,7 +64,7 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
-        #region Attacked event things for C# 3.0
+        #region Attacked
         public event EventHandler<AttackedEventArgs> Attacked;
 
         protected virtual void OnAttacked(AttackedEventArgs e)
@@ -100,6 +103,9 @@ namespace LandRushLibrary.Units
             }
         }
         #endregion
+
+        #endregion
+
     }
 
 

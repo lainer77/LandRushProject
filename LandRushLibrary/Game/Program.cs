@@ -10,7 +10,7 @@ using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
 using LandRushLibrary.Upgrade;
 using LandRushLibrary.Utilities;
-using    LandRushLibrary.Drop;
+using LandRushLibrary.Drop;
 using Newtonsoft.Json;
 
 namespace Game
@@ -22,7 +22,7 @@ namespace Game
         static int _upTry = 100000;
         static int _upSuceess = 0;
 
-        public static void OnUpTried(object sender, UpgradeTriedEventArgs e)
+        public static void OnUpTried(object sender, Upgrader.UpgradeTriedEventArgs e)
         {
             Console.WriteLine(e.Success);
 

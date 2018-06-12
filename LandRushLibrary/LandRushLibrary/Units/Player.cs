@@ -9,17 +9,6 @@ namespace LandRushLibrary.Units
     [JsonObject(MemberSerialization.OptOut)]
     public class Player : Unit, IAttackable
     {
-        public int Level { get; set; }
-        public int CurrentExp { get; set; }
-        public int MaxExp { get; set; }
-
-        [JsonIgnore]
-        public PlayerEquipment Equipment { get; private set; }
-        [JsonIgnore]
-        private readonly int _maxPairCount = 2;
-        [JsonIgnore]
-        public bool IsCombatMode { get; set; }
-
         #region singleton
         private static Player _instance;
 
@@ -44,6 +33,20 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
+        #region Fields
+        public int Level { get; set; }
+        public int CurrentExp { get; set; }
+        public int MaxExp { get; set; }
+        [JsonIgnore]
+        public PlayerEquipment Equipment { get; private set; }
+        [JsonIgnore]
+        private readonly int _maxPairCount = 2;
+        [JsonIgnore]
+        public bool IsCombatMode { get; set; }
+
+        #endregion
+
+        #region Methods
 
         public override void GotDamage(int damage)
         {
@@ -103,8 +106,12 @@ namespace LandRushLibrary.Units
             }
         }
 
+        #endregion
 
-        #region MonsterKilled event things for C# 3.0
+
+        #region Events
+
+        #region MonsterKilled
         public event EventHandler<MonsterKilledEventArgs> MonsterKilled;
 
         protected virtual void OnMonsterKilled(MonsterKilledEventArgs e)
@@ -144,7 +151,7 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
-        #region LevelUp event things for C# 3.0
+        #region LevelUp
         public event EventHandler<LevelUpEventArgs> LevelUp;
 
         protected virtual void OnLevelUp(LevelUpEventArgs e)
@@ -199,6 +206,8 @@ namespace LandRushLibrary.Units
 
             return args;
         }
+
+        #endregion
 
 
     }

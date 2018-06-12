@@ -10,11 +10,15 @@ namespace LandRushLibrary.Units
     [JsonObject(MemberSerialization.OptOut)]
     public class Monster : Unit, IAttackable
     {
+        #region Fields
         public MonsterID MonsterId { get; set; }
         public int SlainExp { get; set; }
         public MonsterGrade MonsterGrade { get; set; }
         public string PrefabName { get; set; }
+        #endregion
 
+
+        #region Methods
         public override void GotDamage(int damage)
         {
             if (Alive == false)
@@ -29,7 +33,7 @@ namespace LandRushLibrary.Units
 
             OnAttacked(new AttackedEventArgs(this));
 
-            if (Alive == false) 
+            if (Alive == false)
             {
                 OnDead(new DeadEventArgs(this));
             }
@@ -39,7 +43,7 @@ namespace LandRushLibrary.Units
         {
             List<GameItem> dropInfos = MonsterItemDropManager.Instance.DropItem(MonsterGrade);
 
-            if( dropInfos.Count > 0)
+            if (dropInfos.Count > 0)
             {
                 OnItemDropped(new ItemDroppedEventArgs(dropInfos));
             }
@@ -58,7 +62,7 @@ namespace LandRushLibrary.Units
             OnCalculatedRandomDamage(args);
 
             damage = args.AttackPower;
-            
+
             int armor = attakedUnit.Armor;
 
 
@@ -99,11 +103,14 @@ namespace LandRushLibrary.Units
             clone.SlainExp = SlainExp;
             clone.PrefabName = PrefabName;
             clone.MonsterGrade = MonsterGrade;
- 
+
             return clone;
         }
+        #endregion
 
-        #region ItemDropped event things for C# 3.0
+        #region Events
+
+        #region ItemDropped
         public event EventHandler<ItemDroppedEventArgs> ItemDropped;
 
         protected virtual void OnItemDropped(ItemDroppedEventArgs e)
@@ -141,6 +148,8 @@ namespace LandRushLibrary.Units
                 DropItems = dropItems;
             }
         }
+
+        #endregion
 
         #endregion
 

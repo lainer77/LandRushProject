@@ -5,6 +5,8 @@ namespace LandRushLibrary.PlayerItemManagers
 {
     public class PlayerEquipment
     {
+        #region Constructor
+
         public PlayerEquipment(int maxPairCount)
         {
             _maxPairCount = maxPairCount;
@@ -12,12 +14,18 @@ namespace LandRushLibrary.PlayerItemManagers
 
         }
 
+        #endregion
+
+        #region Fields
         private readonly int _maxPairCount;
         public int CurrentPair { get; private set; }
         private EquipmentPair[] _equipmentPairs;
 
         public EquipmentItem LeftEquipment { get; private set; }
         public EquipmentItem RightEquipment { get; private set; }
+        #endregion
+
+        #region  Methods
 
         public void EquipItem(EquipmentSlot equipmentSlot, EquipmentItem equipment)
         {
@@ -43,15 +51,10 @@ namespace LandRushLibrary.PlayerItemManagers
 
         }
 
-        private class EquipmentPair
-        {
-            public EquipmentItem LeftEquipment { get; set; }
-            public EquipmentItem RightEquipment { get; set; }
+        #endregion
 
-        }
-
-
-        #region CurrentPairChanged event things for C# 3.0
+        #region Events
+        #region CurrentPairChanged
         public event EventHandler<CurrentPairChangedEventArgs> CurrentPairChanged;
 
         protected virtual void OnCurrentPairChanged(CurrentPairChangedEventArgs e)
@@ -91,7 +94,7 @@ namespace LandRushLibrary.PlayerItemManagers
         }
         #endregion
 
-        #region EquipmentChanged event things for C# 3.0
+        #region EquipmentChanged
         public event EventHandler<EquipmentChangedEventArgs> EquipmentChanged;
 
         protected virtual void OnEquipmentChanged(EquipmentChangedEventArgs e)
@@ -130,7 +133,14 @@ namespace LandRushLibrary.PlayerItemManagers
             }
         }
         #endregion
+        #endregion
 
+        private class EquipmentPair
+        {
+            public EquipmentItem LeftEquipment { get; set; }
+            public EquipmentItem RightEquipment { get; set; }
+
+        }
     }
 
     public enum EquipmentSlot

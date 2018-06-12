@@ -1,11 +1,10 @@
-﻿
-using LandRushLibrary.Repository;
-using System.Linq;
+﻿using LandRushLibrary.Items;
 
 namespace LandRushLibrary.PlayerItemManagers
 {
     public class Inventory : ItemRepository
     {
+        #region Singleton
         private static Inventory _instance;
 
         public static Inventory Instance
@@ -18,5 +17,8 @@ namespace LandRushLibrary.PlayerItemManagers
                 return _instance;
             }
         }
+
+
+        #endregion
     }
 }

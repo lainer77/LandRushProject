@@ -10,13 +10,20 @@ namespace LandRushLibrary.PlayerItemManagers
 {
     public abstract class ItemRepository
     {
+        #region Fields
+
         public GameItem[,] Items { get; protected set; }
+        protected readonly int _rows = 4;
+        protected readonly int _columns = 3;
 
-        protected int _rows;
-        protected int _columns;
+        protected ItemRepository()
+        {
+            Items = new GameItem[_rows, _columns];
+        }
 
-        protected int _maxItemSlotCount;
-        protected int _maxAmount;
+        #endregion
+
+        #region Methods
 
         public void ClearInventory()
         {
@@ -33,17 +40,21 @@ namespace LandRushLibrary.PlayerItemManagers
 
             foreach (var item in Items)
             {
+                if (item == null)
+                    continue;
+
+
                 if (item.ItemId == gameItem.ItemId)
                 {
                     if (item is ICountable countable)
                     {
-                        countable.Amount += ((ICountable) gameItem).Amount;
+                        countable.Amount += ((ICountable)gameItem).Amount;
 
                         if (countable.MaxAmount < countable.Amount)
                         {
                             int remainAmount = countable.Amount - countable.MaxAmount;
                             countable.Amount = countable.MaxAmount;
-                            ((ICountable) gameItem).Amount = remainAmount;
+                            ((ICountable)gameItem).Amount = remainAmount;
                         }
                         else
                         {
@@ -51,7 +62,7 @@ namespace LandRushLibrary.PlayerItemManagers
                             return true;
                         }
                     }
-                    
+
                     break;
                 }
             }
@@ -150,10 +161,11 @@ namespace LandRushLibrary.PlayerItemManagers
             return amount;
 
         }
+        #endregion
 
         #region Events
 
-        #region InventoryItemChanged event things for C# 3.0
+        #region InventoryItemChanged
         public event EventHandler<InventoryItemChangedEventArgs> InventoryItemChanged;
 
         protected virtual void OnInventoryItemChanged(InventoryItemChangedEventArgs e)
@@ -178,10 +190,23 @@ namespace LandRushLibrary.PlayerItemManagers
             return args;
         }
 
+        public class InventoryItemChangedEventArgs : EventArgs
+        {
+            public GameItem[,] GameItems { get; set; }
+
+            public InventoryItemChangedEventArgs()
+            {
+            }
+
+            public InventoryItemChangedEventArgs(GameItem[,] gameItems)
+            {
+                GameItems = gameItems;
+            }
+        }
 
         #endregion
 
-        #region InventoryIsFull event things for C# 3.0
+        #region InventoryIsFull
         public event EventHandler<InventoryIsFullEventArgs> InventoryIsFull;
 
         protected virtual void OnInventoryIsFull(InventoryIsFullEventArgs e)
@@ -206,22 +231,6 @@ namespace LandRushLibrary.PlayerItemManagers
             return args;
         }
 
-        #endregion
-
-        public class InventoryItemChangedEventArgs : EventArgs
-        {
-            public GameItem[,] GameItems { get; set; }
-
-            public InventoryItemChangedEventArgs()
-            {
-            }
-
-            public InventoryItemChangedEventArgs(GameItem[,] gameItems)
-            {
-                GameItems = gameItems;
-            }
-        }
-
         public class InventoryIsFullEventArgs : EventArgs
         {
 
@@ -230,6 +239,8 @@ namespace LandRushLibrary.PlayerItemManagers
             }
 
         }
+
+        #endregion
 
         #endregion
     }

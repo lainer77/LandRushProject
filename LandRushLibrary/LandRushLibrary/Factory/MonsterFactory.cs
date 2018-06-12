@@ -7,6 +7,7 @@ namespace LandRushLibrary.Factory
 {
     public class MonsterFactory
     {
+        #region Singleton
         private static MonsterFactory _instace;
 
         public static MonsterFactory Instance
@@ -26,6 +27,7 @@ namespace LandRushLibrary.Factory
         }
 
         private readonly Dictionary<MonsterID, Monster> _monsters;
+        #endregion
 
         public Monster Create(MonsterID monsterId)
         {

@@ -9,6 +9,7 @@ namespace LandRushLibrary.Factory
 {
     public class ItemFactory
     {
+        #region Singleton
         private static ItemFactory _instace;
 
         public static ItemFactory Instance
@@ -28,6 +29,9 @@ namespace LandRushLibrary.Factory
         {
             _items = ItemSerializer.Instance.Deseriailize();
         }
+        #endregion
+
+        #region Methods
 
         public GameItem Create(ItemID itemId)
         {
@@ -52,5 +56,7 @@ namespace LandRushLibrary.Factory
             return items;
 
         }
+
+        #endregion
     }
 }

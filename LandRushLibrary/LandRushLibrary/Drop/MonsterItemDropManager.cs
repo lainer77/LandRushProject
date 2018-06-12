@@ -117,6 +117,12 @@ namespace LandRushLibrary.Drop
 
         private class DropRateInfo
         {
+
+            public DropRateInfo()
+            {
+
+            }
+
             public GameItem DropItem { get; private set; }
             public float Rate { get; private set; }
 
@@ -131,11 +137,6 @@ namespace LandRushLibrary.Drop
                 }
 
                 Rate = rate;
-            }
-
-            public DropRateInfo()
-            {
-
             }
 
         }

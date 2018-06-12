@@ -6,7 +6,7 @@ namespace LandRushLibrary.Interfaces
     public interface ICountable
     {
         int Amount { get; set; }
-        int MaxAmount { get; set; }
+        int MaxAmount { get; }
 
     }
 }

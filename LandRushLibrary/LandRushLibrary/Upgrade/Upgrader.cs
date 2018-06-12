@@ -62,7 +62,7 @@ namespace LandRushLibrary.Upgrade
 
         }
 
-        private List <UpgradeCost> _upgradeCosts;
+        private List<UpgradeCost> _upgradeCosts;
         private int _maxGrade;
         private Random _random;
 
@@ -144,7 +144,7 @@ namespace LandRushLibrary.Upgrade
 
         }
 
-        #region UpgradeTried event things for C# 3.0
+        #region UpgradeTried
         public event EventHandler<UpgradeTriedEventArgs> UpgradeTried;
 
         protected virtual void OnUpgradeTried(UpgradeTriedEventArgs e)
@@ -169,26 +169,24 @@ namespace LandRushLibrary.Upgrade
             return args;
         }
 
+        public class UpgradeTriedEventArgs : EventArgs
+        {
+            public bool Success { get; set; }
+            public bool NotEnoughIngredients { get; set; }
 
+
+            public UpgradeTriedEventArgs()
+            {
+
+            }
+
+            public UpgradeTriedEventArgs(bool success, bool notEnoughIngreients)
+            {
+                Success = success;
+                NotEnoughIngredients = notEnoughIngreients;
+            }
+        }
         #endregion
 
-    }
-
-    public class UpgradeTriedEventArgs : EventArgs
-    {
-        public bool Success { get; set; }
-        public bool NotEnoughIngredients { get; set; }
-
-
-        public UpgradeTriedEventArgs()
-        {
-
-        }
-
-        public UpgradeTriedEventArgs(bool success, bool notEnoughIngreients)
-        {
-            Success = success;
-            NotEnoughIngredients = notEnoughIngreients;
-        }
     }
 }
