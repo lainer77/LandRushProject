@@ -124,7 +124,8 @@ public class DeviceInteraction : MonoBehaviourEx
     {
         for (float i = 0; i < length; i += Time.deltaTime)
         {
-            _controller.TriggerHapticPulse(strength);
+            if (_controller != null)
+                _controller.TriggerHapticPulse(strength);
             yield return null; //every single frame for the duration of "length" you will vibrate at "strength" amount
         }
     }

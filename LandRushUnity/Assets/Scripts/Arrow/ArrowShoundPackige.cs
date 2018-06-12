@@ -27,19 +27,28 @@ public class ArrowShoundPackige : MonoBehaviourEx
     public void NockShoundPlay()
     {
         _start = 0;
-        Invoke("ShoundPlay", _shound.clip.length);
+        float speed = 0;
+        if (_shound.clip != null)
+            speed = _shound.clip.length;
+        Invoke("ShoundPlay", speed);
     }
 
     public void PullShoundPlay()
     {
         _start = 3;
-        Invoke("ShoundPlay", _shound.clip.length);
+        float speed = 0;
+        if (_shound.clip != null)
+            speed = _shound.clip.length;
+        Invoke("ShoundPlay", speed);
     }
 
     public void ShotShoundPlay()
     {
         _start = 6;
-        Invoke("ShoundPlay", _shound.clip.length);
+        float speed = 0;
+        if (_shound.clip != null)
+            speed = _shound.clip.length;
+        Invoke("ShoundPlay", speed);
     }
 
     private void ShoundPlay()

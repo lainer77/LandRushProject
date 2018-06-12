@@ -27,7 +27,7 @@ public class ArrowScript : MonoBehaviourEx
         }
     }
 
-    private Rigidbody _rigidbody;
+    public Rigidbody Rigid { get; private set; }
     private ArrowState _state;
 
     public ArrowState State
@@ -38,7 +38,7 @@ public class ArrowScript : MonoBehaviourEx
             _state = value;
             if (_state == ArrowState.Hand)
             {
-                UnUseGravity(_rigidbody);
+                UnUseGravity(Rigid);
                 UnUseGravity(Head);
             }
             else if (_state == ArrowState.Nocked)
@@ -46,7 +46,7 @@ public class ArrowScript : MonoBehaviourEx
             }
             else
             {
-                UseGravity(_rigidbody);
+                UseGravity(Rigid);
                 UseGravity(Head);
             }
         }
@@ -59,7 +59,7 @@ public class ArrowScript : MonoBehaviourEx
     protected override void Start()
     {
         _state = ArrowState.Hand;
-        _rigidbody = GetCachedComponent<Rigidbody>();
+        Rigid = GetCachedComponent<Rigidbody>();
     }
 
     protected override void OnTransformParentChanged()
@@ -77,7 +77,7 @@ public class ArrowScript : MonoBehaviourEx
         State = ArrowState.Shoot;
 
 
-        _rigidbody.velocity = power * _speed / 3;
+        Rigid.velocity = power * _speed / 5;
         Head.velocity = power * _speed;
 
         Destroy(gameObject, 10);

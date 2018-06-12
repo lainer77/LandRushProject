@@ -12,7 +12,7 @@ public class LongBow : MonoBehaviourEx
     public GameObject CurrentArrow { get; set; }
     public GameObject DelegatePosition;
     public GameObject Boll;
-
+    private GameObject _rightHand;
 
     public bool Nocked { get; set; }
 
@@ -28,7 +28,7 @@ public class LongBow : MonoBehaviourEx
     protected override void Start()
     {
         _rightDeviceInteraction = DeviceRepository.RightDeviceInteraction;
-
+        _rightHand = _rightDeviceInteraction.transform.Find("Hand").gameObject;
         _rightDeviceInteraction.StrongVibrationTime(10f);
     }
 
@@ -36,7 +36,7 @@ public class LongBow : MonoBehaviourEx
     // 0.48x = 100y;
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Arrow"))
+        if (other.CompareTag(Tags.Arrow))
         {
             CurrentArrow = other.gameObject;
 
@@ -46,7 +46,7 @@ public class LongBow : MonoBehaviourEx
 
     protected override void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Arrow") && !Nocked)
+        if (other.CompareTag(Tags.Arrow) && !Nocked)
         {
             CurrentArrow = null;
 
@@ -57,7 +57,7 @@ public class LongBow : MonoBehaviourEx
     private void TriggerEventSet(bool addOrRemove)
     {
         _rightDeviceInteraction.TriggerButton.SetDeviceButtonDownEvent(StartNockArrow, addOrRemove);
-        _rightDeviceInteraction.TriggerButton.SetDeviceButtonPressEvent(NockedArrowUpdate, addOrRemove);
+//        _rightDeviceInteraction.TriggerButton.SetDeviceButtonPressEvent(NockedArrowUpdate, addOrRemove);
         _rightDeviceInteraction.TriggerButton.SetDeviceButtonUpEvent(EndNockArrow, addOrRemove);
     }
 
@@ -65,7 +65,12 @@ public class LongBow : MonoBehaviourEx
     {
         ArrowShoundPackige.NockShoundPlay();
         Nocked = true;
-        _git = CurrentArrow.GetComponent<ArrowScript>().Git;
+        ArrowScript aScript = CurrentArrow.GetComponent<ArrowScript>();
+        _git = aScript.Git;
+        _arrowRigidbody = aScript.Rigid;
+        
+
+        StartCoroutine("FixedUpdateArrow");
     }
 
     private void EndNockArrow()
@@ -85,6 +90,19 @@ public class LongBow : MonoBehaviourEx
         _git = null;
         CurrentArrow = null;
         Nocked = false;
+
+        StopCoroutine("FixedUpdateArrow");
+    }
+
+    private IEnumerator FixedUpdateArrow()
+    {
+        while (Nocked)
+        {
+            NockedArrowUpdate();
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield break;
     }
 
     private void NockedArrowUpdate()
@@ -94,7 +112,9 @@ public class LongBow : MonoBehaviourEx
         if (CurrentArrow == null)
             return;
 
+
         //현재 Nocked 된 화살의 위치를 시위대에 고정시킨다.(위치, 방향)
+        //        CurrentArrow.transform.rotation = DelegatePosition.transform.rotation;
         CurrentArrow.transform.rotation = DelegatePosition.transform.rotation;
 
         DelegatePosition.transform.position = CurrentArrow.transform.position;
@@ -120,17 +140,6 @@ public class LongBow : MonoBehaviourEx
 
 
         //////////////////////////////////////////////////////////////////////////////
-
-
-        //화살에 가해진 힘에 따라 소리가 난다.
-        float rbSpeed = _arrowRigidbody.velocity.sqrMagnitude;
-        Debug.Log("화살에 가해진 힘에 따라 소리가 난다. reSpeed" + rbSpeed);
-        if (rbSpeed > 0.1)
-        {
-            ArrowShoundPackige.PullShoundPlay();
-            _rightDeviceInteraction.StrongVibrationTime(0.5f);
-        }
-
     }
 
     private void BowStringSync()
