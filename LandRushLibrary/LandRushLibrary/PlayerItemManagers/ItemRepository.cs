@@ -59,6 +59,19 @@ namespace LandRushLibrary.PlayerItemManagers
 
             }
 
+            for (int i = 0; i < _rows; i++)
+            {
+                for (int j = 0; j < _columns; j++)
+                {
+                    if (Items[i, j] == null)
+                    {
+                        Items[i, j] = gameItem;
+                        OnInventoryItemChanged(Items);
+                        return true;
+                    }
+                }
+            }
+
             OnInventoryIsFullForOut(gameItem);
             return false;
 
@@ -75,22 +88,35 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void RemoveItem(ItemID itemId, int amount)
         {
-            foreach (var item in Items)
+            for (int i = 0; i < _rows; i++)
             {
-                if (item == null)
-                    continue;
-
-                if (item.ItemId == itemId)
+                for (int j = 0; j < _columns; j++)
                 {
-                    item.Amount -= amount;
+                    if (Items[i, j] == null)
+                        continue;
 
-                    if (item.Amount < 0)
-                        amount = item.Amount * (-1);
-                    else
-                        break;
+                    if (Items[i, j].ItemId == itemId)
+                    {
+                        Items[i, j].Amount -= amount;
 
+                        if (Items[i, j].Amount < 0)
+                        {
+                            amount = Items[i, j].Amount * (-1);
+                            Items[i, j] = null;
+                        }
+                        else
+                            break;
+
+                    }
                 }
             }
+
+            foreach (var item in Items)
+            {
+
+            }
+
+            OnInventoryItemChanged(Items);
         }
 
         public int GetAmountForId(ItemID itemId)
@@ -109,6 +135,12 @@ namespace LandRushLibrary.PlayerItemManagers
             return amount;
 
         }
+
+        public GameItem this[int row, int column]
+        {
+            get { return Items[row - 1, column - 1]; }
+        }
+
         #endregion
 
         #region Events

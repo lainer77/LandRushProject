@@ -11,7 +11,12 @@ namespace LandRushLibrary.PlayerItemManagers
         {
             _maxPairCount = maxPairCount;
             _equipmentPairs = new EquipmentPair[_maxPairCount];
+            CurrentPair = 1;
 
+            for (int i = 0; i < _equipmentPairs.Length; i++)
+            {
+                _equipmentPairs[i] = new EquipmentPair();
+            }
         }
 
         #endregion
@@ -21,8 +26,31 @@ namespace LandRushLibrary.PlayerItemManagers
         public int CurrentPair { get; private set; }
         private EquipmentPair[] _equipmentPairs;
 
-        public EquipmentItem LeftEquipment { get; private set; }
-        public EquipmentItem RightEquipment { get; private set; }
+        public EquipmentItem LeftEquipment
+        {
+            get
+            {
+                return _equipmentPairs[CurrentPair - 1].LeftEquipment;
+            }
+
+            private set
+            {
+                _equipmentPairs[CurrentPair - 1].LeftEquipment = value;
+            }
+        }
+
+        public EquipmentItem RightEquipment
+        {
+            get
+            {
+                return _equipmentPairs[CurrentPair - 1].RightEquipment;
+            }
+
+            private set
+            {
+                _equipmentPairs[CurrentPair - 1].RightEquipment = value;
+            }
+        }
         #endregion
 
         #region  Methods
@@ -43,10 +71,6 @@ namespace LandRushLibrary.PlayerItemManagers
                 CurrentPair = 1;
             else
                 CurrentPair++;
-
-            RightEquipment = _equipmentPairs[CurrentPair - 1].RightEquipment;
-            LeftEquipment = _equipmentPairs[CurrentPair - 1].LeftEquipment;
-
             OnCurrentPairChanged(this);
 
         }

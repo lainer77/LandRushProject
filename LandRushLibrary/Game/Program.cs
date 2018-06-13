@@ -32,6 +32,7 @@ namespace Game
 
         static void Main(string[] args)
         {
+
             Arrow arrow = ItemFactory.Instance.Create<Arrow>(ItemID.Arrow);
             Console.WriteLine(arrow.Amount);
 
@@ -50,6 +51,9 @@ namespace Game
                 i++;
                 Console.WriteLine(i);
             }
+
+
+
 
             //Inventory inven = Inventory.Instance;
             //Upgrader upgrader = Upgrader.Instance;

@@ -50,10 +50,10 @@ namespace LandRushLibrary.Factory
         public List<T> FindItemListId<T> (Func<T, bool> predicate) where T : GameItem
         {
             var items = (from x in _items
-                        select x.Value as T).ToList();
+                         where x.Value is T
+                        select x.Value as T);
 
-
-            return items;
+            return items.Where(predicate).ToList();
 
         }
 

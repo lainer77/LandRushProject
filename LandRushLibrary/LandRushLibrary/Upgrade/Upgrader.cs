@@ -112,7 +112,7 @@ namespace LandRushLibrary.Upgrade
         {
             if (!UpgradePossibility(equipment))
             {
-                OnUpgradeTried(new UpgradeTriedEventArgs(false, true));
+                OnUpgradeTried(new UpgradeTriedEventArgs(false, true, equipment));
                 return;
             }
 
@@ -129,7 +129,7 @@ namespace LandRushLibrary.Upgrade
 
             if (random > rate)
             {
-                OnUpgradeTried(new UpgradeTriedEventArgs(false, false));
+                OnUpgradeTried(new UpgradeTriedEventArgs(false, false, equipment));
                 return;
             }
 
@@ -140,7 +140,7 @@ namespace LandRushLibrary.Upgrade
 
             equipment = nextGradeItems.FirstOrDefault();
 
-            OnUpgradeTried(new UpgradeTriedEventArgs(true, false));
+            OnUpgradeTried(new UpgradeTriedEventArgs(true, false, equipment));
 
         }
 
@@ -153,9 +153,9 @@ namespace LandRushLibrary.Upgrade
                 UpgradeTried(this, e);
         }
 
-        private UpgradeTriedEventArgs OnUpgradeTried(bool success, bool notEnoughIngreients)
+        private UpgradeTriedEventArgs OnUpgradeTried(bool success, bool notEnoughIngreients, IUpgradable upgradable)
         {
-            UpgradeTriedEventArgs args = new UpgradeTriedEventArgs(success, notEnoughIngreients);
+            UpgradeTriedEventArgs args = new UpgradeTriedEventArgs(success, notEnoughIngreients, upgradable);
             OnUpgradeTried(args);
 
             return args;
@@ -173,17 +173,18 @@ namespace LandRushLibrary.Upgrade
         {
             public bool Success { get; set; }
             public bool NotEnoughIngredients { get; set; }
-
+            public IUpgradable UpgradableItem { get; set; }
 
             public UpgradeTriedEventArgs()
             {
 
             }
 
-            public UpgradeTriedEventArgs(bool success, bool notEnoughIngreients)
+            public UpgradeTriedEventArgs(bool success, bool notEnoughIngreients, IUpgradable upgradable)
             {
                 Success = success;
                 NotEnoughIngredients = notEnoughIngreients;
+                UpgradableItem = upgradable;
             }
         }
         #endregion

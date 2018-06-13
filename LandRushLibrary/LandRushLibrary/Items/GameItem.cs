@@ -13,8 +13,23 @@ namespace LandRushLibrary.Items
         public ItemType Type { get; set; }
         [JsonProperty]
         public int MaxAmount { get; protected set; }
+
         [JsonIgnore]
-        public int Amount { get; set; }
+        private int _amount;
+        [JsonIgnore]
+        public int Amount
+        {
+            get
+            {
+                return _amount;
+            }
+
+            set
+            {
+                if (value <= MaxAmount)
+                    _amount = value;
+            }
+        }
 
         public int AddAmount(int amount)
         {

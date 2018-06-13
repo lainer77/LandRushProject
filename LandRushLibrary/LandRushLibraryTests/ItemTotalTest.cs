@@ -7,6 +7,7 @@ using LandRushLibrary.Items;
 using LandRushLibrary.PlayerItemManagers;
 using LandRushLibrary.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static LandRushLibrary.PlayerItemManagers.ItemRepository;
 
 namespace LandRushLibraryTests
 {
@@ -82,9 +83,50 @@ namespace LandRushLibraryTests
             Assert.AreEqual(stone, inven.Items[0,0]);
             Assert.AreEqual(30, stone.MaxAmount);
 
+            stone.AddAmount(29);
 
-                
+            Assert.AreEqual(30, inven.Items[0, 0].Amount);
 
+            for (int i = 0; i < 11; i++)
+            {
+                IngredientItem wood = ItemFactory.Instance.Create<IngredientItem>(ItemID.Wood);
+                wood.Amount = 30;
+
+                inven.AddGameItem(wood);
+            }
+
+
+
+            Assert.AreEqual(330, inven.GetAmountForId(ItemID.Wood));
+            Assert.AreEqual(30, inven[4, 3].Amount);
+
+            inven.InventoryIsFull += OnInventoryIsFull;
+
+            IngredientItem iron = ItemFactory.Instance.Create<IngredientItem>(ItemID.Iron);
+
+            inven.AddGameItem(iron);
+
+            inven.InventoryItemChanged += OnInventoryChanged;
+
+            inven.RemoveItem(ItemID.Wood, 310);
+
+        }
+
+        public void OnInventoryIsFull(Object sender, Inventory.InventoryIsFullEventArgs e)
+        {
+            Console.WriteLine("inven Full");
+            Assert.AreEqual(1, 1);
+        }
+
+        public void OnInventoryChanged(object sender, Inventory.InventoryItemChangedEventArgs e)
+        {
+            foreach (var item in e.GameItems)
+            {
+                if (item == null)
+                    continue;
+
+                Console.WriteLine($"{item.Name}/{item.Amount}");
+            }
         }
     }
 }
