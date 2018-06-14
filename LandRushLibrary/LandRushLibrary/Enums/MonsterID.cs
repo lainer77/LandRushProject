@@ -4,6 +4,6 @@
     {
         Orc = 2,
         OrcLord = 3,
-        Slime = 4
+        Skeleton = 4
     }
 }
