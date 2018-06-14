@@ -60,7 +60,7 @@ namespace LandRushLibrary.PlayerItemManagers
 
         #region  Methods
 
-        public void EquipItem(EquipmentSlot equipmentSlot, EquipmentItem equipment)
+        public void EquipItem(EquipmentSlot equipmentSlot, EquipmentItem equipment )
         {
             if (equipmentSlot == EquipmentSlot.Left)
                 _equipmentPairs[CurrentPair - 1].LeftEquipment = equipment;
@@ -166,7 +166,7 @@ namespace LandRushLibrary.PlayerItemManagers
         #endregion
         #endregion
 
-        private class EquipmentPair
+        public class EquipmentPair
         {
             public EquipmentItem LeftEquipment { get; set; }
             public EquipmentItem RightEquipment { get; set; }
