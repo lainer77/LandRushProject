@@ -67,7 +67,7 @@ namespace LandRushLibrary.PlayerItemManagers
             else if (equipmentSlot == EquipmentSlot.Right)
                 _equipmentPairs[CurrentPair - 1].RightEquipment = equipment;
 
-            OnEquipmentChanged(equipment);
+            OnEquipmentChanged(equipment, equipmentSlot);
         }
 
         public void ChangeNextPair()
@@ -132,9 +132,9 @@ namespace LandRushLibrary.PlayerItemManagers
                 EquipmentChanged(this, e);
         }
 
-        private EquipmentChangedEventArgs OnEquipmentChanged(EquipmentItem equipment)
+        private EquipmentChangedEventArgs OnEquipmentChanged(EquipmentItem equipment, EquipmentSlot equipmentSlot)
         {
-            EquipmentChangedEventArgs args = new EquipmentChangedEventArgs(equipment);
+            EquipmentChangedEventArgs args = new EquipmentChangedEventArgs(equipment, equipmentSlot);
             OnEquipmentChanged(args);
 
             return args;
@@ -151,14 +151,16 @@ namespace LandRushLibrary.PlayerItemManagers
         public class EquipmentChangedEventArgs : EventArgs
         {
             public EquipmentItem EquipmentItem { get; set; }
+            public EquipmentSlot EquipmentSlot { get; set; }
 
             public EquipmentChangedEventArgs()
             {
             }
 
-            public EquipmentChangedEventArgs(EquipmentItem equipmentItem)
+            public EquipmentChangedEventArgs(EquipmentItem equipmentItem, EquipmentSlot equipmentSlot)
             {
                 EquipmentItem = equipmentItem;
+                EquipmentSlot = EquipmentSlot;
             }
         }
         #endregion
