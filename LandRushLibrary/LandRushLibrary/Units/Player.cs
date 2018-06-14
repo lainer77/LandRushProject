@@ -21,7 +21,6 @@ namespace LandRushLibrary.Units
                     _instance = PlayerSerializer.Instance.DeSerialize();
                     _instance.Equipment = new PlayerEquipment(_instance._maxPairCount);
                     _instance.CurrentHp = _instance.MaxHp;
-
                 }
 
                 return _instance;
