@@ -10,12 +10,12 @@ namespace LandRushLibrary.PlayerItemManagers
         public PlayerEquipment(int maxPairCount)
         {
             _maxPairCount = maxPairCount;
-            _equipmentPairs = new EquipmentPair[_maxPairCount];
-            CurrentPair = 1;
+            EquipmentPairs = new EquipmentPair[_maxPairCount];
+            _currentIndex = 1;
 
-            for (int i = 0; i < _equipmentPairs.Length; i++)
+            for (int i = 0; i < EquipmentPairs.Length; i++)
             {
-                _equipmentPairs[i] = new EquipmentPair();
+                EquipmentPairs[i] = new EquipmentPair();
             }
         }
 
@@ -28,19 +28,19 @@ namespace LandRushLibrary.PlayerItemManagers
 
         #region Fields
         private readonly int _maxPairCount;
-        public int CurrentPair { get; private set; }
-        private EquipmentPair[] _equipmentPairs;
+        private int _currentIndex;
+        public EquipmentPair[] EquipmentPairs { get; set; }
 
         public EquipmentItem LeftEquipment
         {
             get
             {
-                return _equipmentPairs[CurrentPair - 1].LeftEquipment;
+                return EquipmentPairs[_currentIndex - 1].LeftEquipment;
             }
 
             private set
             {
-                _equipmentPairs[CurrentPair - 1].LeftEquipment = value;
+                EquipmentPairs[_currentIndex - 1].LeftEquipment = value;
             }
         }
 
@@ -48,12 +48,12 @@ namespace LandRushLibrary.PlayerItemManagers
         {
             get
             {
-                return _equipmentPairs[CurrentPair - 1].RightEquipment;
+                return EquipmentPairs[_currentIndex - 1].RightEquipment;
             }
 
             private set
             {
-                _equipmentPairs[CurrentPair - 1].RightEquipment = value;
+                EquipmentPairs[_currentIndex - 1].RightEquipment = value;
             }
         }
         #endregion
@@ -62,21 +62,35 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void EquipItem(EquipmentSlot equipmentSlot, EquipmentItem equipment )
         {
-            if (equipmentSlot == EquipmentSlot.Left)
-                _equipmentPairs[CurrentPair - 1].LeftEquipment = equipment;
-            else if (equipmentSlot == EquipmentSlot.Right)
-                _equipmentPairs[CurrentPair - 1].RightEquipment = equipment;
+            EquipmentItem prevEqupment = null;
 
-            OnEquipmentChanged(equipment, equipmentSlot);
+            if (equipmentSlot == EquipmentSlot.Left)
+            {
+                prevEqupment = EquipmentPairs[_currentIndex - 1].LeftEquipment;
+                EquipmentPairs[_currentIndex - 1].LeftEquipment = equipment;
+            }
+            else if (equipmentSlot == EquipmentSlot.Right)
+            {
+                prevEqupment = EquipmentPairs[_currentIndex - 1].RightEquipment;
+                EquipmentPairs[_currentIndex - 1].RightEquipment = equipment;
+            }
+
+            OnEquipmentChanged(prevEqupment, equipment, equipmentSlot);
         }
 
         public void ChangeNextPair()
         {
-            if (CurrentPair >= _maxPairCount)
-                CurrentPair = 1;
+            EquipmentPair prevPair = EquipmentPairs[_currentIndex - 1];
+
+            if (_currentIndex >= _maxPairCount)
+                _currentIndex = 1;
             else
-                CurrentPair++;
-            OnCurrentPairChanged(this);
+                _currentIndex++;
+
+            EquipmentPair newPair = EquipmentPairs[_currentIndex - 1];
+
+
+            OnCurrentPairChanged(prevPair, newPair);
 
         }
 
@@ -92,9 +106,9 @@ namespace LandRushLibrary.PlayerItemManagers
                 CurrentPairChanged(this, e);
         }
 
-        private CurrentPairChangedEventArgs OnCurrentPairChanged(PlayerEquipment playerEquipment)
+        private CurrentPairChangedEventArgs OnCurrentPairChanged(EquipmentPair prevPair, EquipmentPair newPair)
         {
-            CurrentPairChangedEventArgs args = new CurrentPairChangedEventArgs(playerEquipment);
+            CurrentPairChangedEventArgs args = new CurrentPairChangedEventArgs(prevPair, newPair);
             OnCurrentPairChanged(args);
 
             return args;
@@ -110,15 +124,17 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public class CurrentPairChangedEventArgs : EventArgs
         {
-            public PlayerEquipment PlayerEquipment { get; set; }
+            public EquipmentPair PrevPair { get; set; }
+            public EquipmentPair NewPair { get; set; }
 
             public CurrentPairChangedEventArgs()
             {
             }
 
-            public CurrentPairChangedEventArgs(PlayerEquipment playerEquipment)
+            public CurrentPairChangedEventArgs(EquipmentPair prevPair, EquipmentPair newPair)
             {
-                PlayerEquipment = playerEquipment;
+                PrevPair = prevPair;
+                NewPair = newPair;
             }
         }
         #endregion
@@ -132,9 +148,9 @@ namespace LandRushLibrary.PlayerItemManagers
                 EquipmentChanged(this, e);
         }
 
-        private EquipmentChangedEventArgs OnEquipmentChanged(EquipmentItem equipment, EquipmentSlot equipmentSlot)
+        private EquipmentChangedEventArgs OnEquipmentChanged(EquipmentItem newEquipment, EquipmentItem prevEquipment, EquipmentSlot equipmentSlot)
         {
-            EquipmentChangedEventArgs args = new EquipmentChangedEventArgs(equipment, equipmentSlot);
+            EquipmentChangedEventArgs args = new EquipmentChangedEventArgs(newEquipment, prevEquipment, equipmentSlot);
             OnEquipmentChanged(args);
 
             return args;
@@ -150,16 +166,18 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public class EquipmentChangedEventArgs : EventArgs
         {
-            public EquipmentItem EquipmentItem { get; set; }
+            public EquipmentItem PrevEquipment { get; set; }
+            public EquipmentItem NewEquipment { get; set; }
             public EquipmentSlot EquipmentSlot { get; set; }
 
             public EquipmentChangedEventArgs()
             {
             }
 
-            public EquipmentChangedEventArgs(EquipmentItem equipmentItem, EquipmentSlot equipmentSlot)
+            public EquipmentChangedEventArgs(EquipmentItem newEquipment, EquipmentItem prevEquipment, EquipmentSlot equipmentSlot)
             {
-                EquipmentItem = equipmentItem;
+                PrevEquipment = prevEquipment;
+                NewEquipment = newEquipment;
                 EquipmentSlot = EquipmentSlot;
             }
         }
