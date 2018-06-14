@@ -54,6 +54,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CombatTest.cs" />
+    <Compile Include="DropTest.cs" />
     <Compile Include="PlayerEquipmentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ItemTotalTest.cs" />

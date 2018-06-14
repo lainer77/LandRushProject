@@ -58,7 +58,7 @@ namespace LandRushLibrary.Units
 
             int damage = AttackPower;
 
-            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(damage);
+            DamageCalculatedEventArgs args = new DamageCalculatedEventArgs(damage);
             OnCalculatedRandomDamage(args);
 
             damage = args.AttackPower;
@@ -73,17 +73,17 @@ namespace LandRushLibrary.Units
             attakedUnit.GotDamage(damage);
 
         }
-        public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
+        public event EventHandler<DamageCalculatedEventArgs> DamageCalculated;
 
-        protected virtual void OnCalculatedRandomDamage(CalculatedRandomDamageEventArgs e)
+        protected virtual void OnCalculatedRandomDamage(DamageCalculatedEventArgs e)
         {
-            if (CalculatedRandomDamage != null)
-                CalculatedRandomDamage(this, e);
+            if (DamageCalculated != null)
+                DamageCalculated(this, e);
         }
 
-        private CalculatedRandomDamageEventArgs OnCalculatedRandomDamage(int attackPower)
+        private DamageCalculatedEventArgs OnCalculatedRandomDamage(int attackPower)
         {
-            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(attackPower);
+            DamageCalculatedEventArgs args = new DamageCalculatedEventArgs(attackPower);
             OnCalculatedRandomDamage(args);
 
             return args;
@@ -98,7 +98,7 @@ namespace LandRushLibrary.Units
             clone.AttackPower = AttackPower;
             clone.Armor = Armor;
             clone.MaxHp = MaxHp;
-            clone.CurrentHp = CurrentHp;
+            clone.CurrentHp = MaxHp;
             clone.Speed = Speed;
             clone.SlainExp = SlainExp;
             clone.PrefabName = PrefabName;

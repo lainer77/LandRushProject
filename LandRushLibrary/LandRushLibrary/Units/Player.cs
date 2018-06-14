@@ -72,7 +72,7 @@ namespace LandRushLibrary.Units
                 return;
             int damage = AttackPower + weaponDamage;
 
-            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(damage);
+            DamageCalculatedEventArgs args = new DamageCalculatedEventArgs(damage);
             OnCalculatedRandomDamage(args);
 
             damage = args.AttackPower;
@@ -191,17 +191,17 @@ namespace LandRushLibrary.Units
         }
         #endregion
 
-        public event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
+        public event EventHandler<DamageCalculatedEventArgs> DamageCalculated;
 
-        protected virtual void OnCalculatedRandomDamage(CalculatedRandomDamageEventArgs e)
+        protected virtual void OnCalculatedRandomDamage(DamageCalculatedEventArgs e)
         {
-            if (CalculatedRandomDamage != null)
-                CalculatedRandomDamage(this, e);
+            if (DamageCalculated != null)
+                DamageCalculated(this, e);
         }
 
-        private CalculatedRandomDamageEventArgs OnCalculatedRandomDamage(int attackPower)
+        private DamageCalculatedEventArgs OnCalculatedRandomDamage(int attackPower)
         {
-            CalculatedRandomDamageEventArgs args = new CalculatedRandomDamageEventArgs(attackPower);
+            DamageCalculatedEventArgs args = new DamageCalculatedEventArgs(attackPower);
             OnCalculatedRandomDamage(args);
 
             return args;

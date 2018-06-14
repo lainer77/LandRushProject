@@ -6,18 +6,18 @@ namespace LandRushLibrary
     public interface IAttackable
     {
         void Attack(Unit attakedUnit, int weaponDamage = 0);
-        event EventHandler<CalculatedRandomDamageEventArgs> CalculatedRandomDamage;
+        event EventHandler<DamageCalculatedEventArgs> DamageCalculated;
     }
 
-    public class CalculatedRandomDamageEventArgs : EventArgs
+    public class DamageCalculatedEventArgs : EventArgs
     {
         public int AttackPower { get; set; }
 
-        public CalculatedRandomDamageEventArgs()
+        public DamageCalculatedEventArgs()
         {
         }
 
-        public CalculatedRandomDamageEventArgs(int attackPower)
+        public DamageCalculatedEventArgs(int attackPower)
         {
             AttackPower = attackPower;
         }

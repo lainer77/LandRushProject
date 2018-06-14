@@ -42,13 +42,47 @@ namespace LandRushLibraryTests
 
             upgrader.UpgradeTried += OnUpgradeTried;
 
-            while(stop)
+            stop = true;
+
+            while (stop)
             {
                 upgrader.Upgrade<Sword>(ref sword);
             }
 
             Assert.AreEqual("ShortSword", sword.Name);
             Assert.AreEqual(2, sword.Grade);
+
+            stone.AddAmount(30);
+            wood.AddAmount(30);
+            iron.AddAmount(30);
+
+            stop = true;
+
+
+            while (stop)
+            {
+                upgrader.Upgrade<Sword>(ref sword);
+            }
+
+            Assert.AreEqual(ItemID.KnightSword, sword.ItemId);
+            Assert.AreEqual(3, sword.Grade);
+
+            stone.AddAmount(30);
+            wood.AddAmount(30);
+            iron.AddAmount(30);
+
+            stop = true;
+
+
+            while (stop)
+            {
+                upgrader.Upgrade<Sword>(ref sword);
+            }
+
+            Assert.AreEqual(ItemID.SteelSword, sword.ItemId);
+            Assert.AreEqual(4, sword.Grade);
+
+            Assert.AreEqual(false, upgrader.UpgradePossibility(sword));
         }
 
         public void OnUpgradeTried(object sender, Upgrader.UpgradeTriedEventArgs e)

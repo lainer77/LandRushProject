@@ -104,6 +104,7 @@ namespace LandRushLibrary.Drop
                     if (rateSum >= random)
                     {
                         GameItem dropItem = ItemFactory.Instance.Create(x.DropItem.ItemId);
+                        dropItem.Amount = x.DropItem.Amount;
                         dropItems.Add(dropItem);
 
                         break;
