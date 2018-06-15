@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\ModelBase.cs" />
     <Compile Include="Drop\MonsterItemDropManager.cs" />
     <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="Interfaces\IAttackable.cs" />
@@ -62,7 +63,6 @@
     <Compile Include="Items\Potion.cs" />
     <Compile Include="Items\Shield.cs" />
     <Compile Include="Items\Sword.cs" />
-    <Compile Include="Singleton\SingletonBase.cs" />
     <Compile Include="Units\Monster.cs" />
     <Compile Include="Units\Player.cs" />
     <Compile Include="Units\Unit.cs" />

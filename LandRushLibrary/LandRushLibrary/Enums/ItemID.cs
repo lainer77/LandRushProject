@@ -20,7 +20,6 @@
         Sword,
         Shield,
         Bow,
-        Quiver,
         Potion,
         Ingredient,
         Arrow

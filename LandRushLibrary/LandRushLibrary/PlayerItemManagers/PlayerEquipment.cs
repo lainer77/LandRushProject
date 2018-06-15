@@ -29,6 +29,14 @@ namespace LandRushLibrary.PlayerItemManagers
         #region Fields
         private readonly int _maxPairCount;
         private int _currentIndex;
+        public EquipmentPair CurrentPair
+        {
+            get
+            {
+                return EquipmentPairs[_currentIndex];
+            }
+        }
+
         public EquipmentPair[] EquipmentPairs { get; set; }
 
         public EquipmentItem LeftEquipment

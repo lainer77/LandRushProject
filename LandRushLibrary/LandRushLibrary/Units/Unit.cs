@@ -1,11 +1,12 @@
 ﻿using System;
+using LandRushLibrary.Base;
 using LandRushLibrary.Repository;
 using Newtonsoft.Json;
 
 namespace LandRushLibrary.Units
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public abstract class Unit
+    public abstract class Unit : ModelBase
     {
         #region Fields
         public string Name { get; set; }

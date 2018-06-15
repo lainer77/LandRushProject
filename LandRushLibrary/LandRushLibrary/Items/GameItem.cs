@@ -1,10 +1,11 @@
-﻿using LandRushLibrary.Repository;
+﻿using LandRushLibrary.Base;
+using LandRushLibrary.Repository;
 using Newtonsoft.Json;
 
 namespace LandRushLibrary.Items
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public abstract class GameItem
+    public abstract class GameItem : ModelBase
     {
         public ItemID ItemId { get; set; }
         public string Name { get; set; }

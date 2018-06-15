@@ -62,6 +62,7 @@ namespace LandRushLibrary.Upgrade
         }
 
         private List<UpgradeCost> _upgradeCosts;
+        
         private int _maxGrade;
         private Random _random;
 
