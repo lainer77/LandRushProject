@@ -58,14 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\KriptoFX\MeshEffect\PostEffects\PC\Bloom\Editor\ME_BloomEditor.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\PostEffects\PC\Bloom\Editor\ME_BloomGraphDrawer.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\PostEffects\PC\Common\Editor\ME_EditorGUIHelper.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\PostEffects\PC\Common\Editor\ME_FieldFinder.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\PostEffects\PC\Common\Editor\ME_MinDrawer.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\Scripts\Editor\MeshRendererEditor.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\Shaders\Editor\ME_CustomMaterialInspectorParticle.cs" />
-    <Compile Include="Assets\KriptoFX\MeshEffect\Shaders\Editor\ME_CustomShaderGUI.cs" />
     <Compile Include="Assets\SteamVR\Editor\SteamVR_Editor.cs" />
     <Compile Include="Assets\SteamVR\Editor\SteamVR_Preferences.cs" />
     <Compile Include="Assets\SteamVR\Editor\SteamVR_RenderModelEditor.cs" />
