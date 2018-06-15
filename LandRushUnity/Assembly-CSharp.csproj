@@ -58,7 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Catch.cs" />
     <Compile Include="Assets\DaD Inventory\Scripts\Demo\DummyEquipment.cs" />
     <Compile Include="Assets\DaD Inventory\Scripts\Demo\DummyHealthBar.cs" />
     <Compile Include="Assets\DaD Inventory\Scripts\Demo\DummyHealthPotion.cs" />
@@ -114,13 +113,13 @@
     <Compile Include="Assets\KriptoFX\MeshEffect\Scripts\ME_ParticleTrails.cs" />
     <Compile Include="Assets\KriptoFX\MeshEffect\Scripts\ME_TrailRendererNoise.cs" />
     <Compile Include="Assets\KriptoFX\MeshEffect\Scripts\PSMeshRendererUpdater.cs" />
-    <Compile Include="Assets\mati.cs" />
     <Compile Include="Assets\Scripts\Arrow\ArrowShoundPackige.cs" />
     <Compile Include="Assets\Scripts\Arrow\ArrowSlot.cs" />
     <Compile Include="Assets\Scripts\Arrow\BowDesorption.cs" />
     <Compile Include="Assets\Scripts\Arrow\LongBow.cs" />
     <Compile Include="Assets\Scripts\CharacterHelper\CameraLook.cs" />
     <Compile Include="Assets\Scripts\CharacterHelper\CharacterControllerDevice.cs" />
+    <Compile Include="Assets\Scripts\CharacterHelper\HandController.cs" />
     <Compile Include="Assets\Scripts\Repository\Layers.cs" />
     <Compile Include="Assets\Scripts\Repository\Tags.cs" />
     <Compile Include="Assets\Scripts\VRDevice\ControllerInteraction.cs" />
