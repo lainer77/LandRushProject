@@ -8,7 +8,7 @@ namespace LandRushLibrary.Utilities
 {
     internal class MonsterSerializer
     {
-        public const string MonstersFilePath = "Assets//Json//monster.json";
+        public const string MonstersFilePath = "Assets/Assets//Json//monster.json";
 
         #region singleton
         private static MonsterSerializer _instance;

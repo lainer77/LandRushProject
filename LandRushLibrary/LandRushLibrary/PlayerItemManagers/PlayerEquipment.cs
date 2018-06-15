@@ -19,11 +19,6 @@ namespace LandRushLibrary.PlayerItemManagers
             }
         }
 
-        public void EquipItem(EquipmentSlot right, object itemFctory)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region Fields
