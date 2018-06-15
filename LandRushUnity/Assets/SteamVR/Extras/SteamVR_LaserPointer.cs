@@ -1,6 +1,7 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
 using System.Collections;
+using UnityScriptHelper;
 
 public struct PointerEventArgs
 {
@@ -13,7 +14,7 @@ public struct PointerEventArgs
 public delegate void PointerEventHandler(object sender, PointerEventArgs e);
 
 
-public class SteamVR_LaserPointer : MonoBehaviour
+public class SteamVR_LaserPointer : MonoBehaviourEx
 {
     public bool active = true;
     public Color color;
