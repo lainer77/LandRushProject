@@ -84,7 +84,7 @@ namespace Game
 
         static void goo()
         {
-            Inventory inven = Inventory.Instance;
+            PlayerInventory inven = PlayerInventory.Instance;
             Upgrader upgrader = Upgrader.Instance;
 
             upgrader.UpgradeTried += OnUpTried;

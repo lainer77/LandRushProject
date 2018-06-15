@@ -1,0 +1,175 @@
+{
+  "Swords": [
+    {
+      "AttackPower": 10,
+      "Grade": 1,
+      "ItemId": 1,
+      "Name": "올드 소드",
+      "IconName": "OldSword",
+      "PrefabName": "OldSword",
+      "Type": 0,
+        "MaxAmout" :  1
+    },
+    {
+      "AttackPower": 12,
+      "Grade": 2,
+      "ItemId": 10,
+      "Name": "스틸소드",
+      "IconName": "ShortSword",
+      "PrefabName": "ShortSword",
+      "Type": 0,
+      "MaxAmout": 1
+    },
+    {
+      "AttackPower": 15,
+      "Grade": 3,
+      "ItemId": 11,
+      "Name": "나이트소드",
+      "IconName": "KnightSword",
+      "PrefabName": "KnightSword",
+      "Type": 0,
+      "MaxAmout": 1
+    },
+    {
+      "AttackPower": 19,
+      "Grade": 4,
+      "ItemId": 12,
+      "Name": "드래곤소드",
+      "IconName": "SteelSword",
+      "PrefabName": "SteelSword",
+      "Type": 0,
+      "MaxAmout": 1
+    }
+  ],
+  "Shields": [
+    {
+      "Armor": 5,
+      "Grade": 0,
+      "ItemId": 2,
+      "Name": "오래된 방패",
+      "IconName": "OldSword",
+      "PrefabName": "OldShield",
+      "Type": 1,
+      "MaxAmout": 1
+    },
+    {
+      "Armor": 7,
+      "Grade": 0,
+      "ItemId": 13,
+      "Name": "아이언실드",
+      "IconName": "IronShield",
+      "PrefabName": "IronShield",
+      "Type": 1,
+      "MaxAmout": 1
+    },
+    {
+      "Armor": 10,
+      "Grade": 0,
+      "ItemId": 14,
+      "Name": "워실드",
+      "IconName": "WarShield",
+      "PrefabName": "WarShield",
+      "Type": 1,
+      "MaxAmout": 1
+    },
+    {
+      "Armor": 14,
+      "Grade": 0,
+      "ItemId": 15,
+      "Name": "나이트실드",
+      "IconName": "KnightShield",
+      "PrefabName": "KnightShield",
+      "Type": 1,
+      "MaxAmout": 1
+    }
+  ],
+  "Bows": [
+    {
+      "AttackPower": 15,
+      "Grade": 0,
+      "ItemId": 3,
+      "Name": "우드 보우",
+      "IconName": "OldBow",
+      "PrefabName": "OldBow",
+      "Type": 2,
+      "MaxAmout": 1
+    },
+    {
+      "AttackPower": 17,
+      "Grade": 0,
+      "ItemId": 16,
+      "Name": "워 보우",
+      "IconName": "WarBow",
+      "PrefabName": "warBow",
+      "Type": 2,
+      "MaxAmout": 1
+    },
+    {
+      "AttackPower": 20,
+      "Grade": 0,
+      "ItemId": 17,
+      "Name": "메탈 보우",
+      "IconName": "MetalBow",
+      "PrefabName": "MetalBow",
+      "Type": 2,
+      "MaxAmout": 1
+    },
+    {
+      "AttackPower": 24,
+      "Grade": 0,
+      "ItemId": 18,
+      "Name": "풀메탈 보우",
+      "IconName": "FullMetalBow",
+      "PrefabName": "FullMetalBow",
+      "Type": 2,
+      "MaxAmout": 1
+    }
+  ],
+  "Potions": [
+    {
+      "RecorveyPoint": 0.25,
+      "ItemId": 4,
+      "Name": "체력회복 포션",
+      "IconName": "HpPotion",
+      "PrefabName": "HpPotion",
+      "Type": 4,
+      "MaxAmount": 10
+    }
+  ],
+  "Ingredients": [
+    {
+      "ItemId": 6,
+      "Name": "돌멩이",
+      "IconName": "StoneIcon",
+      "PrefabName": "StonePrefab",
+      "Type": 5,
+      "MaxAmount": 30
+    },
+    {
+      "ItemId": 7,
+      "Name": "나무",
+      "IconName": "WoodIcon",
+      "PrefabName": "WoodPrefab",
+      "Type": 5,
+      "MaxAmount": 30
+    },
+    {
+      "ItemId": 8,
+      "Name": "철광석",
+      "IconName": "IronPrefab",
+      "PrefabName": "IronPrefab",
+      "Type": 5,
+      "MaxAmount": 30
+    }
+  ],
+  "Arrows": [
+    {
+      "ItemId": 5,
+      "Name": "화살",
+      "IconName": "Arrow",
+      "PrefabName": "Arrow",
+      "Type": 6,
+      "MaxAmount": 50
+    }
+  ]
+}

@@ -19,7 +19,7 @@ namespace LandRushLibraryTests
 
             Upgrader upgrader = Upgrader.Instance;
 
-            Inventory inven = Inventory.Instance;
+            PlayerInventory inven = PlayerInventory.Instance;
 
             inven.ClearInventory();
 

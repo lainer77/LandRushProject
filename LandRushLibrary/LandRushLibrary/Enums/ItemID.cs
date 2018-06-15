@@ -15,7 +15,11 @@
         DragonSword = 12,
         IronShield = 13,
         WarShield = 14,
-        KnightShield = 15
+        KnightShield = 15,
+        Bow2 = 16,
+        Bow3 = 17,
+        Bow4 = 18,
+        
     }
 
     public enum ItemType

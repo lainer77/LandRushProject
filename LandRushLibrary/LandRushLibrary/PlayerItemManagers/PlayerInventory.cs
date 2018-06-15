@@ -2,17 +2,17 @@
 
 namespace LandRushLibrary.PlayerItemManagers
 {
-    public class Inventory : ItemRepository
+    public class PlayerInventory : ItemRepository
     {
         #region Singleton
-        private static Inventory _instance;
+        private static PlayerInventory _instance;
 
-        public static Inventory Instance
+        public static PlayerInventory Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new Inventory();
+                    _instance = new PlayerInventory();
 
                 return _instance;
             }

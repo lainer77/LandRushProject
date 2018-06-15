@@ -52,7 +52,7 @@
     <Compile Include="Interfaces\IUpgradable.cs" />
     <Compile Include="Items\EquipmentItem.cs" />
     <Compile Include="Items\UseableItem.cs" />
-    <Compile Include="PlayerItemManagers\Inventory.cs" />
+    <Compile Include="PlayerItemManagers\PlayerInventory.cs" />
     <Compile Include="PlayerItemManagers\PlayerEquipment.cs" />
     <Compile Include="PlayerItemManagers\ItemRepository.cs" />
     <Compile Include="PlayerItemManagers\ItemStorage.cs" />

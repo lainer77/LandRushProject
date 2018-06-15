@@ -68,6 +68,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="json\items.json" />
+    <None Include="json\monster.json" />
+    <None Include="json\player.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

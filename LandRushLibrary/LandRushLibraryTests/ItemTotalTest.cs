@@ -74,7 +74,7 @@ namespace LandRushLibraryTests
         [TestMethod]
         public void 인벤토리에_아이템_추가하기_테스트()
         {
-            Inventory inven = Inventory.Instance;
+            PlayerInventory inven = PlayerInventory.Instance;
 
             IngredientItem stone = ItemFactory.Instance.Create<IngredientItem>(ItemID.Stone);
 
@@ -112,13 +112,13 @@ namespace LandRushLibraryTests
 
         }
 
-        public void OnInventoryIsFull(Object sender, Inventory.InventoryIsFullEventArgs e)
+        public void OnInventoryIsFull(Object sender, PlayerInventory.InventoryIsFullEventArgs e)
         {
             Console.WriteLine("inven Full");
             Assert.AreEqual(1, 1);
         }
 
-        public void OnInventoryChanged(object sender, Inventory.InventoryItemChangedEventArgs e)
+        public void OnInventoryChanged(object sender, PlayerInventory.InventoryItemChangedEventArgs e)
         {
             foreach (var item in e.GameItems)
             {

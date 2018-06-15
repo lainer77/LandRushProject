@@ -78,11 +78,11 @@ namespace LandRushLibrary.Upgrade
 
             UpgradeCost stock = new UpgradeCost();
 
-            Inventory inventory = Inventory.Instance;
+            PlayerInventory playerInventory = PlayerInventory.Instance;
 
             foreach (var item in cost.RequireIngredients)
             {
-                stock.AddIngredient(item.Key, inventory.GetAmountForId(item.Key));
+                stock.AddIngredient(item.Key, playerInventory.GetAmountForId(item.Key));
             }
 
             return stock;
@@ -98,7 +98,7 @@ namespace LandRushLibrary.Upgrade
 
             foreach (var item in cost.RequireIngredients)
             {
-                if ( item.Value > Inventory.Instance.GetAmountForId(item.Key))
+                if ( item.Value > PlayerInventory.Instance.GetAmountForId(item.Key))
                 {
                     poss = false;
                     break;
@@ -116,7 +116,7 @@ namespace LandRushLibrary.Upgrade
                 return;
             }
 
-            Inventory inven = Inventory.Instance;
+            PlayerInventory inven = PlayerInventory.Instance;
             UpgradeCost cost = _upgradeCosts[equipment.Grade - 1];
 
             foreach (var item in cost.RequireIngredients)
