@@ -7,6 +7,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
 {
     #region outlets
 
+    public float MoveSpeed;
     #endregion
 
     #region fields
@@ -23,10 +24,12 @@ public class CharacterControllerDevice : MonoBehaviourEx
     }
 
     private DeviceInteraction _leftController;
+    private RightDeviceInteraction _rightController;
 
     protected override void Start()
     {
         _leftController = DeviceRepository.LeftDeviceInteraction;
+        _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
         ControllSetting(true);
     }
@@ -67,7 +70,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
     {
         Vector3 rotate = Camera.main.transform.rotation.ToEulerAngles();
         transform.Rotate(eulerAngles: new Vector3(0, rotate.y, 0));
-        transform.Translate(vector * 0.1f);
+        transform.Translate(vector * Time.deltaTime * MoveSpeed);
     }
 
     #endregion
