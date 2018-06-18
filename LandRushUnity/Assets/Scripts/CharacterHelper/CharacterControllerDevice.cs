@@ -12,7 +12,6 @@ public class CharacterControllerDevice : MonoBehaviourEx
 
     #region fields
 
-    private Rigidbody _rigidbody;
     private Transform _camTransform;
 
     #endregion
@@ -31,7 +30,6 @@ public class CharacterControllerDevice : MonoBehaviourEx
     {
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rightController = DeviceRepository.RightDeviceInteraction;
-        _rigidbody = GetCachedComponent<Rigidbody>();
         _camTransform = Camera.main.GetComponent<Transform>();
         ControllSetting(true);
     }

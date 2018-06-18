@@ -95,8 +95,6 @@
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineVertexData.cs" />
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricMultiLineBehavior.cs" />
-    <Compile Include="Assets\Laterns and candles\scripts\CameraFacing.cs" />
-    <Compile Include="Assets\Laterns and candles\scripts\ExtendedFlycam.cs" />
     <Compile Include="Assets\Multistory Dungeons\Scripts\DisableMeshAtRuntime.cs" />
     <Compile Include="Assets\Multistory Dungeons\Scripts\FPScounter.cs" />
     <Compile Include="Assets\Multistory Dungeons\Scripts\Move.cs" />
@@ -217,7 +215,7 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
-    <None Include="Assets\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
+    <None Include="Assets\Models\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Export\VolumetricLines\Shaders\_StripShader.cginc" />
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
@@ -796,12 +794,6 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.1.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{FA6E0B13-2594-810C-9327-070299EE1D93}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
