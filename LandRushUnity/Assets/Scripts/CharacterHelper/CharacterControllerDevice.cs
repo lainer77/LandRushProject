@@ -13,6 +13,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
     #region fields
 
     private Rigidbody _rigidbody;
+    private Transform _camTransform;
 
     #endregion
 
@@ -31,6 +32,7 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rightController = DeviceRepository.RightDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
+        _camTransform = Camera.main.GetComponent<Transform>();
         ControllSetting(true);
     }
 
@@ -68,9 +70,8 @@ public class CharacterControllerDevice : MonoBehaviourEx
 
     public void MoveTo(Vector3 vector)
     {
-        Vector3 rotate = Camera.main.transform.rotation.ToEulerAngles();
-        transform.Rotate(eulerAngles: new Vector3(0, rotate.y, 0));
-        transform.Translate(vector * Time.deltaTime * MoveSpeed);
+        Vector3 dir = _camTransform.TransformDirection(vector);
+        transform.Translate(dir * Time.deltaTime * MoveSpeed);
     }
 
     #endregion
