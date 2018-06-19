@@ -51,7 +51,11 @@ public class ItemSlotController : MonoBehaviourEx
         }
         else
         {
-            _icon.sprite = Resources.Load<Sprite>(IconPath + "SlotNull");
+            _icon.sprite = null;
+
+            Color color = _icon.color;
+            color.a = 0.0f;
+            _icon.color = color;
         }
     }
 

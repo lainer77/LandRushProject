@@ -23,7 +23,7 @@ public class RayCastController : MonoBehaviourEx
 	
 	protected override void Update ()
 	{
-	    if (!_rightController.Controller.GetHairTrigger())
+	    if ( _rightController.Controller.GetHairTrigger())
 	    {
 	        if (_laser.Hit.transform == null)
 	            return;

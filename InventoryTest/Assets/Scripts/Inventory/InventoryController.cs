@@ -67,7 +67,7 @@ public class InventoryController : MonoBehaviourEx
         foreach (var item in _inventory.Items)
         {
             _slots[index].SlotItem = item;
-            //_slots[index++].SetSlotItem();
+            _slots[index++].SetSlotItem();
         }
     }
 
@@ -87,7 +87,7 @@ public class InventoryController : MonoBehaviourEx
                 slotController.Row = i;
                 slotController.Colum = j;
 
-                //slotController.SetSlotItem();
+                slotController.SetSlotItem();
 
                 slot.transform.SetParent(_slotGroup.transform, false);
 

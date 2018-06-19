@@ -48,7 +48,15 @@ public class InventorySlotController : ItemSlotController
 
 	    if (laser.Hit.transform.gameObject == gameObject)
 	    {
-	        _icon.color = Color.green;
+            Color color;
+            color = Color.green;
+
+	        if (_icon.sprite == null)
+	            color.a = 0.1f;
+	        else
+	            color.a = 1.0f;
+
+            _icon.color = color;
 
             if (_rightController.Controller.GetHairTriggerDown())
 	        {
@@ -57,7 +65,15 @@ public class InventorySlotController : ItemSlotController
 	    }
 	    else
 	    {
-	        _icon.color = Color.white;
+	        Color color;
+	        color = Color.white;
+
+	        if (_icon.sprite == null)
+	            color.a = 0.0f;
+	        else
+	            color.a = 1.0f;
+
+	        _icon.color = color;
         }
 
 
