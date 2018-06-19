@@ -16,6 +16,8 @@ TagManager:
   - FxTemporaire
   - ANVIL
   - STORAGE
+  - Door
+  - DOOR
   layers:
   - Default
   - TransparentFX

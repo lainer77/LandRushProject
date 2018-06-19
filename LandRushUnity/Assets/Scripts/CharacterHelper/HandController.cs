@@ -31,6 +31,11 @@ public class HandController : MonoBehaviourEx
         {
             Debug.Log("TOUCH ANVIL");
         }
+
+        if (other.CompareTag("DOOR"))
+        {
+            Debug.Log("TOUCH DOOR");
+        }
     }
     
     // Update is called once per frame
