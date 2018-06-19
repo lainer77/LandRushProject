@@ -61,7 +61,7 @@
     <Compile Include="Assets\Assets\Store\Multistory Dungeons\Scripts\DisableMeshAtRuntime.cs" />
     <Compile Include="Assets\Assets\Store\Multistory Dungeons\Scripts\FPScounter.cs" />
     <Compile Include="Assets\Assets\Store\Multistory Dungeons\Scripts\Move.cs" />
-    <Compile Include="Assets\DroppedItem.cs" />
+    <Compile Include="Assets\EquipmentController.cs" />
     <Compile Include="Assets\Export\RaserCraft.cs" />
     <Compile Include="Assets\Export\VolumetricLines\Scripts\Utils\TransformExtensionMethods.cs" />
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
@@ -73,8 +73,11 @@
     <Compile Include="Assets\Laterns and candles\scripts\ExtendedFlycam.cs" />
     <Compile Include="Assets\Scripts\CharacterHelper\CameraLook.cs" />
     <Compile Include="Assets\Scripts\CharacterHelper\CharacterControllerDevice.cs" />
+    <Compile Include="Assets\Scripts\DroppedItem.cs" />
+    <Compile Include="Assets\Scripts\Inventory\EquipmentSlotController.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryController.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventorySlotController.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ItemSlotController.cs" />
     <Compile Include="Assets\Scripts\Inventory\Player\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\Inventory\Player\PlayerStatuesScript.cs" />
     <Compile Include="Assets\Scripts\Inventory\Player\ShoulderScript.cs" />
@@ -89,10 +92,10 @@
     <Compile Include="Assets\Scripts\Item\Shield\ShieldScript.cs" />
     <Compile Include="Assets\Scripts\Item\Sword\SwordScript.cs" />
     <Compile Include="Assets\Scripts\ItemCreator.cs" />
+    <Compile Include="Assets\Scripts\RayCastController.cs" />
     <Compile Include="Assets\Scripts\Repository\DataSaverScript.cs" />
     <Compile Include="Assets\Scripts\Repository\Layers.cs" />
     <Compile Include="Assets\Scripts\Repository\Tags.cs" />
-    <Compile Include="Assets\Scripts\RightRayCastController.cs" />
     <Compile Include="Assets\Scripts\VRDevice\ControllerInteraction.cs" />
     <Compile Include="Assets\Scripts\VRDevice\DeviceInteraction.cs" />
     <Compile Include="Assets\Scripts\VRDevice\DeviceRepository.cs" />
@@ -222,10 +225,10 @@
     <None Include="Assets\Export\VolumetricLines\Shaders\_SimpleShader.cginc" />
     <None Include="Assets\SteamVR\InteractionSystem\Readme_InteractionSystem.txt" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/KCCI/Desktop/work/InventoryTest/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/KCCI/Desktop/work/LandRushProject/InventoryTest/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/KCCI/Desktop/work/InventoryTest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/KCCI/Desktop/work/LandRushProject/InventoryTest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -423,13 +426,13 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="LandRushLibrary">
-      <HintPath>C:/Users/KCCI/Desktop/work/InventoryTest/Assets/References/LandRushLibrary.dll</HintPath>
+      <HintPath>C:/Users/KCCI/Desktop/work/LandRushProject/InventoryTest/Assets/References/LandRushLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/KCCI/Desktop/work/InventoryTest/Assets/References/Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:/Users/KCCI/Desktop/work/LandRushProject/InventoryTest/Assets/References/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityScriptHelper">
-      <HintPath>C:/Users/KCCI/Desktop/work/InventoryTest/Assets/References/UnityScriptHelper.dll</HintPath>
+      <HintPath>C:/Users/KCCI/Desktop/work/LandRushProject/InventoryTest/Assets/References/UnityScriptHelper.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/KCCI/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

@@ -12,6 +12,7 @@ namespace LandRushLibrary.PlayerItemManagers
             _maxPairCount = maxPairCount;
             EquipmentPairs = new EquipmentPair[_maxPairCount];
             _currentIndex = 1;
+            _spareIndex = 2;
 
             for (int i = 0; i < EquipmentPairs.Length; i++)
             {
@@ -24,12 +25,18 @@ namespace LandRushLibrary.PlayerItemManagers
         #region Fields
         private readonly int _maxPairCount;
         private int _currentIndex;
+        private int _spareIndex;
         public EquipmentPair CurrentPair
         {
             get
             {
-                return EquipmentPairs[_currentIndex];
+                return EquipmentPairs[_currentIndex -1];
             }
+        }
+
+        public EquipmentPair SparePair
+        {
+            get { return EquipmentPairs[_spareIndex -1]; }
         }
 
         public EquipmentPair[] EquipmentPairs { get; set; }
@@ -84,6 +91,8 @@ namespace LandRushLibrary.PlayerItemManagers
         public void ChangeNextPair()
         {
             EquipmentPair prevPair = EquipmentPairs[_currentIndex - 1];
+
+            _spareIndex = _currentIndex;
 
             if (_currentIndex >= _maxPairCount)
                 _currentIndex = 1;

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityScriptHelper;
 using Valve.VR;
 
-public class InventorySlotController : MonoBehaviourEx
+public class InventorySlotController : ItemSlotController
 {
     #region outlets
 
@@ -16,7 +16,6 @@ public class InventorySlotController : MonoBehaviourEx
 
     #region fields
 
-    private Image _icon;
     private InventorySlotController _interSlotController;
     private PlayerInventory _inventory;
     private InventorySlotController _interSlot;
@@ -24,14 +23,7 @@ public class InventorySlotController : MonoBehaviourEx
 
     public int Row { get; set; }
     public int Colum { get; set; }
-    public string IconPath = "Icons/";
 
-    private GameItem _gameItem;
-    public GameItem SlotItem
-    {
-        get { return _gameItem; }
-        set { _gameItem = value; }
-    }
 
     #endregion
 
@@ -84,13 +76,6 @@ public class InventorySlotController : MonoBehaviourEx
         SetSlotItem();
     }
 
-    protected override void OnMouseEnter()
-    {
-    }
-
-    protected override void OnMouseExit()
-    {
-    }
 
 
     #endregion	
@@ -98,45 +83,6 @@ public class InventorySlotController : MonoBehaviourEx
     #region methods
 
 
-
-
-    public void SetSlotItem()
-    {
-        Image[] images = GetComponentsInChildren<Image>();
-        _icon = images[1];
-
-        SetIconImage();
-        SetItemAmountText();
-    }
-
-    private void SetIconImage()
-    {
-        if (SlotItem != null)
-        {
-            _icon.sprite = Resources.Load<Sprite>(IconPath + SlotItem.IconName);
-        }
-        else
-        {
-            _icon.sprite = null;
-        }
-    }
-
-    private void SetItemAmountText()
-    {
-        Text text = GetComponentInChildren<Text>();
-
-        if (SlotItem != null)
-        {
-            if (SlotItem.Amount <= 1)
-                text.text = "";
-            else
-                text.text = SlotItem.Amount.ToString();
-        }
-        else
-        {
-            text.text = "";
-        }
-    }
 
     #endregion
 }
