@@ -8,17 +8,17 @@
       "IconName": "OldSword",
       "PrefabName": "OldSword",
       "Type": 0,
-        "MaxAmout" :  1
+        "MaxAmount" :  1
     },
     {
       "AttackPower": 12,
       "Grade": 2,
       "ItemId": 10,
       "Name": "½ºÆ¿¼Òµå",
-      "IconName": "ShortSword",
-      "PrefabName": "ShortSword",
+      "IconName": "SteelSword",
+      "PrefabName": "SteelSword",
       "Type": 0,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "AttackPower": 15,
@@ -28,17 +28,17 @@
       "IconName": "KnightSword",
       "PrefabName": "KnightSword",
       "Type": 0,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "AttackPower": 19,
       "Grade": 4,
       "ItemId": 12,
       "Name": "µå·¡°ï¼Òµå",
-      "IconName": "SteelSword",
-      "PrefabName": "SteelSword",
+      "IconName": "DragonSword",
+      "PrefabName": "DragonSword",
       "Type": 0,
-      "MaxAmout": 1
+      "MaxAmount": 1
     }
   ],
   "Shields": [
@@ -50,7 +50,7 @@
       "IconName": "OldSword",
       "PrefabName": "OldShield",
       "Type": 1,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "Armor": 7,
@@ -60,7 +60,7 @@
       "IconName": "IronShield",
       "PrefabName": "IronShield",
       "Type": 1,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "Armor": 10,
@@ -70,7 +70,7 @@
       "IconName": "WarShield",
       "PrefabName": "WarShield",
       "Type": 1,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "Armor": 14,
@@ -80,7 +80,7 @@
       "IconName": "KnightShield",
       "PrefabName": "KnightShield",
       "Type": 1,
-      "MaxAmout": 1
+      "MaxAmount": 1
     }
   ],
   "Bows": [
@@ -92,7 +92,7 @@
       "IconName": "OldBow",
       "PrefabName": "OldBow",
       "Type": 2,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "AttackPower": 17,
@@ -102,7 +102,7 @@
       "IconName": "WarBow",
       "PrefabName": "warBow",
       "Type": 2,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "AttackPower": 20,
@@ -112,7 +112,7 @@
       "IconName": "MetalBow",
       "PrefabName": "MetalBow",
       "Type": 2,
-      "MaxAmout": 1
+      "MaxAmount": 1
     },
     {
       "AttackPower": 24,
@@ -122,7 +122,7 @@
       "IconName": "FullMetalBow",
       "PrefabName": "FullMetalBow",
       "Type": 2,
-      "MaxAmout": 1
+      "MaxAmount": 1
     }
   ],
   "Potions": [
@@ -140,24 +140,24 @@
     {
       "ItemId": 6,
       "Name": "µ¹¸æÀÌ",
-      "IconName": "StoneIcon",
-      "PrefabName": "StonePrefab",
+      "IconName": "Stone",
+      "PrefabName": "Stone",
       "Type": 5,
       "MaxAmount": 30
     },
     {
       "ItemId": 7,
       "Name": "³ª¹«",
-      "IconName": "WoodIcon",
-      "PrefabName": "WoodPrefab",
+      "IconName": "Wood",
+      "PrefabName": "Wood",
       "Type": 5,
       "MaxAmount": 30
     },
     {
       "ItemId": 8,
       "Name": "Ã¶±¤¼®",
-      "IconName": "IronPrefab",
-      "PrefabName": "IronPrefab",
+      "IconName": "Iron",
+      "PrefabName": "Iron",
       "Type": 5,
       "MaxAmount": 30
     }

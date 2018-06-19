@@ -12,22 +12,23 @@ namespace LandRushLibrary.PlayerItemManagers
     {
         #region Fields
 
-        public GameItem[,] Items { get; protected set; }
-        protected readonly int _rows = 4;
-        protected readonly int _columns = 3;
+        public GameItem[,] Items { get; set; }
+        public int Row { get; protected set; }= 4;
+        public int Column { get; protected set; }= 3;
 
         protected ItemRepository()
         {
-            Items = new GameItem[_rows, _columns];
+            Items = new GameItem[Row, Column];
         }
 
         #endregion
 
         #region Methods
 
+
         public void ClearInventory()
         {
-            Items = new GameItem[_rows, _columns];
+            Items = new GameItem[Row, Column];
         }
 
         public GameItem GetSlotItemInfo(int row, int column)
@@ -37,6 +38,7 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public bool AddGameItem(GameItem gameItem)
         {
+
             foreach (var item in Items)
             {
                 if (item == null)
@@ -59,9 +61,9 @@ namespace LandRushLibrary.PlayerItemManagers
 
             }
 
-            for (int i = 0; i < _rows; i++)
+            for (int i = 0; i < Row; i++)
             {
-                for (int j = 0; j < _columns; j++)
+                for (int j = 0; j < Column; j++)
                 {
                     if (Items[i, j] == null)
                     {
@@ -77,20 +79,20 @@ namespace LandRushLibrary.PlayerItemManagers
 
         }
 
-        public void SwapItem(GameItem source, GameItem target)
+        public void SwapItem(int sourceRow, int sourceColumn, int targetRow, int tagetColum)
         {
-            GameItem temp = target;
-            target = source;
-            source = temp;
+            GameItem temp = Items[ sourceRow, sourceColumn];
+            Items[sourceRow, sourceColumn] = Items[targetRow, tagetColum];
+            Items[targetRow, tagetColum] = temp;
 
             OnInventoryItemChanged(Items);
         }
 
         public void RemoveItem(ItemID itemId, int amount)
         {
-            for (int i = 0; i < _rows; i++)
+            for (int i = 0; i < Row; i++)
             {
-                for (int j = 0; j < _columns; j++)
+                for (int j = 0; j < Column; j++)
                 {
                     if (Items[i, j] == null)
                         continue;
@@ -135,6 +137,7 @@ namespace LandRushLibrary.PlayerItemManagers
             return amount;
 
         }
+
 
         public GameItem this[int row, int column]
         {

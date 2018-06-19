@@ -2,6 +2,7 @@
 {
     public enum ItemID
     {
+        Dummy = 4444,
         OldSword = 1,
         OldShield = 2,
         OldBow = 3,
@@ -19,6 +20,7 @@
         Bow2 = 16,
         Bow3 = 17,
         Bow4 = 18,
+
         
     }
 
