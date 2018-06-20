@@ -20,5 +20,16 @@
     "Armor": 10,
     "MaxHp": 120,
     "Speed": 10.0
+  },
+  "Skeleton": {
+    "SlainExp": 10,
+    "MonsterGrade": 1,
+    "PrefabName": "SkeletonPrefab",
+    "MonsterId": 4,
+    "Name": "Skeleton",
+    "AttackPower": 5,
+    "Armor": 2,
+    "MaxHp": 30,
+    "Speed": 10.0
   }
 }

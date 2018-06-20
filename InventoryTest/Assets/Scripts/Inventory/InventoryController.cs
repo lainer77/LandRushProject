@@ -14,7 +14,7 @@ public class InventoryController : MonoBehaviourEx
 
     private PlayerInventory _inventory;
     private GridLayoutGroup _slotGroup;
-    private InventorySlotController _interSlot;
+    private InterSlotController _interSlot;
     private List<InventorySlotController> _slots;
 
     // Use this for initialization
@@ -22,7 +22,7 @@ public class InventoryController : MonoBehaviourEx
 	{
         _inventory = PlayerInventory.Instance;
 	    _inventory.InventoryItemChanged += OnInvenItemChanged;
-	    _interSlot = GameObject.Find("InterSlot").GetComponent<InventorySlotController>();
+	    _interSlot = GameObject.Find("InterSlot").GetComponent<InterSlotController>();
 
         _interSlot.SetSlotItem();
 

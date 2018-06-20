@@ -24,7 +24,6 @@ public class ItemSlotController : MonoBehaviourEx
         set
         {
             _gameItem = value;
-            Debug.Log("set slotItem");
             SetSlotItem();
         }
     }
@@ -46,9 +45,9 @@ public class ItemSlotController : MonoBehaviourEx
 
     protected void SetIconImage()
     {
-        if (SlotItem != null)
+        if (_gameItem != null)
         {
-            _icon.sprite = Resources.Load<Sprite>(IconPath + SlotItem.IconName);
+            _icon.sprite = Resources.Load<Sprite>(IconPath + _gameItem.IconName);
         }
         else
         {
@@ -64,12 +63,12 @@ public class ItemSlotController : MonoBehaviourEx
     {
         Text text = GetComponentInChildren<Text>();
 
-        if (SlotItem != null)
+        if (_gameItem != null)
         {
-            if (SlotItem.Amount <= 1)
+            if (_gameItem.Amount <= 1)
                 text.text = "";
             else
-                text.text = SlotItem.Amount.ToString();
+                text.text = _gameItem.Amount.ToString();
         }
         else
         {

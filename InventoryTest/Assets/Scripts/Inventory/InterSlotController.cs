@@ -14,10 +14,10 @@ public class InterSlotController : ItemSlotController
     #endregion
 
     #region messages
-    protected override void Start () 
-	{
-		
-	}
+    protected override void Awake()
+    {
+        _rightController = DeviceRepository.RightDeviceInteraction;
+    }
 	
 	protected override void Update ()
 	{
@@ -28,7 +28,7 @@ public class InterSlotController : ItemSlotController
 
 	    if (laser.Hit.transform.gameObject == gameObject)
 	    {
-	        Color color;
+            Color color;
 	        color = Color.green;
 
 	        if (_icon.sprite == null)
@@ -41,7 +41,7 @@ public class InterSlotController : ItemSlotController
 	        if (_rightController.Controller.GetHairTriggerDown())
 	        {
                 GameObject dropItem = ItemCreator.CreateItemObject(SlotItem);
-	            dropItem.transform.position = gameObject.transform.forward * 2;
+	            dropItem.transform.position = GameObject.Find("[CameraRig]").transform.position;
 	            SlotItem = null;
 	        }
 	    }

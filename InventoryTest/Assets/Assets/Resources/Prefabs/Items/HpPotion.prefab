@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95660657880163922}
   - component: {fileID: 64386503598564252}
   - component: {fileID: 54958380698002934}
-  - component: {fileID: 114633671148296246}
+  - component: {fileID: 114299780102736278}
   m_Layer: 0
   m_Name: HpPotion
   m_TagString: Item
@@ -134,7 +134,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114633671148296246
+--- !u!114 &114299780102736278
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -142,6 +142,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1255209588031372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c854205fd98a84197664ec35884c56, type: 3}
+  m_Script: {fileID: 11500000, guid: e943431e46c9a39489271b6d6f8eb8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
