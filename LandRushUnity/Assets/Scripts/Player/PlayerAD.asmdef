@@ -1,0 +1,10 @@
+{
+    "name": "PlayerAD",
+    "references": [
+        "DeviceAD"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

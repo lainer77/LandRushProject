@@ -18,6 +18,7 @@ TagManager:
   - STORAGE
   - Door
   - DOOR
+  - ENEMY
   layers:
   - Default
   - TransparentFX
