@@ -18,7 +18,7 @@ public class InventorySlotController : ItemSlotController
 
     private InventorySlotController _interSlotController;
     private PlayerInventory _inventory;
-    private InventorySlotController _interSlot;
+    private InterSlotController _interSlot;
     private DeviceInteraction _rightController;
 
     public int Row { get; set; }
@@ -30,7 +30,7 @@ public class InventorySlotController : ItemSlotController
     #region messages
 	protected override void Awake ()
 	{
-        _interSlot = GameObject.Find("InterSlot").GetComponent<InventorySlotController>();
+        _interSlot = GameObject.Find("InterSlot").GetComponent<InterSlotController>();
 	    _interSlotController = GameObject.Find("InterSlot").GetComponent<InventorySlotController>();
         _inventory = PlayerInventory.Instance;
 

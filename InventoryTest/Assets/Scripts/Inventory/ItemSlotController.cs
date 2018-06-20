@@ -24,6 +24,7 @@ public class ItemSlotController : MonoBehaviourEx
         set
         {
             _gameItem = value;
+            Debug.Log("set slotItem");
             SetSlotItem();
         }
     }

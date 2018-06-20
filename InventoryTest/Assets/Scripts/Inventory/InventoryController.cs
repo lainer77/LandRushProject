@@ -45,11 +45,11 @@ public class InventoryController : MonoBehaviourEx
 	    //Sword oldSword = ItemFactory.Instance.Create<Sword>(ItemID.OldSword);
 	    //_inventory.AddGameItem(oldSword);
 
-	    ItemCreator.GetItemObject<IngredientItem>(ItemID.Stone).transform.position = new Vector3(-2.0f, -2.0f, -10.0f);
+	    ItemCreator.CreateItemObject<IngredientItem>(ItemID.Stone).transform.position = new Vector3(-2.0f, -2.0f, -10.0f);
 
-        ItemCreator.GetItemObject<Potion>(ItemID.HpPotion).transform.position = new Vector3(-4.0f, -2.0f, -10.0f);
+        ItemCreator.CreateItemObject<Potion>(ItemID.HpPotion).transform.position = new Vector3(-4.0f, -2.0f, -10.0f);
 
-	    ItemCreator.GetItemObject<IngredientItem>(ItemID.Wood).transform.position = new Vector3(0.0f, -2.0f, -10.0f);
+	    ItemCreator.CreateItemObject<IngredientItem>(ItemID.Wood).transform.position = new Vector3(0.0f, -2.0f, -10.0f);
 
     }
 

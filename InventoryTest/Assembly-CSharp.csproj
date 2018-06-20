@@ -71,10 +71,11 @@
     <Compile Include="Assets\Export\VolumetricLines\Scripts\VolumetricMultiLineBehavior.cs" />
     <Compile Include="Assets\Laterns and candles\scripts\CameraFacing.cs" />
     <Compile Include="Assets\Laterns and candles\scripts\ExtendedFlycam.cs" />
+    <Compile Include="Assets\PairChangeButton.cs" />
     <Compile Include="Assets\Scripts\CharacterHelper\CameraLook.cs" />
     <Compile Include="Assets\Scripts\CharacterHelper\CharacterControllerDevice.cs" />
-    <Compile Include="Assets\Scripts\DroppedItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\EquipmentSlotController.cs" />
+    <Compile Include="Assets\Scripts\Inventory\InterSlotController.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryController.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventorySlotController.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemSlotController.cs" />
@@ -87,11 +88,12 @@
     <Compile Include="Assets\Scripts\Item\Arrow\HeadTargetted.cs" />
     <Compile Include="Assets\Scripts\Item\Arrow\Quiver.cs" />
     <Compile Include="Assets\Scripts\Item\Arrow\StringBand.cs" />
+    <Compile Include="Assets\Scripts\Item\DroppedItem.cs" />
     <Compile Include="Assets\Scripts\Item\EquipmentItemScript.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemCreator.cs" />
     <Compile Include="Assets\Scripts\Item\ItemScriptRepository.cs" />
     <Compile Include="Assets\Scripts\Item\Shield\ShieldScript.cs" />
     <Compile Include="Assets\Scripts\Item\Sword\SwordScript.cs" />
-    <Compile Include="Assets\Scripts\ItemCreator.cs" />
     <Compile Include="Assets\Scripts\RayCastController.cs" />
     <Compile Include="Assets\Scripts\Repository\DataSaverScript.cs" />
     <Compile Include="Assets\Scripts\Repository\Layers.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Assets\Scripts\VRDevice\DeviceRepository.cs" />
     <Compile Include="Assets\Scripts\VRDevice\VRObject\DeviceButton.cs" />
     <Compile Include="Assets\Scripts\VRDevice\VRObject\TouchPadButton.cs" />
+    <Compile Include="Assets\StatusUIController.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />

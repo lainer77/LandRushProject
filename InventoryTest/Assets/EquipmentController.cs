@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LandRushLibrary.Factory;
 using LandRushLibrary.Items;
 using LandRushLibrary.PlayerItemManagers;
+using LandRushLibrary.Repository;
 using LandRushLibrary.Units;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +35,14 @@ public class EquipmentController : MonoBehaviourEx
 	protected override void Awake ()
 	{
 	    _playerEquipment = Player.Instance.Equipment;
+        InitEquipmentSlots();
+
+	    Player.Instance.Equipment.EquipItem(EquipmentSlot.Right, ItemFactory.Instance.Create<Shield>(ItemID.OldShield));
+
+	    Player.Instance.Equipment.EquipItem(EquipmentSlot.Left, ItemFactory.Instance.Create<Sword>(ItemID.OldSword));
+
+	    Player.Instance.Equipment.SparePair.LeftEquipment = ItemFactory.Instance.Create<Bow>(ItemID.OldBow);
+	    Player.Instance.Equipment.SparePair.RightEquipment = ItemFactory.Instance.Create<Arrow>(ItemID.Arrow);
 	}
 	
 
@@ -58,6 +68,7 @@ public class EquipmentController : MonoBehaviourEx
         _currentRight.SlotItem = _playerEquipment.SparePair.RightEquipment;
 
         _playerEquipment.EquipmentChanged += OnEquipmentChanged;
+        _playerEquipment.CurrentPairChanged += OnPairChanged;
     }
 
     private void OnEquipmentChanged(object sender, PlayerEquipment.EquipmentChangedEventArgs e)
