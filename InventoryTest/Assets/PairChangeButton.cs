@@ -34,7 +34,7 @@ public class PairChangeButton : MonoBehaviourEx
 	    if (laser.Hit.transform.gameObject == gameObject)
 	    {
 	        Image image = GetComponent<Image>();
-	        image.sprite = EnterImage;
+	        image.sprite = ExitImage;
 
 	        if (_rightController.Controller.GetHairTriggerDown())
 	        {
@@ -44,7 +44,7 @@ public class PairChangeButton : MonoBehaviourEx
 	    else
 	    {
 	        Image image = GetComponent<Image>();
-	        image.sprite = ExitImage;
+	        image.sprite = EnterImage;
         }
 
     }

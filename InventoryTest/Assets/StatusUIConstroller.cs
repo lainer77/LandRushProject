@@ -24,6 +24,7 @@ public class StatusUIConstroller : MonoBehaviourEx
 	protected override void LateUpdate ()
 	{
 		transform.LookAt(_cameraTranstorm.position);
+        transform.Rotate(new Vector3(0, 180, 0));
 	}
     #endregion	
 
