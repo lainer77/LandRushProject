@@ -16,9 +16,11 @@ TagManager:
   - FxTemporaire
   - ANVIL
   - STORAGE
-  - Door
   - DOOR
   - ENEMY
+  - SHIELD
+  - SWORD
+  - CHARACTER
   layers:
   - Default
   - TransparentFX

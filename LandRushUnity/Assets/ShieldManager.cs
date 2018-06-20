@@ -11,8 +11,8 @@ public class ShieldManager : MonoBehaviourEx
     {
         OldShield = 0,
         WarShield = 1,
-        KnightShield = 2,
-        IronShield =3
+        IronShield =2,
+        KnightShield = 3
     }
     public Grade grade = Grade.OldShield;
     public List<GameObject> ShieldPrefabs;
@@ -56,11 +56,11 @@ public class ShieldManager : MonoBehaviourEx
                 Destroy(ShieldPrefabs[0]);
                 Instantiate(ShieldPrefabs[1]);
                 break;
-            case Grade.KnightShield:
+            case Grade.IronShield:
                 Destroy(ShieldPrefabs[1]);
                 Instantiate(ShieldPrefabs[2]);
                 break;
-            case Grade.IronShield:
+            case Grade.KnightShield:
                 Destroy(ShieldPrefabs[2]);
                 Instantiate(ShieldPrefabs[3]);
                 break;

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64716635180779824}
   m_Layer: 0
   m_Name: OldShield
-  m_TagString: Untagged
+  m_TagString: SHIELD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,6 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
-  m_CookingOptions: 14
+  m_CookingOptions: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 4e641f79386540e43aae56a00254a5a3, type: 3}
