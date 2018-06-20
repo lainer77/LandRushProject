@@ -72,20 +72,20 @@ namespace LandRushLibrary.PlayerItemManagers
 
         public void EquipItem(EquipmentSlot equipmentSlot, EquipmentItem equipment )
         {
-            EquipmentItem prevEqupment = null;
+            EquipmentItem prevEquipment = null;
 
             if (equipmentSlot == EquipmentSlot.Left)
             {
-                prevEqupment = EquipmentPairs[_currentIndex - 1].LeftEquipment;
+                prevEquipment = EquipmentPairs[_currentIndex - 1].LeftEquipment;
                 EquipmentPairs[_currentIndex - 1].LeftEquipment = equipment;
             }
             else if (equipmentSlot == EquipmentSlot.Right)
             {
-                prevEqupment = EquipmentPairs[_currentIndex - 1].RightEquipment;
+                prevEquipment = EquipmentPairs[_currentIndex - 1].RightEquipment;
                 EquipmentPairs[_currentIndex - 1].RightEquipment = equipment;
             }
 
-            OnEquipmentChanged(prevEqupment, equipment, equipmentSlot);
+            OnEquipmentChanged(equipment, prevEquipment, equipmentSlot);
         }
 
         public void ChangeNextPair()
@@ -190,7 +190,7 @@ namespace LandRushLibrary.PlayerItemManagers
             {
                 PrevEquipment = prevEquipment;
                 NewEquipment = newEquipment;
-                EquipmentSlot = EquipmentSlot;
+                EquipmentSlot = equipmentSlot;
             }
         }
         #endregion

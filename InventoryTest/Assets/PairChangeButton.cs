@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LandRushLibrary.Units;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityScriptHelper;
 
 public class PairChangeButton : MonoBehaviourEx
@@ -12,6 +13,9 @@ public class PairChangeButton : MonoBehaviourEx
 
     #region fields
     private DeviceInteraction _rightController;
+
+    public Sprite EnterImage;
+    public Sprite ExitImage;
     #endregion
 
     #region messages
@@ -29,12 +33,19 @@ public class PairChangeButton : MonoBehaviourEx
 
 	    if (laser.Hit.transform.gameObject == gameObject)
 	    {
+	        Image image = GetComponent<Image>();
+	        image.sprite = EnterImage;
 
 	        if (_rightController.Controller.GetHairTriggerDown())
 	        {
 	            Player.Instance.Equipment.ChangeNextPair();
 	        }
 	    }
+	    else
+	    {
+	        Image image = GetComponent<Image>();
+	        image.sprite = ExitImage;
+        }
 
     }
     #endregion	

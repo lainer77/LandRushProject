@@ -47,7 +47,7 @@
       "Grade": 0,
       "ItemId": 2,
       "Name": "오래된 방패",
-      "IconName": "OldSword",
+      "IconName": "OldShield",
       "PrefabName": "OldShield",
       "Type": 1,
       "MaxAmout": 1

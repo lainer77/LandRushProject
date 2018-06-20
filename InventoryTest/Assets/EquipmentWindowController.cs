@@ -38,13 +38,14 @@ public class EquipmentWindowController : MonoBehaviourEx
         InitEquipmentSlots();
 
 	    Sword sword = ItemFactory.Instance.Create<Sword>(ItemID.OldSword);
-        Debug.Log(sword.AttackPower);
 
         Player.Instance.Equipment.EquipItem(EquipmentSlot.Left, ItemFactory.Instance.Create<Shield>(ItemID.OldShield));
         Player.Instance.Equipment.EquipItem(EquipmentSlot.Right, sword );
 
         Player.Instance.Equipment.SparePair.LeftEquipment = ItemFactory.Instance.Create<Bow>(ItemID.OldBow);
         Player.Instance.Equipment.SparePair.RightEquipment = ItemFactory.Instance.Create<Arrow>(ItemID.Arrow);
+
+        Player.Instance.Equipment.ChangeNextPair();
     }
 	
 
@@ -57,7 +58,7 @@ public class EquipmentWindowController : MonoBehaviourEx
         _currentLeft = currentLeftSlot.GetComponent<EquipmentSlotController>();
         _currentRight = currentRightSlot.GetComponent<EquipmentSlotController>();
         _spareLeft = spareLeftSlot.GetComponent<EquipmentSlotController>();
-        _spareRight = spareLeftSlot.GetComponent<EquipmentSlotController>();
+        _spareRight = spareRightSlot.GetComponent<EquipmentSlotController>();
 
         _currentLeft.IsCurrent = true;
         _currentRight.IsCurrent = true;
@@ -67,7 +68,7 @@ public class EquipmentWindowController : MonoBehaviourEx
         _currentLeft.SlotItem = _playerEquipment.LeftEquipment;
         _currentRight.SlotItem = _playerEquipment.RightEquipment;
         _spareLeft.SlotItem = _playerEquipment.SparePair.LeftEquipment;
-        _currentRight.SlotItem = _playerEquipment.SparePair.RightEquipment;
+        _spareRight.SlotItem = _playerEquipment.SparePair.RightEquipment;
 
         _playerEquipment.EquipmentChanged += OnEquipmentChanged;
         _playerEquipment.CurrentPairChanged += OnPairChanged;
@@ -75,7 +76,6 @@ public class EquipmentWindowController : MonoBehaviourEx
 
     private void OnEquipmentChanged(object sender, PlayerEquipment.EquipmentChangedEventArgs e)
     {
-
         if (e.EquipmentSlot == EquipmentSlot.Left)
             _currentLeft.SlotItem = e.NewEquipment;
         else
@@ -87,7 +87,7 @@ public class EquipmentWindowController : MonoBehaviourEx
         _currentLeft.SlotItem = e.NewPair.LeftEquipment;
         _currentRight.SlotItem = e.NewPair.RightEquipment;
         _spareLeft.SlotItem = e.PrevPair.LeftEquipment;
-        _spareLeft.SlotItem = e.PrevPair.RightEquipment;
+        _spareRight.SlotItem = e.PrevPair.RightEquipment;
     }
 
     #endregion

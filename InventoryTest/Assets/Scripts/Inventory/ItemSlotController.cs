@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using LandRushLibrary.Items;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ public class ItemSlotController : MonoBehaviourEx
         set
         {
             _gameItem = value;
+
             SetSlotItem();
         }
     }
@@ -47,6 +49,10 @@ public class ItemSlotController : MonoBehaviourEx
     {
         if (_gameItem != null)
         {
+            Color color = _icon.color;
+            color.a = 1.0f;
+            _icon.color = color;
+
             _icon.sprite = Resources.Load<Sprite>(IconPath + _gameItem.IconName);
         }
         else
