@@ -41,6 +41,10 @@ public class SpareEquipManager : MonoBehaviourEx
             {
                 SwapEquipment(_sword, _arrow);
             }
+            else if (_arrow.activeSelf)
+            {
+                SwapEquipment(_arrow, _sword);
+            }
         }
 
         if (other == LeftController && _left.Controller.GetHairTriggerDown())
@@ -49,6 +53,11 @@ public class SpareEquipManager : MonoBehaviourEx
             {
                 SwapEquipment(_shield,_bow);
             }
+            else if (_bow.activeSelf)
+            {
+                SwapEquipment(_bow,_shield);
+            }
+            
         }
     }
 
@@ -65,6 +74,7 @@ public class SpareEquipManager : MonoBehaviourEx
         spareEquip = emptyObject;
         usingEquip.SetActive(true);
         spareEquip.SetActive(false);
+        emptyObject = null;
     }
 
    
