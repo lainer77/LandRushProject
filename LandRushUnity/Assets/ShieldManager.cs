@@ -50,19 +50,19 @@ public class ShieldManager : MonoBehaviourEx
         switch (grade)
         {
             case Grade.OldShield:
-                Instantiate(ShieldPrefabs[0]);
+                Instantiate(ShieldPrefabs[0], transform.position, ShieldPrefabs[0].transform.rotation,transform);
                 break;
             case Grade.WarShield:
                 Destroy(ShieldPrefabs[0]);
-                Instantiate(ShieldPrefabs[1]);
+                Instantiate(ShieldPrefabs[1], transform.position, ShieldPrefabs[1].transform.rotation,transform);
                 break;
             case Grade.IronShield:
                 Destroy(ShieldPrefabs[1]);
-                Instantiate(ShieldPrefabs[2]);
+                Instantiate(ShieldPrefabs[2], transform.position, ShieldPrefabs[2].transform.rotation, transform);
                 break;
             case Grade.KnightShield:
                 Destroy(ShieldPrefabs[2]);
-                Instantiate(ShieldPrefabs[3]);
+                Instantiate(ShieldPrefabs[3], transform.position, ShieldPrefabs[3].transform.rotation, transform);
                 break;
                 
 

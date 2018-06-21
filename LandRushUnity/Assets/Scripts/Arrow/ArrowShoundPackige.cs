@@ -7,45 +7,62 @@ using UnityScriptHelper;
 public class ArrowShoundPackige : MonoBehaviourEx
 {
     public List<AudioClip> AudioClipList;
-    private AudioSource _nockShound;
-    private AudioSource _pullShound;
-    private AudioSource _shotShound;
+    private AudioSource _shound;
     public float VolMin;
     public float VolMax;
 
     public float PitchMin;
 
     public float PitchMax;
-    // Use this for initialization
 
-    //-------------------------------------------------
+    private int _start;
+
+    // Use this for initialization
+    protected override void Start()
+    {
+        _shound = GetCachedComponent<AudioSource>();
+    }
+
+//-------------------------------------------------
     public void NockShoundPlay()
     {
-        ShoundPlay(_nockShound, 0);
+        _start = 0;
+        float speed = 0;
+        if (_shound.clip != null)
+            speed = _shound.clip.length;
+        Invoke("ShoundPlay", speed);
     }
 
     public void PullShoundPlay()
     {
-        ShoundPlay(_pullShound, 3);
+        _start = 3;
+        float speed = 0;
+        if (_shound.clip != null)
+            speed = _shound.clip.length;
+        Invoke("ShoundPlay", speed);
     }
 
     public void ShotShoundPlay()
     {
-        ShoundPlay(_shotShound, 6);
+        _start = 6;
+        float speed = 0;
+        if (_shound.clip != null)
+            speed = _shound.clip.length;
+        Invoke("ShoundPlay", speed);
     }
 
-    private void ShoundPlay(AudioSource shound, int start)
+    private void ShoundPlay()
     {
-        if (shound != null && shound.isActiveAndEnabled)
+        if (_shound != null && _shound.isActiveAndEnabled)
         {
             //randomly apply a volume between the volume min max
-            shound.volume = Random.Range(VolMin, VolMax);
+            _shound.volume = Random.Range(VolMin, VolMax);
 
             //randomly apply a pitch between the pitch min max
-            shound.pitch = Random.Range(PitchMin, PitchMax);
+            _shound.pitch = Random.Range(PitchMin, PitchMax);
 
             // play the sound
-            shound.PlayOneShot(AudioClipList[Random.Range(start, start + 3)]);
+            _shound.PlayOneShot(AudioClipList[Random.Range(_start, _start + 3)]);
         }
     }
 }

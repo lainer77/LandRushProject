@@ -22,15 +22,15 @@ public class EnemyController : MonoBehaviourEx
     #region messages
     protected override void Start () 
 	{
-		_player = GameObject.FindWithTag("Player");
-	    _animator = GetComponent<Animator>();
-	    _navMeshAgent = GetComponent<NavMeshAgent>();
+//		_player = GameObject.FindWithTag("Player");
+//	    _animator = GetComponent<Animator>();
+//	    _navMeshAgent = GetComponent<NavMeshAgent>();
 
 	}
 	
 	protected override void Update ()
 	{
-	    _distance = Vector3.Distance(_player.transform.position, transform.position);
+	    //_distance = Vector3.Distance(_player.transform.position, transform.position);
 
     }
     #endregion	

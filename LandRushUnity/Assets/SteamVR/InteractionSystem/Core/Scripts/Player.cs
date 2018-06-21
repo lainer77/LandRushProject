@@ -1,6 +1,6 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
-// Purpose: Player interface used to query HMD transforms and VR hands
+// Purpose: Sword interface used to query HMD transforms and VR hands
 //
 //=============================================================================
 
@@ -41,7 +41,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		// Singleton instance of the Player. Only one can exist at a time.
+		// Singleton instance of the Sword. Only one can exist at a time.
 		//-------------------------------------------------
 		private static Player _instance;
 		public static Player instance

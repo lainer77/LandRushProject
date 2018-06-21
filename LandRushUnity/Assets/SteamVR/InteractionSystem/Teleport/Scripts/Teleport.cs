@@ -175,7 +175,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( player == null )
 			{
-				Debug.LogError( "Teleport: No Player instance found in map." );
+				Debug.LogError( "Teleport: No Sword instance found in map." );
 				Destroy( this.gameObject );
 				return;
 			}

@@ -36,7 +36,7 @@ public class SteamVR_Preferences
 			string tooltip = "Should SteamVR automatically enable VR on launch and play?";
 			AutoEnableVR = EditorGUILayout.Toggle(new GUIContent(title, tooltip), AutoEnableVR);
 			string helpMessage = "To enable VR manually:\n";
-			helpMessage += "- go to Edit -> Project Settings -> Player,\n";
+			helpMessage += "- go to Edit -> Project Settings -> Sword,\n";
 			helpMessage += "- tick 'Virtual Reality Supported',\n";
 			helpMessage += "- make sure OpenVR is in the 'Virtual Reality SDKs' list.";
 			EditorGUILayout.HelpBox(helpMessage, MessageType.Info);

@@ -170,7 +170,7 @@ namespace Valve.VR.InteractionSystem
 					StickInTarget( collision, travelledFrames < 2 );
 				}
 
-				// Player Collision Check (self hit)
+				// Sword Collision Check (self hit)
 				if ( Player.instance && collision.collider == Player.instance.headCollider )
 				{
 					Player.instance.PlayerShotSelf();

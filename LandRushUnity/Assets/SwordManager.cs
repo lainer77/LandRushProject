@@ -9,30 +9,31 @@ public class SwordManager : MonoBehaviourEx
 
     public enum Grade
     {
-        OldSword = 0,
-        SteelSword = 1,
-        KnightSword = 2,
-        DragonSword = 3
+        Grade0,
+        Grade1,
+        Grade2,
+        Grade3
     }
 
-    public Grade grade = Grade.OldSword;
+    public Grade grade = Grade.Grade0;
     public List<GameObject> SwordPrefabs;
     #endregion
 
     #region fields
 
-    [SerializeField] private WaitForSeconds _wait;
+    private WaitForSeconds _wait;
     #endregion
 
     #region messages
     protected override void Start()
     {
-
+       
     }
 
     protected override void Update()
     {
 
+        
     }
 
     private void OnEnable()
@@ -50,20 +51,20 @@ public class SwordManager : MonoBehaviourEx
 
         switch (grade)
         {
-            case Grade.OldSword:
-                Instantiate(SwordPrefabs[0]);
+            case Grade.Grade0:
+                Instantiate(SwordPrefabs[0], transform.position, SwordPrefabs[0].transform.rotation,transform);
                 break;
-            case Grade.SteelSword:
+            case Grade.Grade1:
                 Destroy(SwordPrefabs[0]);
-                Instantiate(SwordPrefabs[1]);
+                Instantiate(SwordPrefabs[1], transform.position, SwordPrefabs[1].transform.rotation,transform);
                 break;
-            case Grade.KnightSword:
+            case Grade.Grade2:
                 Destroy(SwordPrefabs[1]);
-                Instantiate(SwordPrefabs[2]);
+                Instantiate(SwordPrefabs[2], transform.position, SwordPrefabs[2].transform.rotation,transform);
                 break;
-            case Grade.DragonSword:
+            case Grade.Grade3:
                 Destroy(SwordPrefabs[2]);
-                Instantiate(SwordPrefabs[3]);
+                Instantiate(SwordPrefabs[3], transform.position, SwordPrefabs[3].transform.rotation,transform);
                 break;
 
 
