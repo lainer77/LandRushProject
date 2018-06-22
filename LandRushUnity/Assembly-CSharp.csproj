@@ -110,7 +110,9 @@
     <Compile Include="Assets\Scripts\Item\Arrow\ArrowScript.cs" />
     <Compile Include="Assets\Scripts\Item\Arrow\HeadTargetted.cs" />
     <Compile Include="Assets\Scripts\Item\Arrow\StringBand.cs" />
+    <Compile Include="Assets\Scripts\Item\DroppedItem.cs" />
     <Compile Include="Assets\Scripts\Item\EquipmentItemScript.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemCreator.cs" />
     <Compile Include="Assets\Scripts\Item\ItemScriptRepository.cs" />
     <Compile Include="Assets\Scripts\Item\Shield\ShieldScript.cs" />
     <Compile Include="Assets\Scripts\Item\Sword\SwordScript.cs" />
@@ -120,6 +122,17 @@
     <Compile Include="Assets\Scripts\Player\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatuesScript.cs" />
     <Compile Include="Assets\Scripts\Player\ShoulderScript.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Equipment\EquipmentSlotController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Equipment\EquipmentWindowController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Equipment\PairChangeButton.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Inter\InterSlotController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Inventory\InventoryController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Inventory\InventorySlotController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\ItemSlotController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\PopUIController.cs" />
+    <Compile Include="Assets\Scripts\PopUI\PopUpManager.cs" />
+    <Compile Include="Assets\Scripts\PopUI\Status\StatusUIController.cs" />
+    <Compile Include="Assets\Scripts\RayCastController.cs" />
     <Compile Include="Assets\Scripts\Repository\DataSaverScript.cs" />
     <Compile Include="Assets\Scripts\Repository\Layers.cs" />
     <Compile Include="Assets\Scripts\Repository\Tags.cs" />
@@ -233,6 +246,8 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+    <Compile Include="Assets\StorageCanvasController.cs" />
+    <Compile Include="Assets\StorageController.cs" />
     <Compile Include="Assets\SwordInfo.cs" />
     <Compile Include="Assets\SwordManager.cs" />
     <None Include="Assets\Models\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />

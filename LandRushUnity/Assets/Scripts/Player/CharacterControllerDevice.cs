@@ -5,14 +5,19 @@ using UnityScriptHelper;
 
 public class CharacterControllerDevice : MonoBehaviourEx
 {
-    public float Speed = 0.05f;
+
     #region outlets
 
+    public float Speed;
+    public AudioClip StepSound;
     #endregion
 
     #region fields
 
     private Rigidbody _rigidbody;
+    private AudioSource _audio;
+    private Transform _camTransform;
+    private CharacterController _characterController;
 
     #endregion
 
@@ -29,7 +34,15 @@ public class CharacterControllerDevice : MonoBehaviourEx
     {
         _leftController = DeviceRepository.LeftDeviceInteraction;
         _rigidbody = GetCachedComponent<Rigidbody>();
-        ControllSetting(true);
+       // ControllSetting(true);
+        _audio = GetComponent<AudioSource>();
+        _camTransform = Camera.main.GetComponent<Transform>();
+        _characterController = GetComponent<CharacterController>();
+    }
+
+    protected override void Update()
+    {
+        Move();
     }
 
     #endregion
@@ -44,6 +57,17 @@ public class CharacterControllerDevice : MonoBehaviourEx
         _leftController.TouchpadButton.SetDPadRightButtonEvent(MoveRight, addOrRemove);
     }
 
+    private void Move()
+    {
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+            MoveUp();
+        else if(Input.GetKeyDown(KeyCode.DownArrow))
+            MoveDown();
+        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+            MoveLeft();
+        else if(Input.GetKeyDown(KeyCode.RightArrow))
+            MoveRight();
+    }
     private void MoveUp()
     {
         MoveTo(Vector3.forward);
@@ -67,10 +91,10 @@ public class CharacterControllerDevice : MonoBehaviourEx
     public void MoveTo(Vector3 vector)
     {
 #pragma warning disable 618
-        Vector3 rotate = Camera.main.transform.rotation.ToEulerAngles();
+        Vector3 dir = _camTransform.TransformDirection(vector);
 #pragma warning restore 618
-        transform.Rotate(eulerAngles: new Vector3(0, rotate.y, 0));
-        transform.Translate(vector * Speed);
+         transform.Translate(dir * Speed * Time.deltaTime) ;
+        _audio.PlayOneShot(StepSound);
     }
 
     #endregion

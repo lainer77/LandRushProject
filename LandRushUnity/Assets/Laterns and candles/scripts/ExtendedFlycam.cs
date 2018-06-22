@@ -32,7 +32,9 @@ public class ExtendedFlycam : MonoBehaviour
 
 	void Start ()
 	{
+#pragma warning disable 618
 		Screen.lockCursor = true;
+#pragma warning restore 618
 	}
 
 	void Update ()

@@ -8,7 +8,7 @@ public class Quiver : MonoBehaviourEx
 {
     // Use this for initialization
 
-    private RightDeviceInteraction _rightDeviceInteraction;
+    private DeviceInteraction _rightDeviceInteraction;
     private IInventoriable _inventoriable;
     private Inventory _inventory;
     public Arrow CurrentArrow { get; set; }

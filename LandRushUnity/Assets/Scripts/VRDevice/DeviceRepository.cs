@@ -16,16 +16,16 @@ public class DeviceRepository
         }
     }
 
-    private static RightDeviceInteraction _rightDeviceInteraction;
+    private static DeviceInteraction _rightDeviceInteraction;
 
-    public static RightDeviceInteraction RightDeviceInteraction
+    public static DeviceInteraction RightDeviceInteraction
     {
         get
         {
             if (_rightDeviceInteraction == null)
                 _rightDeviceInteraction =
                     GameObject.Find("[CameraRig]").transform.Find("Controller (right)")
-                        .GetComponent<RightDeviceInteraction>();
+                        .GetComponent<DeviceInteraction>();
 
             return _rightDeviceInteraction;
         }
