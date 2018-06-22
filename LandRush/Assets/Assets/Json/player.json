@@ -1,0 +1,10 @@
+{
+    "Name": "Player",
+    "AttackPower": 10,
+    "Armor": 5,
+    "MaxHp": 50,
+    "MaxExp": 200,
+    "Speed": 10.0,
+    "CurrentExp": 0,
+    "Level": 1
+}
