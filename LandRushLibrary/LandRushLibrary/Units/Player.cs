@@ -40,8 +40,20 @@ namespace LandRushLibrary.Units
         public PlayerEquipment Equipment { get; private set; }
         [JsonIgnore]
         private readonly int _maxPairCount = 2;
+
+        [JsonIgnore] private bool _isCombatMode;
         [JsonIgnore]
-        public bool IsCombatMode { get; set; }
+        public bool IsCombatMode
+        {
+            get { return _isCombatMode; }
+            set
+            {
+                bool temp = _isCombatMode;
+                _isCombatMode = value;
+                OnCombatModeChanged(temp, value);
+
+            }
+        }
 
         #endregion
 
@@ -87,7 +99,6 @@ namespace LandRushLibrary.Units
             if (attakedUnit.CurrentHp <= 0)
                 AddExperience(((Monster)attakedUnit).SlainExp);
         }
-
         private void AddExperience(int exp)
         {
             CurrentExp += exp;
@@ -103,6 +114,11 @@ namespace LandRushLibrary.Units
 
                 OnLevelUp(new LevelUpEventArgs(Level));
             }
+        }
+
+        public void ChangeCombatMode(bool combatMode)
+        {
+            IsCombatMode = combatMode;
         }
 
         #endregion
@@ -186,6 +202,48 @@ namespace LandRushLibrary.Units
             public LevelUpEventArgs(int newLevel)
             {
                 NewLevel = newLevel;
+            }
+        }
+        #endregion
+
+        #region CombatModeChanged
+        public event EventHandler<CombatModeChangedEventArgs> CombatModeChanged;
+
+        protected virtual void OnCombatModeChanged(CombatModeChangedEventArgs e)
+        {
+            if (CombatModeChanged != null)
+                CombatModeChanged(this, e);
+        }
+
+        private CombatModeChangedEventArgs OnCombatModeChanged(bool prevMode, bool newMode)
+        {
+            CombatModeChangedEventArgs args = new CombatModeChangedEventArgs(prevMode, newMode);
+            OnCombatModeChanged(args);
+
+            return args;
+        }
+
+        private CombatModeChangedEventArgs OnCombatModeChangedForOut()
+        {
+            CombatModeChangedEventArgs args = new CombatModeChangedEventArgs();
+            OnCombatModeChanged(args);
+
+            return args;
+        }
+
+        public class CombatModeChangedEventArgs : EventArgs
+        {
+            public bool PrevMode { get; set; }
+            public bool NewMode { get; set; }
+
+            public CombatModeChangedEventArgs()
+            {
+            }
+
+            public CombatModeChangedEventArgs(bool prevMode, bool newMode)
+            {
+                PrevMode = prevMode;
+                NewMode = newMode;
             }
         }
         #endregion

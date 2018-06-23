@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityScriptHelper;
 
-public class StatusUIConstroller : MonoBehaviourEx
+public class PopUIController : MonoBehaviourEx
 {
     #region outlets
     

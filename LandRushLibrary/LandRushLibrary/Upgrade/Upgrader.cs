@@ -32,14 +32,12 @@ namespace LandRushLibrary.Upgrade
             cost.SetProbability(0.8f);
             cost.AddIngredient(ItemID.Stone, 2);
             cost.AddIngredient(ItemID.Wood, 2);
-            cost.AddIngredient(ItemID.Iron, 0);
             _upgradeCosts.Add(cost);
 
             cost = new UpgradeCost();
             cost.SetProbability(0.5f);
             cost.AddIngredient(ItemID.Stone, 5);
             cost.AddIngredient(ItemID.Wood, 5);
-            cost.AddIngredient(ItemID.Iron, 0);
             _upgradeCosts.Add(cost);
 
             cost = new UpgradeCost();
@@ -108,7 +106,7 @@ namespace LandRushLibrary.Upgrade
             return poss;
         }
 
-        public void Upgrade<T>(ref T equipment) where T : EquipmentItem, IUpgradable
+        public void Upgrade<T>(T equipment) where T : EquipmentItem, IUpgradable
         {
             if (!UpgradePossibility(equipment))
             {
@@ -153,7 +151,7 @@ namespace LandRushLibrary.Upgrade
                 UpgradeTried(this, e);
         }
 
-        private UpgradeTriedEventArgs OnUpgradeTried(bool success, bool notEnoughIngreients, IUpgradable upgradable)
+        private UpgradeTriedEventArgs OnUpgradeTried(bool success, bool notEnoughIngreients, EquipmentItem upgradable)
         {
             UpgradeTriedEventArgs args = new UpgradeTriedEventArgs(success, notEnoughIngreients, upgradable);
             OnUpgradeTried(args);
@@ -173,14 +171,14 @@ namespace LandRushLibrary.Upgrade
         {
             public bool Success { get; set; }
             public bool NotEnoughIngredients { get; set; }
-            public IUpgradable UpgradableItem { get; set; }
+            public EquipmentItem UpgradableItem { get; set; }
 
             public UpgradeTriedEventArgs()
             {
 
             }
 
-            public UpgradeTriedEventArgs(bool success, bool notEnoughIngreients, IUpgradable upgradable)
+            public UpgradeTriedEventArgs(bool success, bool notEnoughIngreients, EquipmentItem upgradable)
             {
                 Success = success;
                 NotEnoughIngredients = notEnoughIngreients;

@@ -28,16 +28,16 @@ namespace LandRushLibrary.PlayerItemManagers
         private int _spareIndex;
         public EquipmentPair CurrentPair
         {
-            get
-            {
-                return EquipmentPairs[_currentIndex -1];
-            }
+            get => EquipmentPairs[_currentIndex -1];
+            set => EquipmentPairs[_currentIndex - 1] = value;
         }
 
         public EquipmentPair SparePair
         {
-            get { return EquipmentPairs[_spareIndex -1]; }
+            get => EquipmentPairs[_spareIndex -1];
+            set => EquipmentPairs[_spareIndex - 1] = value;
         }
+
 
         public EquipmentPair[] EquipmentPairs { get; set; }
 

@@ -1,24 +1,24 @@
 {
-  "Orc": {
+  "Giblin": {
     "SlainExp": 20,
     "MonsterGrade": 1,
-    "PrefabName": "OrcPrefab",
+    "PrefabName": "GblinPrefab",
     "MonsterId": 2,
-    "Name": "Orc",
+    "Name": "고블린",
     "AttackPower": 10,
-    "Armor": 3,
-    "MaxHp": 40,
+    "Armor": 5,
+    "MaxHp": 100,
     "Speed": 10.0
   },
-  "OrcLord": {
-    "SlainExp": 60,
+  "WereWolf": {
+    "SlainExp": 100,
     "MonsterGrade": 2,
-    "PrefabName": "OrcPrefab",
+    "PrefabName": "WereWolfPrefab",
     "MonsterId": 2,
-    "Name": "Orc",
+    "Name": "웨어울프",
     "AttackPower": 30,
     "Armor": 10,
-    "MaxHp": 120,
+    "MaxHp": 500,
     "Speed": 10.0
   }
 }

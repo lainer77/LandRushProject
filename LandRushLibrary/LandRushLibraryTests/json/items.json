@@ -11,7 +11,7 @@
         "MaxAmount" :  1
     },
     {
-      "AttackPower": 12,
+      "AttackPower": 14,
       "Grade": 2,
       "ItemId": 10,
       "Name": "스틸소드",
@@ -21,7 +21,7 @@
       "MaxAmount": 1
     },
     {
-      "AttackPower": 15,
+      "AttackPower": 20,
       "Grade": 3,
       "ItemId": 11,
       "Name": "나이트소드",
@@ -31,7 +31,7 @@
       "MaxAmount": 1
     },
     {
-      "AttackPower": 19,
+      "AttackPower": 26,
       "Grade": 4,
       "ItemId": 12,
       "Name": "드래곤소드",

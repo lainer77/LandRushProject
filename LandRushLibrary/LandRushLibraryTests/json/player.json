@@ -1,6 +1,6 @@
 {
     "Name": "Player",
-    "AttackPower": 10,
+    "AttackPower": 5,
     "Armor": 5,
     "MaxHp": 50,
     "MaxExp": 200,

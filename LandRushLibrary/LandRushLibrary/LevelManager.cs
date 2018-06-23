@@ -31,8 +31,8 @@ namespace LandRushLibrary
 
         public void AddStat(Player player)
         {
-            player.MaxHp += (player.Level * 100);
-            player.AttackPower += player.Level;
+            player.MaxHp += (player.Level * 20);
+            player.AttackPower += (player.Level * 2);
             player.Armor += player.Level;
         }
     }
