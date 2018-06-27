@@ -12,8 +12,12 @@ namespace LandRushLibrary.Items
         public string IconName { get; set; }
         public string PrefabName { get; set; }
         public ItemType Type { get; set; }
+        
+        [JsonProperty]
+        public string Caption { get; protected set; }
         [JsonProperty]
         public int MaxAmount { get; protected set; }
+
 
         [JsonIgnore]
         private int _amount;
@@ -62,7 +66,8 @@ namespace LandRushLibrary.Items
             clone.Type = Type;
             clone.MaxAmount = MaxAmount;
             clone.Amount = 1;
-    
+            clone.Caption = Caption;
+
         }
 
     }

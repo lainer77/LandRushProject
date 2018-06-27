@@ -17,9 +17,9 @@
         IronShield = 13,
         WarShield = 14,
         KnightShield = 15,
-        Bow2 = 16,
-        Bow3 = 17,
-        Bow4 = 18,
+        RefinedBow = 16,
+        HunterBow = 17,
+        PowerThorn = 18,
 
         
     }

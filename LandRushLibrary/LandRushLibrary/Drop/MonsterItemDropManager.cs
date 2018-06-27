@@ -55,7 +55,7 @@ namespace LandRushLibrary.Drop
 
             ////////////////////////////////////////////////
 
-            _dropInfos.Clear();
+            _dropList = new List<DropRateInfo>();
 
             AddDropInfo(ItemID.Arrow, 0.1f, 2);
             AddDropInfo(ItemID.Arrow, 0.2f, 3);
